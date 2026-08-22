@@ -932,6 +932,30 @@
     text-align: left;
   }
 
+  .pkg-pax-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .pkg-pax-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 0.65rem 0.9rem;
+    gap: 0.5rem;
+  }
+
+  .pkg-pax-card strong,
+  .pkg-pax-card > span {
+    margin-bottom: 0;
+  }
+
+  .pkg-pax-card > span {
+    display: block;
+    font-size: 0.7rem;
+  }
+
   .pkg-pax-ctrl {
     gap: 0.45rem;
     padding: 0.25rem;

@@ -1,0 +1,96 @@
+.brand-mark {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  line-height: 1;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-mark-name {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-mark-elite {
+  color: #c5a028;
+}
+
+.brand-mark-alhussam {
+  color: #0a2749;
+}
+
+.brand-mark-tagline {
+  display: block;
+  margin-top: 0.2rem;
+  color: #0a2749;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand-mark-rule {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin-top: 0.45rem;
+  background: #c5a028;
+  border-radius: 999px;
+}
+
+.brand-mark--sm .brand-mark-name {
+  font-size: 0.95rem;
+}
+
+.brand-mark--sm .brand-mark-tagline {
+  font-size: 0.48rem;
+}
+
+.brand-mark--md .brand-mark-name {
+  font-size: 1.15rem;
+}
+
+.brand-mark--md .brand-mark-tagline {
+  font-size: 0.55rem;
+}
+
+.brand-mark--lg .brand-mark-name {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+
+.brand-mark--lg .brand-mark-tagline {
+  font-size: clamp(0.62rem, 1.4vw, 0.82rem);
+  letter-spacing: 0.16em;
+  margin-top: 0.35rem;
+}
+
+.brand-mark.is-light .brand-mark-elite {
+  color: #f0d78c;
+}
+
+.brand-mark.is-light .brand-mark-alhussam,
+.brand-mark.is-light .brand-mark-tagline {
+  color: #fff;
+}
+
+.brand-mark.is-light .brand-mark-rule {
+  background: #d4af37;
+}
+
+@media (max-width: 640px) {
+  .brand-mark--md .brand-mark-name {
+    font-size: 0.95rem;
+  }
+
+  .brand-mark--md .brand-mark-tagline {
+    font-size: 0.45rem;
+    letter-spacing: 0.08em;
+  }
+}

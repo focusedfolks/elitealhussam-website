@@ -1,0 +1,47 @@
+import { Link } from 'react-router-dom'
+import type { BlogPost } from 'virtual:blog-posts'
+import './BlogCard.css'
+
+type Props = {
+  post: BlogPost
+  priority?: boolean
+}
+
+function formatDate(iso: string) {
+  try {
+    return new Date(iso).toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    })
+  } catch {
+    return iso
+  }
+}
+
+export function BlogCard({ post, priority = false }: Props) {
+  return (
+    <Link to={`/blog/${post.slug}`} className="blog-card">
+      <div className="blog-card-media">
+        <img
+          src={post.coverImage}
+          alt=""
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+        <span className="blog-card-badge">{post.category}</span>
+      </div>
+      <div className="blog-card-body">
+        <h3>{post.title}</h3>
+        <p>{post.excerpt}</p>
+        <div className="blog-card-meta">
+          <span>{post.author}</span>
+          <span aria-hidden="true">·</span>
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <span aria-hidden="true">·</span>
+          <span>{post.readTime}</span>
+        </div>
+      </div>
+    </Link>
+  )
+}

@@ -1,0 +1,220 @@
+.travel-fields {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.travel-fields-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.travel-fields-head strong {
+  color: var(--navy, #0f1f3d);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.travel-fields-head span {
+  color: var(--muted, #6b7280);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.travel-mode-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.travel-mode-toggle:has(.travel-mode-btn:only-child) {
+  grid-template-columns: 1fr;
+}
+
+.travel-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 48px;
+  padding: 0.7rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 31, 61, 0.14);
+  background: #fbf8f2;
+  color: var(--muted, #6b7280);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.travel-mode-btn:hover {
+  color: var(--navy, #0f1f3d);
+  border-color: rgba(201, 162, 39, 0.55);
+}
+
+.travel-mode-btn.is-active {
+  background: var(--navy, #0f1f3d);
+  border-color: var(--navy, #0f1f3d);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(15, 31, 61, 0.18);
+}
+
+.travel-mode-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.travel-date-field {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: var(--navy, #0f1f3d);
+}
+
+.travel-date-wrap {
+  position: relative;
+  display: block;
+}
+
+.travel-date-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.travel-date-wrap input[type='date'] {
+  border: 1px solid #d5dbe3;
+  border-radius: 10px;
+  padding: 0.8rem 0.9rem 0.8rem 2.5rem;
+  background: #fff;
+  color: var(--ink, #374151);
+  width: 100%;
+  font-size: 16px;
+  min-height: 48px;
+  font-family: inherit;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.travel-date-wrap input[type='date']:focus {
+  outline: none;
+  border-color: #c9a227;
+  box-shadow:
+    0 0 0 3px rgba(201, 162, 39, 0.22),
+    0 0 16px rgba(224, 184, 74, 0.18);
+}
+
+.travel-date-wrap input[type='date']::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 0.25rem;
+  border-radius: 6px;
+}
+
+.travel-date-wrap input[type='date']::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background: rgba(201, 162, 39, 0.12);
+}
+
+
+.travel-conditional label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: var(--navy, #0f1f3d);
+}
+
+.travel-conditional label em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--muted, #6b7280);
+  font-size: 0.78rem;
+}
+
+.travel-conditional select,
+.travel-conditional input {
+  border: 1px solid #d5dbe3;
+  border-radius: 10px;
+  padding: 0.8rem 0.9rem;
+  background: #fff;
+  color: var(--ink, #374151);
+  width: 100%;
+  font-size: 16px;
+  min-height: 48px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.travel-conditional select:focus,
+.travel-conditional input:focus {
+  outline: none;
+  border-color: #c9a227;
+  box-shadow:
+    0 0 0 3px rgba(201, 162, 39, 0.22),
+    0 0 16px rgba(224, 184, 74, 0.18);
+}
+
+.travel-note {
+  margin: 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(15, 31, 61, 0.05);
+  border-left: 3px solid #c9a227;
+  color: #4b5563;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.travel-error {
+  margin: 0;
+  color: #b91c1c;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.travel-fields.is-invalid .travel-mode-toggle {
+  box-shadow: 0 0 0 2px rgba(185, 28, 28, 0.15);
+  border-radius: 14px;
+}
+
+.travel-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(201, 162, 39, 0.14);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  color: #8a6f14;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .travel-mode-toggle {
+    grid-template-columns: 1fr;
+  }
+
+  .travel-fields-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

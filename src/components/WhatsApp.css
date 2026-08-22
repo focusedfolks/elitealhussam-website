@@ -1,0 +1,58 @@
+.wa-float {
+  position: fixed;
+  inset-inline-end: 1.15rem;
+  bottom: 5.25rem;
+  z-index: 54;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 48px;
+  padding: 0.85rem 1.15rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  box-shadow: 0 14px 32px rgba(37, 211, 102, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  animation: waPulse 3.2s ease-in-out infinite;
+}
+
+.wa-float:hover,
+.wa-float:focus-visible {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(37, 211, 102, 0.42);
+  animation: none;
+}
+
+.wa-float svg {
+  flex-shrink: 0;
+}
+
+@keyframes waPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 14px 32px rgba(37, 211, 102, 0.35),
+      0 0 0 0 rgba(37, 211, 102, 0.35);
+  }
+  55% {
+    box-shadow:
+      0 14px 32px rgba(37, 211, 102, 0.35),
+      0 0 0 12px rgba(37, 211, 102, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-float {
+    animation: none;
+  }
+}
+
+/* Lead bar already has WhatsApp on phones - avoid overlap */
+@media (max-width: 768px) {
+  .wa-float {
+    display: none;
+  }
+}

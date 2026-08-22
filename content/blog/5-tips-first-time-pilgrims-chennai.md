@@ -5,7 +5,7 @@ date: "2026-08-18"
 author: "ELITE ALHUSSAM Team"
 category: "Travel Advice"
 excerpt: "Practical advice from 45+ years of guiding Tamil Nadu families - from pre-departure briefing to staying calm in the Haram."
-coverImage: "/images/blog-cover-chennai.webp"
+coverImage: "/images/blog-cover-chennai.jpeg"
 readTime: "4 min read"
 ---
 

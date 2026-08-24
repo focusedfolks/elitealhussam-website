@@ -9,12 +9,12 @@ import {
   type MouseEvent,
 } from 'react'
 import {
-  allPackages,
   packageTravelModes,
   type PackageAmenity,
   type PackageCategory,
   type TravelPackage,
 } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
 import { useCurrency } from '../currency'
 import { useI18n } from '../i18n'
 import {
@@ -50,6 +50,7 @@ export function PackageCards({
   onFilterChange,
 }: Props) {
   const { t } = useI18n()
+  const { packages: allPackages } = useCms()
   const { currency, setCurrency } = useCurrency()
   const [internalFilter, setInternalFilter] = useState<Filter>(filter)
   const controlled = typeof onFilterChange === 'function'

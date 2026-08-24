@@ -1,5 +1,7 @@
 import { useMemo, useState, type FormEvent } from 'react'
-import { company, allPackages, packageTravelModes } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
+import { submitLead } from '../cms/api'
+import { packageTravelModes } from '../content/site'
 import {
   IconBuilding,
   IconLock,
@@ -39,6 +41,7 @@ export function LeadForm({
   id = 'lead-form',
 }: Props) {
   const { t } = useI18n()
+  const { company, packages: allPackages } = useCms()
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
   const [touched, setTouched] = useState<Record<string, boolean>>({})
   const [interest, setInterest] = useState(defaultPackage)
@@ -51,7 +54,7 @@ export function LeadForm({
 
   const selectedPkg = useMemo(
     () => allPackages.find((pkg) => pkg.title === interest),
-    [interest],
+    [interest, allPackages],
   )
   const modes = selectedPkg ? packageTravelModes(selectedPkg) : (['air', 'road'] as const)
 
@@ -88,6 +91,21 @@ export function LeadForm({
     const travellers = String(data.get('travellers') || '')
     const message = String(data.get('message') || '')
     const travelBlock = formatTravelForMessage(travel)
+
+    void submitLead({
+      name,
+      phone,
+      email,
+      interest: packageInterest,
+      travellers,
+      message,
+      travel_mode: travel.mode || '',
+      departure_date: travel.departureDate || '',
+      departure_airport: travel.airport || '',
+      preferred_airline: travel.airline || '',
+      departure_city: travel.departureCity || '',
+      pickup_point: travel.pickupPoint || '',
+    })
 
     const body =
       `New Website Lead - ELITE ALHUSSAM\n` +

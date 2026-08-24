@@ -45,49 +45,22 @@ export function useHomeScrollEffects(rootRef: RefObject<HTMLElement | null>) {
         return
       }
 
-      // 1. Hero pin + curtain reveal
-      if (desktop) {
-        const hero = root.querySelector('.hero-section')
-        const curtain = root.querySelector('.hero-curtain')
-        if (hero && curtain) {
-          ScrollTrigger.create({
-            trigger: hero,
-            start: 'top top',
-            end: '+=100%',
-            pin: true,
-            pinSpacing: false,
-            anticipatePin: 1,
-          })
-        }
-      }
+      // Sticky image pin removed: it left leftover overlays that blocked page changes.
 
-      // 2. Sticky image + scrolling feature list
+      // 2. Feature list active states (no pin — pinning blocked page navigation)
       if (desktop) {
-        const wrapper = root.querySelector('.feature-list-wrapper')
-        const stickyImage = root.querySelector('.sticky-image')
         const items = gsap.utils.toArray<HTMLElement>(
           root.querySelectorAll('.feature-item'),
         )
 
-        if (wrapper && stickyImage && items.length) {
+        items.forEach((item) => {
           ScrollTrigger.create({
-            trigger: wrapper,
-            start: 'top top+=80',
-            end: 'bottom bottom',
-            pin: stickyImage,
-            pinSpacing: false,
-            invalidateOnRefresh: true,
+            trigger: item,
+            start: 'top center',
+            end: 'bottom center',
+            onToggle: (self) => item.classList.toggle('is-active', self.isActive),
           })
-
-          items.forEach((item) => {
-            ScrollTrigger.create({
-              trigger: item,
-              start: 'top center',
-              end: 'bottom center',
-              onToggle: (self) => item.classList.toggle('is-active', self.isActive),
-            })
-          })
-        }
+        })
       }
 
       // 3. Animated data readout

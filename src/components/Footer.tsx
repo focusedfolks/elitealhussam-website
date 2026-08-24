@@ -8,13 +8,14 @@ import {
   IconWhatsApp,
   IconYouTube,
 } from './Icons'
-import { company } from '../content/site'
-import { useI18n } from '../i18n'
 import { BrandMark } from './BrandMark'
+import { useCms } from '../cms/CmsProvider'
+import { useI18n } from '../i18n'
 import './Footer.css'
 
 export function Footer() {
   const { t } = useI18n()
+  const { company } = useCms()
   const waHref = `https://wa.me/91${company.whatsapp}`
 
   return (

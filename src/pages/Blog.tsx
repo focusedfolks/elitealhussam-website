@@ -1,13 +1,16 @@
 import { useMemo, useState } from 'react'
-import { posts, type BlogCategory } from 'virtual:blog-posts'
 import { PageHero } from '../components/PageHero'
 import { BlogCard } from '../components/BlogCard'
 import { LeadForm } from '../components/LeadForm'
 import { Seo } from '../components/Seo'
+import { useCms } from '../cms/CmsProvider'
+import type { CmsBlogPost } from '../cms/types'
 import { images } from '../content/site'
 import './Blog.css'
 
 const PAGE_SIZE = 9
+
+type BlogCategory = CmsBlogPost['category']
 
 const filters: Array<{ key: 'all' | BlogCategory; label: string }> = [
   { key: 'all', label: 'All Posts' },
@@ -18,13 +21,14 @@ const filters: Array<{ key: 'all' | BlogCategory; label: string }> = [
 ]
 
 export function Blog() {
+  const { posts } = useCms()
   const [filter, setFilter] = useState<'all' | BlogCategory>('all')
   const [visible, setVisible] = useState(PAGE_SIZE)
 
   const filtered = useMemo(
     () =>
       filter === 'all' ? posts : posts.filter((p) => p.category === filter),
-    [filter],
+    [filter, posts],
   )
 
   const shown = filtered.slice(0, visible)

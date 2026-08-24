@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { company } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
 import { IconPhone, IconWhatsApp } from './Icons'
 import { useI18n } from '../i18n'
 import './LeadBar.css'
 
 export function LeadBar() {
   const { t } = useI18n()
+  const { company } = useCms()
   const [visible, setVisible] = useState(false)
   const waHref = `https://wa.me/91${company.whatsapp}?text=${encodeURIComponent(
     'Assalamu Alaikum, please share a free Hajj / Umrah package quote.',

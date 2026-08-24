@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
-import { allPackages, type TravelPackage } from '../content/site'
+import type { TravelPackage } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
 import { CURRENCIES, useCurrency } from '../currency'
 
 import './Pricing.css'
@@ -15,6 +16,7 @@ export function Pricing() {
     convertFromInr,
     formatPrice,
   } = useCurrency()
+  const { packages: allPackages } = useCms()
 
   const convertedPackages = allPackages.map((pkg: TravelPackage) => ({
     ...pkg,

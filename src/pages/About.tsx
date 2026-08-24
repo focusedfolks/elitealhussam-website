@@ -3,7 +3,8 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import { PageHero } from '../components/PageHero'
 import { BrandMark } from '../components/BrandMark'
 import { highlightIcons, IconWhatsApp } from '../components/Icons'
-import { aboutCopy, company, highlights, images } from '../content/site'
+import { highlights, images } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
 import './InnerPages.css'
 import './About.css'
@@ -86,6 +87,7 @@ const milestones = [
 
 export function About() {
   const { t } = useI18n()
+  const { company, about: aboutCopy } = useCms()
   const labels: Record<string, string> = {
     weekly: t.common.weekly,
     bestPrice: t.common.bestPrice,

@@ -119,11 +119,14 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true
     }
-  }, [currency, rates])
+  }, [currency])
 
   const value = useMemo<CurrencyContextValue>(() => {
     const selectedCurrency = currencyMap[currency]
+    const hasRate = currency === 'INR' || Boolean(rates[currency])
     const rate = currency === 'INR' ? 1 : (rates[currency] ?? 1)
+    const displayCode = hasRate ? currency : 'INR'
+    const displayInfo = currencyMap[displayCode]
 
     return {
       currency,
@@ -131,11 +134,11 @@ export function CurrencyProvider({ children }: { children: ReactNode }) {
       selectedCurrency,
       loading,
       error,
-      convertFromInr: (amount: number) => amount * rate,
+      convertFromInr: (amount: number) => (hasRate ? amount * rate : amount),
       formatPrice: (amount: number) =>
-        new Intl.NumberFormat(selectedCurrency.locale, {
+        new Intl.NumberFormat(displayInfo.locale, {
           style: 'currency',
-          currency,
+          currency: displayCode,
           maximumFractionDigits: 0,
         }).format(amount),
     }

@@ -159,21 +159,26 @@ export function Header() {
             )}
           </div>
 
-          <div className="nav-menu-actions">
-            <label className="currency-switch" aria-label="Currency">
+          <div className="nav-prefs">
+            <p className="nav-prefs-title">Price & language</p>
+            <label className="nav-pref-field" htmlFor="mobile-currency">
+              <span>Currency</span>
               <select
+                id="mobile-currency"
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
               >
                 {CURRENCIES.map((item) => (
                   <option key={item.code} value={item.code}>
-                    {item.code}
+                    {item.code} — {item.name}
                   </option>
                 ))}
               </select>
             </label>
-            <label className="lang-switch" aria-label="Language">
+            <label className="nav-pref-field" htmlFor="mobile-language">
+              <span>Language</span>
               <select
+                id="mobile-language"
                 value={lang}
                 onChange={(e) => setLang(e.target.value as typeof lang)}
               >
@@ -184,6 +189,9 @@ export function Header() {
                 ))}
               </select>
             </label>
+          </div>
+
+          <div className="nav-menu-actions">
             <Link
               className="talk-btn talk-btn--drawer"
               to="/contact#lead-form"
@@ -202,7 +210,7 @@ export function Header() {
             >
               {CURRENCIES.map((item) => (
                 <option key={item.code} value={item.code}>
-                  {item.code}
+                  {item.code} — {item.name}
                 </option>
               ))}
             </select>

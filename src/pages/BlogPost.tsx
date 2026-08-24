@@ -1,10 +1,9 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { useMemo } from 'react'
-import { posts } from 'virtual:blog-posts'
 import { BlogCard } from '../components/BlogCard'
 import { LeadForm } from '../components/LeadForm'
 import { Seo } from '../components/Seo'
-import { company } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
 import './Blog.css'
 
 function formatDate(iso: string) {
@@ -21,6 +20,7 @@ function formatDate(iso: string) {
 
 export function BlogPost() {
   const { slug } = useParams()
+  const { posts, company } = useCms()
   const post = posts.find((p) => p.slug === slug)
 
   const related = useMemo(() => {
@@ -28,7 +28,7 @@ export function BlogPost() {
     return posts
       .filter((p) => p.slug !== post.slug && p.category === post.category)
       .slice(0, 3)
-  }, [post])
+  }, [post, posts])
 
   if (!post) return <Navigate to="/blog" replace />
 
@@ -126,7 +126,7 @@ export function BlogPost() {
 
         <article
           className="blog-prose"
-          dangerouslySetInnerHTML={{ __html: post.html }}
+          dangerouslySetInnerHTML={{ __html: post.html || '' }}
         />
       </div>
 

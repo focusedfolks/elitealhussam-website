@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { PackageCards } from '../components/PackageCards'
 import { LeadForm } from '../components/LeadForm'
-import { allPackages, images } from '../content/site'
+import { images } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
 import './InnerPages.css'
 
@@ -11,6 +12,7 @@ type Filter = 'all' | 'hajj' | 'umrah'
 
 export function Packages() {
   const { t } = useI18n()
+  const { packages: allPackages } = useCms()
   const location = useLocation()
   const [filter, setFilter] = useState<Filter>('all')
 
@@ -26,7 +28,7 @@ export function Packages() {
           ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       })
     }
-  }, [location.hash])
+  }, [location.hash, allPackages])
 
   return (
     <div>

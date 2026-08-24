@@ -13,12 +13,14 @@ import {
   IconWhatsApp,
   IconYouTube,
 } from '../components/Icons'
-import { allPackages, company, images } from '../content/site'
+import { images } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
 import './InnerPages.css'
 
 export function Contact() {
   const { t } = useI18n()
+  const { company, packages: allPackages } = useCms()
   const [params] = useSearchParams()
   const packageId = params.get('package') || ''
   const adults = params.get('adults') || ''
@@ -33,7 +35,7 @@ export function Contact() {
   const defaultPackage = useMemo(() => {
     const match = allPackages.find((pkg) => pkg.id === packageId)
     return match?.title ?? ''
-  }, [packageId])
+  }, [packageId, allPackages])
   const defaultTravellers = useMemo(() => {
     if (!adults && !children && !infants) return ''
     const parts = []

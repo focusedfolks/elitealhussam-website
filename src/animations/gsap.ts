@@ -18,5 +18,6 @@ export function refreshScrollTriggers() {
 }
 
 export function killAllScrollTriggers() {
-  ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+  ScrollTrigger.getAll().forEach((trigger) => trigger.kill(true))
+  ScrollTrigger.normalizeScroll(false)
 }

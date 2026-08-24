@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import type { BlogPost } from 'virtual:blog-posts'
+import type { CmsBlogPost } from '../cms/types'
 import './BlogCard.css'
 
 type Props = {
-  post: BlogPost
+  post: CmsBlogPost
   priority?: boolean
 }
 

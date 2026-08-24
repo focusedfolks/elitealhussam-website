@@ -197,7 +197,8 @@
 }
 
 .nav-menu-head,
-.nav-menu-actions {
+.nav-menu-actions,
+.nav-prefs {
   display: none;
 }
 
@@ -292,7 +293,7 @@
     box-shadow: -16px 0 40px rgba(10, 21, 40, 0.18);
     transform: translateX(105%);
     transition: transform 0.28s ease;
-    overflow-y: auto;
+    overflow: hidden;
     overscroll-behavior: contain;
   }
 
@@ -304,10 +305,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0.75rem;
     padding: 1rem 1.1rem;
     border-bottom: 1px solid var(--line);
-    position: sticky;
-    top: 0;
+    flex: 0 0 auto;
     background: #f7f3ec;
     z-index: 1;
   }
@@ -328,14 +329,18 @@
     color: var(--navy);
     font-size: 1.1rem;
     cursor: pointer;
+    flex: 0 0 auto;
   }
 
   .nav-menu-links {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    padding: 0.85rem 0.85rem 1rem;
-    flex: 1;
+    padding: 0.85rem 0.85rem 0.5rem;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-link {
@@ -376,23 +381,74 @@
     padding: 0.75rem 0.9rem;
   }
 
-  .nav-menu-actions {
+  .nav-prefs {
     display: grid;
-    gap: 0.65rem;
-    padding: 1rem 1.1rem calc(1.25rem + env(safe-area-inset-bottom, 0));
-    border-top: 1px solid var(--line);
+    gap: 0.7rem;
+    margin: 0.35rem 0.85rem 0.85rem;
+    padding: 0.95rem 0.95rem 1rem;
+    border-radius: 16px;
+    background: #fff;
+    border: 1.5px solid rgba(201, 162, 39, 0.45);
+    box-shadow: 0 10px 24px rgba(15, 31, 61, 0.08);
+    flex: 0 0 auto;
+  }
+
+  .nav-prefs-title {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .nav-pref-field {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .nav-pref-field span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .nav-pref-field select {
+    width: 100%;
+    min-height: 48px;
+    border: 1.5px solid rgba(15, 31, 61, 0.18);
+    border-radius: 12px;
+    background: #fbf8f2;
+    color: var(--navy);
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 650;
+    padding: 0.7rem 0.9rem;
+    cursor: pointer;
+  }
+
+  .nav-pref-field select:focus {
+    outline: 2px solid rgba(201, 162, 39, 0.55);
+    outline-offset: 1px;
+    border-color: var(--gold);
     background: #fff;
   }
 
-  .nav-menu-actions .lang-switch select,
-  .nav-menu-actions .currency-switch select,
-  .talk-btn--drawer {
-    width: 100%;
+  .nav-menu-actions {
+    display: grid;
+    gap: 0.65rem;
+    padding: 0.85rem 1.1rem calc(1rem + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--line);
+    background: #fff;
+    flex: 0 0 auto;
+    position: sticky;
+    bottom: 0;
   }
 
   .talk-btn--drawer {
-    min-height: 48px;
-    font-size: 0.95rem;
+    width: 100%;
+    min-height: 50px;
+    font-size: 0.98rem;
   }
 }
 

@@ -13,7 +13,8 @@ import {
   IconSparkle,
   IconUsers,
 } from '../components/Icons'
-import { aboutCopy, images } from '../content/site'
+import { images } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
 import { Hero } from '../components/Hero'
 import { PackageCards } from '../components/PackageCards'
@@ -54,6 +55,7 @@ function initials(name: string) {
 
 export function Home() {
   const { t } = useI18n()
+  const { testimonials, about } = useCms()
   const homeRef = useRef<HTMLDivElement>(null)
   useHomeScrollEffects(homeRef)
 
@@ -136,27 +138,6 @@ export function Home() {
     'Family-friendly stays',
     'Elderly care',
     'Kids under 2 free',
-  ]
-
-  const testimonials = [
-    {
-      quote:
-        'From visa to Ziyarat, everything was organised with sincerity. We could focus on our prayers.',
-      name: 'Fathima R.',
-      place: 'Chennai pilgrim · Umrah',
-    },
-    {
-      quote:
-        'They treated our elderly parents with respect and patience. A trustworthy guide for the sacred journey.',
-      name: 'Imran S.',
-      place: 'Family group · Hajj',
-    },
-    {
-      quote:
-        'Clear communication, honest pricing, and spiritual support. ELITE ALHUSSAM feels like family.',
-      name: 'Ayesha K.',
-      place: 'Kilpauk · Economy package',
-    },
   ]
 
   const partners = [
@@ -468,7 +449,7 @@ export function Home() {
             <p className="eyebrow">Service coverage</p>
             <h2>Complete pilgrimage solutions</h2>
             <p>
-              {aboutCopy.intro}{' '}
+              {about.intro}{' '}
               <Link className="inline-more" to="/about">
                 {t.common.readMore} →
               </Link>

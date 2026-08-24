@@ -1,10 +1,11 @@
-import { company } from '../content/site'
 import { IconWhatsApp } from './Icons'
+import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
 import './WhatsApp.css'
 
 export function WhatsAppButton() {
   const { t } = useI18n()
+  const { company } = useCms()
   const href = `https://wa.me/91${company.whatsapp}?text=${encodeURIComponent(
     'Assalamu Alaikum, I would like to enquire about Hajj / Umrah packages.',
   )}`

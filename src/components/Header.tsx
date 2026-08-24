@@ -1,11 +1,13 @@
 import { NavLink, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { CURRENCIES, useCurrency, type CurrencyCode } from '../currency'
 import { useI18n } from '../i18n'
 import { BrandMark } from './BrandMark'
 import './Header.css'
 
 export function Header() {
   const { t, lang, setLang, languages } = useI18n()
+  const { currency, setCurrency } = useCurrency()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState<string | null>(null)
@@ -170,6 +172,18 @@ export function Header() {
           </div>
 
           <div className="nav-menu-actions">
+            <label className="currency-switch" aria-label="Currency">
+              <select
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
+              >
+                {CURRENCIES.map((item) => (
+                  <option key={item.code} value={item.code}>
+                    {item.code}
+                  </option>
+                ))}
+              </select>
+            </label>
             <label className="lang-switch" aria-label="Language">
               <select
                 value={lang}
@@ -193,6 +207,18 @@ export function Header() {
         </nav>
 
         <div className="header-actions">
+          <label className="currency-switch" aria-label="Currency">
+            <select
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
+            >
+              {CURRENCIES.map((item) => (
+                <option key={item.code} value={item.code}>
+                  {item.code}
+                </option>
+              ))}
+            </select>
+          </label>
           <label className="lang-switch" aria-label="Language">
             <select
               value={lang}

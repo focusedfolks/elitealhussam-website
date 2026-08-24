@@ -10,12 +10,12 @@ import {
 } from 'react'
 import {
   allPackages,
-  formatInr,
   packageTravelModes,
   type PackageAmenity,
   type PackageCategory,
   type TravelPackage,
 } from '../content/site'
+import { useCurrency } from '../currency'
 import { useI18n } from '../i18n'
 import {
   TravelModeFields,
@@ -50,6 +50,7 @@ export function PackageCards({
   onFilterChange,
 }: Props) {
   const { t } = useI18n()
+  const { currency, setCurrency } = useCurrency()
   const [internalFilter, setInternalFilter] = useState<Filter>(filter)
   const controlled = typeof onFilterChange === 'function'
   const active = controlled ? filter : internalFilter
@@ -89,6 +90,32 @@ export function PackageCards({
     <div className={`pkg-wrap${popularOnly ? ' pkg-wrap--popular-only' : ''}`}>
       {showFilters && !popularOnly ? (
         <div className="pkg-filters-block">
+          <div className="pkg-topbar">
+            <div className="pkg-topbar-copy">
+              <p className="pkg-filter-meta">
+                Showing {packages.length} of {totalCount} packages
+              </p>
+              <p className="pkg-grid-trust">
+                Chosen by 500+ families who booked with confidence
+              </p>
+            </div>
+            <label className="pkg-currency-switch" aria-label="Package currency">
+              <span>Currency</span>
+              <select
+                value={currency}
+                onChange={(event) => setCurrency(event.target.value as typeof currency)}
+              >
+                <option value="INR">INR</option>
+                <option value="AED">AED</option>
+                <option value="USD">USD</option>
+                <option value="SAR">SAR</option>
+                <option value="GBP">GBP</option>
+                <option value="EUR">EUR</option>
+                <option value="CAD">CAD</option>
+                <option value="AUD">AUD</option>
+              </select>
+            </label>
+          </div>
           <div
             className="pkg-filters"
             role="tablist"
@@ -123,12 +150,6 @@ export function PackageCards({
               </button>
             ))}
           </div>
-          <p className="pkg-filter-meta">
-            Showing {packages.length} of {totalCount} packages
-          </p>
-          <p className="pkg-grid-trust">
-            Chosen by 500+ families who booked with confidence
-          </p>
         </div>
       ) : null}
 
@@ -148,6 +169,7 @@ function PackageCard({
   pkg: TravelPackage
   index: number
 }) {
+  const { convertFromInr, formatPrice } = useCurrency()
   const cardRef = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(false)
   const [passengers, setPassengers] = useState<Passengers>({
@@ -180,10 +202,12 @@ function PackageCard({
 
   const total = useMemo(
     () =>
-      passengers.adults * pkg.pricing.adult +
-      passengers.children * pkg.pricing.child +
-      passengers.infants * pkg.pricing.infant,
-    [passengers, pkg.pricing],
+      convertFromInr(
+        passengers.adults * pkg.pricing.adult +
+          passengers.children * pkg.pricing.child +
+          passengers.infants * pkg.pricing.infant,
+      ),
+    [convertFromInr, passengers, pkg.pricing],
   )
 
   const totalLabel = useMemo(() => {
@@ -290,7 +314,7 @@ function PackageCard({
         <div className="pkg-price-panel">
           <div className="pkg-price-start">
             <span>Starting From</span>
-            <strong>{formatInr(pkg.pricing.adult)}</strong>
+            <strong>{formatPrice(convertFromInr(pkg.pricing.adult))}</strong>
             <em>Per person · {pkg.duration}</em>
           </div>
           <ul className="pkg-highlights">
@@ -433,6 +457,7 @@ function PackageBadge({
 }
 
 function AnimatedTotal({ value }: { value: number }) {
+  const { formatPrice } = useCurrency()
   const [display, setDisplay] = useState(value)
   const displayRef = useRef(value)
   const frame = useRef(0)
@@ -457,7 +482,7 @@ function AnimatedTotal({ value }: { value: number }) {
     return () => cancelAnimationFrame(frame.current)
   }, [value])
 
-  return <strong className="pkg-total-amount">{formatInr(display)}</strong>
+  return <strong className="pkg-total-amount">{formatPrice(display)}</strong>
 }
 
 function PassengerCounter({

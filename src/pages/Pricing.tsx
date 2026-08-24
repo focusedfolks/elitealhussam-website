@@ -1,161 +1,29 @@
-import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { allPackages, type TravelPackage } from '../content/site'
+import { CURRENCIES, useCurrency } from '../currency'
 
 import './Pricing.css'
 
-type CurrencyCode =
-  | 'INR'
-  | 'AED'
-  | 'USD'
-  | 'SAR'
-  | 'GBP'
-  | 'EUR'
-  | 'CAD'
-  | 'AUD'
-
-type Currency = {
-  code: CurrencyCode
-  name: string
-  symbol: string
-  locale: string
-}
-
-const CURRENCIES: Currency[] = [
-  {
-    code: 'INR',
-    name: 'Indian Rupee',
-    symbol: '₹',
-    locale: 'en-IN',
-  },
-  {
-    code: 'AED',
-    name: 'UAE Dirham',
-    symbol: 'د.إ',
-    locale: 'en-AE',
-  },
-  {
-    code: 'USD',
-    name: 'US Dollar',
-    symbol: '$',
-    locale: 'en-US',
-  },
-  {
-    code: 'SAR',
-    name: 'Saudi Riyal',
-    symbol: '﷼',
-    locale: 'en-SA',
-  },
-  {
-    code: 'GBP',
-    name: 'British Pound',
-    symbol: '£',
-    locale: 'en-GB',
-  },
-  {
-    code: 'EUR',
-    name: 'Euro',
-    symbol: '€',
-    locale: 'en-IE',
-  },
-  {
-    code: 'CAD',
-    name: 'Canadian Dollar',
-    symbol: 'CA$',
-    locale: 'en-CA',
-  },
-  {
-    code: 'AUD',
-    name: 'Australian Dollar',
-    symbol: 'A$',
-    locale: 'en-AU',
-  },
-]
-
-const currencyMap = Object.fromEntries(
-  CURRENCIES.map((currency) => [currency.code, currency]),
-) as Record<CurrencyCode, Currency>
-
-function formatPrice(amount: number, currency: CurrencyCode) {
-  const currencyInfo = currencyMap[currency]
-
-  return new Intl.NumberFormat(currencyInfo.locale, {
-    style: 'currency',
-    currency,
-    maximumFractionDigits: 0,
-  }).format(amount)
-}
-
 export function Pricing() {
-  const [currency, setCurrency] = useState<CurrencyCode>('INR')
-  const [rates, setRates] = useState<Record<string, number>>({})
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
+  const {
+    currency,
+    setCurrency,
+    selectedCurrency,
+    loading,
+    error,
+    convertFromInr,
+    formatPrice,
+  } = useCurrency()
 
-  useEffect(() => {
-    if (currency === 'INR') {
-      setRates({ INR: 1 })
-      return
-    }
-
-    let cancelled = false
-
-    async function loadRate() {
-      try {
-        setLoading(true)
-        setError(false)
-
-        const response = await fetch(
-          `https://api.frankfurter.dev/v2/rate/INR/${currency}`,
-        )
-
-        if (!response.ok) {
-          throw new Error('Unable to load exchange rate')
-        }
-
-        const data = await response.json()
-
-        if (!cancelled) {
-          setRates({
-            INR: 1,
-            [currency]: Number(data.rate),
-          })
-        }
-      } catch {
-        if (!cancelled) {
-          setError(true)
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false)
-        }
-      }
-    }
-
-    loadRate()
-
-    return () => {
-      cancelled = true
-    }
-  }, [currency])
-
-  const selectedCurrency = currencyMap[currency]
-
-  const convertedPackages = useMemo(() => {
-    const rate = currency === 'INR' ? 1 : rates[currency]
-
-    if (!rate) return []
-
-    return allPackages.map((pkg: TravelPackage) => ({
-      ...pkg,
-      convertedPricing: {
-        adult: pkg.pricing.adult * rate,
-        child: pkg.pricing.child * rate,
-        infant: pkg.pricing.infant * rate,
-      },
-    }))
-  }, [currency, rates])
+  const convertedPackages = allPackages.map((pkg: TravelPackage) => ({
+    ...pkg,
+    convertedPricing: {
+      adult: convertFromInr(pkg.pricing.adult),
+      child: convertFromInr(pkg.pricing.child),
+      infant: convertFromInr(pkg.pricing.infant),
+    },
+  }))
 
   return (
     <main className="pricing-page">
@@ -180,12 +48,12 @@ export function Pricing() {
                 id="pricing-currency"
                 value={currency}
                 onChange={(event) =>
-                  setCurrency(event.target.value as CurrencyCode)
+                  setCurrency(event.target.value as typeof currency)
                 }
               >
                 {CURRENCIES.map((item) => (
                   <option key={item.code} value={item.code}>
-                    {item.symbol} {item.code} — {item.name}
+                    {item.code} - {item.name}
                   </option>
                 ))}
               </select>
@@ -203,7 +71,7 @@ export function Pricing() {
               <h2>
                 Package prices in{' '}
                 <strong>
-                  {selectedCurrency.symbol} {selectedCurrency.code}
+                  {selectedCurrency.code}
                 </strong>
               </h2>
             </div>
@@ -268,7 +136,6 @@ export function Pricing() {
                       <strong>
                         {formatPrice(
                           pkg.convertedPricing.adult,
-                          currency,
                         )}
                       </strong>
                     </div>
@@ -278,7 +145,6 @@ export function Pricing() {
                       <strong>
                         {formatPrice(
                           pkg.convertedPricing.child,
-                          currency,
                         )}
                       </strong>
                     </div>
@@ -288,7 +154,6 @@ export function Pricing() {
                       <strong>
                         {formatPrice(
                           pkg.convertedPricing.infant,
-                          currency,
                         )}
                       </strong>
                     </div>

@@ -205,7 +205,8 @@
   display: contents;
 }
 
-.lang-switch select {
+.lang-switch select,
+.currency-switch select {
   border: 1px solid var(--line);
   background: #fff;
   border-radius: 999px;
@@ -384,6 +385,7 @@
   }
 
   .nav-menu-actions .lang-switch select,
+  .nav-menu-actions .currency-switch select,
   .talk-btn--drawer {
     width: 100%;
   }

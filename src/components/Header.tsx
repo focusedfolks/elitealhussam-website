@@ -155,6 +155,18 @@ export function Header() {
                 </NavLink>
               ),
             )}
+            
+            
+           <NavLink
+              to="/pricing"
+              end
+              className={({ isActive }) =>
+                `nav-link${isActive ? ' is-active' : ''}`
+              }
+              onClick={closeNav}
+            >
+              Pricing
+            </NavLink>
           </div>
 
           <div className="nav-menu-actions">

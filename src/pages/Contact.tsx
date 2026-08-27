@@ -16,6 +16,11 @@ import {
 import { images } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
+import {
+  HAJJ_PASSPORT_NOTE,
+  telHref,
+  whatsappHref,
+} from '../lib/contact'
 import './InnerPages.css'
 
 export function Contact() {
@@ -59,6 +64,8 @@ export function Contact() {
     }),
     [travelMode, airport, airline, departureCity, pickupPoint, departureDate],
   )
+  const primaryPhone = company.phones[0]
+  const waHref = whatsappHref(company.whatsapp)
 
   return (
     <div>
@@ -79,8 +86,8 @@ export function Contact() {
               <BrandMark size="lg" showTagline showRule />
             </div>
             <p className="contact-intro">
-              Speak with our sales team for a free package quotation. Offices in
-              Chennai and Dubai.
+              Speak with our Dubai sales team for package details and a free
+              quotation. {HAJJ_PASSPORT_NOTE}.
             </p>
 
             {company.offices.map((office) => (
@@ -113,7 +120,7 @@ export function Contact() {
                     <a
                       key={phone}
                       className="phone-link"
-                      href={`tel:${phone.replace(/\s/g, '')}`}
+                      href={telHref(phone)}
                     >
                       {phone}
                     </a>
@@ -129,12 +136,8 @@ export function Contact() {
               <div>
                 <strong>WhatsApp Sales</strong>
                 <p>
-                  <a
-                    href={`https://wa.me/91${company.whatsapp}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {company.whatsapp}
+                  <a href={waHref} target="_blank" rel="noreferrer">
+                    {primaryPhone}
                   </a>
                 </p>
               </div>

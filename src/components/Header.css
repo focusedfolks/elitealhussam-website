@@ -206,8 +206,7 @@
   display: contents;
 }
 
-.lang-switch select,
-.currency-switch select {
+.lang-switch select {
   border: 1px solid var(--line);
   background: #fff;
   border-radius: 999px;
@@ -217,6 +216,27 @@
   font-weight: 600;
   font-size: 0.8rem;
   cursor: pointer;
+}
+
+.header-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.55rem 0.95rem;
+  border: 1.5px solid rgba(201, 162, 39, 0.55);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 0.84rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-phone:hover {
+  border-color: var(--gold);
+  background: #fffdf7;
 }
 
 .talk-btn {
@@ -449,6 +469,27 @@
     width: 100%;
     min-height: 50px;
     font-size: 0.98rem;
+  }
+
+  .talk-btn--ghost {
+    background: #fff;
+    color: var(--navy);
+    border: 1.5px solid var(--line);
+  }
+
+  .nav-pref-call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 48px;
+    padding: 0.7rem 0.9rem;
+    border-radius: 12px;
+    border: 1.5px solid rgba(201, 162, 39, 0.5);
+    background: #fffdf7;
+    color: var(--navy);
+    font-weight: 700;
+    text-decoration: none;
   }
 }
 

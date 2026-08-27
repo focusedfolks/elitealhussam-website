@@ -11,7 +11,7 @@ readTime: "5 min read"
 
 ## Two sacred journeys, one purpose
 
-Both **Umrah** and **Hajj** draw the believer closer to Allah. Understanding the difference helps families plan dates, budgets, and expectations - especially first-time pilgrims from India and the UAE.
+Both **Umrah** and **Hajj** draw the believer closer to Allah. Understanding the difference helps families plan dates, budgets, and expectations - especially first-time pilgrims arranging travel through Dubai, UAE.
 
 ## Obligation & timing
 
@@ -29,14 +29,14 @@ Both **Umrah** and **Hajj** draw the believer closer to Allah. Understanding the
 
 ## Which journey is right for you?
 
-Many of our Chennai families begin with **Umrah** to familiarise elders and children with the Haramain, then return for **Hajj** when ready. Others book Hajj directly with our guided packages.
+Many of our Dubai families begin with **Umrah** to familiarise elders and children with the Haramain, then return for **Hajj** when ready. Others book Hajj directly with our guided packages. **Haj services are for Indian passport holders only.**
 
 - Prefer flexible dates → explore [Umrah packages](/packages)  
 - Planning for 2025–26 season → see our [Hajj packages](/packages)  
 
 ## How we support you
 
-ELITE ALHUSSAM combines Saudi hospitality roots with local offices in **Chennai** and **Dubai** - visas, hotels, transport, and religious guidance under one clear quotation.
+ELITE ALHUSSAM combines Saudi hospitality roots with dedicated support from our **Dubai, UAE** office - visas, hotels, transport, and religious guidance under one clear quotation. Contact us for pricing and package details.
 
 > Assalamu Alaikum - if you are unsure which journey fits your family this year, speak with our sales team. A short call often brings clarity.
 

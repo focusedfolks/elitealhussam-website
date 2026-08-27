@@ -83,11 +83,14 @@ export function Hero() {
             <IconSparkle size={14} /> 45+ Years
           </span>
           <span>
-            <IconBuilding size={14} /> Chennai & Dubai
+            <IconBuilding size={14} /> Dubai, UAE
           </span>
         </div>
         <p className="hero-faith rise rise-delay-3">
           “Labbaik Allahumma Labbaik” - we walk with you in faith.
+        </p>
+        <p className="hero-passport rise rise-delay-3">
+          Haj Services – Indian Passport Holders Only
         </p>
       </div>
 

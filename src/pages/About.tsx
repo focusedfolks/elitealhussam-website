@@ -6,6 +6,7 @@ import { highlightIcons, IconWhatsApp } from '../components/Icons'
 import { highlights, images } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
+import { whatsappHref } from '../lib/contact'
 import './InnerPages.css'
 import './About.css'
 
@@ -43,10 +44,10 @@ function Reveal({
 
 const highlightCopy: Record<string, string> = {
   weekly: 'Regular scheduled trips throughout the season.',
-  bestPrice: 'Transparent packages with honest adult, child, and infant rates.',
+  bestPrice: 'Clear package guidance with honest inclusions for every traveller.',
   guidance: 'Experienced spiritual support from briefing to return.',
   luxury: 'Comfortable hotels close to the Haramain experience.',
-  chennaiSupport: 'Dedicated assistance from our Kilpauk office team.',
+  chennaiSupport: 'Dedicated assistance from our Dubai, UAE office team.',
   multilingual: 'Guidance in languages your family understands.',
 }
 
@@ -75,13 +76,13 @@ const milestones = [
   },
   {
     year: '1998',
-    label: 'Chennai franchise established',
-    detail: 'Al Hussam Travel & Tours India (P) Ltd inaugurated',
+    label: 'Pilgrimage operations formalised',
+    detail: 'Organised Hajj & Umrah service tradition carried forward',
   },
   {
     year: 'Today',
-    label: 'Chennai & Dubai support',
-    detail: 'ELITE ALHUSSAM serving pilgrims with clear packages',
+    label: 'Dubai, UAE office',
+    detail: 'ELITE ALHUSSAM serving pilgrims with dedicated local support',
   },
 ]
 
@@ -97,9 +98,10 @@ export function About() {
     multilingual: t.common.multilingual,
   }
 
-  const waHref = `https://wa.me/91${company.whatsapp}?text=${encodeURIComponent(
+  const waHref = whatsappHref(
+    company.whatsapp,
     'Assalamu Alaikum, I would like to learn more about ELITE ALHUSSAM packages.',
-  )}`
+  )
 
   return (
     <div className="about-page">
@@ -148,7 +150,7 @@ export function About() {
             <aside className="about-stat-card">
               <strong>45+</strong>
               <span>Years of trusted service</span>
-              <em>Est. 1998 in Chennai</em>
+              <em>Serving from Dubai, UAE</em>
             </aside>
           </Reveal>
         </div>
@@ -188,7 +190,7 @@ export function About() {
             <h2>Decades of trust, carried forward</h2>
             <p>
               From Holy Land hospitality roots to organised pilgrimage support
-              in India and the UAE.
+              from Dubai, UAE.
             </p>
           </Reveal>
           <Reveal className="about-timeline">
@@ -238,10 +240,11 @@ export function About() {
         <div className="container about-cta-inner">
           <div>
             <p className="eyebrow">Start your journey</p>
-            <h2>Ready for a clear package quotation?</h2>
+            <h2>Ready for package details?</h2>
             <p>
-              Talk to our Chennai or Dubai team for Hajj and Umrah options with
-              adult, child, and infant pricing.
+              Talk to our Dubai team for Hajj and Umrah options. Haj services
+              are for Indian passport holders only — contact us for pricing and
+              package details.
             </p>
           </div>
           <div className="about-cta-actions">

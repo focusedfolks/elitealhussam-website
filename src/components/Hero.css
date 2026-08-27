@@ -188,6 +188,20 @@
   font-size: 1.05rem;
 }
 
+.hero-passport {
+  margin: 0.85rem 0 0;
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 185, 45, 0.55);
+  background: rgba(15, 31, 61, 0.45);
+  color: #f7e7b0;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .hero-dots {
   position: absolute;
   z-index: 3;

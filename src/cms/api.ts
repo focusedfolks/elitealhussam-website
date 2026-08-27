@@ -20,7 +20,7 @@ marked.setOptions({ gfm: true })
 const fallbackTestimonials: CmsTestimonial[] = [
   {
     name: 'Fathima R.',
-    place: 'Chennai pilgrim · Umrah',
+    place: 'Dubai pilgrim · Umrah',
     quote:
       'From visa to Ziyarat, everything was organised with sincerity. We could focus on our prayers.',
   },
@@ -32,9 +32,9 @@ const fallbackTestimonials: CmsTestimonial[] = [
   },
   {
     name: 'Ayesha K.',
-    place: 'Kilpauk · Economy package',
+    place: 'Dubai · Economy package',
     quote:
-      'Clear communication, honest pricing, and spiritual support. ELITE ALHUSSAM feels like family.',
+      'Clear communication, dedicated support, and spiritual care. ELITE ALHUSSAM feels like family.',
   },
 ]
 

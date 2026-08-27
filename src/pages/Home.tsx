@@ -65,7 +65,7 @@ export function Home() {
     { label: 'Ziyarat Tours', Icon: IconLandmark },
     { label: 'Transport Care', Icon: IconGlobe },
     { label: 'Religious Guidance', Icon: IconKaaba },
-    { label: 'Chennai & Dubai Support', Icon: IconBuilding },
+    { label: 'Dubai, UAE Support', Icon: IconBuilding },
   ]
 
   const steps: {
@@ -84,7 +84,7 @@ export function Home() {
     {
       n: '02',
       title: 'Receive a clear quotation',
-      text: 'Adult, child, and infant pricing with package inclusions.',
+      text: 'We share package details and a clear quotation for your group.',
       featured: true,
       Icon: IconBook,
     },
@@ -129,7 +129,7 @@ export function Home() {
 
   const proof = [
     { value: '45+', label: t.common.years, Icon: IconSparkle },
-    { value: '2', label: 'Offices · Chennai & Dubai', Icon: IconBuilding },
+    { value: '1', label: 'Office · Dubai, UAE', Icon: IconBuilding },
     { value: '4', label: t.common.multilingual, Icon: IconGlobe },
     { value: '24/7', label: 'Pilgrim support on journey', Icon: IconKaaba },
   ]
@@ -137,7 +137,7 @@ export function Home() {
   const familyTrust = [
     'Family-friendly stays',
     'Elderly care',
-    'Kids under 2 free',
+    'Indian passport Hajj eligibility',
   ]
 
   const partners = [
@@ -181,7 +181,7 @@ export function Home() {
             </div>
             <div className="trust-item">
               <IconGlobe size={16} />
-              <span>India & UAE presence</span>
+              <span>Dubai, UAE presence</span>
             </div>
             <div className="trust-item">
               <IconKaaba size={16} />
@@ -230,7 +230,7 @@ export function Home() {
             </div>
             <div className="data-readout-stat">
               <span className="data-readout-label">Offices</span>
-              <strong data-count="2">0</strong>
+              <strong data-count="1">0</strong>
             </div>
             <div className="data-readout-stat">
               <span className="data-readout-label">Pilgrims served</span>
@@ -262,8 +262,9 @@ export function Home() {
             <h2>Travel together. Pray together. Return blessed.</h2>
             <p>
               ELITE ALHUSSAM plans Hajj and Umrah for the whole family - adults,
-              children, and infants - with clear pricing, comfortable stays, and
-              guidance you can trust from Chennai and Dubai.
+              children, and infants - with comfortable stays and guidance you
+              can trust from our Dubai, UAE office. Haj services are for Indian
+              passport holders only.
             </p>
             <ul className="family-trust-list">
               {familyTrust.map((item) => (
@@ -323,8 +324,8 @@ export function Home() {
             <p className="eyebrow">{t.home.packagesEyebrow}</p>
             <h2>{t.home.packagesTitle}</h2>
             <p>
-              Our most popular Hajj and Umrah packages - clear pricing for
-              adults, children, and infants.
+              Our most popular Hajj and Umrah packages from Dubai - contact us
+              for pricing and package details.
             </p>
           </GsapReveal>
           <PackageCards popularOnly />

@@ -137,7 +137,7 @@ export function BlogPost() {
           </span>
           <div>
             <strong>{post.author}</strong>
-            <p>45+ years guiding pilgrims from Chennai and Dubai.</p>
+            <p>45+ years guiding pilgrims from Dubai, UAE.</p>
           </div>
         </div>
       </div>
@@ -160,7 +160,7 @@ export function BlogPost() {
 
       <LeadForm
         title="Ready to plan your pilgrimage?"
-        subtitle="Share a few details and our Chennai / Dubai team will send a clear package quotation."
+        subtitle="Share a few details and our Dubai team will send a clear package quotation."
       />
     </div>
   )

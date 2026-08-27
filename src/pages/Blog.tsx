@@ -101,7 +101,7 @@ export function Blog() {
 
       <LeadForm
         title="Ready to plan your pilgrimage?"
-        subtitle="Share a few details and our Chennai / Dubai team will send a clear package quotation."
+        subtitle="Share a few details and our Dubai team will send a clear package quotation."
       />
     </div>
   )

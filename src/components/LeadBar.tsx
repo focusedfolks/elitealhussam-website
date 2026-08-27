@@ -3,15 +3,18 @@ import { useEffect, useState } from 'react'
 import { useCms } from '../cms/CmsProvider'
 import { IconPhone, IconWhatsApp } from './Icons'
 import { useI18n } from '../i18n'
+import { telHref, whatsappHref } from '../lib/contact'
 import './LeadBar.css'
 
 export function LeadBar() {
   const { t } = useI18n()
   const { company } = useCms()
   const [visible, setVisible] = useState(false)
-  const waHref = `https://wa.me/91${company.whatsapp}?text=${encodeURIComponent(
-    'Assalamu Alaikum, please share a free Hajj / Umrah package quote.',
-  )}`
+  const waHref = whatsappHref(
+    company.whatsapp,
+    'Assalamu Alaikum, please share Hajj / Umrah package details and pricing.',
+  )
+  const primaryPhone = company.phones[0]
 
   useEffect(() => {
     const onScroll = () => {
@@ -43,7 +46,7 @@ export function LeadBar() {
       <div className="lead-bar-inner">
         <p className="lead-bar-copy">
           <strong>{t.home.needHelp}</strong>
-          <span>Free consultation · Chennai & Dubai</span>
+          <span>Free consultation · Dubai, UAE</span>
         </p>
         <div className="lead-bar-actions">
           <a
@@ -59,7 +62,7 @@ export function LeadBar() {
           </a>
           <a
             className="lead-bar-btn is-call"
-            href={`tel:${company.phones[0].replace(/\s/g, '')}`}
+            href={telHref(primaryPhone)}
             tabIndex={visible ? 0 : -1}
           >
             <IconPhone size={16} />

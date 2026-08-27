@@ -26,7 +26,7 @@ export function StickyQuoteBar() {
       <div className="sticky-quote-inner">
         <p>
           <strong>{t.common.getQuote}</strong>
-          <span>Clear packages · Chennai & Dubai support</span>
+          <span>Clear packages · Dubai, UAE support</span>
         </p>
         <Link className="btn btn-gold sticky-quote-btn" to="/contact#lead-form" tabIndex={visible ? 0 : -1}>
           {t.home.explore}

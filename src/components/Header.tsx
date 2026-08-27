@@ -1,13 +1,16 @@
 import { NavLink, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { CURRENCIES, useCurrency, type CurrencyCode } from '../currency'
 import { useI18n } from '../i18n'
 import { BrandMark } from './BrandMark'
+import { useCms } from '../cms/CmsProvider'
+import { IconPhone } from './Icons'
+import { telHref } from '../lib/contact'
 import './Header.css'
 
 export function Header() {
   const { t, lang, setLang, languages } = useI18n()
-  const { currency, setCurrency } = useCurrency()
+  const { company } = useCms()
+  const primaryPhone = company.phones[0]
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState<string | null>(null)
@@ -160,21 +163,7 @@ export function Header() {
           </div>
 
           <div className="nav-prefs">
-            <p className="nav-prefs-title">Price & language</p>
-            <label className="nav-pref-field" htmlFor="mobile-currency">
-              <span>Currency</span>
-              <select
-                id="mobile-currency"
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-              >
-                {CURRENCIES.map((item) => (
-                  <option key={item.code} value={item.code}>
-                    {item.code} — {item.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <p className="nav-prefs-title">Language</p>
             <label className="nav-pref-field" htmlFor="mobile-language">
               <span>Language</span>
               <select
@@ -189,11 +178,22 @@ export function Header() {
                 ))}
               </select>
             </label>
+            <a className="nav-pref-call" href={telHref(primaryPhone)}>
+              <IconPhone size={16} />
+              <span>{primaryPhone}</span>
+            </a>
           </div>
 
           <div className="nav-menu-actions">
-            <Link
+            <a
               className="talk-btn talk-btn--drawer"
+              href={telHref(primaryPhone)}
+              onClick={closeNav}
+            >
+              <span>Call {primaryPhone}</span>
+            </a>
+            <Link
+              className="talk-btn talk-btn--drawer talk-btn--ghost"
               to="/contact#lead-form"
               onClick={closeNav}
             >
@@ -203,18 +203,10 @@ export function Header() {
         </nav>
 
         <div className="header-actions">
-          <label className="currency-switch" aria-label="Currency">
-            <select
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
-            >
-              {CURRENCIES.map((item) => (
-                <option key={item.code} value={item.code}>
-                  {item.code} — {item.name}
-                </option>
-              ))}
-            </select>
-          </label>
+          <a className="header-phone" href={telHref(primaryPhone)}>
+            <IconPhone size={15} />
+            <span>{primaryPhone}</span>
+          </a>
           <label className="lang-switch" aria-label="Language">
             <select
               value={lang}

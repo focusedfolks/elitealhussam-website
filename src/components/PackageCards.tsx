@@ -15,8 +15,13 @@ import {
   type TravelPackage,
 } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
-import { useCurrency } from '../currency'
 import { useI18n } from '../i18n'
+import {
+  HAJJ_PASSPORT_NOTE,
+  PRICING_CTA_LABEL,
+  telHref,
+  whatsappHref,
+} from '../lib/contact'
 import {
   TravelModeFields,
   emptyTravelDetails,
@@ -51,7 +56,6 @@ export function PackageCards({
 }: Props) {
   const { t } = useI18n()
   const { packages: allPackages } = useCms()
-  const { currency, setCurrency } = useCurrency()
   const [internalFilter, setInternalFilter] = useState<Filter>(filter)
   const controlled = typeof onFilterChange === 'function'
   const active = controlled ? filter : internalFilter
@@ -97,25 +101,10 @@ export function PackageCards({
                 Showing {packages.length} of {totalCount} packages
               </p>
               <p className="pkg-grid-trust">
-                Chosen by 500+ families who booked with confidence
+                Chosen by 500+ families who booked with confidence · Dubai, UAE
               </p>
+              <p className="pkg-passport-note">{HAJJ_PASSPORT_NOTE}</p>
             </div>
-            <label className="pkg-currency-switch" aria-label="Package currency">
-              <span>Currency</span>
-              <select
-                value={currency}
-                onChange={(event) => setCurrency(event.target.value as typeof currency)}
-              >
-                <option value="INR">INR</option>
-                <option value="AED">AED</option>
-                <option value="USD">USD</option>
-                <option value="SAR">SAR</option>
-                <option value="GBP">GBP</option>
-                <option value="EUR">EUR</option>
-                <option value="CAD">CAD</option>
-                <option value="AUD">AUD</option>
-              </select>
-            </label>
           </div>
           <div
             className="pkg-filters"
@@ -170,7 +159,8 @@ function PackageCard({
   pkg: TravelPackage
   index: number
 }) {
-  const { convertFromInr, formatPrice } = useCurrency()
+  const { company } = useCms()
+  const { t } = useI18n()
   const cardRef = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(false)
   const [passengers, setPassengers] = useState<Passengers>({
@@ -184,6 +174,11 @@ function PackageCard({
     mode: modes.length === 1 ? modes[0] : 'air',
   }))
   const [travelTouched, setTravelTouched] = useState(false)
+  const primaryPhone = company.phones[0]
+  const pricingHref = whatsappHref(
+    company.whatsapp,
+    `Assalamu Alaikum, please share pricing & package details for ${pkg.title}.`,
+  )
 
   useEffect(() => {
     const node = cardRef.current
@@ -200,16 +195,6 @@ function PackageCard({
     observer.observe(node)
     return () => observer.disconnect()
   }, [])
-
-  const total = useMemo(
-    () =>
-      convertFromInr(
-        passengers.adults * pkg.pricing.adult +
-          passengers.children * pkg.pricing.child +
-          passengers.infants * pkg.pricing.infant,
-      ),
-    [convertFromInr, passengers, pkg.pricing],
-  )
 
   const totalLabel = useMemo(() => {
     const parts: string[] = []
@@ -290,6 +275,9 @@ function PackageCard({
         <header className="pkg-intro">
           <p className="pkg-season">{pkg.season}</p>
           <h3>{pkg.title}</h3>
+          {pkg.category === 'hajj' ? (
+            <p className="pkg-passport-badge">{HAJJ_PASSPORT_NOTE}</p>
+          ) : null}
           <p className="pkg-social-proof">
             <span aria-hidden="true">★★★★★</span> 4.9 · Chosen by 200+ pilgrims
           </p>
@@ -312,11 +300,11 @@ function PackageCard({
           ))}
         </div>
 
-        <div className="pkg-price-panel">
+        <div className="pkg-price-panel pkg-price-panel--cta">
           <div className="pkg-price-start">
-            <span>Starting From</span>
-            <strong>{formatPrice(convertFromInr(pkg.pricing.adult))}</strong>
-            <em>Per person · {pkg.duration}</em>
+            <span>Package details</span>
+            <strong>{pkg.duration}</strong>
+            <em>Dubai · UAE departures</em>
           </div>
           <ul className="pkg-highlights">
             {pkg.highlights.map((point) => (
@@ -326,6 +314,14 @@ function PackageCard({
               </li>
             ))}
           </ul>
+          <div className="pkg-pricing-cta">
+            <a className="pkg-pricing-cta-btn" href={pricingHref} target="_blank" rel="noreferrer">
+              {PRICING_CTA_LABEL}
+            </a>
+            <a className="pkg-pricing-cta-phone" href={telHref(primaryPhone)}>
+              Call {primaryPhone}
+            </a>
+          </div>
         </div>
 
         <div className="pkg-passengers">
@@ -374,10 +370,10 @@ function PackageCard({
         </div>
 
         <div className="pkg-footer">
-          <div className="pkg-total-block">
-            <span>Total Price</span>
-            <AnimatedTotal value={total} />
-            <em>({totalLabel})</em>
+          <div className="pkg-total-block pkg-total-block--enquiry">
+            <span>Traveller summary</span>
+            <strong className="pkg-total-amount">{totalLabel}</strong>
+            <em>Contact us for pricing</em>
             {chip ? (
               <span className="travel-chip">
                 {travel.mode === 'road' ? '🚌' : '✈'} {chip}
@@ -398,18 +394,18 @@ function PackageCard({
               onClick={guardBook}
               aria-disabled={!travelOk}
             >
-              Book Now <span aria-hidden="true">→</span>
+              {t.common.contactForPricing} <span aria-hidden="true">→</span>
             </Link>
-            <Link
+            <a
               className="pkg-ask-btn"
-              to={enquireTo}
-              onClick={guardBook}
-              aria-disabled={!travelOk}
+              href={pricingHref}
+              target="_blank"
+              rel="noreferrer"
             >
-              Ask a Question
-            </Link>
+              WhatsApp Now
+            </a>
             <span className="pkg-secure">
-              <LockIcon /> Secure booking · Your details stay private
+              <LockIcon /> Secure enquiry · Your details stay private
             </span>
           </div>
         </div>
@@ -455,35 +451,6 @@ function PackageBadge({
       {tag}
     </span>
   )
-}
-
-function AnimatedTotal({ value }: { value: number }) {
-  const { formatPrice } = useCurrency()
-  const [display, setDisplay] = useState(value)
-  const displayRef = useRef(value)
-  const frame = useRef(0)
-
-  useEffect(() => {
-    const from = displayRef.current
-    const to = value
-    if (from === to) return
-    const start = performance.now()
-    const duration = 320
-
-    cancelAnimationFrame(frame.current)
-    const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration)
-      const eased = 1 - (1 - t) ** 3
-      const next = Math.round(from + (to - from) * eased)
-      displayRef.current = next
-      setDisplay(next)
-      if (t < 1) frame.current = requestAnimationFrame(tick)
-    }
-    frame.current = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frame.current)
-  }, [value])
-
-  return <strong className="pkg-total-amount">{formatPrice(display)}</strong>
 }
 
 function PassengerCounter({

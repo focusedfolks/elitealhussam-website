@@ -4,18 +4,18 @@ slug: "what-to-pack-for-hajj-checklist"
 date: "2026-08-10"
 author: "ELITE ALHUSSAM Team"
 category: "Hajj Guide"
-excerpt: "A practical packing list for pilgrims travelling from Chennai and Dubai - essentials for Ihram, health, and comfort in Makkah and Madinah."
+excerpt: "A practical packing list for pilgrims travelling from Dubai, UAE - essentials for Ihram, health, and comfort in Makkah and Madinah."
 coverImage: "/images/blog-cover-packing.webp"
 readTime: "6 min read"
 ---
 
 ## Start with intention, then pack with care
 
-Hajj is a journey of the heart - but thoughtful packing makes the days of worship smoother. Families travelling with ELITE ALHUSSAM from **Chennai** and **Dubai** often ask what is truly essential. Use this checklist as a calm starting point.
+Hajj is a journey of the heart - but thoughtful packing makes the days of worship smoother. Families travelling with ELITE ALHUSSAM from **Dubai, UAE** often ask what is truly essential. Use this checklist as a calm starting point. **Haj services are for Indian passport holders only.**
 
 ## Documents & essentials
 
-- Valid passport, visas, and printed copies in a waterproof pouch  
+- Valid Indian passport, visas, and printed copies in a waterproof pouch  
 - Vaccination records and any hospital letters your doctor recommends  
 - Hotel and package vouchers (keep digital copies on your phone too)  
 - Emergency contacts: family, and your ELITE ALHUSSAM group leader  
@@ -42,4 +42,4 @@ Hajj is a journey of the heart - but thoughtful packing makes the days of worshi
 - Tasbih / digital counter  
 - Small notebook for reflections  
 
-If you are joining our **Platinum** or **Classic Hajj** packages, your briefing in Chennai covers group-specific packing notes. Need a personalised list for elders or children? [Request a free quote](/contact#lead-form) and mention your travellers.
+If you are joining our **Platinum** or **Classic Hajj** packages, your Dubai briefing covers group-specific packing notes. Need a personalised list for elders or children? [Request a free quote](/contact#lead-form) or call **+971 56 574 6678**.

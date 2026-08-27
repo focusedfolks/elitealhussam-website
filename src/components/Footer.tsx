@@ -11,12 +11,14 @@ import {
 import { BrandMark } from './BrandMark'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
+import { telHref, whatsappHref } from '../lib/contact'
 import './Footer.css'
 
 export function Footer() {
   const { t } = useI18n()
   const { company } = useCms()
-  const waHref = `https://wa.me/91${company.whatsapp}`
+  const waHref = whatsappHref(company.whatsapp)
+  const primaryPhone = company.phones[0]
 
   return (
     <footer className="site-footer">
@@ -27,9 +29,9 @@ export function Footer() {
             <p>{t.home.needHelpText}</p>
           </div>
           <div className="footer-cta-actions">
-            <Link className="btn btn-gold" to="/contact#lead-form">
-              {t.common.getQuote}
-            </Link>
+            <a className="btn btn-gold" href={telHref(primaryPhone)}>
+              <IconPhone size={16} /> {primaryPhone}
+            </a>
             <a
               className="btn footer-wa-btn"
               href={waHref}
@@ -130,7 +132,7 @@ export function Footer() {
                 </span>
                 <span>
                   {company.phones.map((phone) => (
-                    <a key={phone} href={`tel:${phone.replace(/\s/g, '')}`}>
+                    <a key={phone} href={telHref(phone)}>
                       {phone}
                     </a>
                   ))}
@@ -147,7 +149,7 @@ export function Footer() {
                   <IconWhatsApp size={15} />
                 </span>
                 <a href={waHref} target="_blank" rel="noreferrer">
-                  {company.whatsapp}
+                  {primaryPhone}
                 </a>
               </p>
             </div>

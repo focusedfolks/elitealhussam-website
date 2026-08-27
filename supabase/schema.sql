@@ -200,29 +200,22 @@ insert into public.site_settings (key, value) values
     "name": "Elite Alhussam Travel and Tourism L.L.C",
     "shortName": "ELITE ALHUSSAM",
     "legalName": "Elite Alhussam Travel and Tourism L.L.C",
-    "indiaName": "AL HUSSAM Travel & Tours India (P) LTD",
+    "indiaName": "Elite Alhussam Travel and Tourism L.L.C",
     "tagline": "TRAVEL AND TOURISM L.L.C",
-    "positioning": "Premium pilgrimage brand with Saudi hospitality roots - Chennai and Dubai office support for pilgrims.",
+    "positioning": "Premium pilgrimage brand with Saudi hospitality roots - serving pilgrims from our Dubai, UAE office.",
     "experience": "45+ years of trusted Hajj & Umrah service",
-    "background": "Saudi-based hospitality lineage connected with Aziz Khogeer Group Hotels. Al Hussam Travel & Tours India (P) Ltd was established in 1998 in Chennai as a franchise of Al Hussam Co. Makkah, with Elite Alhussam Travel and Tourism L.L.C serving from Dubai, UAE.",
-    "phones": ["044-2640 2420", "044-2640 2421", "044-2640 0422", "7299460725", "9941372228"],
-    "whatsapp": "9941372228",
-    "email": "alhussamchennai@gmail.com",
-    "address": "No.3, Balfours Road, 3rd Floor, Kilpauk, Chennai - 600 010",
+    "background": "Saudi-based hospitality lineage connected with Aziz Khogeer Group Hotels. Elite Alhussam Travel and Tourism L.L.C operates from Dubai, UAE, arranging Hajj and Umrah with dedicated local support.",
+    "phones": ["+971 56 574 6678"],
+    "whatsapp": "971565746678",
+    "email": "alhussamuae@gmail.com",
+    "address": "No. 54, M Floor, Smart Eyes Business Centre, AG House Building, P.O. Box: 35127, Dubai, UAE",
     "offices": [
-      {
-        "id": "chennai",
-        "city": "Chennai",
-        "label": "Chennai Office",
-        "companyName": "AL HUSSAM Travel & Tours India (P) LTD",
-        "lines": ["No.3, Balfours Road, 3rd Floor", "Kilpauk, Chennai - 600 010", "India"]
-      },
       {
         "id": "dubai",
         "city": "Dubai",
         "label": "Dubai Office",
         "companyName": "Elite Alhussam Travel and Tourism L.L.C",
-        "lines": ["Office No.: 54, Smart Eyes Business Center,", "AG House Building,", "P.O.Box: 35127, Dubai, UAE"]
+        "lines": ["No. 54, M Floor", "Smart Eyes Business Centre", "AG House Building", "P.O. Box: 35127", "Dubai, UAE"]
       }
     ],
     "social": {
@@ -237,8 +230,8 @@ insert into public.site_settings (key, value) values
   '{
     "intro": "A pilgrimage to the holy land is a sacred mission for spiritual enlightenment. Makkah is Allah’s chosen land. Millions of Muslims visit the city of Qibla for peace and tranquillity. Al Hussam is a reliable name with four decades of spotless reputation for Hajj & Umrah services.",
     "legacy": "Al Hussam is a Saudi-based company predominantly operating in hospitality management, originally known as Aziz Khogeer group Hotels, with 45 years of experience in rendering Hajj & Umrah services. The company has impeccable lineage from Abdul Aziz Khogeer Hotels Establishment.",
-    "profile": "Mr. K.A. Basheer Ahmed from Tamil Nadu worked as Senior Manager since 1975, rendering world-class hospitality to pilgrims from Europe, Africa and South East Asia - serving 5,000 to 7,000 pilgrims every year.",
-    "india": "In 1998, Mr. K.A. Basheer Ahmed (Chairman) established Al Hussam Travel & Tours India (P) Ltd as a franchise of Al Hussam Co. Makkah. It was inaugurated by Mr. Mazen Khogeer (son of Sheikh Abdul Aziz Khogeer) to provide the same class of facilities for pilgrims from India.",
+    "profile": "Our leadership brings decades of Holy Land hospitality experience - serving pilgrims with organised care, quality stays, and sincere guidance throughout the sacred journey.",
+    "india": "Elite Alhussam Travel and Tourism L.L.C operates from Dubai, UAE. Hajj services are strictly for Indian passport holders only, with Umrah packages arranged for eligible travellers through our Dubai office.",
     "leadership": "Managing Director Mr. B. Sameer Ahmed continues this tradition of organised, experienced and genuine tour operation with top-class accommodation and efficient service for elite and regular guests alike."
   }'::jsonb
 )
@@ -248,7 +241,7 @@ on conflict (key) do nothing;
 insert into public.testimonials (name, place, quote, sort_order) values
 (
   'Fathima R.',
-  'Chennai pilgrim · Umrah',
+  'Dubai pilgrim · Umrah',
   'From visa to Ziyarat, everything was organised with sincerity. We could focus on our prayers.',
   1
 ),
@@ -260,8 +253,8 @@ insert into public.testimonials (name, place, quote, sort_order) values
 ),
 (
   'Ayesha K.',
-  'Kilpauk · Economy package',
-  'Clear communication, honest pricing, and spiritual support. ELITE ALHUSSAM feels like family.',
+  'Dubai · Economy package',
+  'Clear communication, dedicated support, and spiritual care. ELITE ALHUSSAM feels like family.',
   3
 )
 on conflict do nothing;
@@ -293,11 +286,11 @@ insert into public.packages (
 ),
 (
   'classic-hajj-2025', 'hajj', 'Classic Hajj Package', 'Classic', '2025 – 26',
-  'Balanced comfort and value for first-time and returning pilgrims from Chennai.',
+  'Balanced comfort and value for first-time and returning pilgrims from Dubai, UAE.',
   'Makkah • Madinah • Arafat', '28–32 Days', '/images/makkah-clock-tower.webp',
-  '{"adult":385000,"child":295000,"infant":72000,"currency":"INR","note":"Starting from · per person"}'::jsonb,
-  '["Shared transport","Ziyarat included","Chennai briefing"]'::jsonb,
-  '["Best value Hajj","Ziyarat included","Chennai briefing"]'::jsonb,
+  '{"adult":385000,"child":295000,"infant":72000,"currency":"INR","note":"Contact for pricing · per person"}'::jsonb,
+  '["Shared transport","Ziyarat included","Indian passport holders only"]'::jsonb,
+  '["Best value Hajj","Ziyarat included","Indian passport holders only"]'::jsonb,
   '[{"key":"hotel","title":"Hotel Stay","subtitle":"Quality lodging"},{"key":"transport","title":"Transport","subtitle":"All transfers"},{"key":"meals","title":"Daily Meals","subtitle":"As per package"},{"key":"support","title":"24/7 Support","subtitle":"Always available"},{"key":"visa","title":"Visa Help","subtitle":"Documentation"}]'::jsonb,
   '["air","road"]'::jsonb, true, false, 3
 ),

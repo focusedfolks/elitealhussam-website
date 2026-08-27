@@ -19,6 +19,7 @@ import {
   type TravelDetails,
 } from './TravelModeFields'
 import { useI18n } from '../i18n'
+import { whatsappHref } from '../lib/contact'
 import './LeadForm.css'
 
 type Props = {
@@ -58,9 +59,10 @@ export function LeadForm({
   )
   const modes = selectedPkg ? packageTravelModes(selectedPkg) : (['air', 'road'] as const)
 
-  const waHref = `https://wa.me/91${company.whatsapp}?text=${encodeURIComponent(
+  const waHref = whatsappHref(
+    company.whatsapp,
     'Assalamu Alaikum, I want a package quote.',
-  )}`
+  )
 
   function mark(name: string) {
     setTouched((prev) => ({ ...prev, [name]: true }))
@@ -130,7 +132,7 @@ export function LeadForm({
 
     window.setTimeout(() => {
       window.open(
-        `https://wa.me/91${company.whatsapp}?text=${waText}`,
+        whatsappHref(company.whatsapp, decodeURIComponent(waText)),
         '_blank',
         'noopener,noreferrer',
       )
@@ -156,7 +158,7 @@ export function LeadForm({
                 <IconSparkle size={14} /> {t.common.years} of trusted service
               </li>
               <li>
-                <IconBuilding size={14} /> Chennai & Dubai office support
+                <IconBuilding size={14} /> Dubai, UAE office support
               </li>
               <li>
                 <IconUsers size={14} /> Free package consultation
@@ -196,7 +198,7 @@ export function LeadForm({
                     autoComplete="tel"
                     required
                     minLength={8}
-                    placeholder="+91 / +971"
+                    placeholder="+971 56 574 6678"
                     onBlur={() => mark('phone')}
                   />
                 </span>

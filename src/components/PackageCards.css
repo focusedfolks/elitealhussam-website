@@ -1056,3 +1056,56 @@
     opacity: 1;
   }
 }
+
+.pkg-passport-note,
+.pkg-passport-badge {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pkg-gold-soft, #8a6d1a);
+}
+
+.pkg-passport-badge {
+  display: inline-block;
+  margin: 0.45rem 0 0.2rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(201, 162, 39, 0.14);
+  border: 1px solid rgba(201, 162, 39, 0.4);
+}
+
+.pkg-pricing-cta {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+.pkg-pricing-cta-btn,
+.pkg-pricing-cta-phone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  text-align: center;
+}
+
+.pkg-pricing-cta-btn {
+  background: var(--pkg-navy, #0f1f3d);
+  color: #fff;
+}
+
+.pkg-pricing-cta-phone {
+  border: 1.5px solid rgba(201, 162, 39, 0.55);
+  background: #fffdf7;
+  color: var(--pkg-navy, #0f1f3d);
+}
+
+.pkg-total-block--enquiry .pkg-total-amount {
+  font-size: 1.15rem;
+}

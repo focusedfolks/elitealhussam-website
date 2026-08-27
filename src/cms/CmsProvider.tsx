@@ -59,7 +59,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
   const [testimonials, setTestimonials] = useState<CmsTestimonial[]>([
     {
       name: 'Fathima R.',
-      place: 'Chennai pilgrim · Umrah',
+      place: 'Dubai pilgrim · Umrah',
       quote:
         'From visa to Ziyarat, everything was organised with sincerity. We could focus on our prayers.',
     },
@@ -71,9 +71,9 @@ export function CmsProvider({ children }: { children: ReactNode }) {
     },
     {
       name: 'Ayesha K.',
-      place: 'Kilpauk · Economy package',
+      place: 'Dubai · Economy package',
       quote:
-        'Clear communication, honest pricing, and spiritual support. ELITE ALHUSSAM feels like family.',
+        'Clear communication, dedicated support, and spiritual care. ELITE ALHUSSAM feels like family.',
     },
   ])
   const [company, setCompany] = useState<CmsCompany>(
@@ -88,7 +88,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
       setTestimonials([
         {
           name: 'Fathima R.',
-          place: 'Chennai pilgrim · Umrah',
+          place: 'Dubai pilgrim · Umrah',
           quote:
             'From visa to Ziyarat, everything was organised with sincerity. We could focus on our prayers.',
         },
@@ -100,9 +100,9 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         },
         {
           name: 'Ayesha K.',
-          place: 'Kilpauk · Economy package',
+          place: 'Dubai · Economy package',
           quote:
-            'Clear communication, honest pricing, and spiritual support. ELITE ALHUSSAM feels like family.',
+            'Clear communication, dedicated support, and spiritual care. ELITE ALHUSSAM feels like family.',
         },
       ])
       setCompany(staticCompany as unknown as CmsCompany)
@@ -123,8 +123,22 @@ export function CmsProvider({ children }: { children: ReactNode }) {
       setPackages(pkgs.length ? pkgs : allPackages)
       setPosts(blog.length ? blog : staticBlogAsCms())
       setTestimonials(testi)
-      setCompany(comp)
-      setAbout(ab)
+      // Keep Dubai contact details authoritative even if CMS seed is stale
+      setCompany({
+        ...comp,
+        phones: staticCompany.phones,
+        whatsapp: staticCompany.whatsapp,
+        email: staticCompany.email,
+        address: staticCompany.address,
+        offices: staticCompany.offices,
+        positioning: staticCompany.positioning,
+        background: staticCompany.background,
+      } as CmsCompany)
+      setAbout({
+        ...ab,
+        india: aboutCopy.india,
+        profile: aboutCopy.profile,
+      })
     } finally {
       setLoading(false)
     }

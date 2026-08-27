@@ -2,44 +2,30 @@ export const company = {
   name: 'Elite Alhussam Travel and Tourism L.L.C',
   shortName: 'ELITE ALHUSSAM',
   legalName: 'Elite Alhussam Travel and Tourism L.L.C',
-  indiaName: 'AL HUSSAM Travel & Tours India (P) LTD',
+  indiaName: 'Elite Alhussam Travel and Tourism L.L.C',
   tagline: 'TRAVEL AND TOURISM L.L.C',
   positioning:
-    'Premium pilgrimage brand with Saudi hospitality roots - Chennai and Dubai office support for pilgrims.',
+    'Premium pilgrimage brand with Saudi hospitality roots - serving pilgrims from our Dubai, UAE office.',
   experience: '45+ years of trusted Hajj & Umrah service',
   background:
-    'Saudi-based hospitality lineage connected with Aziz Khogeer Group Hotels. Al Hussam Travel & Tours India (P) Ltd was established in 1998 in Chennai as a franchise of Al Hussam Co. Makkah, with Elite Alhussam Travel and Tourism L.L.C serving from Dubai, UAE.',
-  phones: [
-    '044-2640 2420',
-    '044-2640 2421',
-    '044-2640 0422',
-    '7299460725',
-    '9941372228',
-  ],
-  whatsapp: '9941372228',
-  email: 'alhussamchennai@gmail.com',
-  address: 'No.3, Balfours Road, 3rd Floor, Kilpauk, Chennai - 600 010',
+    'Saudi-based hospitality lineage connected with Aziz Khogeer Group Hotels. Elite Alhussam Travel and Tourism L.L.C operates from Dubai, UAE, arranging Hajj and Umrah with dedicated local support.',
+  phones: ['+971 56 574 6678'],
+  whatsapp: '971565746678',
+  email: 'alhussamuae@gmail.com',
+  address:
+    'No. 54, M Floor, Smart Eyes Business Centre, AG House Building, P.O. Box: 35127, Dubai, UAE',
   offices: [
-    {
-      id: 'chennai',
-      city: 'Chennai',
-      label: 'Chennai Office',
-      companyName: 'AL HUSSAM Travel & Tours India (P) LTD',
-      lines: [
-        'No.3, Balfours Road, 3rd Floor',
-        'Kilpauk, Chennai - 600 010',
-        'India',
-      ],
-    },
     {
       id: 'dubai',
       city: 'Dubai',
       label: 'Dubai Office',
       companyName: 'Elite Alhussam Travel and Tourism L.L.C',
       lines: [
-        'Office No.: 54, Smart Eyes Business Center,',
-        'AG House Building,',
-        'P.O.Box: 35127, Dubai, UAE',
+        'No. 54, M Floor',
+        'Smart Eyes Business Centre',
+        'AG House Building',
+        'P.O. Box: 35127',
+        'Dubai, UAE',
       ],
     },
   ],
@@ -57,19 +43,19 @@ export const aboutCopy = {
   legacy:
     'Al Hussam is a Saudi-based company predominantly operating in hospitality management, originally known as Aziz Khogeer group Hotels, with 45 years of experience in rendering Hajj & Umrah services. The company has impeccable lineage from Abdul Aziz Khogeer Hotels Establishment.',
   profile:
-    'Mr. K.A. Basheer Ahmed from Tamil Nadu worked as Senior Manager since 1975, rendering world-class hospitality to pilgrims from Europe, Africa and South East Asia - serving 5,000 to 7,000 pilgrims every year.',
+    'Our leadership brings decades of Holy Land hospitality experience - serving pilgrims with organised care, quality stays, and sincere guidance throughout the sacred journey.',
   india:
-    'In 1998, Mr. K.A. Basheer Ahmed (Chairman) established Al Hussam Travel & Tours India (P) Ltd as a franchise of Al Hussam Co. Makkah. It was inaugurated by Mr. Mazen Khogeer (son of Sheikh Abdul Aziz Khogeer) to provide the same class of facilities for pilgrims from India.',
+    'Elite Alhussam Travel and Tourism L.L.C operates from Dubai, UAE. Hajj services are strictly for Indian passport holders only, with Umrah packages arranged for eligible travellers through our Dubai office.',
   leadership:
     'Managing Director Mr. B. Sameer Ahmed continues this tradition of organised, experienced and genuine tour operation with top-class accommodation and efficient service for elite and regular guests alike.',
 }
 
 export const highlights = [
   { key: 'weekly', title: 'Weekly Departures' },
-  { key: 'bestPrice', title: 'Best Price Guarantee' },
+  { key: 'bestPrice', title: 'Trusted Package Guidance' },
   { key: 'guidance', title: 'Complete Religious Guidance' },
   { key: 'luxury', title: 'Luxurious Accommodations' },
-  { key: 'chennaiSupport', title: 'Chennai Office Support' },
+  { key: 'chennaiSupport', title: 'Dubai Office Support' },
   { key: 'multilingual', title: 'Multilingual Pilgrim Guidance' },
 ] as const
 
@@ -135,7 +121,6 @@ export const AIRPORTS = [
   { value: 'DXB', label: 'Dubai (DXB)' },
   { value: 'AUH', label: 'Abu Dhabi (AUH)' },
   { value: 'SHJ', label: 'Sharjah (SHJ)' },
-  { value: 'MAA', label: 'Chennai (MAA)' },
 ] as const
 
 export const AIRLINES = [
@@ -143,8 +128,8 @@ export const AIRLINES = [
   'Saudia',
   'Qatar Airways',
   'Etihad',
-  'IndiGo',
-  'Air India',
+  'flydubai',
+  'Air Arabia',
   'Other / No preference',
 ] as const
 
@@ -192,8 +177,8 @@ export const hajjPackages: TravelPackage[] = [
       currency: 'INR',
       note: 'Starting from · per person',
     },
-    features: ['Visa assistance', 'Hotels near Haram', 'Religious guidance'],
-    highlights: ['Close Haram stays', 'Guided spiritual care', 'Short-duration Hajj'],
+    features: ['Visa assistance', 'Hotels near Haram', 'Indian passport holders only'],
+    highlights: ['Close Haram stays', 'Guided spiritual care', 'Indian passport holders only'],
     amenities: [
       { key: 'hotel', title: 'Hotel', subtitle: 'Near Haram' },
       { key: 'transport', title: 'Transport', subtitle: 'All transfers' },
@@ -223,8 +208,8 @@ export const hajjPackages: TravelPackage[] = [
       currency: 'INR',
       note: 'Starting from · per person',
     },
-    features: ['Premium hotels', 'Transport care', 'Group leader support'],
-    highlights: ['Premium hotels', 'Full spiritual care', 'Trusted 45+ years'],
+    features: ['Premium hotels', 'Transport care', 'Indian passport holders only'],
+    highlights: ['Premium hotels', 'Full spiritual care', 'Indian passport holders only'],
     amenities: [
       { key: 'hotel', title: 'Hotel', subtitle: 'Luxury stay' },
       { key: 'transport', title: 'Transport', subtitle: 'Comfort coaches' },
@@ -240,7 +225,7 @@ export const hajjPackages: TravelPackage[] = [
     tag: 'Classic',
     season: '2025 – 26',
     summary:
-      'Balanced comfort and value for first-time and returning pilgrims from Chennai.',
+      'Balanced comfort and value for first-time and returning pilgrims from Dubai, UAE.',
     locations: 'Makkah • Madinah • Arafat',
     duration: '28–32 Days',
     image: '/images/makkah-clock-tower.webp',
@@ -251,10 +236,18 @@ export const hajjPackages: TravelPackage[] = [
       child: 295000,
       infant: 72000,
       currency: 'INR',
-      note: 'Starting from · per person',
+      note: 'Contact for pricing · per person',
     },
-    features: ['Shared transport', 'Ziyarat included', 'Chennai briefing'],
-    highlights: ['Best value Hajj', 'Ziyarat included', 'Chennai briefing'],
+    features: [
+      'Shared transport',
+      'Ziyarat included',
+      'Indian passport holders only',
+    ],
+    highlights: [
+      'Best value Hajj',
+      'Ziyarat included',
+      'Indian passport holders only',
+    ],
     amenities: defaultAmenities,
   },
   {
@@ -276,8 +269,8 @@ export const hajjPackages: TravelPackage[] = [
       currency: 'INR',
       note: 'Custom quote · per person',
     },
-    features: ['Private options', 'Family rooms', 'Flexible dates'],
-    highlights: ['Private options', 'Family rooms', 'Flexible dates'],
+    features: ['Private options', 'Family rooms', 'Indian passport holders only'],
+    highlights: ['Private options', 'Family rooms', 'Indian passport holders only'],
     amenities: defaultAmenities,
   },
 ]

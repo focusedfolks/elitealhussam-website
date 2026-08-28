@@ -19,6 +19,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://elitealhussam.com/pricing</loc>
+    
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://elitealhussam.com/blog</loc>
     
     <changefreq>weekly</changefreq>
@@ -31,12 +37,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://elitealhussam.com/blog/5-tips-first-time-pilgrims-chennai</loc>
-    <lastmod>2026-08-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://elitealhussam.com/blog/umrah-vs-hajj-understanding-the-difference</loc>
     <lastmod>2026-08-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -45,6 +45,12 @@
   <url>
     <loc>https://elitealhussam.com/blog/what-to-pack-for-hajj-checklist</loc>
     <lastmod>2026-08-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://elitealhussam.com/blog/5-tips-first-time-pilgrims-chennai</loc>
+    <lastmod>2025-11-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

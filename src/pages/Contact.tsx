@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { LeadForm } from '../components/LeadForm'
+import { Seo } from '../components/Seo'
+import { pageMeta } from '../seo/pageMeta'
 import { BrandMark } from '../components/BrandMark'
 import {
   IconFacebook,
@@ -69,6 +71,12 @@ export function Contact() {
 
   return (
     <div>
+      <Seo
+        title={pageMeta.contact.title}
+        description={pageMeta.contact.description}
+        url={pageMeta.contact.path}
+        image={pageMeta.contact.image}
+      />
       <PageHero
         title={t.pages.contactTitle}
         subtitle={t.pages.contactSub}

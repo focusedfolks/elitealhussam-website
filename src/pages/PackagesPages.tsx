@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { PackageCards } from '../components/PackageCards'
 import { LeadForm } from '../components/LeadForm'
+import { Seo } from '../components/Seo'
+import { pageMeta } from '../seo/pageMeta'
 import { images } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
@@ -32,6 +34,12 @@ export function Packages() {
 
   return (
     <div>
+      <Seo
+        title={pageMeta.packages.title}
+        description={pageMeta.packages.description}
+        url={pageMeta.packages.path}
+        image={pageMeta.packages.image}
+      />
       <PageHero
         title={t.pages.packagesTitle}
         subtitle={t.pages.packagesSub}

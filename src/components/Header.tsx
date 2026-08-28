@@ -62,7 +62,7 @@ export function Header() {
         >
           <img
             src="/images/alhussam-logo.png?v=2"
-            alt=""
+            alt="ELITE ALHUSSAM Travel and Tourism logo"
             className="brand-logo"
             width={52}
             height={52}

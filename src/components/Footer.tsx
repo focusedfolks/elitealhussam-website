@@ -50,7 +50,7 @@ export function Footer() {
           <div className="footer-brand-row">
             <img
               src="/images/alhussam-logo.png?v=2"
-              alt=""
+              alt="ELITE ALHUSSAM Travel and Tourism logo"
               className="footer-logo"
               width={64}
               height={64}

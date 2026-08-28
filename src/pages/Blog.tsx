@@ -4,6 +4,7 @@ import { BlogCard } from '../components/BlogCard'
 import { LeadForm } from '../components/LeadForm'
 import { Seo } from '../components/Seo'
 import { useCms } from '../cms/CmsProvider'
+import { pageMeta } from '../seo/pageMeta'
 import type { CmsBlogPost } from '../cms/types'
 import { images } from '../content/site'
 import './Blog.css'
@@ -36,10 +37,10 @@ export function Blog() {
   return (
     <div className="blog-page">
       <Seo
-        title="Blog | ELITE ALHUSSAM Hajj & Umrah Guidance"
-        description="Guidance, tips, and stories for your pilgrimage journey - from packing checklists to Umrah vs Hajj advice."
-        url="/blog"
-        image={images.makkahArch}
+        title={pageMeta.blog.title}
+        description={pageMeta.blog.description}
+        url={pageMeta.blog.path}
+        image={pageMeta.blog.image}
       />
       <PageHero
         title="Blog"

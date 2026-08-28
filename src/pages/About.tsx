@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useRef, type ReactNode } from 'react'
 import { PageHero } from '../components/PageHero'
+import { Seo } from '../components/Seo'
+import { pageMeta } from '../seo/pageMeta'
 import { BrandMark } from '../components/BrandMark'
 import { highlightIcons, IconWhatsApp } from '../components/Icons'
 import { highlights, images } from '../content/site'
@@ -105,6 +107,12 @@ export function About() {
 
   return (
     <div className="about-page">
+      <Seo
+        title={pageMeta.about.title}
+        description={pageMeta.about.description}
+        url={pageMeta.about.path}
+        image={pageMeta.about.image}
+      />
       <PageHero
         title={t.pages.aboutTitle}
         subtitle={t.pages.aboutSub}

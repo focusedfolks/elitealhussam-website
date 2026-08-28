@@ -262,10 +262,12 @@ function PackageCard({
       <div className="pkg-hero">
         <img
           src={pkg.image}
-          alt=""
+          alt={`${pkg.title} — ${pkg.category} package`}
           className="pkg-hero-img"
           loading="lazy"
           decoding="async"
+          width={640}
+          height={360}
         />
         <div className="pkg-hero-fade" aria-hidden="true" />
         <PackageBadge tag={pkg.tag} featured={pkg.featured} />

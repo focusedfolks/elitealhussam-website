@@ -4,6 +4,7 @@ import { BlogCard } from '../components/BlogCard'
 import { LeadForm } from '../components/LeadForm'
 import { Seo } from '../components/Seo'
 import { useCms } from '../cms/CmsProvider'
+import { absoluteUrl } from '../lib/site'
 import './Blog.css'
 
 function formatDate(iso: string) {
@@ -35,7 +36,7 @@ export function BlogPost() {
   const shareUrl =
     typeof window !== 'undefined'
       ? window.location.href
-      : `https://elitealhussam.com/blog/${post.slug}`
+      : absoluteUrl(`/blog/${post.slug}`)
   const shareText = encodeURIComponent(post.title)
   const waShare = `https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`
   const fbShare = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
@@ -53,7 +54,7 @@ export function BlogPost() {
     '@type': 'Article',
     headline: post.title,
     description: post.excerpt,
-    image: `https://elitealhussam.com${post.coverImage}`,
+    image: absoluteUrl(post.coverImage),
     datePublished: post.date,
     author: {
       '@type': 'Organization',
@@ -64,10 +65,10 @@ export function BlogPost() {
       name: company.shortName,
       logo: {
         '@type': 'ImageObject',
-        url: 'https://elitealhussam.com/images/alhussam-logo.png',
+        url: absoluteUrl('/images/alhussam-logo.png'),
       },
     },
-    mainEntityOfPage: `https://elitealhussam.com/blog/${post.slug}`,
+    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
   }
 
   return (
@@ -84,10 +85,12 @@ export function BlogPost() {
       <header className="blog-post-hero">
         <img
           src={post.coverImage}
-          alt=""
+          alt={`Cover image for ${post.title}`}
           className="blog-post-hero-img"
           fetchPriority="high"
           decoding="async"
+          width={1200}
+          height={630}
         />
         <div className="blog-post-hero-veil" aria-hidden="true" />
         <div className="container blog-post-hero-content">

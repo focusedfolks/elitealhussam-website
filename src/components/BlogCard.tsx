@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { CmsBlogPost } from '../cms/types'
+import { SafeImage } from './SafeImage'
 import './BlogCard.css'
 
 type Props = {
@@ -23,11 +24,12 @@ export function BlogCard({ post, priority = false }: Props) {
   return (
     <Link to={`/blog/${post.slug}`} className="blog-card">
       <div className="blog-card-media">
-        <img
+        <SafeImage
           src={post.coverImage}
-          alt=""
+          alt={`${post.title} — ${post.category}`}
           loading={priority ? 'eager' : 'lazy'}
-          decoding="async"
+          width={640}
+          height={360}
         />
         <span className="blog-card-badge">{post.category}</span>
       </div>

@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "images:fetch": "node scripts/fetch-site-images.mjs"
+    "images:fetch": "node scripts/fetch-site-images.mjs",
+    "seo:assets": "node scripts/generate-seo-assets.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

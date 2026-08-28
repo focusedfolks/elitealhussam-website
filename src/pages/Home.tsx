@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useRef, type ComponentType, type ReactNode, type SVGProps } from 'react'
+import { Seo, homeJsonLd } from '../components/Seo'
+import { pageMeta } from '../seo/pageMeta'
 import {
   IconBook,
   IconBuilding,
@@ -151,6 +153,13 @@ export function Home() {
 
   return (
     <div className="home" ref={homeRef}>
+      <Seo
+        title={pageMeta.home.title}
+        description={pageMeta.home.description}
+        url={pageMeta.home.path}
+        image={pageMeta.home.image}
+        jsonLd={homeJsonLd()}
+      />
       <Hero />
 
       <section

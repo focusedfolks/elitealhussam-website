@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { BrandMark } from '../components/BrandMark'
 import { useAdminAuth } from './AdminAuth'
@@ -19,6 +19,16 @@ export function AdminLayout() {
   const navigate = useNavigate()
   const location = useLocation()
   const [navOpen, setNavOpen] = useState(false)
+
+  useEffect(() => {
+    let el = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
+    if (!el) {
+      el = document.createElement('meta')
+      el.name = 'robots'
+      document.head.appendChild(el)
+    }
+    el.content = 'noindex, nofollow'
+  }, [])
 
   const title = location.pathname.startsWith('/admin/packages')
     ? 'Packages'
@@ -50,7 +60,7 @@ export function AdminLayout() {
             className="admin-brand"
             onClick={() => setNavOpen(false)}
           >
-            <img src="/images/alhussam-logo.png?v=2" alt="" />
+            <img src="/images/alhussam-logo.png?v=2" alt="ELITE ALHUSSAM logo" />
             <BrandMark size="sm" showTagline={false} light />
           </NavLink>
           <button

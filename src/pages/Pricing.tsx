@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { IconPhone, IconWhatsApp } from '../components/Icons'
+import { Seo } from '../components/Seo'
+import { pageMeta } from '../seo/pageMeta'
 import { images } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
@@ -23,6 +25,12 @@ export function Pricing() {
 
   return (
     <main className="pricing-page">
+      <Seo
+        title={pageMeta.pricing.title}
+        description={pageMeta.pricing.description}
+        url={pageMeta.pricing.path}
+        image={pageMeta.pricing.image}
+      />
       <PageHero
         title="Pricing & Package Details"
         subtitle="Contact our Dubai office for current package pricing. Prices are shared privately on enquiry."

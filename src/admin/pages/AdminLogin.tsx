@@ -38,7 +38,7 @@ export function AdminLogin() {
     <div className="admin-login">
       <form className="admin-login-card" onSubmit={onSubmit}>
         <div className="admin-login-brand">
-          <img src="/images/alhussam-logo.png?v=2" alt="" />
+          <img src="/images/alhussam-logo.png?v=2" alt="ELITE ALHUSSAM admin login" />
           <BrandMark size="md" showTagline />
         </div>
         <div>

@@ -62,9 +62,15 @@ function loadPosts(root: string): BlogPost[] {
   return posts.sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
-function buildSitemap(root: string, posts: BlogPost[]) {
-  const site = 'https://elitealhussam.com'
-  const staticRoutes = ['/', '/about', '/packages', '/blog', '/contact']
+function buildSitemap(root: string, posts: BlogPost[], site: string) {
+  const staticRoutes = [
+    '/',
+    '/about',
+    '/packages',
+    '/pricing',
+    '/blog',
+    '/contact',
+  ]
   const urls = [
     ...staticRoutes.map((loc) => ({ loc: `${site}${loc}`, priority: loc === '/' ? '1.0' : '0.8' })),
     ...posts.map((p) => ({
@@ -95,11 +101,14 @@ ${body}
 
 export function blogPlugin(): Plugin {
   let root = process.cwd()
+  let siteUrl = 'https://elitealhussam.com'
 
   return {
     name: 'elite-alhussam-blog',
     configResolved(config) {
       root = config.root
+      const fromEnv = config.env.VITE_SITE_URL
+      if (fromEnv) siteUrl = fromEnv.replace(/\/$/, '')
     },
     resolveId(id) {
       if (id === VIRTUAL_ID) return RESOLVED_ID
@@ -107,7 +116,7 @@ export function blogPlugin(): Plugin {
     load(id) {
       if (id !== RESOLVED_ID) return
       const posts = loadPosts(root)
-      buildSitemap(root, posts)
+      buildSitemap(root, posts, siteUrl)
       return `export const posts = ${JSON.stringify(posts)};`
     },
     configureServer(server) {

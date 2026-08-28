@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from '../lib/site'
 
 type SeoProps = {
   title: string
@@ -7,9 +8,8 @@ type SeoProps = {
   url?: string
   type?: 'website' | 'article'
   jsonLd?: Record<string, unknown>
+  noindex?: boolean
 }
-
-const SITE = 'https://elitealhussam.com'
 
 function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(
@@ -36,33 +36,39 @@ function upsertLink(rel: string, href: string) {
 export function Seo({
   title,
   description,
-  image = '/images/family-makkah.webp',
+  image = DEFAULT_OG_IMAGE,
   url = '/',
   type = 'website',
   jsonLd,
+  noindex = false,
 }: SeoProps) {
   useEffect(() => {
-    const absImage = image.startsWith('http') ? image : `${SITE}${image}`
-    const absUrl = url.startsWith('http') ? url : `${SITE}${url}`
+    const absImage = absoluteUrl(image)
+    const absUrl = absoluteUrl(url)
 
     document.title = title
     upsertMeta('name', 'description', description)
+    upsertMeta('name', 'robots', noindex ? 'noindex, nofollow' : 'index, follow')
+    upsertMeta('property', 'og:site_name', SITE_NAME)
     upsertMeta('property', 'og:title', title)
     upsertMeta('property', 'og:description', description)
     upsertMeta('property', 'og:image', absImage)
+    upsertMeta('property', 'og:image:width', '1200')
+    upsertMeta('property', 'og:image:height', '630')
     upsertMeta('property', 'og:url', absUrl)
     upsertMeta('property', 'og:type', type)
+    upsertMeta('property', 'og:locale', 'en_AE')
     upsertMeta('name', 'twitter:card', 'summary_large_image')
     upsertMeta('name', 'twitter:title', title)
     upsertMeta('name', 'twitter:description', description)
     upsertMeta('name', 'twitter:image', absImage)
     upsertLink('canonical', absUrl)
 
-    let script = document.getElementById('blog-jsonld') as HTMLScriptElement | null
+    let script = document.getElementById('page-jsonld') as HTMLScriptElement | null
     if (jsonLd) {
       if (!script) {
         script = document.createElement('script')
-        script.id = 'blog-jsonld'
+        script.id = 'page-jsonld'
         script.type = 'application/ld+json'
         document.head.appendChild(script)
       }
@@ -72,10 +78,35 @@ export function Seo({
     }
 
     return () => {
-      const s = document.getElementById('blog-jsonld')
+      const s = document.getElementById('page-jsonld')
       if (s) s.remove()
     }
-  }, [title, description, image, url, type, jsonLd])
+  }, [title, description, image, url, type, jsonLd, noindex])
 
   return null
+}
+
+/** Organization JSON-LD for the homepage. */
+export function homeJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TravelAgency',
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: absoluteUrl('/images/alhussam-logo.png'),
+    image: absoluteUrl(DEFAULT_OG_IMAGE),
+    telephone: '+971565746678',
+    email: 'alhussamuae@gmail.com',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress:
+        'No. 54, M Floor, Smart Eyes Business Centre, AG House Building',
+      addressLocality: 'Dubai',
+      addressCountry: 'AE',
+      postalCode: '35127',
+    },
+    areaServed: { '@type': 'Country', name: 'United Arab Emirates' },
+    description:
+      'Hajj and Umrah pilgrimage packages from Dubai, UAE. Haj services for Indian passport holders only.',
+  }
 }

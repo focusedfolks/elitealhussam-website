@@ -12,7 +12,7 @@
   --cream: #f7f3ec;
   --white: #ffffff;
   --ink: #374151;
-  --muted: #6b7280;
+  --muted: #5c6370;
   --line: rgba(15, 31, 61, 0.12);
   --line-light: rgba(255, 255, 255, 0.16);
   --success: #0f766e;
@@ -93,8 +93,17 @@ select {
 }
 
 :focus-visible {
-  outline: 2px solid var(--navy);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 2px;
 }
 
 #root {

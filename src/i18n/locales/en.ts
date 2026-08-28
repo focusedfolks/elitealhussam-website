@@ -21,7 +21,7 @@ export const en: Dictionary = {
     headlineScript: '',
     support:
       'ELITE ALHUSSAM delivers organised pilgrimage packages from Dubai, UAE - trusted for 45+ years, built for families and group bookings. Haj services for Indian passport holders only.',
-    explore: 'Get Free Quote',
+    explore: 'View Packages',
     watch: 'Watch Video',
     packagesTitle: 'Hajj & Umrah Packages',
     packagesEyebrow: 'Business Packages',

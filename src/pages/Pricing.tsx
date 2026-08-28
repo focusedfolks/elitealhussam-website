@@ -1,27 +1,19 @@
-import { Link } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
-import { IconPhone, IconWhatsApp } from '../components/Icons'
+import { IconPhone } from '../components/Icons'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../seo/pageMeta'
 import { images } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
-import { useI18n } from '../i18n'
 import {
   HAJJ_PASSPORT_NOTE,
   PRICING_CTA_LABEL,
   telHref,
-  whatsappHref,
 } from '../lib/contact'
 import './Pricing.css'
 
 export function Pricing() {
-  const { t } = useI18n()
   const { company } = useCms()
   const primaryPhone = company.phones[0]
-  const waHref = whatsappHref(
-    company.whatsapp,
-    'Assalamu Alaikum, please share pricing and package details.',
-  )
 
   return (
     <main className="pricing-page">
@@ -55,17 +47,6 @@ export function Pricing() {
             <a className="btn btn-gold" href={telHref(primaryPhone)}>
               <IconPhone size={16} /> Call {primaryPhone}
             </a>
-            <a
-              className="btn btn-ghost"
-              href={waHref}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <IconWhatsApp size={16} /> WhatsApp
-            </a>
-            <Link className="btn btn-ghost" to="/contact#lead-form">
-              {t.common.getQuote}
-            </Link>
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 .wa-float {
   position: fixed;
   inset-inline-end: 1.15rem;
-  bottom: 5.25rem;
+  bottom: 1.15rem;
   z-index: 54;
   display: inline-flex;
   align-items: center;
@@ -47,12 +47,5 @@
 @media (prefers-reduced-motion: reduce) {
   .wa-float {
     animation: none;
-  }
-}
-
-/* Lead bar already has WhatsApp on phones - avoid overlap */
-@media (max-width: 768px) {
-  .wa-float {
-    display: none;
   }
 }

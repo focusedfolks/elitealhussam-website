@@ -49,3 +49,8 @@ set value = '{
 }'::jsonb,
 updated_at = now()
 where key = 'about';
+
+-- Remove year-range season labels from package cards
+update public.packages
+set season = '', updated_at = now()
+where season in ('2025 – 26', '2026 – 27');

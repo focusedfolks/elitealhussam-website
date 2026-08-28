@@ -20,7 +20,6 @@ import {
   HAJJ_PASSPORT_NOTE,
   PRICING_CTA_LABEL,
   telHref,
-  whatsappHref,
 } from '../lib/contact'
 import {
   TravelModeFields,
@@ -175,10 +174,6 @@ function PackageCard({
   }))
   const [travelTouched, setTravelTouched] = useState(false)
   const primaryPhone = company.phones[0]
-  const pricingHref = whatsappHref(
-    company.whatsapp,
-    `Assalamu Alaikum, please share pricing & package details for ${pkg.title}.`,
-  )
 
   useEffect(() => {
     const node = cardRef.current
@@ -275,7 +270,7 @@ function PackageCard({
 
       <div className="pkg-body">
         <header className="pkg-intro">
-          <p className="pkg-season">{pkg.season}</p>
+          {pkg.season ? <p className="pkg-season">{pkg.season}</p> : null}
           <h3>{pkg.title}</h3>
           {pkg.category === 'hajj' ? (
             <p className="pkg-passport-badge">{HAJJ_PASSPORT_NOTE}</p>
@@ -305,7 +300,6 @@ function PackageCard({
         <div className="pkg-price-panel pkg-price-panel--cta">
           <div className="pkg-price-start">
             <span>Package details</span>
-            <strong>{pkg.duration}</strong>
             <em>Dubai · UAE departures</em>
           </div>
           <ul className="pkg-highlights">
@@ -317,9 +311,9 @@ function PackageCard({
             ))}
           </ul>
           <div className="pkg-pricing-cta">
-            <a className="pkg-pricing-cta-btn" href={pricingHref} target="_blank" rel="noreferrer">
+            <Link className="pkg-pricing-cta-btn" to={enquireTo}>
               {PRICING_CTA_LABEL}
-            </a>
+            </Link>
             <a className="pkg-pricing-cta-phone" href={telHref(primaryPhone)}>
               Call {primaryPhone}
             </a>
@@ -398,14 +392,6 @@ function PackageCard({
             >
               {t.common.contactForPricing} <span aria-hidden="true">→</span>
             </Link>
-            <a
-              className="pkg-ask-btn"
-              href={pricingHref}
-              target="_blank"
-              rel="noreferrer"
-            >
-              WhatsApp Now
-            </a>
             <span className="pkg-secure">
               <LockIcon /> Secure enquiry · Your details stay private
             </span>

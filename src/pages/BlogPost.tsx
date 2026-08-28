@@ -37,8 +37,6 @@ export function BlogPost() {
     typeof window !== 'undefined'
       ? window.location.href
       : absoluteUrl(`/blog/${post.slug}`)
-  const shareText = encodeURIComponent(post.title)
-  const waShare = `https://wa.me/?text=${shareText}%20${encodeURIComponent(shareUrl)}`
   const fbShare = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
 
   async function copyLink() {
@@ -116,9 +114,6 @@ export function BlogPost() {
       <div className="blog-post-layout">
         <aside className="blog-share" aria-label="Share this article">
           <p>Share</p>
-          <a href={waShare} target="_blank" rel="noreferrer" aria-label="Share on WhatsApp">
-            WhatsApp
-          </a>
           <a href={fbShare} target="_blank" rel="noreferrer" aria-label="Share on Facebook">
             Facebook
           </a>

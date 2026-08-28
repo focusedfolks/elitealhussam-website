@@ -12,7 +12,6 @@ import {
   IconMapPin,
   IconPhone,
   IconTwitter,
-  IconWhatsApp,
   IconYouTube,
 } from '../components/Icons'
 import { images } from '../content/site'
@@ -21,7 +20,6 @@ import { useI18n } from '../i18n'
 import {
   HAJJ_PASSPORT_NOTE,
   telHref,
-  whatsappHref,
 } from '../lib/contact'
 import './InnerPages.css'
 
@@ -66,8 +64,6 @@ export function Contact() {
     }),
     [travelMode, airport, airline, departureCity, pickupPoint, departureDate],
   )
-  const primaryPhone = company.phones[0]
-  const waHref = whatsappHref(company.whatsapp)
 
   return (
     <div>
@@ -133,20 +129,6 @@ export function Contact() {
                       {phone}
                     </a>
                   ))}
-                </p>
-              </div>
-            </div>
-
-            <div className="contact-row">
-              <span className="contact-icon" aria-hidden>
-                <IconWhatsApp size={18} />
-              </span>
-              <div>
-                <strong>WhatsApp Sales</strong>
-                <p>
-                  <a href={waHref} target="_blank" rel="noreferrer">
-                    {primaryPhone}
-                  </a>
                 </p>
               </div>
             </div>

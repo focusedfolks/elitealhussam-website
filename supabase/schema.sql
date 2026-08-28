@@ -265,7 +265,7 @@ insert into public.packages (
   pricing, features, highlights, amenities, available_travel_modes, popular, featured, sort_order
 ) values
 (
-  'platinum-short-2025', 'hajj', 'Platinum Short Package', 'Platinum', '2025 – 26',
+  'platinum-short-2025', 'hajj', 'Platinum Short Package', 'Platinum', '',
   'Premium short-duration Hajj with guided spiritual care and close Haramain stays.',
   'Makkah • Madinah • Arafat', '18–22 Days', '/images/hajj-arafat.webp',
   '{"adult":485000,"child":365000,"infant":85000,"currency":"INR","note":"Starting from · per person"}'::jsonb,
@@ -275,7 +275,7 @@ insert into public.packages (
   '["air"]'::jsonb, false, false, 1
 ),
 (
-  'platinum-2025', 'hajj', 'Platinum Hajj Package', 'Platinum', '2025 – 26',
+  'platinum-2025', 'hajj', 'Platinum Hajj Package', 'Platinum', '',
   'Full platinum Hajj experience with hospitality rooted in decades of Holy Land service.',
   'Makkah • Madinah • Arafat', '30–35 Days', '/images/kiswah-detail.webp',
   '{"adult":545000,"child":415000,"infant":95000,"currency":"INR","note":"Starting from · per person"}'::jsonb,
@@ -285,7 +285,7 @@ insert into public.packages (
   '["air","road"]'::jsonb, true, true, 2
 ),
 (
-  'classic-hajj-2025', 'hajj', 'Classic Hajj Package', 'Classic', '2025 – 26',
+  'classic-hajj-2025', 'hajj', 'Classic Hajj Package', 'Classic', '',
   'Balanced comfort and value for first-time and returning pilgrims from Dubai, UAE.',
   'Makkah • Madinah • Arafat', '28–32 Days', '/images/makkah-clock-tower.webp',
   '{"adult":385000,"child":295000,"infant":72000,"currency":"INR","note":"Contact for pricing · per person"}'::jsonb,
@@ -305,7 +305,7 @@ insert into public.packages (
   '["air","road"]'::jsonb, false, false, 4
 ),
 (
-  'umrah-economy', 'umrah', 'Economy Umrah Package', 'Economy', '2026 – 27',
+  'umrah-economy', 'umrah', 'Economy Umrah Package', 'Economy', '',
   'A comfortable & affordable Umrah experience with quality service and care.',
   'Makkah • Madinah', '10–12 Days', '/images/safa-marwa.webp',
   '{"adult":89999,"child":72999,"infant":24999,"currency":"INR","note":"Starting from · per person"}'::jsonb,
@@ -315,7 +315,7 @@ insert into public.packages (
   '["air","road"]'::jsonb, true, false, 5
 ),
 (
-  'umrah-classic', 'umrah', 'Classic Umrah Package', 'Classic', '2026 – 27',
+  'umrah-classic', 'umrah', 'Classic Umrah Package', 'Classic', '',
   'Comfortable Makkah & Madinah stays with a balanced itinerary for families.',
   'Makkah • Madinah', '12–14 Days', '/images/mount-uhud.webp',
   '{"adult":125000,"child":99000,"infant":32000,"currency":"INR","note":"Starting from · per person"}'::jsonb,
@@ -325,7 +325,7 @@ insert into public.packages (
   '["air","road"]'::jsonb, false, false, 6
 ),
 (
-  'umrah-premium', 'umrah', 'Premium Umrah Package', 'Premium', '2026 – 27',
+  'umrah-premium', 'umrah', 'Premium Umrah Package', 'Premium', '',
   'Closer hotels, smoother transfers, and attentive care for a peaceful Umrah.',
   'Makkah • Madinah', '14–16 Days', '/images/luxury-stay.webp',
   '{"adult":185000,"child":145000,"infant":42000,"currency":"INR","note":"Starting from · per person"}'::jsonb,

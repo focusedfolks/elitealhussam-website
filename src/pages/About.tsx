@@ -4,11 +4,10 @@ import { PageHero } from '../components/PageHero'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../seo/pageMeta'
 import { BrandMark } from '../components/BrandMark'
-import { highlightIcons, IconWhatsApp } from '../components/Icons'
+import { highlightIcons } from '../components/Icons'
 import { highlights, images } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
-import { whatsappHref } from '../lib/contact'
 import './InnerPages.css'
 import './About.css'
 
@@ -90,7 +89,7 @@ const milestones = [
 
 export function About() {
   const { t } = useI18n()
-  const { company, about: aboutCopy } = useCms()
+  const { about: aboutCopy } = useCms()
   const labels: Record<string, string> = {
     weekly: t.common.weekly,
     bestPrice: t.common.bestPrice,
@@ -99,11 +98,6 @@ export function About() {
     chennaiSupport: t.common.chennaiSupport,
     multilingual: t.common.multilingual,
   }
-
-  const waHref = whatsappHref(
-    company.whatsapp,
-    'Assalamu Alaikum, I would like to learn more about ELITE ALHUSSAM packages.',
-  )
 
   return (
     <div className="about-page">
@@ -254,14 +248,6 @@ export function About() {
               are for Indian passport holders only — contact us for pricing and
               package details.
             </p>
-          </div>
-          <div className="about-cta-actions">
-            <Link className="btn btn-gold" to="/contact#lead-form">
-              {t.common.getQuote}
-            </Link>
-            <a className="btn about-wa-btn" href={waHref} target="_blank" rel="noreferrer">
-              <IconWhatsApp size={16} /> WhatsApp
-            </a>
           </div>
         </div>
       </section>

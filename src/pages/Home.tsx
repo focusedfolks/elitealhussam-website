@@ -281,10 +281,7 @@ export function Home() {
               ))}
             </ul>
             <div className="cta-row-home">
-              <Link className="btn btn-gold" to="/contact#lead-form">
-                {t.common.getQuote}
-              </Link>
-              <Link className="btn btn-ghost" to="/packages">
+              <Link className="btn btn-gold" to="/packages">
                 {t.pages.packagesTitle}
               </Link>
             </div>
@@ -341,9 +338,6 @@ export function Home() {
           <div className="packages-more">
             <Link className="btn btn-ghost" to="/packages">
               {t.common.viewDetails}
-            </Link>
-            <Link className="btn btn-gold" to="/contact#lead-form">
-              {t.common.getQuote}
             </Link>
           </div>
         </div>
@@ -424,11 +418,6 @@ export function Home() {
               </blockquote>
             ))}
           </GsapReveal>
-          <div className="testimonial-cta">
-            <Link className="btn btn-gold" to="/contact#lead-form">
-              {t.common.getQuote}
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -490,11 +479,6 @@ export function Home() {
               </article>
             ))}
           </GsapReveal>
-          <div className="packages-more">
-            <Link className="btn btn-gold" to="/contact#lead-form">
-              {t.common.getQuote}
-            </Link>
-          </div>
         </div>
       </section>
 

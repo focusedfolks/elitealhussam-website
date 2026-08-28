@@ -163,7 +163,7 @@ export const hajjPackages: TravelPackage[] = [
     category: 'hajj',
     title: 'Platinum Short Package',
     tag: 'Platinum',
-    season: '2025 – 26',
+    season: '',
     summary:
       'Premium short-duration Hajj with guided spiritual care and close Haramain stays.',
     locations: 'Makkah • Madinah • Arafat',
@@ -192,7 +192,7 @@ export const hajjPackages: TravelPackage[] = [
     category: 'hajj',
     title: 'Platinum Hajj Package',
     tag: 'Platinum',
-    season: '2025 – 26',
+    season: '',
     summary:
       'Full platinum Hajj experience with hospitality rooted in decades of Holy Land service.',
     locations: 'Makkah • Madinah • Arafat',
@@ -223,7 +223,7 @@ export const hajjPackages: TravelPackage[] = [
     category: 'hajj',
     title: 'Classic Hajj Package',
     tag: 'Classic',
-    season: '2025 – 26',
+    season: '',
     summary:
       'Balanced comfort and value for first-time and returning pilgrims from Dubai, UAE.',
     locations: 'Makkah • Madinah • Arafat',
@@ -281,7 +281,7 @@ export const umrahPackages: TravelPackage[] = [
     category: 'umrah',
     title: 'Economy Umrah Package',
     tag: 'Economy',
-    season: '2026 – 27',
+    season: '',
     summary:
       'A comfortable & affordable Umrah experience with quality service and care.',
     locations: 'Makkah • Madinah',
@@ -311,7 +311,7 @@ export const umrahPackages: TravelPackage[] = [
     category: 'umrah',
     title: 'Classic Umrah Package',
     tag: 'Classic',
-    season: '2026 – 27',
+    season: '',
     summary:
       'Comfortable Makkah & Madinah stays with a balanced itinerary for families.',
     locations: 'Makkah • Madinah',
@@ -340,7 +340,7 @@ export const umrahPackages: TravelPackage[] = [
     category: 'umrah',
     title: 'Premium Umrah Package',
     tag: 'Premium',
-    season: '2026 – 27',
+    season: '',
     summary:
       'Closer hotels, smoother transfers, and attentive care for a peaceful Umrah.',
     locations: 'Makkah • Madinah',
@@ -457,36 +457,85 @@ export const images = {
 } as const
 
 /** Home hero slideshow - unique images only (no repeats) */
-export const heroSlides: {
+export type HeroSlideCta = {
+  label: string
+  link: string
+}
+
+export type HeroSlide = {
   id: string
   image: string
   label: string
   position?: string
-}[] = [
+  primaryCta: HeroSlideCta
+  secondaryCta: HeroSlideCta
+}
+
+export const heroSlides: HeroSlide[] = [
   {
     id: 'family-makkah',
     image: images.familyMakkah,
     label: 'Family in Makkah',
+    primaryCta: {
+      label: 'Start Your Hajj Journey',
+      link: '/contact#lead-form',
+    },
+    secondaryCta: {
+      label: 'View Hajj Packages',
+      link: '/packages',
+    },
   },
   {
     id: 'makkah',
     image: images.hero,
     label: 'Makkah',
+    primaryCta: {
+      label: 'Umrah, Made Simple',
+      link: '/packages',
+    },
+    secondaryCta: {
+      label: 'Explore Umrah Deals',
+      link: '/packages',
+    },
   },
   {
     id: 'madinah',
     image: images.heroMadinah,
     label: 'Madinah',
     position: 'center 42%',
+    primaryCta: {
+      label: '45+ Years From Dubai',
+      link: '/about',
+    },
+    secondaryCta: {
+      label: 'Speak to Our Team',
+      link: '/contact',
+    },
   },
   {
     id: 'umrah',
     image: images.umrah,
     label: 'Umrah',
+    primaryCta: {
+      label: 'Family & Group Bookings',
+      link: '/contact#lead-form',
+    },
+    secondaryCta: {
+      label: 'See Family Packages',
+      link: '/packages',
+    },
   },
   {
     id: 'pilgrims',
     image: images.pilgrims,
     label: 'Pilgrims',
+    primaryCta: {
+      label: 'Trusted by 200+ Pilgrims',
+      link: '/about',
+    },
+    secondaryCta: {
+      label: 'Check Available Dates',
+      link: '/contact#lead-form',
+    },
   },
 ]

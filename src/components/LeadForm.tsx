@@ -9,7 +9,6 @@ import {
   IconPhone,
   IconSparkle,
   IconUsers,
-  IconWhatsApp,
 } from './Icons'
 import {
   TravelModeFields,
@@ -58,11 +57,6 @@ export function LeadForm({
     [interest, allPackages],
   )
   const modes = selectedPkg ? packageTravelModes(selectedPkg) : (['air', 'road'] as const)
-
-  const waHref = whatsappHref(
-    company.whatsapp,
-    'Assalamu Alaikum, I want a package quote.',
-  )
 
   function mark(name: string) {
     setTouched((prev) => ({ ...prev, [name]: true }))
@@ -150,7 +144,7 @@ export function LeadForm({
       <div className={compact ? undefined : 'container'}>
         <div className="lead-panel">
           <div className="lead-copy">
-            <p className="eyebrow">{t.common.getQuote}</p>
+            <p className="eyebrow">{t.common.enquire}</p>
             <h2>{title ?? t.common.leadTitle}</h2>
             <p>{subtitle ?? t.common.leadSubtitle}</p>
             <ul className="lead-bullets">
@@ -317,9 +311,6 @@ export function LeadForm({
                   t.common.requestQuote
                 )}
               </button>
-              <a className="lead-wa-alt" href={waHref} target="_blank" rel="noreferrer">
-                <IconWhatsApp size={16} /> WhatsApp us
-              </a>
             </div>
 
             <div className="lead-trust-row">

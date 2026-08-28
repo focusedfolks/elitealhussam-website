@@ -5,19 +5,17 @@ import {
   IconMapPin,
   IconPhone,
   IconTwitter,
-  IconWhatsApp,
   IconYouTube,
 } from './Icons'
 import { BrandMark } from './BrandMark'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
-import { telHref, whatsappHref } from '../lib/contact'
+import { telHref } from '../lib/contact'
 import './Footer.css'
 
 export function Footer() {
   const { t } = useI18n()
   const { company } = useCms()
-  const waHref = whatsappHref(company.whatsapp)
   const primaryPhone = company.phones[0]
 
   return (
@@ -31,15 +29,6 @@ export function Footer() {
           <div className="footer-cta-actions">
             <a className="btn btn-gold" href={telHref(primaryPhone)}>
               <IconPhone size={16} /> {primaryPhone}
-            </a>
-            <a
-              className="btn footer-wa-btn"
-              href={waHref}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <IconWhatsApp size={16} />
-              WhatsApp
             </a>
           </div>
         </div>
@@ -69,9 +58,6 @@ export function Footer() {
             </a>
             <a href={company.social.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
               <IconYouTube size={16} />
-            </a>
-            <a href={waHref} target="_blank" rel="noreferrer" aria-label="WhatsApp">
-              <IconWhatsApp size={16} />
             </a>
           </div>
         </div>
@@ -143,14 +129,6 @@ export function Footer() {
                   <IconMail size={15} />
                 </span>
                 <a href={`mailto:${company.email}`}>{company.email}</a>
-              </p>
-              <p className="footer-contact-line">
-                <span className="footer-contact-icon" aria-hidden>
-                  <IconWhatsApp size={15} />
-                </span>
-                <a href={waHref} target="_blank" rel="noreferrer">
-                  {primaryPhone}
-                </a>
               </p>
             </div>
           </details>

@@ -17,6 +17,9 @@ import {
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
 import {
+  BUSINESS_CLASS_HAJJ_CTA_LABEL,
+  BUSINESS_CLASS_HAJJ_PACKAGE_ID,
+  CONTACT_PHONE_DISPLAY,
   HAJJ_PASSPORT_NOTE,
   PRICING_CTA_LABEL,
   telHref,
@@ -230,6 +233,14 @@ function PackageCard({
   const travelOk = isTravelComplete(travel, modes)
   const chip = travelSummaryChip(travel)
   const isFeatured = Boolean(pkg.featured)
+  const isBusinessClassHajj = pkg.id === BUSINESS_CLASS_HAJJ_PACKAGE_ID
+  const bookCtaLabel = isBusinessClassHajj
+    ? BUSINESS_CLASS_HAJJ_CTA_LABEL
+    : t.common.contactForPricing
+  const bookCtaHref = telHref(CONTACT_PHONE_DISPLAY)
+  const pricingPanelCtaLabel = isBusinessClassHajj
+    ? BUSINESS_CLASS_HAJJ_CTA_LABEL
+    : PRICING_CTA_LABEL
 
   function guardBook(e: MouseEvent) {
     if (travelOk) return
@@ -311,9 +322,15 @@ function PackageCard({
             ))}
           </ul>
           <div className="pkg-pricing-cta">
-            <Link className="pkg-pricing-cta-btn" to={enquireTo}>
-              {PRICING_CTA_LABEL}
-            </Link>
+            {isBusinessClassHajj ? (
+              <a className="pkg-pricing-cta-btn" href={bookCtaHref}>
+                {pricingPanelCtaLabel}
+              </a>
+            ) : (
+              <Link className="pkg-pricing-cta-btn" to={enquireTo}>
+                {pricingPanelCtaLabel}
+              </Link>
+            )}
             <a className="pkg-pricing-cta-phone" href={telHref(primaryPhone)}>
               Call {primaryPhone}
             </a>
@@ -369,7 +386,11 @@ function PackageCard({
           <div className="pkg-total-block pkg-total-block--enquiry">
             <span>Traveller summary</span>
             <strong className="pkg-total-amount">{totalLabel}</strong>
-            <em>Contact us for pricing</em>
+            <em>
+              {isBusinessClassHajj
+                ? 'Contact us for Business Class rates'
+                : 'Contact us for pricing'}
+            </em>
             {chip ? (
               <span className="travel-chip">
                 {travel.mode === 'road' ? '🚌' : '✈'} {chip}
@@ -384,14 +405,20 @@ function PackageCard({
             </p>
           </div>
           <div className="pkg-book-cta">
-            <Link
-              className={`pkg-book-btn${travelOk ? '' : ' is-blocked'}`}
-              to={enquireTo}
-              onClick={guardBook}
-              aria-disabled={!travelOk}
-            >
-              {t.common.contactForPricing} <span aria-hidden="true">→</span>
-            </Link>
+            {isBusinessClassHajj ? (
+              <a className="pkg-book-btn" href={bookCtaHref}>
+                {bookCtaLabel} <span aria-hidden="true">→</span>
+              </a>
+            ) : (
+              <Link
+                className={`pkg-book-btn${travelOk ? '' : ' is-blocked'}`}
+                to={enquireTo}
+                onClick={guardBook}
+                aria-disabled={!travelOk}
+              >
+                {bookCtaLabel} <span aria-hidden="true">→</span>
+              </Link>
+            )}
             <span className="pkg-secure">
               <LockIcon /> Secure enquiry · Your details stay private
             </span>
@@ -419,7 +446,7 @@ function PackageBadge({
 
   const kind = tag.toLowerCase()
   const icon =
-    kind.includes('platinum') ? (
+    kind.includes('platinum') || kind.includes('business') ? (
       <CrownIcon />
     ) : kind.includes('classic') ? (
       <BadgeDot />

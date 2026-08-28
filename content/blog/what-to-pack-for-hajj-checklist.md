@@ -42,4 +42,4 @@ Hajj is a journey of the heart - but thoughtful packing makes the days of worshi
 - Tasbih / digital counter  
 - Small notebook for reflections  
 
-If you are joining our **Platinum** or **Classic Hajj** packages, your Dubai briefing covers group-specific packing notes. Need a personalised list for elders or children? [Request a free quote](/contact#lead-form) or call **+971 56 574 6678**.
+If you are joining our **Platinum** or **Business Class Hajj** packages, your Dubai briefing covers group-specific packing notes. Need a personalised list for elders or children? [Contact us](/contact#lead-form) or call **+971 56 574 6678**.

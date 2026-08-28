@@ -285,13 +285,13 @@ insert into public.packages (
   '["air","road"]'::jsonb, true, true, 2
 ),
 (
-  'classic-hajj-2025', 'hajj', 'Classic Hajj Package', 'Classic', '',
-  'Balanced comfort and value for first-time and returning pilgrims from Dubai, UAE.',
+  'classic-hajj-2025', 'hajj', 'Business Class Hajj Package', 'Business Class', '',
+  'Premium Business Class Hajj from Dubai, UAE — elevated hotel stays, priority transfers, and dedicated support for Indian passport holders.',
   'Makkah • Madinah • Arafat', '28–32 Days', '/images/makkah-clock-tower.webp',
-  '{"adult":385000,"child":295000,"infant":72000,"currency":"INR","note":"Contact for pricing · per person"}'::jsonb,
-  '["Shared transport","Ziyarat included","Indian passport holders only"]'::jsonb,
-  '["Best value Hajj","Ziyarat included","Indian passport holders only"]'::jsonb,
-  '[{"key":"hotel","title":"Hotel Stay","subtitle":"Quality lodging"},{"key":"transport","title":"Transport","subtitle":"All transfers"},{"key":"meals","title":"Daily Meals","subtitle":"As per package"},{"key":"support","title":"24/7 Support","subtitle":"Always available"},{"key":"visa","title":"Visa Help","subtitle":"Documentation"}]'::jsonb,
+  '{"adult":385000,"child":295000,"infant":72000,"currency":"INR","note":"Contact for Business Class rates"}'::jsonb,
+  '["Business Class hotels","Priority Dubai, UAE support","Indian passport holders only"]'::jsonb,
+  '["Elevated Business Class comfort","Dubai, UAE departures","Indian passport holders only"]'::jsonb,
+  '[{"key":"hotel","title":"Business Hotels","subtitle":"Premium near Haram"},{"key":"transport","title":"Priority Transport","subtitle":"Comfort transfers"},{"key":"meals","title":"Quality Dining","subtitle":"Curated meals"},{"key":"support","title":"Dedicated Support","subtitle":"Dubai team 24/7"},{"key":"visa","title":"Visa Assistance","subtitle":"Full documentation"}]'::jsonb,
   '["air","road"]'::jsonb, true, false, 3
 ),
 (

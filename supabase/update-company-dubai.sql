@@ -54,3 +54,17 @@ where key = 'about';
 update public.packages
 set season = '', updated_at = now()
 where season in ('2025 – 26', '2026 – 27');
+
+-- Upgrade Classic Hajj to Business Class Hajj Package
+update public.packages
+set
+  title = 'Business Class Hajj Package',
+  tag = 'Business Class',
+  summary = 'Premium Business Class Hajj from Dubai, UAE — elevated hotel stays, priority transfers, and dedicated support for Indian passport holders.',
+  pricing = '{"adult":385000,"child":295000,"infant":72000,"currency":"INR","note":"Contact for Business Class rates"}'::jsonb,
+  features = '["Business Class hotels","Priority Dubai, UAE support","Indian passport holders only"]'::jsonb,
+  highlights = '["Elevated Business Class comfort","Dubai, UAE departures","Indian passport holders only"]'::jsonb,
+  amenities = '[{"key":"hotel","title":"Business Hotels","subtitle":"Premium near Haram"},{"key":"transport","title":"Priority Transport","subtitle":"Comfort transfers"},{"key":"meals","title":"Quality Dining","subtitle":"Curated meals"},{"key":"support","title":"Dedicated Support","subtitle":"Dubai team 24/7"},{"key":"visa","title":"Visa Assistance","subtitle":"Full documentation"}]'::jsonb,
+  updated_at = now()
+where id = 'classic-hajj-2025';
+

@@ -60,14 +60,6 @@ export const hero: Dictionary['hero'] = {
       secondaryCta: 'ہماری ٹیم سے بات کریں',
       complianceTag: null,
     },
-    {
-      headline: '200+ سے زائد حاجیوں نے منتخب کیا',
-      subtext:
-        'دبئی اور یو اے ای بھر کے خاندان Elite Alhussam پر کیوں بھروسہ کرتے ہیں، جانیں۔',
-      primaryCta: 'دستیاب تاریخیں دیکھیں',
-      secondaryCta: 'حج پیکج دیکھیں',
-      complianceTag: null,
-    },
   ],
 }
 

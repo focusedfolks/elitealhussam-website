@@ -60,14 +60,6 @@ export const hero: Dictionary['hero'] = {
       secondaryCta: 'எங்கள் குழுவை தொடர்பு கொள்ள',
       complianceTag: null,
     },
-    {
-      headline: '200+ தீர்த்தயாatriகள் தேர்வு செய்துள்ளனர்',
-      subtext:
-        'துபை & UAE முழுவதும் குடும்பங்கள் Elite Alhussam-ஐ ஏன் நம்புகிறார்கள்.',
-      primaryCta: 'கிடைக்கும் தேதிகளைப் பார்க்க',
-      secondaryCta: 'ஹஜ் பேக்கேஜ்களைப் பார்க்க',
-      complianceTag: null,
-    },
   ],
 }
 

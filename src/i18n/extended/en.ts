@@ -61,6 +61,14 @@ export const hero: Dictionary['hero'] = {
       secondaryCta: 'Speak to Our Team',
       complianceTag: null,
     },
+    {
+      headline: '200+ Pilgrims and Counting',
+      subtext:
+        'See why families across Dubai and the UAE trust Elite Alhussam for their Hajj and Umrah journey.',
+      primaryCta: 'Check Available Dates',
+      secondaryCta: 'View Hajj Packages',
+      complianceTag: null,
+    },
   ],
 }
 

@@ -60,6 +60,14 @@ export const hero: Dictionary['hero'] = {
       secondaryCta: 'અમારી ટીમ સાથે વાત કરો',
       complianceTag: null,
     },
+    {
+      headline: '200+ હાજીઓએ પસંદ કર્યું',
+      subtext:
+        'દુબઈ અને યુએઈ ભરના કુટુંબો Elite Alhussam પર શા માટે ભરોસો કરે છે, જાણો.',
+      primaryCta: 'ઉપલબ્ધ તારીખો જુઓ',
+      secondaryCta: 'હજ પેકેજ જુઓ',
+      complianceTag: null,
+    },
   ],
 }
 

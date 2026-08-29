@@ -27,4 +27,10 @@ export const HERO_SLIDE_META = [
     primaryLink: '/about',
     secondaryLink: '/contact#lead-form',
   },
+  {
+    id: 'pilgrims',
+    image: images.pilgrims,
+    primaryLink: '/contact#lead-form',
+    secondaryLink: '/packages',
+  },
 ] as const

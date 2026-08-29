@@ -311,6 +311,10 @@
     filter: brightness(1.08) saturate(1.05);
   }
 
+  .hero-slide--pilgrims {
+    background-position: center 30%;
+  }
+
   .hero-single.is-ready .hero-slide.is-active {
     transform: scale(1);
   }

@@ -61,6 +61,14 @@ export const hero: Dictionary['hero'] = {
       secondaryCta: 'हमारी टीम से बात करें',
       complianceTag: null,
     },
+    {
+      headline: '200+ से अधिक हाजियों ने चुना',
+      subtext:
+        'दुबई और यूएई भर के परिवार Elite Alhussam पर क्यों भरोसा करते हैं, जानें।',
+      primaryCta: 'उपलब्ध तिथियाँ देखें',
+      secondaryCta: 'हज पैकेज देखें',
+      complianceTag: null,
+    },
   ],
 }
 

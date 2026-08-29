@@ -330,11 +330,18 @@ export function Home() {
             <p className="eyebrow">{t.home.packagesEyebrow}</p>
             <h2>{t.home.packagesTitle}</h2>
             <p>
-              Our most popular Hajj and Umrah packages from Dubai - contact us
-              for pricing and package details.
+              Umrah and Hajj packages from Dubai, UAE — view itineraries and
+              enquire with our team.
             </p>
           </GsapReveal>
-          <PackageCards popularOnly />
+          <div className="packages-category-block">
+            <h3 className="packages-category-title">{t.pages.umrahTitle}</h3>
+            <PackageCards filter="umrah" />
+          </div>
+          <div className="packages-category-block">
+            <h3 className="packages-category-title">{t.pages.hajjTitle}</h3>
+            <PackageCards filter="hajj" />
+          </div>
           <div className="packages-more">
             <Link className="btn btn-ghost" to="/packages">
               {t.common.viewDetails}

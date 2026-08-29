@@ -23,7 +23,7 @@ export const en: Dictionary = {
       'ELITE ALHUSSAM delivers organised pilgrimage packages from Dubai, UAE - trusted for 45+ years, built for families and group bookings. Haj services for Indian passport holders only.',
     explore: 'View Packages',
     watch: 'Watch Video',
-    packagesTitle: 'Hajj & Umrah Packages',
+    packagesTitle: 'Umrah & Hajj Packages',
     packagesEyebrow: 'Business Packages',
     exploreTitle: 'End-to-end pilgrimage solutions',
     whoTitle: 'Trusted pilgrimage partners',
@@ -40,6 +40,15 @@ export const en: Dictionary = {
     enquire: 'Enquire Now',
     viewDetails: 'View Details',
     contactForPricing: 'Contact Us for Pricing & Package Details',
+    viewItineraryEnquire: 'View Itinerary & Enquire',
+    packageDetails: 'Package details',
+    itineraryTitle: 'Itinerary',
+    itineraryPlace: 'Place',
+    itineraryDate: 'Date',
+    itineraryHijri: 'Hijri Date',
+    itineraryDescription: 'Description',
+    placeholderPackageNote:
+      'Full package details coming soon — contact our Dubai team to enquire.',
     sourceNote: 'Official ELITE ALHUSSAM website',
     readMore: 'Read more',
     back: 'Back',
@@ -81,9 +90,9 @@ export const en: Dictionary = {
   pages: {
     aboutTitle: 'About Us',
     aboutSub: 'Saudi hospitality roots. Dubai support. 45+ years of trusted service.',
-    packagesTitle: 'Hajj & Umrah Packages',
+    packagesTitle: 'Umrah & Hajj Packages',
     packagesSub:
-      'Hajj and Umrah packages from Dubai, UAE. Contact us for pricing and package details. Haj services – Indian passport holders only.',
+      'Umrah and Hajj packages from Dubai, UAE. View itineraries and enquire with our team. Haj services – Indian passport holders only.',
     hajjTitle: 'Hajj',
     hajjSub:
       'Hajj 2025 (1446H) packages — Indian passport holders only. Contact us for pricing & details.',

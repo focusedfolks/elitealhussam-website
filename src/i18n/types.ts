@@ -1,4 +1,4 @@
-export type Lang = 'en' | 'hi' | 'gu' | 'ur'
+export type Lang = 'en' | 'hi' | 'gu' | 'ur' | 'ta'
 
 export type NavChild = { to: string; label: string }
 export type NavItem = { to: string; label: string; children?: NavChild[] }
@@ -34,6 +34,14 @@ export type Dictionary = {
     enquire: string
     viewDetails: string
     contactForPricing: string
+    viewItineraryEnquire: string
+    packageDetails: string
+    itineraryTitle: string
+    itineraryPlace: string
+    itineraryDate: string
+    itineraryHijri: string
+    itineraryDescription: string
+    placeholderPackageNote: string
     sourceNote: string
     readMore: string
     back: string

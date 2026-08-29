@@ -505,6 +505,22 @@
   margin-top: 2.2rem;
 }
 
+.packages-category-block {
+  margin-top: 2rem;
+}
+
+.packages-category-block + .packages-category-block {
+  margin-top: 3rem;
+}
+
+.packages-category-title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  color: var(--navy);
+}
+
 /* -- Packages / offerings -- */
 .offers-section {
   padding: 7rem 0;

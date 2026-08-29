@@ -64,6 +64,8 @@ function mapPackage(row: Record<string, unknown>): TravelPackage {
       : undefined,
     popular: Boolean(row.popular),
     featured: Boolean(row.featured),
+    itinerary: allPackages.find((p) => p.id === String(row.id))?.itinerary,
+    placeholder: allPackages.find((p) => p.id === String(row.id))?.placeholder,
   }
 }
 
@@ -93,7 +95,18 @@ export async function fetchCmsPackages(): Promise<TravelPackage[]> {
     .eq('published', true)
     .order('sort_order', { ascending: true })
   if (error || !data?.length) return allPackages
-  return data.map((row) => mapPackage(row as Record<string, unknown>))
+  const mapped = data.map((row) => mapPackage(row as Record<string, unknown>))
+  const cmsById = new Map(mapped.map((pkg) => [pkg.id, pkg]))
+  return allPackages.map((fallback) => {
+    const cms = cmsById.get(fallback.id)
+    if (!cms) return fallback
+    return {
+      ...fallback,
+      ...cms,
+      itinerary: fallback.itinerary ?? cms.itinerary,
+      placeholder: fallback.placeholder ?? cms.placeholder,
+    }
+  })
 }
 
 export async function fetchCmsBlogPosts(): Promise<CmsBlogPost[]> {

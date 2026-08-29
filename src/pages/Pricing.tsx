@@ -6,7 +6,7 @@ import { images } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
 import {
   HAJJ_PASSPORT_NOTE,
-  PRICING_CTA_LABEL,
+  ITINERARY_ENQUIRE_CTA_LABEL,
   telHref,
 } from '../lib/contact'
 import './Pricing.css'
@@ -36,7 +36,7 @@ export function Pricing() {
       <section className="pricing-section">
         <div className="pricing-container pricing-cta-only">
           <p className="pricing-kicker">DUBAI · UAE</p>
-          <h2>{PRICING_CTA_LABEL}</h2>
+          <h2>{ITINERARY_ENQUIRE_CTA_LABEL}</h2>
           <p>
             Package rates vary by season, hotel class, and traveller mix. Our
             Dubai team will share a clear quotation for adults, children, and

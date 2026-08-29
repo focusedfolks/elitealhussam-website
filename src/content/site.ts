@@ -94,6 +94,13 @@ export type PackageAmenity = {
   subtitle: string
 }
 
+export type { ItineraryRow } from './hajjItineraries'
+import {
+  budgetHajjItinerary,
+  businessHajjItineraryPlaceholder,
+  platinumHajjItinerary,
+} from './hajjItineraries'
+
 export type TravelMode = 'air' | 'road'
 
 export type TravelPackage = {
@@ -110,6 +117,10 @@ export type TravelPackage = {
   features: string[]
   highlights: string[]
   amenities: PackageAmenity[]
+  /** Hajj packages: day-by-day itinerary table */
+  itinerary?: import('./hajjItineraries').ItineraryRow[]
+  /** Placeholder card — copy to be supplied */
+  placeholder?: boolean
   popular?: boolean
   /** Standout “Most Popular” treatment on cards */
   featured?: boolean
@@ -157,36 +168,134 @@ const defaultAmenities: PackageAmenity[] = [
   { key: 'visa', title: 'Visa Help', subtitle: 'Documentation' },
 ]
 
-export const hajjPackages: TravelPackage[] = [
+export const umrahPackages: TravelPackage[] = [
   {
-    id: 'platinum-short-2025',
-    category: 'hajj',
-    title: 'Platinum Short Package',
-    tag: 'Platinum',
+    id: 'umrah-economy',
+    category: 'umrah',
+    title: 'Economic Umrah Package',
+    tag: 'Economic',
     season: '',
     summary:
-      'Premium short-duration Hajj with guided spiritual care and close Haramain stays.',
-    locations: 'Makkah • Madinah • Arafat',
-    duration: '18–22 Days',
-    image: '/images/hajj-arafat.webp',
-    availableTravelModes: ['air'],
+      'A comfortable & affordable Umrah from Dubai, UAE — quality hotels, transport, and visa support handled end-to-end.',
+    locations: 'Makkah • Madinah',
+    duration: '10–12 Days',
+    image: '/images/safa-marwa.webp',
+    popular: true,
+    availableTravelModes: ['air', 'road'],
     pricing: {
-      adult: 485000,
-      child: 365000,
-      infant: 85000,
+      adult: 89999,
+      child: 72999,
+      infant: 24999,
       currency: 'INR',
-      note: 'Starting from · per person',
+      note: 'Details on enquiry',
     },
-    features: ['Visa assistance', 'Hotels near Haram', 'Indian passport holders only'],
-    highlights: ['Close Haram stays', 'Guided spiritual care', 'Indian passport holders only'],
+    features: ['Group departure from Dubai', 'Shared transport', 'Visa help'],
+    highlights: [
+      'Best for budget-conscious travellers',
+      'Comfortable Dubai · UAE departure',
+      'Hassle-free Umrah journey',
+    ],
     amenities: [
-      { key: 'hotel', title: 'Hotel', subtitle: 'Near Haram' },
-      { key: 'transport', title: 'Transport', subtitle: 'All transfers' },
-      { key: 'meals', title: 'Meals', subtitle: 'Package meals' },
-      { key: 'support', title: 'Support', subtitle: 'Group leader' },
-      { key: 'visa', title: 'Visa', subtitle: 'Full help' },
+      { key: 'hotel', title: 'Hotel', subtitle: 'Economy stay' },
+      { key: 'transport', title: 'Transport', subtitle: 'All ground' },
+      { key: 'meals', title: 'Meals', subtitle: 'Daily included' },
+      { key: 'support', title: 'Support', subtitle: '24/7 care' },
+      { key: 'visa', title: 'Visa', subtitle: 'Docs help' },
     ],
   },
+  {
+    id: 'umrah-premium',
+    category: 'umrah',
+    title: 'Premium Umrah Package',
+    tag: 'Premium',
+    season: '',
+    summary:
+      'Closer hotels, smoother transfers, and attentive care for a peaceful Umrah from Dubai, UAE.',
+    locations: 'Makkah • Madinah',
+    duration: '14–16 Days',
+    image: '/images/luxury-stay.webp',
+    availableTravelModes: ['air'],
+    pricing: {
+      adult: 185000,
+      child: 145000,
+      infant: 42000,
+      currency: 'INR',
+      note: 'Details on enquiry',
+    },
+    features: ['Near Haram hotels', 'Private transfers option', 'Priority support'],
+    highlights: ['Near Haram hotels', 'Smoother transfers', 'Priority Dubai support'],
+    amenities: [
+      { key: 'hotel', title: 'Hotel', subtitle: 'Near Haram' },
+      { key: 'transport', title: 'Transport', subtitle: 'Private option' },
+      { key: 'meals', title: 'Meals', subtitle: 'Quality dining' },
+      { key: 'support', title: 'Support', subtitle: 'Priority care' },
+      { key: 'visa', title: 'Visa', subtitle: 'Docs help' },
+    ],
+  },
+  {
+    id: 'umrah-group',
+    category: 'umrah',
+    title: 'Group Umrah Package',
+    tag: 'Group',
+    season: '',
+    summary:
+      'Coordinated group Umrah departures from Dubai, UAE — shared hotels, transport, and dedicated group leader support.',
+    locations: 'Makkah • Madinah',
+    duration: 'TBC',
+    image: '/images/family-travel.webp',
+    placeholder: true,
+    availableTravelModes: ['air', 'road'],
+    pricing: {
+      adult: 0,
+      child: 0,
+      infant: 0,
+      currency: 'INR',
+      note: 'Details on enquiry',
+    },
+    features: ['Group coordination', 'Shared transport', 'Dubai, UAE departures'],
+    highlights: [
+      'Ideal for families & friends travelling together',
+      'Group leader support throughout',
+      'Package details — coming soon',
+    ],
+    amenities: [
+      { key: 'hotel', title: 'Hotel', subtitle: 'Group allocation' },
+      { key: 'transport', title: 'Transport', subtitle: 'Shared coaches' },
+      { key: 'meals', title: 'Meals', subtitle: 'As per package' },
+      { key: 'support', title: 'Support', subtitle: 'Group leader' },
+      { key: 'visa', title: 'Visa', subtitle: 'Group processing' },
+    ],
+  },
+  {
+    id: 'umrah-customise',
+    category: 'umrah',
+    title: 'Customise Your Umrah',
+    tag: 'Customise',
+    season: '',
+    summary:
+      'Tell us your preferred dates, group size, and hotel class — our Dubai team will tailor your Umrah itinerary.',
+    locations: 'Makkah • Madinah',
+    duration: 'Flexible',
+    image: '/images/theme-offer-1.webp',
+    placeholder: true,
+    pricing: {
+      adult: 145000,
+      child: 112000,
+      infant: 35000,
+      currency: 'INR',
+      note: 'Details on enquiry',
+    },
+    features: ['Choose your dates', 'Room preference', 'Family-friendly'],
+    highlights: [
+      'Flexible Dubai · UAE planning',
+      'Tailored hotel & transport options',
+      'Enquiry-based itinerary — contact our team',
+    ],
+    amenities: defaultAmenities,
+  },
+]
+
+export const hajjPackages: TravelPackage[] = [
   {
     id: 'platinum-2025',
     category: 'hajj',
@@ -194,24 +303,25 @@ export const hajjPackages: TravelPackage[] = [
     tag: 'Platinum',
     season: '',
     summary:
-      'Full platinum Hajj experience with hospitality rooted in decades of Holy Land service.',
+      'Full platinum Hajj from Dubai, UAE — premium Haramain stays, guided spiritual care, and decades of trusted hospitality.',
     locations: 'Makkah • Madinah • Arafat',
     duration: '30–35 Days',
     image: '/images/kiswah-detail.webp',
     popular: true,
     featured: true,
     availableTravelModes: ['air', 'road'],
+    itinerary: platinumHajjItinerary,
     pricing: {
       adult: 545000,
       child: 415000,
       infant: 95000,
       currency: 'INR',
-      note: 'Starting from · per person',
+      note: 'Details on enquiry',
     },
-    features: ['Premium hotels', 'Transport care', 'Indian passport holders only'],
-    highlights: ['Premium hotels', 'Full spiritual care', 'Indian passport holders only'],
+    features: ['Premium hotels near Haram', 'Full Hajj guidance', 'Indian passport holders only'],
+    highlights: ['Premium Haramain hotels', 'Full spiritual care', 'Indian passport holders only'],
     amenities: [
-      { key: 'hotel', title: 'Hotel', subtitle: 'Luxury stay' },
+      { key: 'hotel', title: 'Hotel', subtitle: 'Luxury near Haram' },
       { key: 'transport', title: 'Transport', subtitle: 'Comfort coaches' },
       { key: 'meals', title: 'Meals', subtitle: 'Quality dining' },
       { key: 'support', title: 'Support', subtitle: 'Dedicated team' },
@@ -221,22 +331,24 @@ export const hajjPackages: TravelPackage[] = [
   {
     id: 'classic-hajj-2025',
     category: 'hajj',
-    title: 'Business Class Hajj Package',
-    tag: 'Business Class',
+    title: 'Business Hajj Package',
+    tag: 'Business',
     season: '',
     summary:
-      'Premium Business Class Hajj from Dubai, UAE — elevated hotel stays, priority transfers, and dedicated support for Indian passport holders.',
+      'Business Class Hajj from Dubai, UAE — elevated stays, priority transfers, and dedicated support for Indian passport holders.',
     locations: 'Makkah • Madinah • Arafat',
     duration: '28–32 Days',
     image: '/images/makkah-clock-tower.webp',
     popular: true,
+    placeholder: true,
     availableTravelModes: ['air', 'road'],
+    itinerary: businessHajjItineraryPlaceholder,
     pricing: {
       adult: 385000,
       child: 295000,
       infant: 72000,
       currency: 'INR',
-      note: 'Contact for Business Class rates',
+      note: 'Details on enquiry',
     },
     features: [
       'Business Class hotels',
@@ -257,144 +369,36 @@ export const hajjPackages: TravelPackage[] = [
     ],
   },
   {
-    id: 'individual-hajj',
+    id: 'hajj-budget',
     category: 'hajj',
-    title: 'Individual Hajj Planning',
-    tag: 'Custom',
-    season: 'Flexible',
+    title: 'Budget Hajj Package',
+    tag: 'Budget',
+    season: '',
     summary:
-      'Personalised Hajj planning with enquiry-based dates, rooms, and family support.',
-    locations: 'Makkah • Madinah',
-    duration: 'Flexible',
-    image: '/images/theme-pilgrim.webp',
+      'Value-focused Hajj from Dubai, UAE for Indian passport holders — organised rites, comfortable stays, and group support.',
+    locations: 'Makkah • Madinah • Arafat',
+    duration: '28–32 Days',
+    image: '/images/hajj-arafat.webp',
     availableTravelModes: ['air', 'road'],
+    itinerary: budgetHajjItinerary,
     pricing: {
-      adult: 425000,
-      child: 325000,
-      infant: 78000,
+      adult: 385000,
+      child: 295000,
+      infant: 72000,
       currency: 'INR',
-      note: 'Custom quote · per person',
+      note: 'Details on enquiry',
     },
-    features: ['Private options', 'Family rooms', 'Indian passport holders only'],
-    highlights: ['Private options', 'Family rooms', 'Indian passport holders only'],
+    features: ['Organised Hajj rites', 'Shared transport', 'Indian passport holders only'],
+    highlights: [
+      'Best value Hajj from Dubai',
+      'Group leader throughout',
+      'Indian passport holders only',
+    ],
     amenities: defaultAmenities,
   },
 ]
 
-export const umrahPackages: TravelPackage[] = [
-  {
-    id: 'umrah-economy',
-    category: 'umrah',
-    title: 'Economy Umrah Package',
-    tag: 'Economy',
-    season: '',
-    summary:
-      'A comfortable & affordable Umrah experience with quality service and care.',
-    locations: 'Makkah • Madinah',
-    duration: '10–12 Days',
-    image: '/images/safa-marwa.webp',
-    popular: true,
-    availableTravelModes: ['air', 'road'],
-    pricing: {
-      adult: 89999,
-      child: 72999,
-      infant: 24999,
-      currency: 'INR',
-      note: 'Starting from · per person',
-    },
-    features: ['Group departure', 'Shared transport', 'Visa help'],
-    highlights: ['Best for budget travelers', 'Comfortable stay', 'Hassle-free journey'],
-    amenities: [
-      { key: 'hotel', title: 'Hotel', subtitle: 'Economy stay' },
-      { key: 'transport', title: 'Transport', subtitle: 'All ground' },
-      { key: 'meals', title: 'Meals', subtitle: 'Daily included' },
-      { key: 'support', title: 'Support', subtitle: '24/7 care' },
-      { key: 'visa', title: 'Visa', subtitle: 'Docs help' },
-    ],
-  },
-  {
-    id: 'umrah-classic',
-    category: 'umrah',
-    title: 'Classic Umrah Package',
-    tag: 'Classic',
-    season: '',
-    summary:
-      'Comfortable Makkah & Madinah stays with a balanced itinerary for families.',
-    locations: 'Makkah • Madinah',
-    duration: '12–14 Days',
-    image: '/images/mount-uhud.webp',
-    availableTravelModes: ['air', 'road'],
-    pricing: {
-      adult: 125000,
-      child: 99000,
-      infant: 32000,
-      currency: 'INR',
-      note: 'Starting from · per person',
-    },
-    features: ['Better hotels', 'Ziyarat tours', 'Multilingual guide'],
-    highlights: ['Family-friendly', 'Ziyarat tours', 'Better hotels'],
-    amenities: [
-      { key: 'hotel', title: 'Hotel', subtitle: 'Comfort stay' },
-      { key: 'transport', title: 'Transport', subtitle: 'All ground' },
-      { key: 'meals', title: 'Meals', subtitle: 'Daily included' },
-      { key: 'support', title: 'Support', subtitle: 'Guide care' },
-      { key: 'visa', title: 'Visa', subtitle: 'Docs help' },
-    ],
-  },
-  {
-    id: 'umrah-premium',
-    category: 'umrah',
-    title: 'Premium Umrah Package',
-    tag: 'Premium',
-    season: '',
-    summary:
-      'Closer hotels, smoother transfers, and attentive care for a peaceful Umrah.',
-    locations: 'Makkah • Madinah',
-    duration: '14–16 Days',
-    image: '/images/luxury-stay.webp',
-    availableTravelModes: ['air'],
-    pricing: {
-      adult: 185000,
-      child: 145000,
-      infant: 42000,
-      currency: 'INR',
-      note: 'Starting from · per person',
-    },
-    features: ['Near Haram hotels', 'Private transfers option', 'Priority support'],
-    highlights: ['Near Haram hotels', 'Smoother transfers', 'Priority support'],
-    amenities: [
-      { key: 'hotel', title: 'Hotel', subtitle: 'Near Haram' },
-      { key: 'transport', title: 'Transport', subtitle: 'Private option' },
-      { key: 'meals', title: 'Meals', subtitle: 'Quality dining' },
-      { key: 'support', title: 'Support', subtitle: 'Priority care' },
-      { key: 'visa', title: 'Visa', subtitle: 'Docs help' },
-    ],
-  },
-  {
-    id: 'umrah-individual',
-    category: 'umrah',
-    title: 'Individual Umrah Package',
-    tag: 'Custom',
-    season: 'Flexible',
-    summary:
-      'Travel on your preferred dates with rooms sized for adults, children, and infants.',
-    locations: 'Makkah • Madinah',
-    duration: 'Flexible',
-    image: '/images/theme-offer-1.webp',
-    pricing: {
-      adult: 145000,
-      child: 112000,
-      infant: 35000,
-      currency: 'INR',
-      note: 'Custom quote · per person',
-    },
-    features: ['Choose your dates', 'Room preference', 'Family-friendly'],
-    highlights: ['Choose your dates', 'Room preference', 'Family-friendly'],
-    amenities: defaultAmenities,
-  },
-]
-
-export const allPackages: TravelPackage[] = [...hajjPackages, ...umrahPackages]
+export const allPackages: TravelPackage[] = [...umrahPackages, ...hajjPackages]
 
 export function formatInr(amount: number) {
   return new Intl.NumberFormat('en-IN', {

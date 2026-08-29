@@ -10,20 +10,14 @@ import {
 } from 'react'
 import {
   packageTravelModes,
+  type ItineraryRow,
   type PackageAmenity,
   type PackageCategory,
   type TravelPackage,
 } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
-import {
-  BUSINESS_CLASS_HAJJ_CTA_LABEL,
-  BUSINESS_CLASS_HAJJ_PACKAGE_ID,
-  CONTACT_PHONE_DISPLAY,
-  HAJJ_PASSPORT_NOTE,
-  PRICING_CTA_LABEL,
-  telHref,
-} from '../lib/contact'
+import { HAJJ_PASSPORT_NOTE, telHref } from '../lib/contact'
 import {
   TravelModeFields,
   emptyTravelDetails,
@@ -80,6 +74,12 @@ export function PackageCards({
   const packages = allPackages
     .filter((pkg) => (popularOnly ? Boolean(pkg.popular) : true))
     .filter((pkg) => (active === 'all' ? true : pkg.category === active))
+    .sort((a, b) => {
+      if (a.category !== b.category) {
+        return a.category === 'umrah' ? -1 : 1
+      }
+      return 0
+    })
     .slice(0, limit)
 
   useLayoutEffect(() => {
@@ -125,8 +125,8 @@ export function PackageCards({
             {(
               [
                 ['all', t.common.allPackages],
-                ['hajj', t.pages.hajjTitle],
                 ['umrah', t.pages.umrahTitle],
+                ['hajj', t.pages.hajjTitle],
               ] as const
             ).map(([key, label]) => (
               <button
@@ -233,14 +233,8 @@ function PackageCard({
   const travelOk = isTravelComplete(travel, modes)
   const chip = travelSummaryChip(travel)
   const isFeatured = Boolean(pkg.featured)
-  const isBusinessClassHajj = pkg.id === BUSINESS_CLASS_HAJJ_PACKAGE_ID
-  const bookCtaLabel = isBusinessClassHajj
-    ? BUSINESS_CLASS_HAJJ_CTA_LABEL
-    : t.common.contactForPricing
-  const bookCtaHref = telHref(CONTACT_PHONE_DISPLAY)
-  const pricingPanelCtaLabel = isBusinessClassHajj
-    ? BUSINESS_CLASS_HAJJ_CTA_LABEL
-    : PRICING_CTA_LABEL
+  const hasItinerary = Boolean(pkg.itinerary?.length)
+  const enquireCtaLabel = t.common.viewItineraryEnquire
 
   function guardBook(e: MouseEvent) {
     if (travelOk) return
@@ -310,27 +304,28 @@ function PackageCard({
 
         <div className="pkg-price-panel pkg-price-panel--cta">
           <div className="pkg-price-start">
-            <span>Package details</span>
+            <span>{hasItinerary ? t.common.itineraryTitle : t.common.packageDetails}</span>
             <em>Dubai · UAE departures</em>
           </div>
-          <ul className="pkg-highlights">
-            {pkg.highlights.map((point) => (
-              <li key={point}>
-                <CheckIcon />
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
+          {hasItinerary ? (
+            <PackageItineraryTable rows={pkg.itinerary!} />
+          ) : (
+            <ul className="pkg-highlights">
+              {pkg.highlights.map((point) => (
+                <li key={point}>
+                  <CheckIcon />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {pkg.placeholder ? (
+            <p className="pkg-placeholder-note">{t.common.placeholderPackageNote}</p>
+          ) : null}
           <div className="pkg-pricing-cta">
-            {isBusinessClassHajj ? (
-              <a className="pkg-pricing-cta-btn" href={bookCtaHref}>
-                {pricingPanelCtaLabel}
-              </a>
-            ) : (
-              <Link className="pkg-pricing-cta-btn" to={enquireTo}>
-                {pricingPanelCtaLabel}
-              </Link>
-            )}
+            <Link className="pkg-pricing-cta-btn" to={enquireTo}>
+              {enquireCtaLabel}
+            </Link>
             <a className="pkg-pricing-cta-phone" href={telHref(primaryPhone)}>
               Call {primaryPhone}
             </a>
@@ -386,11 +381,6 @@ function PackageCard({
           <div className="pkg-total-block pkg-total-block--enquiry">
             <span>Traveller summary</span>
             <strong className="pkg-total-amount">{totalLabel}</strong>
-            <em>
-              {isBusinessClassHajj
-                ? 'Contact us for Business Class rates'
-                : 'Contact us for pricing'}
-            </em>
             {chip ? (
               <span className="travel-chip">
                 {travel.mode === 'road' ? '🚌' : '✈'} {chip}
@@ -405,20 +395,14 @@ function PackageCard({
             </p>
           </div>
           <div className="pkg-book-cta">
-            {isBusinessClassHajj ? (
-              <a className="pkg-book-btn" href={bookCtaHref}>
-                {bookCtaLabel} <span aria-hidden="true">→</span>
-              </a>
-            ) : (
-              <Link
-                className={`pkg-book-btn${travelOk ? '' : ' is-blocked'}`}
-                to={enquireTo}
-                onClick={guardBook}
-                aria-disabled={!travelOk}
-              >
-                {bookCtaLabel} <span aria-hidden="true">→</span>
-              </Link>
-            )}
+            <Link
+              className={`pkg-book-btn${travelOk ? '' : ' is-blocked'}`}
+              to={enquireTo}
+              onClick={guardBook}
+              aria-disabled={!travelOk}
+            >
+              {enquireCtaLabel} <span aria-hidden="true">→</span>
+            </Link>
             <span className="pkg-secure">
               <LockIcon /> Secure enquiry · Your details stay private
             </span>
@@ -426,6 +410,34 @@ function PackageCard({
         </div>
       </div>
     </article>
+  )
+}
+
+function PackageItineraryTable({ rows }: { rows: ItineraryRow[] }) {
+  const { t } = useI18n()
+  return (
+    <div className="pkg-itinerary-wrap">
+      <table className="pkg-itinerary-table">
+        <thead>
+          <tr>
+            <th scope="col">{t.common.itineraryPlace}</th>
+            <th scope="col">{t.common.itineraryDate}</th>
+            <th scope="col">{t.common.itineraryHijri}</th>
+            <th scope="col">{t.common.itineraryDescription}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={`${row.place}-${i}`}>
+              <td>{row.place}</td>
+              <td>{row.date}</td>
+              <td>{row.hijriDate}</td>
+              <td>{row.description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -446,16 +458,18 @@ function PackageBadge({
 
   const kind = tag.toLowerCase()
   const icon =
-    kind.includes('platinum') || kind.includes('business') ? (
+    kind.includes('platinum') || kind.includes('business') || kind.includes('premium') ? (
       <CrownIcon />
     ) : kind.includes('classic') ? (
       <BadgeDot />
-    ) : kind.includes('custom') ? (
+    ) : kind.includes('custom') || kind.includes('customise') ? (
       <BadgeSpark />
-    ) : kind.includes('economy') ? (
+    ) : kind.includes('group') ? (
       <BadgeDot />
-    ) : kind.includes('premium') ? (
-      <CrownIcon />
+    ) : kind.includes('economic') || kind.includes('economy') ? (
+      <BadgeDot />
+    ) : kind.includes('budget') ? (
+      <BadgeDot />
     ) : (
       <BadgeDot />
     )

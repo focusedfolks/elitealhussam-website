@@ -16,7 +16,7 @@ export function Packages() {
   const { t } = useI18n()
   const { packages: allPackages } = useCms()
   const location = useLocation()
-  const [filter, setFilter] = useState<Filter>('all')
+  const [filter, setFilter] = useState<Filter>('umrah')
 
   useEffect(() => {
     const hash = location.hash.replace('#', '')

@@ -10,10 +10,11 @@ import {
 import { en } from './locales/en'
 import { gu } from './locales/gu'
 import { hi } from './locales/hi'
+import { ta } from './locales/ta'
 import { ur } from './locales/ur'
 import type { Dictionary, Lang } from './types'
 
-const dictionaries: Record<Lang, Dictionary> = { en, hi, gu, ur }
+const dictionaries: Record<Lang, Dictionary> = { en, hi, gu, ur, ta }
 
 const LANG_KEY = 'alhussam-lang'
 
@@ -54,6 +55,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
         { code: 'hi' as const, label: 'हिन्दी' },
         { code: 'gu' as const, label: 'ગુજરાતી' },
         { code: 'ur' as const, label: 'اردو' },
+        { code: 'ta' as const, label: 'தமிழ்' },
       ],
     }),
     [lang, t, setLang],

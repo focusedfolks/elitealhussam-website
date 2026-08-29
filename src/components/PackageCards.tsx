@@ -17,7 +17,7 @@ import {
 } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
-import { HAJJ_PASSPORT_NOTE, telHref } from '../lib/contact'
+import { telHref } from '../lib/contact'
 import {
   TravelModeFields,
   emptyTravelDetails,
@@ -40,6 +40,8 @@ type Props = {
   showFilters?: boolean
   limit?: number
   popularOnly?: boolean
+  excludeIds?: string[]
+  compact?: boolean
   onFilterChange?: (filter: Filter) => void
 }
 
@@ -48,6 +50,8 @@ export function PackageCards({
   showFilters = false,
   limit,
   popularOnly = false,
+  excludeIds = [],
+  compact = false,
   onFilterChange,
 }: Props) {
   const { t } = useI18n()
@@ -74,6 +78,7 @@ export function PackageCards({
   const packages = allPackages
     .filter((pkg) => (popularOnly ? Boolean(pkg.popular) : true))
     .filter((pkg) => (active === 'all' ? true : pkg.category === active))
+    .filter((pkg) => !excludeIds.includes(pkg.id))
     .sort((a, b) => {
       if (a.category !== b.category) {
         return a.category === 'umrah' ? -1 : 1
@@ -94,18 +99,20 @@ export function PackageCards({
   }, [active, showFilters, popularOnly, t.common.allPackages])
 
   return (
-    <div className={`pkg-wrap${popularOnly ? ' pkg-wrap--popular-only' : ''}`}>
+    <div
+      className={`pkg-wrap${popularOnly ? ' pkg-wrap--popular-only' : ''}${compact ? ' pkg-wrap--compact' : ''}`}
+    >
       {showFilters && !popularOnly ? (
         <div className="pkg-filters-block">
           <div className="pkg-topbar">
             <div className="pkg-topbar-copy">
               <p className="pkg-filter-meta">
-                Showing {packages.length} of {totalCount} packages
+                {t.packagesUi.showingPackages
+                  .replace('{shown}', String(packages.length))
+                  .replace('{total}', String(totalCount))}
               </p>
-              <p className="pkg-grid-trust">
-                Chosen by 500+ families who booked with confidence · Dubai, UAE
-              </p>
-              <p className="pkg-passport-note">{HAJJ_PASSPORT_NOTE}</p>
+              <p className="pkg-grid-trust">{t.packagesUi.gridTrust}</p>
+              <p className="pkg-passport-note">{t.hero.passportNote}</p>
             </div>
           </div>
           <div
@@ -147,7 +154,7 @@ export function PackageCards({
 
       <div className="pkg-grid">
         {packages.map((pkg, index) => (
-          <PackageCard key={pkg.id} pkg={pkg} index={index} />
+          <PackageCard key={pkg.id} pkg={pkg} index={index} compact={compact} />
         ))}
       </div>
     </div>
@@ -157,9 +164,11 @@ export function PackageCards({
 function PackageCard({
   pkg,
   index,
+  compact = false,
 }: {
   pkg: TravelPackage
   index: number
+  compact?: boolean
 }) {
   const { company } = useCms()
   const { t } = useI18n()
@@ -176,7 +185,9 @@ function PackageCard({
     mode: modes.length === 1 ? modes[0] : 'air',
   }))
   const [travelTouched, setTravelTouched] = useState(false)
-  const primaryPhone = company.phones[0]
+  const catalog = t.packageCatalog[pkg.id]
+  const title = catalog?.title ?? pkg.title
+  const summary = catalog?.summary ?? pkg.summary
 
   useEffect(() => {
     const node = cardRef.current
@@ -198,18 +209,18 @@ function PackageCard({
     const parts: string[] = []
     if (passengers.adults)
       parts.push(
-        `${passengers.adults} ${passengers.adults === 1 ? 'Adult' : 'Adults'}`,
+        `${passengers.adults} ${passengers.adults === 1 ? t.packagesUi.adultLabel : t.common.adults}`,
       )
     if (passengers.children)
       parts.push(
-        `${passengers.children} ${passengers.children === 1 ? 'Child' : 'Children'}`,
+        `${passengers.children} ${passengers.children === 1 ? t.packagesUi.childLabel : t.common.children}`,
       )
     if (passengers.infants)
       parts.push(
-        `${passengers.infants} ${passengers.infants === 1 ? 'Infant' : 'Infants'}`,
+        `${passengers.infants} ${passengers.infants === 1 ? t.packagesUi.infantLabel : t.common.infant}`,
       )
     return parts.join(' + ')
-  }, [passengers])
+  }, [passengers, t.common.adults, t.common.children, t.common.infant, t.packagesUi.adultLabel, t.packagesUi.childLabel, t.packagesUi.infantLabel])
 
   const enquireTo = useMemo(() => {
     const params = new URLSearchParams({
@@ -235,6 +246,7 @@ function PackageCard({
   const isFeatured = Boolean(pkg.featured)
   const hasItinerary = Boolean(pkg.itinerary?.length)
   const enquireCtaLabel = t.common.viewItineraryEnquire
+  const primaryPhone = company.phones[0]
 
   function guardBook(e: MouseEvent) {
     if (travelOk) return
@@ -253,16 +265,18 @@ function PackageCard({
   return (
     <article
       ref={cardRef}
-      className={`pkg-card pkg-card--${pkg.category}${isFeatured ? ' pkg-card--featured' : ''}${visible ? ' is-visible' : ''}`}
+      className={`pkg-card pkg-card--${pkg.category}${isFeatured ? ' pkg-card--featured' : ''}${compact ? ' pkg-card--compact' : ''}${visible ? ' is-visible' : ''}`}
       id={pkg.id}
       style={{ '--pkg-delay': `${Math.min(index, 5) * 80}ms` } as CSSProperties}
     >
-      {isFeatured ? <span className="pkg-ribbon">Recommended</span> : null}
+      {isFeatured ? (
+        <span className="pkg-ribbon">{t.packagesUi.recommended}</span>
+      ) : null}
 
       <div className="pkg-hero">
         <img
           src={pkg.image}
-          alt={`${pkg.title} — ${pkg.category} package`}
+          alt={`${title} — ${pkg.category} package`}
           className="pkg-hero-img"
           loading="lazy"
           decoding="async"
@@ -270,21 +284,19 @@ function PackageCard({
           height={360}
         />
         <div className="pkg-hero-fade" aria-hidden="true" />
-        <PackageBadge tag={pkg.tag} featured={pkg.featured} />
+        <PackageBadge tag={pkg.tag} featured={pkg.featured} mostPopularLabel={t.packagesUi.mostPopular} />
       </div>
 
       <div className="pkg-body">
         <header className="pkg-intro">
           {pkg.season ? <p className="pkg-season">{pkg.season}</p> : null}
-          <h3>{pkg.title}</h3>
+          <h3>{title}</h3>
           {pkg.category === 'hajj' ? (
-            <p className="pkg-passport-badge">{HAJJ_PASSPORT_NOTE}</p>
+            <p className="pkg-passport-badge">{t.hero.passportNote}</p>
           ) : null}
-          <p className="pkg-social-proof">
-            <span aria-hidden="true">★★★★★</span> 4.9 · Chosen by 200+ pilgrims
-          </p>
+          <p className="pkg-social-proof">{t.packagesUi.socialProof}</p>
           <span className="pkg-title-rule" aria-hidden="true" />
-          <p className="pkg-summary">{pkg.summary}</p>
+          <p className="pkg-summary">{summary}</p>
         </header>
 
         <div className="pkg-amenities" aria-label="Package inclusions">
@@ -305,7 +317,7 @@ function PackageCard({
         <div className="pkg-price-panel pkg-price-panel--cta">
           <div className="pkg-price-start">
             <span>{hasItinerary ? t.common.itineraryTitle : t.common.packageDetails}</span>
-            <em>Dubai · UAE departures</em>
+            <em>{t.packagesUi.dubaiDepartures}</em>
           </div>
           {hasItinerary ? (
             <PackageItineraryTable rows={pkg.itinerary!} />
@@ -327,38 +339,40 @@ function PackageCard({
               {enquireCtaLabel}
             </Link>
             <a className="pkg-pricing-cta-phone" href={telHref(primaryPhone)}>
-              Call {primaryPhone}
+              {t.packagesUi.callPrefix} {primaryPhone}
             </a>
           </div>
         </div>
 
+        {!compact ? (
+          <>
         <div className="pkg-passengers">
           <div className="pkg-passengers-head">
             <strong>
-              <UserIcon /> Select Passengers
+              <UserIcon /> {t.packagesUi.selectPassengers}
             </strong>
-            <span>How many are traveling?</span>
+            <span>{t.packagesUi.travelingQuestion}</span>
           </div>
           <div className="pkg-pax-grid">
             <PassengerCounter
-              label="Adult"
-              hint="12+ Years"
+              label={t.packagesUi.adultLabel}
+              hint={t.packagesUi.adultHint}
               value={passengers.adults}
               min={1}
               onDec={() => update('adults', -1)}
               onInc={() => update('adults', 1)}
             />
             <PassengerCounter
-              label="Child"
-              hint="2–12 Years"
+              label={t.packagesUi.childLabel}
+              hint={t.packagesUi.childHint}
               value={passengers.children}
               min={0}
               onDec={() => update('children', -1)}
               onInc={() => update('children', 1)}
             />
             <PassengerCounter
-              label="Infant"
-              hint="Below 2 Years"
+              label={t.packagesUi.infantLabel}
+              hint={t.packagesUi.infantHint}
               value={passengers.infants}
               min={0}
               onDec={() => update('infants', -1)}
@@ -379,7 +393,7 @@ function PackageCard({
 
         <div className="pkg-footer">
           <div className="pkg-total-block pkg-total-block--enquiry">
-            <span>Traveller summary</span>
+            <span>{t.packagesUi.travellerSummary}</span>
             <strong className="pkg-total-amount">{totalLabel}</strong>
             {chip ? (
               <span className="travel-chip">
@@ -390,8 +404,8 @@ function PackageCard({
           <div className="pkg-trust">
             <ShieldIcon />
             <p>
-              Trusted Travel Partner
-              <span>Safe journey · Spiritual experience</span>
+              {t.packagesUi.trustedPartner}
+              <span>{t.packagesUi.trustedPartnerSub}</span>
             </p>
           </div>
           <div className="pkg-book-cta">
@@ -404,10 +418,20 @@ function PackageCard({
               {enquireCtaLabel} <span aria-hidden="true">→</span>
             </Link>
             <span className="pkg-secure">
-              <LockIcon /> Secure enquiry · Your details stay private
+              <LockIcon /> {t.packagesUi.secureEnquiry}
             </span>
           </div>
         </div>
+          </>
+        ) : (
+          <div className="pkg-footer pkg-footer--compact">
+            <div className="pkg-book-cta">
+              <Link className="pkg-book-btn" to={enquireTo}>
+                {enquireCtaLabel} <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </article>
   )
@@ -444,14 +468,16 @@ function PackageItineraryTable({ rows }: { rows: ItineraryRow[] }) {
 function PackageBadge({
   tag,
   featured,
+  mostPopularLabel,
 }: {
   tag: string
   featured?: boolean
+  mostPopularLabel: string
 }) {
   if (featured) {
     return (
       <span className="pkg-badge pkg-badge--popular">
-        <PopularStar /> Most Popular
+        <PopularStar /> {mostPopularLabel}
       </span>
     )
   }

@@ -20,7 +20,6 @@ import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
 import { Hero } from '../components/Hero'
 import { PackageCards } from '../components/PackageCards'
-import { LeadForm } from '../components/LeadForm'
 import { useHomeScrollEffects } from '../animations/useHomeScrollEffects'
 import './Home.css'
 
@@ -267,14 +266,9 @@ export function Home() {
             </aside>
           </GsapReveal>
           <GsapReveal className="family-feature-copy">
-            <span className="pill-tag">Family pilgrimage</span>
-            <h2>Travel together. Pray together. Return blessed.</h2>
-            <p>
-              ELITE ALHUSSAM plans Hajj and Umrah for the whole family - adults,
-              children, and infants - with comfortable stays and guidance you
-              can trust from our Dubai, UAE office. Haj services are for Indian
-              passport holders only.
-            </p>
+            <span className="pill-tag">{t.home.familyPill}</span>
+            <h2>{t.home.familyTitle}</h2>
+            <p>{t.home.familyText}</p>
             <ul className="family-trust-list">
               {familyTrust.map((item) => (
                 <li key={item}>{item}</li>
@@ -292,12 +286,9 @@ export function Home() {
       <section className="process-section">
         <div className="container">
           <GsapReveal as="header" className="section-head">
-            <p className="eyebrow">Simple process</p>
-            <h2>From enquiry to departure in 3 steps</h2>
-            <p>
-              A clear business process designed to convert interest into
-              confirmed bookings.
-            </p>
+            <p className="eyebrow">{t.home.processEyebrow}</p>
+            <h2>{t.home.processTitle}</h2>
+            <p>{t.home.processSub}</p>
           </GsapReveal>
           <GsapReveal className="process-grid" stagger>
             {steps.map((step) => (
@@ -330,17 +321,15 @@ export function Home() {
             <p className="eyebrow">{t.home.packagesEyebrow}</p>
             <h2>{t.home.packagesTitle}</h2>
             <p>
-              Umrah and Hajj packages from Dubai, UAE — view itineraries and
-              enquire with our team.
+              {t.home.packagesIntro}
             </p>
           </GsapReveal>
           <div className="packages-category-block">
-            <h3 className="packages-category-title">{t.pages.umrahTitle}</h3>
-            <PackageCards filter="umrah" />
-          </div>
-          <div className="packages-category-block">
-            <h3 className="packages-category-title">{t.pages.hajjTitle}</h3>
-            <PackageCards filter="hajj" />
+            <PackageCards
+              filter="umrah"
+              excludeIds={['umrah-customise']}
+              compact
+            />
           </div>
           <div className="packages-more">
             <Link className="btn btn-ghost" to="/packages">
@@ -488,8 +477,6 @@ export function Home() {
           </GsapReveal>
         </div>
       </section>
-
-      <LeadForm />
     </div>
   )
 }

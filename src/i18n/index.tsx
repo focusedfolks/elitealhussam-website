@@ -43,7 +43,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = lang
     document.documentElement.dir = t.dir
-  }, [lang, t.dir])
+    document.title = t.metaTitle
+  }, [lang, t.dir, t.metaTitle])
 
   const value = useMemo(
     () => ({

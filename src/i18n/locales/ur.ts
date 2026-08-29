@@ -1,4 +1,10 @@
 import type { Dictionary } from '../types'
+import {
+  hero,
+  homeExtended,
+  packageCatalog,
+  packagesUi,
+} from '../extended/ur'
 
 export const ur: Dictionary = {
   dir: 'rtl',
@@ -34,7 +40,11 @@ export const ur: Dictionary = {
     testimonials: 'ہمارے حجاج کے الفاظ',
     needHelp: 'سفر کی منصوبہ بندی میں مدد چاہیے؟',
     needHelpText: 'ہماری دبئی ٹیم سے بات کریں۔',
+    ...homeExtended,
   },
+  hero,
+  packageCatalog,
+  packagesUi,
   common: {
     enquire: 'استفسار کریں',
     viewDetails: 'تفصیل دیکھیں',

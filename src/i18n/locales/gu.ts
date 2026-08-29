@@ -1,4 +1,10 @@
 import type { Dictionary } from '../types'
+import {
+  hero,
+  homeExtended,
+  packageCatalog,
+  packagesUi,
+} from '../extended/gu'
 
 export const gu: Dictionary = {
   dir: 'ltr',
@@ -34,7 +40,11 @@ export const gu: Dictionary = {
     testimonials: 'અમારા હાજીઓના શબ્દો',
     needHelp: 'યાત્રાની યોજનામાં મદદ જોઈએ?',
     needHelpText: 'અમારી દુબઈ ટીમ સાથે વાત કરો.',
+    ...homeExtended,
   },
+  hero,
+  packageCatalog,
+  packagesUi,
   common: {
     enquire: 'પૂછપરછ કરો',
     viewDetails: 'વિગતો જુઓ',

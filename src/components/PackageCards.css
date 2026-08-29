@@ -1155,3 +1155,91 @@
 .pkg-total-block--enquiry .pkg-total-amount {
   font-size: 1.15rem;
 }
+
+/* -- Compact (home preview) -- */
+.pkg-wrap--compact {
+  width: min(1080px, calc(100vw - 1.5rem));
+  gap: 1.1rem;
+}
+
+.pkg-wrap--compact .pkg-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.pkg-wrap--compact .pkg-card--featured {
+  transform: none;
+}
+
+.pkg-wrap--compact .pkg-card--featured:hover {
+  transform: translateY(-3px);
+}
+
+.pkg-card--compact .pkg-hero {
+  height: 118px;
+}
+
+.pkg-card--compact .pkg-body {
+  padding: 0.75rem 0.85rem 0.85rem;
+  gap: 0.65rem;
+}
+
+.pkg-card--compact .pkg-intro h3 {
+  font-size: 1.05rem;
+}
+
+.pkg-card--compact .pkg-summary {
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.pkg-card--compact .pkg-amenities {
+  gap: 0.35rem;
+}
+
+.pkg-card--compact .pkg-amenity {
+  padding: 0.45rem 0.35rem;
+}
+
+.pkg-card--compact .pkg-amenity strong {
+  font-size: 0.62rem;
+}
+
+.pkg-card--compact .pkg-price-panel {
+  padding: 0.75rem 0.85rem;
+  gap: 0.55rem;
+}
+
+.pkg-card--compact .pkg-highlights li {
+  font-size: 0.76rem;
+}
+
+.pkg-card--compact .pkg-pricing-cta-btn,
+.pkg-card--compact .pkg-pricing-cta-phone {
+  min-height: 40px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.78rem;
+}
+
+.pkg-footer--compact {
+  padding-top: 0.15rem;
+}
+
+.pkg-footer--compact .pkg-book-btn {
+  min-height: 42px;
+  font-size: 0.82rem;
+  padding: 0.65rem 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .pkg-wrap--compact .pkg-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .pkg-wrap--compact .pkg-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+

@@ -3,6 +3,19 @@ export type Lang = 'en' | 'hi' | 'gu' | 'ur' | 'ta'
 export type NavChild = { to: string; label: string }
 export type NavItem = { to: string; label: string; children?: NavChild[] }
 
+export type HeroSlideCopy = {
+  headline: string
+  subtext: string
+  primaryCta: string
+  secondaryCta: string
+  complianceTag: string | null
+}
+
+export type PackageCatalogCopy = {
+  title: string
+  summary: string
+}
+
 export type Dictionary = {
   dir: 'ltr' | 'rtl'
   metaTitle: string
@@ -29,6 +42,43 @@ export type Dictionary = {
     testimonials: string
     needHelp: string
     needHelpText: string
+    packagesIntro: string
+    familyPill: string
+    familyTitle: string
+    familyText: string
+    processEyebrow: string
+    processTitle: string
+    processSub: string
+  }
+  hero: {
+    licensedOperator: string
+    yearsExperience: string
+    dubaiUae: string
+    faithQuote: string
+    passportNote: string
+    slides: HeroSlideCopy[]
+  }
+  packageCatalog: Record<string, PackageCatalogCopy>
+  packagesUi: {
+    socialProof: string
+    dubaiDepartures: string
+    selectPassengers: string
+    travelingQuestion: string
+    adultLabel: string
+    childLabel: string
+    infantLabel: string
+    adultHint: string
+    childHint: string
+    infantHint: string
+    travellerSummary: string
+    trustedPartner: string
+    trustedPartnerSub: string
+    secureEnquiry: string
+    callPrefix: string
+    mostPopular: string
+    recommended: string
+    showingPackages: string
+    gridTrust: string
   }
   common: {
     enquire: string

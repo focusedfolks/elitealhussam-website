@@ -1,4 +1,10 @@
 import type { Dictionary } from '../types'
+import {
+  hero,
+  homeExtended,
+  packageCatalog,
+  packagesUi,
+} from '../extended/ta'
 
 export const ta: Dictionary = {
   dir: 'ltr',
@@ -34,7 +40,11 @@ export const ta: Dictionary = {
     testimonials: 'வாடிக்கையாளர் கருத்துகள்',
     whyText:
       'விசா, ஹோட்டல், போக்குவரத்து, மார்க்கதரிசி — அனைத்தும் நாங்கள். நீங்கள் இபாதாவில் கவனம் செலுத்துங்கள்.',
+    ...homeExtended,
   },
+  hero,
+  packageCatalog,
+  packagesUi,
   common: {
     enquire: 'விசாரணை',
     viewDetails: 'விவரங்களைப் பார்க்க',

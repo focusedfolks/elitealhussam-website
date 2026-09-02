@@ -52,6 +52,13 @@ export const pageMeta = {
     path: '/contact',
     image: images.dubai,
   },
+  internationalTours: {
+    title: 'International Tours | ELITE ALHUSSAM Dubai',
+    description:
+      'International holiday and group tour packages from ELITE ALHUSSAM, Dubai, UAE. Contact our team for destinations and itineraries.',
+    path: '/international-tours',
+    image: images.dubai,
+  },
   notFound: {
     title: 'Page Not Found | ELITE ALHUSSAM',
     description:

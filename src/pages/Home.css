@@ -131,6 +131,124 @@
   background: #fff;
 }
 
+/* -- Home split: Hajj & Umrah / International Tours -- */
+.home-split {
+  position: relative;
+  z-index: 2;
+  background: var(--home-navy);
+}
+
+.home-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 50vh;
+  min-height: 50dvh;
+}
+
+.home-split-panel {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 50vh;
+  min-height: 50dvh;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.home-split-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 31, 61, 0.35) 0%,
+      rgba(15, 31, 61, 0.72) 55%,
+      rgba(10, 21, 40, 0.92) 100%
+    ),
+    linear-gradient(90deg, rgba(10, 21, 40, 0.25), transparent 40%);
+  pointer-events: none;
+}
+
+.home-split-content {
+  position: relative;
+  z-index: 1;
+  max-width: 26rem;
+  color: #fff;
+}
+
+.home-split-eyebrow {
+  margin: 0 0 0.65rem;
+  color: var(--home-gold-soft);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.home-split-content h2 {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
+  color: #fff;
+}
+
+.home-split-content h2::after {
+  content: '';
+  display: block;
+  width: 2.75rem;
+  height: 2px;
+  margin-top: 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--home-gold-soft), transparent);
+}
+
+.home-split-content p {
+  margin: 0 0 1.35rem;
+  color: rgba(255, 255, 255, 0.86);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.home-split-content .btn-gold {
+  min-height: 48px;
+}
+
+@media (max-width: 768px) {
+  .home-split-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-split-panel {
+    min-height: 42vh;
+    min-height: 42dvh;
+    padding: 2rem 1.25rem;
+  }
+
+  .home-split-content {
+    max-width: 100%;
+  }
+
+  .home-split-content h2 {
+    font-size: clamp(1.65rem, 7vw, 2.1rem);
+  }
+
+  .home-split-content p {
+    font-size: 0.95rem;
+  }
+
+  .home-split-content .btn-gold {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* -- Trust data readout -- */
 .data-readout-section {
   position: relative;

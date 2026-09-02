@@ -61,8 +61,8 @@ const leaders = [
       'Four decades of hospitality for pilgrims - service rooted in sincerity.',
   },
   {
-    initials: 'SA',
-    name: 'Mr. B. Sameer Ahmed',
+    initials: 'BA',
+    name: 'Mr. Basheer Ahmed',
     title: 'Managing Director',
     quote:
       'Organised, experienced, and genuine tour operation for every pilgrim.',
@@ -152,7 +152,7 @@ export function About() {
             <aside className="about-stat-card">
               <strong>45+</strong>
               <span>Years of trusted service</span>
-              <em>Serving from Dubai, UAE</em>
+              <em>Now Serving from Dubai, UAE</em>
             </aside>
           </Reveal>
         </div>

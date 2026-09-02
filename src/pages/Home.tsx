@@ -161,6 +161,46 @@ export function Home() {
       />
       <Hero />
 
+      <section className="home-split" aria-label="Our services">
+        <div className="home-split-grid">
+          <article
+            className="home-split-panel"
+            style={{ backgroundImage: `url(${images.familyMakkah})` }}
+          >
+            <div className="home-split-veil" aria-hidden />
+            <div className="home-split-content">
+              <p className="home-split-eyebrow">Sacred journeys</p>
+              <h2>Hajj &amp; Umrah</h2>
+              <p>
+                Organised pilgrimage packages from Dubai, UAE — visas, hotels,
+                transport, and spiritual guidance for families and groups.
+              </p>
+              <Link className="btn btn-gold" to="/packages">
+                View Hajj &amp; Umrah Packages
+              </Link>
+            </div>
+          </article>
+
+          <article
+            className="home-split-panel"
+            style={{ backgroundImage: `url(${images.dubai})` }}
+          >
+            <div className="home-split-veil" aria-hidden />
+            <div className="home-split-content">
+              <p className="home-split-eyebrow">Global travel</p>
+              <h2>International Tours</h2>
+              <p>
+                Curated international holidays and group tours arranged with the
+                same trusted service from our Dubai office.
+              </p>
+              <Link className="btn btn-gold" to="/international-tours">
+                View International Tours
+              </Link>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section
         className="proof-section hero-curtain"
         aria-label="Business credentials"

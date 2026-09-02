@@ -20,6 +20,7 @@ import { Home } from './pages/Home'
 import { InternationalTours } from './pages/InternationalTours'
 import { NotFound } from './pages/NotFound'
 import { Packages } from './pages/PackagesPages'
+import { PackageItineraryPage } from './pages/PackageItineraryPage'
 import { Pricing } from './pages/Pricing'
 import { Analytics } from './components/Analytics'
 
@@ -55,7 +56,9 @@ export default function App() {
             <Route element={<PublicLayout />}>
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
+              <Route path="packages/hajj-umrah" element={<Packages />} />
               <Route path="packages" element={<Packages />} />
+              <Route path="packages/:packageId/itinerary" element={<PackageItineraryPage />} />
               <Route path="international-tours" element={<InternationalTours />} />
               <Route path="pricing" element={<Pricing />} />
               <Route path="hajj" element={<Navigate to="/packages" replace />} />

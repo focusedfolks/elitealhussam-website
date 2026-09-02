@@ -29,7 +29,7 @@ export const pageMeta = {
     description:
       'Browse Hajj and Umrah packages from Dubai, UAE. Contact us for pricing and package details. Haj services — Indian passport holders only.',
     path: '/packages',
-    image: images.themeHero,
+    image: images.pilgrimsHero,
   },
   pricing: {
     title: 'Pricing & Package Details | ELITE ALHUSSAM',
@@ -48,7 +48,7 @@ export const pageMeta = {
   contact: {
     title: 'Contact Us | ELITE ALHUSSAM Dubai Office',
     description:
-      'Call +971 56 574 6678 or email alhussamuae@gmail.com. Dubai office: Smart Eyes Business Centre, AG House Building, Dubai, UAE.',
+      'Call +971 56 574 6678 or email alhussamuae@gmail.com. Dubai office: Smart Eye Business Centre, AG House Building, Dubai, UAE.',
     path: '/contact',
     image: images.dubai,
   },
@@ -57,7 +57,7 @@ export const pageMeta = {
     description:
       'International holiday and group tour packages from ELITE ALHUSSAM, Dubai, UAE. Contact our team for destinations and itineraries.',
     path: '/international-tours',
-    image: images.dubai,
+    image: images.touristHero,
   },
   notFound: {
     title: 'Page Not Found | ELITE ALHUSSAM',

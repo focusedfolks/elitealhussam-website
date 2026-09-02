@@ -1,7 +1,12 @@
 import { useMemo, useState, type FormEvent } from 'react'
 import { useCms } from '../cms/CmsProvider'
 import { submitLead } from '../cms/api'
-import { packageTravelModes } from '../content/site'
+import {
+  FORM_UMRAH_PACKAGE_OPTIONS,
+  MADINA_HOTEL_OPTIONS,
+  MAKKAH_HOTEL_OPTIONS,
+  packageTravelModes,
+} from '../content/site'
 import {
   IconBuilding,
   IconLock,
@@ -13,6 +18,7 @@ import {
 import {
   TravelModeFields,
   emptyTravelDetails,
+  formatDisplayDate,
   formatTravelForMessage,
   isTravelComplete,
   type TravelDetails,
@@ -31,6 +37,50 @@ type Props = {
   id?: string
 }
 
+function parseDefaultAdults(defaultTravellers: string): number {
+  const match = defaultTravellers.match(/(\d+)\s*Adult/i)
+  if (match) return Math.max(1, Number(match[1]))
+  return 1
+}
+
+function formatTravellersLabel(adults: number, children: number): string {
+  const parts = [`${adults} Adult${adults === 1 ? '' : 's'}`]
+  if (children > 0) {
+    parts.push(`${children} Child${children === 1 ? '' : 'ren'}`)
+  }
+  return parts.join(', ')
+}
+
+function formatTripPreferencesForMessage(opts: {
+  makkahHotel: string
+  madinaHotel: string
+  makkahCheckIn: string
+  madinaCheckIn: string
+}): string {
+  const lines: string[] = []
+  if (opts.makkahHotel) lines.push(`Preferred Hotel — Makkah: ${opts.makkahHotel}`)
+  if (opts.madinaHotel) lines.push(`Preferred Hotel — Madina: ${opts.madinaHotel}`)
+  if (opts.makkahCheckIn) {
+    lines.push(
+      `Makkah check-in: ${formatDisplayDate(opts.makkahCheckIn)}`,
+    )
+  }
+  if (opts.madinaCheckIn) {
+    lines.push(
+      `Madina check-in: ${formatDisplayDate(opts.madinaCheckIn)}`,
+    )
+  }
+  return lines.length ? lines.join('\n') : ''
+}
+
+function todayISO() {
+  const d = new Date()
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
+}
+
 export function LeadForm({
   title,
   subtitle,
@@ -45,12 +95,23 @@ export function LeadForm({
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
   const [touched, setTouched] = useState<Record<string, boolean>>({})
   const [interest, setInterest] = useState(defaultPackage)
+  const [adults, setAdults] = useState(() =>
+    parseDefaultAdults(defaultTravellers),
+  )
+  const [children, setChildren] = useState(0)
+  const [makkahHotel, setMakkahHotel] = useState('')
+  const [madinaHotel, setMadinaHotel] = useState('')
+  const [makkahCheckIn, setMakkahCheckIn] = useState('')
+  const [madinaCheckIn, setMadinaCheckIn] = useState('')
   const [travel, setTravel] = useState<TravelDetails>(() => ({
     ...emptyTravelDetails(),
     ...defaultTravel,
     mode: defaultTravel?.mode || 'air',
   }))
   const [travelTouched, setTravelTouched] = useState(false)
+  const minDate = todayISO()
+
+  const travellersLabel = formatTravellersLabel(adults, children)
 
   const selectedPkg = useMemo(
     () => allPackages.find((pkg) => pkg.title === interest),
@@ -84,9 +145,16 @@ export function LeadForm({
     const phone = String(data.get('phone') || '')
     const email = String(data.get('email') || '')
     const packageInterest = String(data.get('interest') || '')
-    const travellers = String(data.get('travellers') || '')
-    const message = String(data.get('message') || '')
+    const travellers = String(data.get('travellers') || travellersLabel)
+    const messageInput = String(data.get('message') || '')
     const travelBlock = formatTravelForMessage(travel)
+    const tripBlock = formatTripPreferencesForMessage({
+      makkahHotel,
+      madinaHotel,
+      makkahCheckIn,
+      madinaCheckIn,
+    })
+    const message = [messageInput, tripBlock].filter(Boolean).join('\n\n')
 
     void submitLead({
       name,
@@ -111,8 +179,9 @@ export function LeadForm({
       `Email: ${email}\n` +
       `Package interest: ${packageInterest}\n` +
       `Travellers: ${travellers}\n` +
+      `${tripBlock ? `${tripBlock}\n` : ''}` +
       `${travelBlock}\n` +
-      `Message: ${message}\n`
+      `Message: ${messageInput || '-'}\n`
 
     const waText = encodeURIComponent(
       `Assalamu Alaikum, I want a package quote.\n` +
@@ -120,8 +189,9 @@ export function LeadForm({
         `Phone: ${phone}\n` +
         `Interest: ${packageInterest}\n` +
         `Travellers: ${travellers}\n` +
+        `${tripBlock ? `${tripBlock}\n` : ''}` +
         `${travelBlock}\n` +
-        `${message}`,
+        `${messageInput}`,
     )
 
     window.setTimeout(() => {
@@ -192,7 +262,7 @@ export function LeadForm({
                     autoComplete="tel"
                     required
                     minLength={8}
-                    placeholder="+971 56 574 6678"
+                    placeholder="+971 5X XXX XXXX"
                     onBlur={() => mark('phone')}
                   />
                 </span>
@@ -243,6 +313,11 @@ export function LeadForm({
                   </option>
                   <option value="Hajj - General">Hajj - General enquiry</option>
                   <option value="Umrah - General">Umrah - General enquiry</option>
+                  {FORM_UMRAH_PACKAGE_OPTIONS.map((label) => (
+                    <option key={label} value={label}>
+                      {label}
+                    </option>
+                  ))}
                   {allPackages.map((pkg) => (
                     <option key={pkg.id} value={pkg.title}>
                       {pkg.title}
@@ -250,12 +325,102 @@ export function LeadForm({
                   ))}
                 </select>
               </label>
+
+              <div className="lead-travellers">
+                <span className="lead-travellers-label">{t.common.travellers}</span>
+                <div className="lead-stepper-row">
+                  <span>Adults</span>
+                  <div className="lead-stepper">
+                    <button
+                      type="button"
+                      aria-label="Decrease adults"
+                      disabled={adults <= 1}
+                      onClick={() => setAdults((n) => Math.max(1, n - 1))}
+                    >
+                      −
+                    </button>
+                    <output aria-live="polite">{adults}</output>
+                    <button
+                      type="button"
+                      aria-label="Increase adults"
+                      onClick={() => setAdults((n) => n + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div className="lead-stepper-row">
+                  <span>Children</span>
+                  <div className="lead-stepper">
+                    <button
+                      type="button"
+                      aria-label="Decrease children"
+                      disabled={children <= 0}
+                      onClick={() => setChildren((n) => Math.max(0, n - 1))}
+                    >
+                      −
+                    </button>
+                    <output aria-live="polite">{children}</output>
+                    <button
+                      type="button"
+                      aria-label="Increase children"
+                      onClick={() => setChildren((n) => n + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <input type="hidden" name="travellers" value={travellersLabel} />
+              </div>
+
               <label>
-                {t.common.travellers}
+                Preferred Hotel — Makkah
+                <select
+                  name="makkahHotel"
+                  value={makkahHotel}
+                  onChange={(e) => setMakkahHotel(e.target.value)}
+                >
+                  <option value="">Select hotel (optional)</option>
+                  {MAKKAH_HOTEL_OPTIONS.map((hotel) => (
+                    <option key={hotel} value={hotel}>
+                      {hotel}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Preferred Hotel — Madina
+                <select
+                  name="madinaHotel"
+                  value={madinaHotel}
+                  onChange={(e) => setMadinaHotel(e.target.value)}
+                >
+                  <option value="">Select hotel (optional)</option>
+                  {MADINA_HOTEL_OPTIONS.map((hotel) => (
+                    <option key={hotel} value={hotel}>
+                      {hotel}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Makkah check-in date
                 <input
-                  name="travellers"
-                  defaultValue={defaultTravellers}
-                  placeholder="e.g. 2 Adults, 1 Child, 1 Infant"
+                  type="date"
+                  name="makkahCheckIn"
+                  min={minDate}
+                  value={makkahCheckIn}
+                  onChange={(e) => setMakkahCheckIn(e.target.value)}
+                />
+              </label>
+              <label>
+                Madina check-in date
+                <input
+                  type="date"
+                  name="madinaCheckIn"
+                  min={minDate}
+                  value={madinaCheckIn}
+                  onChange={(e) => setMadinaCheckIn(e.target.value)}
                 />
               </label>
             </div>

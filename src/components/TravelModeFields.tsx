@@ -1,6 +1,7 @@
 import {
   AIRLINES,
   AIRPORTS,
+  AIRPORTS_PLACEHOLDER_NOTE,
   UAE_CITIES,
   type TravelMode,
 } from '../content/site'
@@ -9,6 +10,7 @@ import './TravelModeFields.css'
 export type TravelDetails = {
   mode: TravelMode | ''
   airport: string
+  returnAirport: string
   airline: string
   departureCity: string
   pickupPoint: string
@@ -18,6 +20,7 @@ export type TravelDetails = {
 export const emptyTravelDetails = (): TravelDetails => ({
   mode: 'air',
   airport: '',
+  returnAirport: '',
   airline: '',
   departureCity: '',
   pickupPoint: '',
@@ -52,7 +55,7 @@ export function isTravelComplete(
   const mode = details.mode || (modes.length === 1 ? modes[0] : '')
   if (!mode || !modes.includes(mode)) return false
   if (!details.departureDate) return false
-  if (mode === 'air') return Boolean(details.airport)
+  if (mode === 'air') return Boolean(details.airport && details.returnAirport)
   return Boolean(details.departureCity)
 }
 
@@ -78,12 +81,13 @@ export function formatTravelForMessage(details: TravelDetails): string {
   if (!details.mode) return `${dateLine}Travel Mode: Not specified`
   if (details.mode === 'air') {
     const airport =
-      AIRPORTS.find((a) => a.value === details.airport)?.label ||
-      details.airport ||
-      '-'
+      AIRPORTS.find((a) => a.value === details.airport)?.label || details.airport
+    const returnAirport =
+      AIRPORTS.find((a) => a.value === details.returnAirport)?.label ||
+      details.returnAirport
     const airline = details.airline || 'No preference'
     return (
-      `${dateLine}Travel Mode: By Air\nDeparture Airport: ${airport}\nPreferred Airline: ${airline}`
+      `${dateLine}Travel Mode: By Air\nDeparture Airport: ${airport}\nReturn Airport: ${returnAirport}\nPreferred Airline: ${airline}`
     )
   }
   const pickup = details.pickupPoint || 'To be confirmed'
@@ -121,6 +125,7 @@ export function TravelModeFields({
       ...value,
       mode: next,
       airport: next === 'air' ? value.airport : '',
+      returnAirport: next === 'air' ? value.returnAirport : '',
       airline: next === 'air' ? value.airline : '',
       departureCity: next === 'road' ? value.departureCity : '',
       pickupPoint: next === 'road' ? value.pickupPoint : '',
@@ -207,7 +212,7 @@ export function TravelModeFields({
               }
             >
               <option value="" disabled>
-                Select airport
+                Select departure airport
               </option>
               {AIRPORTS.map((a) => (
                 <option key={a.value} value={a.value}>
@@ -216,6 +221,34 @@ export function TravelModeFields({
               ))}
             </select>
           </label>
+          <label htmlFor={`${idPrefix}-return-airport`}>
+            Return Airport
+            <select
+              id={`${idPrefix}-return-airport`}
+              name={asFormFields ? 'returnAirport' : undefined}
+              required={asFormFields}
+              value={value.returnAirport}
+              onChange={(e) =>
+                onChange({
+                  ...value,
+                  mode: 'air',
+                  returnAirport: e.target.value,
+                })
+              }
+            >
+              <option value="" disabled>
+                Select return airport
+              </option>
+              {AIRPORTS.map((a) => (
+                <option key={`return-${a.value}`} value={a.value}>
+                  {a.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <p className="travel-note travel-note--placeholder">
+            {AIRPORTS_PLACEHOLDER_NOTE}
+          </p>
           <label htmlFor={`${idPrefix}-airline`}>
             Preferred Airline <em>(optional)</em>
             <select

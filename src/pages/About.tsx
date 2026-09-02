@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useRef, type ReactNode } from 'react'
+import { emphasizeIndianPassport } from '../lib/copy'
 import { PageHero } from '../components/PageHero'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../seo/pageMeta'
@@ -129,7 +130,7 @@ export function About() {
               <p>{aboutCopy.intro}</p>
               <p>{aboutCopy.legacy}</p>
               <p>{aboutCopy.profile}</p>
-              <p>{aboutCopy.india}</p>
+              <p>{emphasizeIndianPassport(aboutCopy.india)}</p>
               <p>{aboutCopy.leadership}</p>
             </div>
             <div className="cta-row">
@@ -245,8 +246,8 @@ export function About() {
             <h2>Ready for package details?</h2>
             <p>
               Talk to our Dubai team for Hajj and Umrah options. Haj services
-              are for Indian passport holders only — contact us for pricing and
-              package details.
+              are for <strong>Indian passport holders</strong> only — contact
+              us for pricing and package details.
             </p>
           </div>
         </div>

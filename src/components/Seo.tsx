@@ -100,7 +100,7 @@ export function homeJsonLd() {
     address: {
       '@type': 'PostalAddress',
       streetAddress:
-        'No. 54, M Floor, Smart Eyes Business Centre, AG House Building',
+        'Office Cabin No. 54, Mezzanine Floor, Smart Eye Business Centre, AG House Building',
       addressLocality: 'Dubai',
       addressCountry: 'AE',
       postalCode: '35127',

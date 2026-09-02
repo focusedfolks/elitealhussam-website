@@ -5,6 +5,7 @@ import { BrandMark } from './BrandMark'
 import { useCms } from '../cms/CmsProvider'
 import { IconPhone } from './Icons'
 import { telHref } from '../lib/contact'
+import { PackagesMegaMenu } from './PackagesMegaMenu'
 import './Header.css'
 
 export function Header() {
@@ -103,7 +104,13 @@ export function Header() {
 
           <div className="nav-menu-links">
             {t.nav.map((item) =>
-              item.children ? (
+              item.to === '/packages' ? (
+                <PackagesMegaMenu
+                  key={item.to}
+                  label={item.label}
+                  onNavigate={closeNav}
+                />
+              ) : item.children ? (
                 <div
                   key={item.to}
                   className={`nav-drop ${openMenu === item.to ? 'is-open' : ''}`}

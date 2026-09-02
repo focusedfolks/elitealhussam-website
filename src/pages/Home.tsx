@@ -135,11 +135,7 @@ export function Home() {
     { value: '24/7', label: 'Pilgrim support on journey', Icon: IconKaaba },
   ]
 
-  const familyTrust = [
-    'Family-friendly stays',
-    'Elderly care',
-    'Indian passport Hajj eligibility',
-  ]
+  const familyTrust = ['Family-friendly stays', 'Elderly care']
 
   const partners = [
     { name: 'Saudi Airlines', kind: 'air' as const },
@@ -310,9 +306,11 @@ export function Home() {
             <h2>{t.home.familyTitle}</h2>
             <p>{t.home.familyText}</p>
             <ul className="family-trust-list">
-              {familyTrust.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
+              <li>{familyTrust[0]}</li>
+              <li>{familyTrust[1]}</li>
+              <li>
+                <strong>Indian passport</strong> Hajj eligibility
+              </li>
             </ul>
             <div className="cta-row-home">
               <Link className="btn btn-gold" to="/packages">

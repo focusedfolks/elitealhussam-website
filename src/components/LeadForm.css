@@ -161,6 +161,80 @@
   padding-inline-start: 2.35rem !important;
 }
 
+.lead-form input::placeholder,
+.lead-form textarea::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.lead-travellers {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.lead-travellers-label {
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: var(--navy);
+}
+
+.lead-stepper-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #d5dbe3;
+}
+
+.lead-stepper-row > span {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.lead-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.lead-stepper button {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #d5dbe3;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--navy);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lead-stepper button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.lead-stepper button:not(:disabled):hover {
+  border-color: #c9a227;
+  color: var(--gold-deep);
+}
+
+.lead-stepper output {
+  min-width: 1.75rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
 .lead-form input,
 .lead-form select,
 .lead-form textarea {

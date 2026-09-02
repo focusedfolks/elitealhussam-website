@@ -16,7 +16,16 @@ export function Packages() {
   const { t } = useI18n()
   const { packages: allPackages } = useCms()
   const location = useLocation()
-  const [filter, setFilter] = useState<Filter>('umrah')
+  const isHajjUmrahHub = location.pathname === '/packages/hajj-umrah'
+  const [filter, setFilter] = useState<Filter>(
+    isHajjUmrahHub ? 'all' : 'umrah',
+  )
+
+  useEffect(() => {
+    if (location.pathname === '/packages/hajj-umrah') {
+      setFilter('all')
+    }
+  }, [location.pathname])
 
   useEffect(() => {
     const hash = location.hash.replace('#', '')
@@ -43,7 +52,7 @@ export function Packages() {
       <PageHero
         title={t.pages.packagesTitle}
         subtitle={t.pages.packagesSub}
-        image={images.themeHero}
+        image={images.pilgrimsHero}
         crumbs={[
           { label: 'Home', to: '/' },
           { label: t.pages.packagesTitle },

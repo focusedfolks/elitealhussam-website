@@ -20,7 +20,7 @@ export function InternationalTours() {
       <PageHero
         title="International Tours"
         subtitle="Curated global travel experiences from our Dubai, UAE office — full details coming soon."
-        image={images.dubai}
+        image={images.touristHero}
         crumbs={[
           { label: 'Home', to: '/' },
           { label: 'International Tours' },

@@ -1,0 +1,49 @@
+.pkg-itin-page-intro {
+  padding: 2rem 0 0.5rem;
+}
+
+.pkg-itin-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.85rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.pkg-itin-breadcrumb a {
+  color: var(--gold-deep);
+  font-weight: 600;
+}
+
+.pkg-itin-breadcrumb a:hover {
+  color: var(--ink);
+}
+
+.pkg-itin-passport-note {
+  margin: 0;
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  background: rgba(201, 162, 39, 0.08);
+  color: var(--gold-deep);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pkg-itin-page-body {
+  padding-top: 1.5rem;
+  padding-bottom: 4rem;
+}
+
+.pkg-itin-page-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}

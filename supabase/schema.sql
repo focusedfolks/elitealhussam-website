@@ -208,14 +208,14 @@ insert into public.site_settings (key, value) values
     "phones": ["+971 56 574 6678"],
     "whatsapp": "971565746678",
     "email": "alhussamuae@gmail.com",
-    "address": "No. 54, M Floor, Smart Eyes Business Centre, AG House Building, P.O. Box: 35127, Dubai, UAE",
+    "address": "Office Cabin No. 54, Mezzanine Floor, Smart Eye Business Centre, AG House Building, P.O. Box 35127, Dubai, UAE",
     "offices": [
       {
         "id": "dubai",
         "city": "Dubai",
         "label": "Dubai Office",
         "companyName": "Elite Alhussam Travel and Tourism L.L.C",
-        "lines": ["No. 54, M Floor", "Smart Eyes Business Centre", "AG House Building", "P.O. Box: 35127", "Dubai, UAE"]
+        "lines": ["Mezzanine Floor", "Smart Eye Business Centre", "Office Cabin No. 54", "AG House Building", "P.O. Box 35127", "Dubai, UAE"]
       }
     ],
     "social": {

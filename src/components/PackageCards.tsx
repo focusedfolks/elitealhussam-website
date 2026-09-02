@@ -15,6 +15,10 @@ import {
   type PackageCategory,
   type TravelPackage,
 } from '../content/site'
+import {
+  getHajjItineraryDetail,
+  hasDetailedHajjItinerary,
+} from '../content/hajjPackageItineraryDetails'
 import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
 import { telHref } from '../lib/contact'
@@ -244,7 +248,9 @@ function PackageCard({
   const travelOk = isTravelComplete(travel, modes)
   const chip = travelSummaryChip(travel)
   const isFeatured = Boolean(pkg.featured)
-  const hasItinerary = Boolean(pkg.itinerary?.length)
+  const hasDetailedItinerary = hasDetailedHajjItinerary(pkg.id)
+  const itineraryDetail = getHajjItineraryDetail(pkg.id)
+  const hasItinerary = Boolean(pkg.itinerary?.length) && !hasDetailedItinerary
   const enquireCtaLabel = t.common.viewItineraryEnquire
   const primaryPhone = company.phones[0]
 
@@ -316,10 +322,34 @@ function PackageCard({
 
         <div className="pkg-price-panel pkg-price-panel--cta">
           <div className="pkg-price-start">
-            <span>{hasItinerary ? t.common.itineraryTitle : t.common.packageDetails}</span>
+            <span>
+              {hasDetailedItinerary
+                ? t.common.itineraryTitle
+                : hasItinerary
+                  ? t.common.itineraryTitle
+                  : t.common.packageDetails}
+            </span>
             <em>{t.packagesUi.dubaiDepartures}</em>
           </div>
-          {hasItinerary ? (
+          {hasDetailedItinerary && itineraryDetail ? (
+            <div className="pkg-itinerary-teaser">
+              <p className="pkg-itinerary-season">{itineraryDetail.seasonHeading}</p>
+              <ul className="pkg-highlights">
+                {pkg.highlights.slice(0, 3).map((point) => (
+                  <li key={point}>
+                    <CheckIcon />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                className="pkg-itinerary-full-link"
+                to={`/packages/${pkg.id}/itinerary`}
+              >
+                View Full Itinerary <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          ) : hasItinerary ? (
             <PackageItineraryTable rows={pkg.itinerary!} />
           ) : (
             <ul className="pkg-highlights">

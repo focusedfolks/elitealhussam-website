@@ -13,7 +13,7 @@ export const company = {
   whatsapp: '971565746678',
   email: 'alhussamuae@gmail.com',
   address:
-    'No. 54, M Floor, Smart Eyes Business Centre, AG House Building, P.O. Box: 35127, Dubai, UAE',
+    'Office Cabin No. 54, Mezzanine Floor, Smart Eye Business Centre, AG House Building, P.O. Box 35127, Dubai, UAE',
   offices: [
     {
       id: 'dubai',
@@ -21,10 +21,11 @@ export const company = {
       label: 'Dubai Office',
       companyName: 'Elite Alhussam Travel and Tourism L.L.C',
       lines: [
-        'No. 54, M Floor',
-        'Smart Eyes Business Centre',
+        'Mezzanine Floor',
+        'Smart Eye Business Centre',
+        'Office Cabin No. 54',
         'AG House Building',
-        'P.O. Box: 35127',
+        'P.O. Box 35127',
         'Dubai, UAE',
       ],
     },
@@ -132,6 +133,37 @@ export const AIRPORTS = [
   { value: 'DXB', label: 'Dubai (DXB)' },
   { value: 'AUH', label: 'Abu Dhabi (AUH)' },
   { value: 'SHJ', label: 'Sharjah (SHJ)' },
+  { value: 'JED', label: 'Jeddah (JED)' },
+  { value: 'MED', label: 'Madinah (MED)' },
+] as const
+
+/** PLACEHOLDER — airport list pending confirmation from client. */
+export const AIRPORTS_PLACEHOLDER_NOTE =
+  'Airport options are placeholders — client list pending.'
+
+/** Makkah hotel names from Hajj package itineraries */
+export const MAKKAH_HOTEL_OPTIONS = [
+  'Swissotel Al Maqam',
+  'Makkah Tower / Pullman / Rotana',
+  'Similar / No preference',
+  'Other / No preference',
+] as const
+
+/** Madina hotel names from Hajj package itineraries */
+export const MADINA_HOTEL_OPTIONS = [
+  'Dallah Taiba',
+  'Dar Al Iman',
+  'Province Sham',
+  'Sanabel',
+  'Similar / No preference',
+  'Other / No preference',
+] as const
+
+/** Extra Umrah package labels for the enquiry form (alongside CMS package titles). */
+export const FORM_UMRAH_PACKAGE_OPTIONS = [
+  'Customise Umrah Package',
+  'Umrah Package (Economic & Premium)',
+  'Umrah Group Package',
 ] as const
 
 export const AIRLINES = [
@@ -299,13 +331,13 @@ export const hajjPackages: TravelPackage[] = [
   {
     id: 'platinum-2025',
     category: 'hajj',
-    title: 'Platinum Hajj Package',
-    tag: 'Platinum',
-    season: '',
+    title: 'Platinum Short Package',
+    tag: 'Platinum Short',
+    season: 'Hajj 1448H / 2027',
     summary:
-      'Full platinum Hajj from Dubai, UAE — premium Haramain stays, guided spiritual care, and decades of trusted hospitality.',
+      '20-day platinum-short Hajj from Dubai, UAE — Swissotel Al Maqam & Dallah Taiba stays, full Hajj days programme, and decades of trusted hospitality.',
     locations: 'Makkah • Madinah • Arafat',
-    duration: '30–35 Days',
+    duration: '20 Days',
     image: '/images/kiswah-detail.webp',
     popular: true,
     featured: true,
@@ -319,7 +351,11 @@ export const hajjPackages: TravelPackage[] = [
       note: 'Details on enquiry',
     },
     features: ['Premium hotels near Haram', 'Full Hajj guidance', 'Indian passport holders only'],
-    highlights: ['Premium Haramain hotels', 'Full spiritual care', 'Indian passport holders only'],
+    highlights: [
+      '20-day Platinum Short programme',
+      'Swissotel Al Maqam & Dallah Taiba',
+      'Indian passport holders only',
+    ],
     amenities: [
       { key: 'hotel', title: 'Hotel', subtitle: 'Luxury near Haram' },
       { key: 'transport', title: 'Transport', subtitle: 'Comfort coaches' },
@@ -371,13 +407,13 @@ export const hajjPackages: TravelPackage[] = [
   {
     id: 'hajj-budget',
     category: 'hajj',
-    title: 'Budget Hajj Package',
+    title: 'Budget Package',
     tag: 'Budget',
-    season: '',
+    season: 'Hajj 1448H / 2027',
     summary:
-      'Value-focused Hajj from Dubai, UAE for Indian passport holders — organised rites, comfortable stays, and group support.',
+      '30-day value Hajj from Dubai, UAE for Indian passport holders — Makkah Tower / Pullman stays, organised rites, and group support.',
     locations: 'Makkah • Madinah • Arafat',
-    duration: '28–32 Days',
+    duration: '30 Days',
     image: '/images/hajj-arafat.webp',
     availableTravelModes: ['air', 'road'],
     itinerary: budgetHajjItinerary,
@@ -390,8 +426,8 @@ export const hajjPackages: TravelPackage[] = [
     },
     features: ['Organised Hajj rites', 'Shared transport', 'Indian passport holders only'],
     highlights: [
-      'Best value Hajj from Dubai',
-      'Group leader throughout',
+      '30-day Budget Hajj programme',
+      'Makkah Tower / Pullman stays',
       'Indian passport holders only',
     ],
     amenities: defaultAmenities,
@@ -448,6 +484,10 @@ export const images = {
   dubai: '/images/dubai-skyline.webp',
   chennai: '/images/chennai-city.webp',
   themeHero: '/images/theme-hero.webp',
+  /** Pilgrims landing (Hajj & Umrah packages) */
+  pilgrimsHero: '/images/hero-makkah.webp',
+  /** Tourist landing (International Tours) */
+  touristHero: '/images/dubai-skyline.webp',
   offer1: '/images/theme-offer-1.webp',
   offer2: '/images/theme-offer-2.webp',
   offer3: '/images/theme-offer-3.webp',

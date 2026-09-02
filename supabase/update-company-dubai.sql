@@ -14,7 +14,7 @@
     "phones": ["+971 56 574 6678"],
     "whatsapp": "971565746678",
     "email": "alhussamuae@gmail.com",
-    "address": "No. 54, M Floor, Smart Eyes Business Centre, AG House Building, P.O. Box: 35127, Dubai, UAE",
+    "address": "Office Cabin No. 54, Mezzanine Floor, Smart Eye Business Centre, AG House Building, P.O. Box 35127, Dubai, UAE",
     "offices": [
       {
         "id": "dubai",
@@ -22,10 +22,11 @@
         "label": "Dubai Office",
         "companyName": "Elite Alhussam Travel and Tourism L.L.C",
         "lines": [
-          "No. 54, M Floor",
-          "Smart Eyes Business Centre",
+          "Mezzanine Floor",
+          "Smart Eye Business Centre",
+          "Office Cabin No. 54",
           "AG House Building",
-          "P.O. Box: 35127",
+          "P.O. Box 35127",
           "Dubai, UAE"
         ]
       }
@@ -164,4 +165,27 @@ on conflict (id) do update set
   sort_order = excluded.sort_order,
   published = excluded.published,
   updated_at = now();
+
+-- Hajj 1448H / 2027 detailed itinerary package labels
+update public.packages
+set
+  title = 'Platinum Short Package',
+  tag = 'Platinum Short',
+  season = 'Hajj 1448H / 2027',
+  summary = '20-day platinum-short Hajj from Dubai, UAE — Swissotel Al Maqam & Dallah Taiba stays, full Hajj days programme, and decades of trusted hospitality.',
+  duration = '20 Days',
+  highlights = '["20-day Platinum Short programme","Swissotel Al Maqam & Dallah Taiba","Indian passport holders only"]'::jsonb,
+  updated_at = now()
+where id = 'platinum-2025';
+
+update public.packages
+set
+  title = 'Budget Package',
+  tag = 'Budget',
+  season = 'Hajj 1448H / 2027',
+  summary = '30-day value Hajj from Dubai, UAE for Indian passport holders — Makkah Tower / Pullman stays, organised rites, and group support.',
+  duration = '30 Days',
+  highlights = '["30-day Budget Hajj programme","Makkah Tower / Pullman stays","Indian passport holders only"]'::jsonb,
+  updated_at = now()
+where id = 'hajj-budget';
 

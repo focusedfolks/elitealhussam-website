@@ -94,9 +94,9 @@ export const packageCatalog: Dictionary['packageCatalog'] = {
       'Tell us your preferred dates, group size, and hotel class — our Dubai team will tailor your Umrah itinerary.',
   },
   'platinum-2025': {
-    title: 'Platinum Hajj Package',
+    title: 'Platinum Short Package',
     summary:
-      'Full platinum Hajj from Dubai, UAE — premium Haramain stays, guided spiritual care, and decades of trusted hospitality.',
+      '20-day platinum-short Hajj from Dubai, UAE — Swissotel Al Maqam & Dallah Taiba stays, full Hajj days programme.',
   },
   'classic-hajj-2025': {
     title: 'Business Hajj Package',
@@ -104,9 +104,9 @@ export const packageCatalog: Dictionary['packageCatalog'] = {
       'Business Class Hajj from Dubai, UAE — elevated stays, priority transfers, and dedicated support for Indian passport holders.',
   },
   'hajj-budget': {
-    title: 'Budget Hajj Package',
+    title: 'Budget Package',
     summary:
-      'Value-focused Hajj from Dubai, UAE for Indian passport holders — organised rites, comfortable stays, and group support.',
+      '30-day value Hajj from Dubai, UAE — Makkah Tower / Pullman stays, organised rites, and group support.',
   },
 }
 

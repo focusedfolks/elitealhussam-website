@@ -25,6 +25,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://elitealhussam.com/guide/history-of-kabah</loc>
+    
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://elitealhussam.com/guide/story-of-zamzam</loc>
+    
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://elitealhussam.com/guide/masjid-e-nabawi</loc>
+    
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://elitealhussam.com/blog</loc>
     
     <changefreq>weekly</changefreq>

@@ -68,6 +68,9 @@ function buildSitemap(root: string, posts: BlogPost[], site: string) {
     '/about',
     '/packages',
     '/pricing',
+    '/guide/history-of-kabah',
+    '/guide/story-of-zamzam',
+    '/guide/masjid-e-nabawi',
     '/blog',
     '/contact',
   ]

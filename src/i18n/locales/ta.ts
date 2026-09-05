@@ -18,6 +18,7 @@ export const ta: Dictionary = {
     { to: '/', label: 'முகப்பு' },
     { to: '/about', label: 'எங்களைப் பற்றி' },
     { to: '/packages', label: 'பேக்கேஜ்கள்' },
+    { to: '/guide', label: 'வழிகாட்டி' },
     { to: '/blog', label: 'வலைப்பதிவு' },
     { to: '/contact', label: 'தொடர்பு' },
   ],

@@ -18,6 +18,7 @@ export const ur: Dictionary = {
     { to: '/', label: 'ہوم' },
     { to: '/about', label: 'ہمارے بارے میں' },
     { to: '/packages', label: 'پیکجز' },
+    { to: '/guide', label: 'گائیڈ' },
     { to: '/blog', label: 'بلاگ' },
     { to: '/contact', label: 'رابطہ' },
   ],

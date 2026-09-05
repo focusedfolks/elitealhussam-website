@@ -5,6 +5,7 @@ import { BrandMark } from './BrandMark'
 import { useCms } from '../cms/CmsProvider'
 import { IconPhone } from './Icons'
 import { telHref } from '../lib/contact'
+import { GuideMegaMenu } from './GuideMegaMenu'
 import { PackagesMegaMenu } from './PackagesMegaMenu'
 import './Header.css'
 
@@ -106,6 +107,12 @@ export function Header() {
             {t.nav.map((item) =>
               item.to === '/packages' ? (
                 <PackagesMegaMenu
+                  key={item.to}
+                  label={item.label}
+                  onNavigate={closeNav}
+                />
+              ) : item.to === '/guide' ? (
+                <GuideMegaMenu
                   key={item.to}
                   label={item.label}
                   onNavigate={closeNav}

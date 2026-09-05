@@ -16,6 +16,8 @@ import { About } from './pages/About'
 import { Blog } from './pages/Blog'
 import { BlogPost } from './pages/BlogPost'
 import { Contact } from './pages/Contact'
+import { GUIDE_DEFAULT_PATH } from './content/guide'
+import { GuidePage } from './pages/GuidePage'
 import { Home } from './pages/Home'
 import { InternationalTours } from './pages/InternationalTours'
 import { NotFound } from './pages/NotFound'
@@ -65,6 +67,11 @@ export default function App() {
               <Route path="umrah" element={<Navigate to="/packages" replace />} />
               <Route path="blog" element={<Blog />} />
               <Route path="blog/:slug" element={<BlogPost />} />
+              <Route
+                path="guide"
+                element={<Navigate to={GUIDE_DEFAULT_PATH} replace />}
+              />
+              <Route path="guide/:slug" element={<GuidePage />} />
               <Route path="contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Route>

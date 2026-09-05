@@ -145,17 +145,15 @@ export const AIRPORTS_PLACEHOLDER_NOTE =
 export const MAKKAH_HOTEL_OPTIONS = [
   'Swissotel Al Maqam',
   'Makkah Tower / Pullman / Rotana',
-  'Similar / No preference',
   'Other / No preference',
 ] as const
 
-/** Madina hotel names from Hajj package itineraries */
+/** Madinah hotel names from Hajj package itineraries */
 export const MADINA_HOTEL_OPTIONS = [
   'Dallah Taiba',
   'Dar Al Iman',
   'Province Sham',
   'Sanabel',
-  'Similar / No preference',
   'Other / No preference',
 ] as const
 

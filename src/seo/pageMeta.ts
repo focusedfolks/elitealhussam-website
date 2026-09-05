@@ -34,7 +34,7 @@ export const pageMeta = {
   pricing: {
     title: 'Pricing & Package Details | ELITE ALHUSSAM',
     description:
-      'Contact our Dubai office for current Hajj and Umrah package pricing. Rates are shared privately on enquiry for adults, children, and infants.',
+      'Request a custom Hajj & Umrah quotation from our Dubai office. Share hotels, dates, rooms, and services — our team follows up with pricing. No auto-calculated totals.',
     path: '/pricing',
     image: images.dubai,
   },

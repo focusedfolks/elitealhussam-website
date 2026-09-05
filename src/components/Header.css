@@ -28,8 +28,7 @@
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  flex: 0 1 auto;
-  max-width: 14.5rem;
+  flex: 0 0 auto;
   text-decoration: none;
   min-width: 0;
   padding: 0.15rem 0.2rem 0.15rem 0;
@@ -38,21 +37,19 @@
   border: 0;
   box-shadow: none;
   cursor: pointer;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .brand .brand-mark {
+  flex: 0 0 auto;
   min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
 }
 
 .brand .brand-mark-name,
 .brand .brand-mark-tagline {
   display: block;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
+  text-overflow: unset;
   white-space: nowrap;
 }
 
@@ -286,11 +283,6 @@
     gap: 0.65rem;
   }
 
-  .brand {
-    /* More room for brand text when inline nav is collapsed */
-    max-width: min(18rem, 72vw);
-  }
-
   .nav-toggle {
     display: grid;
     place-items: center;
@@ -516,10 +508,6 @@
 }
 
 @media (max-width: 640px) {
-  .brand .brand-mark-tagline {
-    display: none;
-  }
-
   .brand-logo {
     height: 44px;
     max-width: 44px;

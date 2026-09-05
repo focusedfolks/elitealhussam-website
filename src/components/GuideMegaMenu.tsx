@@ -16,7 +16,7 @@ import {
 import '../components/PackagesMegaMenu.css'
 
 const HOVER_DELAY_MS = 150
-const DESKTOP_MQ = '(min-width: 981px)'
+const DESKTOP_MQ = '(min-width: 1280px)'
 
 type Props = {
   label: string

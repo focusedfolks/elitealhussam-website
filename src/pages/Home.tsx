@@ -60,6 +60,14 @@ export function Home() {
   const homeRef = useRef<HTMLDivElement>(null)
   useHomeScrollEffects(homeRef)
 
+  const uniqueTestimonials = testimonials.filter(
+    (item, index, arr) =>
+      arr.findIndex(
+        (candidate) =>
+          candidate.name === item.name && candidate.quote === item.quote,
+      ) === index,
+  )
+
   const services = [
     { label: 'Hotel Booking', Icon: IconHotel },
     { label: 'Visa Processing', Icon: IconBook },
@@ -431,14 +439,17 @@ export function Home() {
             </p>
           </GsapReveal>
           <GsapReveal className="testimonial-grid" stagger>
-            {testimonials.map((item) => (
-              <blockquote className="testimonial-card" key={item.name}>
+            {uniqueTestimonials.map((item) => (
+              <blockquote
+                className="testimonial-card"
+                key={`${item.name}-${item.quote}`}
+              >
                 <span className="testimonial-quote" aria-hidden="true">
                   “
                 </span>
                 <div className="star-row" aria-label="5 star rating">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <span key={i}>★</span>
+                    <span key={`${item.name}-star-${i}`}>★</span>
                   ))}
                 </div>
                 <p>{item.quote}</p>

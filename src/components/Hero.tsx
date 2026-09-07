@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { images } from '../content/site'
-import { IconLandmark, IconMountain } from './Icons'
+import { IconMountain, IconMosque } from './Icons'
 import './Hero.css'
 
 /** Swap / extend these paths — left panel (Hajj & Umrah) backgrounds */
@@ -81,7 +81,7 @@ export function Hero() {
           />
           <div className="hero-split-veil" aria-hidden />
           <div className="hero-split-content hero-split-content--hajj">
-            <IconLandmark className="hero-split-icon" size={34} />
+            <IconMosque className="hero-split-icon" size={34} />
             <h1>Umrah</h1>
             <p className="hero-split-copy">A Journey of Faith, Peace &amp; Blessings</p>
             <span className="hero-split-ornament" aria-hidden="true">◆</span>

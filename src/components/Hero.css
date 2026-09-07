@@ -123,6 +123,7 @@
 }
 
 .hero-split-content--hajj {
+  z-index: 3;
   padding: 2.5rem 2rem 2.5rem 2.25rem;
   width: min(36rem, 46%);
 }
@@ -139,6 +140,16 @@
 
 .hero-split-content--hajj .hero-split-icon {
   color: #0b4f3f;
+}
+
+.hero-split-content--hajj::before {
+  inset: -4.25rem -5rem;
+  background: radial-gradient(
+    ellipse,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.5) 48%,
+    rgba(0, 0, 0, 0) 78%
+  );
 }
 
 .hero-split-content--hajj h1 {

@@ -130,6 +130,16 @@ export function IconLandmark(props: IconProps) {
   )
 }
 
+export function IconMosque(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M3 21h18M5 21v-7h14v7M7 14a5 5 0 0 1 10 0" />
+      <path d="M12 5v-2M10.5 5h3M6 14V8l2-2v8M18 14V8l-2-2v8" />
+      <path d="M10 21v-4h4v4" />
+    </Icon>
+  )
+}
+
 export function IconMountain(props: IconProps) {
   return (
     <Icon {...props}>

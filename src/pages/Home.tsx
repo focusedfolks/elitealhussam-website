@@ -157,43 +157,45 @@ export function Home() {
       />
       <Hero />
 
-      <section className="home-split" aria-label="Our services">
-        <div className="home-split-grid">
-          <article
-            className="home-split-panel"
-            style={{ backgroundImage: `url(${images.familyMakkah})` }}
-          >
-            <div className="home-split-veil" aria-hidden />
-            <div className="home-split-content">
-              <p className="home-split-eyebrow">Sacred journeys</p>
-              <h2>Hajj &amp; Umrah</h2>
-              <p>
-                Organised pilgrimage packages from Dubai, UAE — visas, hotels,
-                transport, and spiritual guidance for families and groups.
-              </p>
-              <Link className="btn btn-gold" to="/packages">
-                View Hajj &amp; Umrah Packages
-              </Link>
-            </div>
-          </article>
-
-          <article
-            className="home-split-panel"
-            style={{ backgroundImage: `url(${images.dubai})` }}
-          >
-            <div className="home-split-veil" aria-hidden />
-            <div className="home-split-content">
-              <p className="home-split-eyebrow">Global travel</p>
-              <h2>International Tours</h2>
-              <p>
-                Curated international holidays and group tours arranged with the
-                same trusted service from our Dubai office.
-              </p>
-              <Link className="btn btn-gold" to="/international-tours">
-                View International Tours
-              </Link>
-            </div>
-          </article>
+      <section className="hero-stats-strip" aria-label="Trust and credentials">
+        <div className="container hero-stats-inner">
+          <p className="hero-stats-quote">
+            Labbaik Allahumma Labbaik — we walk with you in faith.
+          </p>
+          <div className="hero-stats-badges">
+            <span>
+              <IconShieldCheck size={14} /> Licensed Operator
+            </span>
+            <span>
+              <IconSparkle size={14} /> 45+ Years
+            </span>
+            <span>
+              <IconBuilding size={14} /> Dubai, UAE
+            </span>
+          </div>
+          <div className="hero-stats-cards">
+            <article className="hero-stat-card">
+              <span className="hero-stat-icon" aria-hidden>
+                <IconSparkle size={18} />
+              </span>
+              <strong>45+</strong>
+              <span>Years</span>
+            </article>
+            <article className="hero-stat-card">
+              <span className="hero-stat-icon" aria-hidden>
+                <IconUsers size={18} />
+              </span>
+              <strong>500+</strong>
+              <span>Pilgrims Served</span>
+            </article>
+            <article className="hero-stat-card">
+              <span className="hero-stat-icon" aria-hidden>
+                <IconKaaba size={18} />
+              </span>
+              <strong>24/7</strong>
+              <span>Pilgrim Support on Journey</span>
+            </article>
+          </div>
         </div>
       </section>
 

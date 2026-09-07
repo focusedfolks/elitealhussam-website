@@ -1,0 +1,169 @@
+.tour-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--line, rgba(15, 31, 61, 0.1));
+  box-shadow: 0 14px 36px rgba(15, 31, 61, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tour-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(15, 31, 61, 0.12);
+}
+
+.tour-card-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  background: #1a2a4a;
+}
+
+.tour-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.tour-card:hover .tour-card-media img {
+  transform: scale(1.04);
+}
+
+.tour-card-badge {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.88);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tour-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.15rem 1.2rem 1.3rem;
+  flex: 1;
+}
+
+.tour-card-title {
+  margin: 0;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink, #0f1f3d);
+}
+
+.tour-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tour-card-title a:hover {
+  color: var(--gold-deep, #8a6a3d);
+}
+
+.tour-card-tagline {
+  margin: 0;
+  color: var(--gold-deep, #b8956c);
+  font-size: 0.88rem;
+  font-weight: 650;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tour-card-desc {
+  margin: 0;
+  color: var(--muted, #6b7280);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tour-card-duration {
+  margin: 0.15rem 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ink, #0f1f3d);
+  font-size: 0.84rem;
+  font-weight: 650;
+}
+
+.tour-card-duration svg {
+  color: var(--gold-deep, #b8956c);
+  flex: 0 0 auto;
+}
+
+.tour-card-cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 46px;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  background: #0f1f3d;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.tour-card-cta:hover {
+  background: #1a3358;
+  transform: translateY(-1px);
+}
+
+.tour-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.35rem;
+}
+
+.tour-country-block {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2.75rem;
+}
+
+.tour-country-block:last-child {
+  margin-bottom: 0;
+}
+
+.tour-country-title {
+  margin: 0;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: var(--ink, #0f1f3d);
+}
+
+@media (max-width: 980px) {
+  .tour-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .tour-grid {
+    grid-template-columns: 1fr;
+  }
+}

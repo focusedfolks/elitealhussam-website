@@ -1,420 +1,278 @@
-.hero-single {
-  position: relative;
-  min-height: 100svh;
-  min-height: 100dvh;
-  height: 100svh;
-  height: 100dvh;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  overflow: hidden;
-  background: #0f1f3d;
-  text-align: center;
-  touch-action: pan-y pinch-zoom;
-  -webkit-tap-highlight-color: transparent;
+/* Contained rounded diagonal-split hero */
+
+.hero-shell {
+  padding:
+    calc(5.25rem + env(safe-area-inset-top, 0px))
+    max(1rem, env(safe-area-inset-right, 0px))
+    1.25rem
+    max(1rem, env(safe-area-inset-left, 0px));
+  background: #f6f3ec;
 }
 
-.hero-slide {
+.hero-split {
+  position: relative;
+  display: grid;
+  min-height: calc(100svh - 6.75rem);
+  min-height: calc(100dvh - 6.75rem);
+  height: calc(100svh - 6.75rem);
+  height: calc(100dvh - 6.75rem);
+  overflow: hidden;
+  border-radius: 24px;
+  background: #0a1528;
+  box-shadow: 0 18px 48px rgba(15, 31, 61, 0.14);
+}
+
+.hero-split-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+}
+
+.hero-split-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-split-slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transform: scale(1.06);
-  transition:
-    opacity 0.45s ease,
-    transform 2s ease;
-  will-change: opacity, transform;
+  transition: opacity 800ms ease;
+  will-change: opacity;
 }
 
-.hero-single.is-ready .hero-slide.is-active {
+.hero-split-slide.is-active {
   opacity: 1;
-  transform: scale(1);
-  z-index: 0;
+  z-index: 1;
 }
 
-/* Madinah slide (3rd dot): brighter image, green dome visible through veil */
-.hero-slide--madinah {
-  filter: brightness(1.12) saturate(1.08);
-  background-position: center 42%;
-}
-
-.hero-single[data-active-slide='madinah'] .hero-single-veil {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(15, 31, 61, 0.52) 0%,
-      rgba(15, 31, 61, 0.18) 42%,
-      rgba(15, 31, 61, 0.55) 78%,
-      rgba(10, 21, 40, 0.82) 100%
-    ),
-    radial-gradient(
-      ellipse 70% 45% at 18% 92%,
-      rgba(10, 21, 40, 0.55),
-      transparent 70%
-    );
-}
-
-.hero-single-veil {
+.hero-split-veil {
   position: absolute;
   inset: 0;
   z-index: 1;
   background:
     linear-gradient(
-      180deg,
-      rgba(15, 31, 61, 0.78) 0%,
-      rgba(15, 31, 61, 0.32) 40%,
-      rgba(15, 31, 61, 0.82) 78%,
-      rgba(10, 21, 40, 0.94) 100%
-    ),
-    radial-gradient(
-      ellipse 70% 45% at 18% 92%,
-      rgba(10, 21, 40, 0.75),
-      transparent 70%
+      115deg,
+      rgba(10, 21, 40, 0.82) 0%,
+      rgba(15, 31, 61, 0.55) 45%,
+      rgba(10, 21, 40, 0.35) 100%
+    );
+  pointer-events: none;
+}
+
+.hero-split-veil--tours {
+  background:
+    linear-gradient(
+      220deg,
+      rgba(10, 21, 40, 0.45) 0%,
+      rgba(15, 31, 61, 0.72) 55%,
+      rgba(10, 21, 40, 0.88) 100%
     );
 }
 
-.hero-single-content {
+/* Corner-to-corner diagonal: bottom-left (0,100%) → top-right (100%,0%) */
+.hero-split-panel--hajj {
+  z-index: 2;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.hero-split-panel--tours {
+  z-index: 1;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.hero-split-content {
   position: relative;
   z-index: 2;
-  padding:
-    calc(5.5rem + env(safe-area-inset-top, 0px))
-    max(1rem, env(safe-area-inset-right, 0px))
-    calc(5rem + env(safe-area-inset-bottom, 0px))
-    max(1rem, env(safe-area-inset-left, 0px));
-  max-width: 48rem;
-  margin-inline: auto;
   color: #fff;
-  width: 100%;
+  max-width: 36rem;
 }
 
-.hero-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0 0 1.15rem;
-  padding: 0.45rem 1rem;
-  border-radius: 999px;
-  background: rgba(15, 31, 61, 0.45);
-  border: 1px solid rgba(224, 184, 74, 0.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+.hero-split-content--hajj {
+  padding: 2.5rem 2rem 2.5rem 2.25rem;
+  width: min(36rem, 46%);
+}
+
+.hero-split-content--tours {
+  padding: 2.5rem 2.25rem 2.5rem 1.5rem;
+  width: min(36rem, 46%);
+  text-align: left;
+}
+
+.hero-split-eyebrow {
+  margin: 0 0 0.75rem;
   color: #e0b84a;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
 }
 
-.hero-kicker-icon {
-  color: #e0b84a;
-  font-size: 0.72rem;
-  line-height: 1;
-}
-
-.hero-single h1 {
-  margin: 0;
-}
-
-.hero-title-main {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(2.75rem, 6.5vw, 4.75rem);
+.hero-split-content--hajj h1 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
   font-weight: 600;
   letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.hero-split-content--tours h2 {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.85rem, 3.4vw, 2.65rem);
+  font-weight: 600;
   line-height: 1.1;
-  color: #fff;
 }
 
-.hero-copy {
-  margin: 1.15rem auto 1.7rem;
-  max-width: 34rem;
-  color: rgba(255, 255, 255, 0.86);
-  font-size: 1.05rem;
-  line-height: 1.75;
+.hero-split-copy {
+  margin: 0 0 1.5rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.95rem, 1.3vw, 1.08rem);
+  line-height: 1.7;
+  max-width: 32rem;
 }
 
-.hero-actions {
+.hero-split-actions {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
-.hero-actions .btn-gold,
-.hero-cta-pulse {
-  min-width: 11rem;
-  animation: heroCtaPulse 2.6s ease-in-out infinite;
-}
-
-.hero-cta-secondary {
-  color: #fff !important;
-  border-color: rgba(255, 255, 255, 0.5) !important;
-  background: transparent !important;
-}
-
-.hero-cta-secondary:hover {
-  background: rgba(255, 255, 255, 0.14) !important;
-  border-color: #fff !important;
-  color: #fff !important;
-}
-
-.hero-trust-bar {
-  display: inline-flex;
+.hero-split-tours-row {
+  display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.45rem 0.85rem;
-  margin: 1.35rem auto 0;
-  padding: 0.55rem 1rem;
-  border-radius: 999px;
-  background: rgba(15, 31, 61, 0.4);
-  border: 1px solid rgba(224, 184, 74, 0.28);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  align-items: center;
+  gap: 0.65rem 0.85rem;
 }
 
-.hero-trust-bar span {
+.hero-split-tours-row > a:not(.hero-split-tours-cta) {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+  font-weight: 650;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-split-tours-row > a:not(.hero-split-tours-cta):hover {
+  color: #e0b84a;
+  border-bottom-color: rgba(224, 184, 74, 0.65);
+}
+
+/* Keep Explore Tours on the same row as Local */
+.hero-split-tours-cta {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.hero-trust-bar svg {
-  color: #e0b84a;
-  flex: 0 0 auto;
-}
-
-.hero-faith {
-  margin: 1.5rem 0 0;
-  color: rgba(255, 255, 255, 0.72);
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.05rem;
-}
-
-.hero-passport {
-  margin: 0.85rem 0 0;
-  display: inline-block;
-  padding: 0.45rem 0.85rem;
+  justify-content: center;
+  min-height: 40px;
+  margin-inline-start: 0.15rem;
+  padding: 0.5rem 1.05rem;
   border-radius: 999px;
-  border: 1px solid rgba(232, 185, 45, 0.55);
-  background: rgba(15, 31, 61, 0.45);
-  color: #f7e7b0;
-  font-size: 0.78rem;
-  font-weight: 750;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.hero-dots {
-  position: absolute;
-  z-index: 3;
-  left: 50%;
-  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.45rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(10, 21, 40, 0.55);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(224, 184, 74, 0.65);
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
 }
 
-.hero-dot {
-  width: 0.65rem;
-  height: 0.65rem;
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-  padding: 0;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.25s ease;
+.hero-split-tours-cta:hover {
+  background: rgba(224, 184, 74, 0.22);
+  border-color: #e0b84a;
 }
 
-.hero-dot::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 0.65rem;
-  height: 0.65rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.4);
-  transition:
-    width 0.25s ease,
-    background 0.25s ease;
-}
-
-.hero-dot.is-active::after {
-  width: 1.6rem;
-  background: #e0b84a;
-}
-
-.hero-dot:focus-visible {
-  outline: 2px solid #e0b84a;
-  outline-offset: 3px;
-}
-
-@keyframes heroCtaPulse {
-  0%,
-  100% {
-    box-shadow:
-      0 10px 24px rgba(201, 162, 39, 0.35),
-      0 0 0 0 rgba(224, 184, 74, 0.35);
+/* —— Mobile: stack full-width rectangles, no clip-path —— */
+@media (max-width: 900px) {
+  .hero-shell {
+    padding:
+      calc(4.75rem + env(safe-area-inset-top, 0px))
+      0.85rem
+      1rem;
   }
-  50% {
-    box-shadow:
-      0 14px 32px rgba(201, 162, 39, 0.45),
-      0 0 0 10px rgba(224, 184, 74, 0);
+
+  .hero-split {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-split-panel {
+    position: relative;
+    inset: auto;
+    clip-path: none !important;
+    min-height: min(58svh, 480px);
+    width: 100%;
+  }
+
+  .hero-split-panel--hajj {
+    min-height: min(62svh, 520px);
+    align-items: flex-end;
+  }
+
+  .hero-split-panel--tours {
+    min-height: min(42svh, 360px);
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .hero-split-content--hajj,
+  .hero-split-content--tours {
+    width: 100%;
+    max-width: none;
+    padding: 1.75rem 1.25rem 1.75rem;
+  }
+
+  .hero-split-content--hajj h1 {
+    font-size: clamp(2.15rem, 9vw, 3rem);
+  }
+
+  .hero-split-content--tours h2 {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+
+  .hero-split-veil {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(10, 21, 40, 0.35) 0%,
+        rgba(10, 21, 40, 0.55) 40%,
+        rgba(10, 21, 40, 0.88) 100%
+      );
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-split-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-split-tours-row {
+    gap: 0.55rem 0.75rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-slide {
+  .hero-split-slide {
     transition: none;
-    transform: none;
   }
 
-  .hero-cta-pulse {
-    animation: none;
-  }
-}
-
-@media (max-width: 640px) {
-  .hero-single {
-    min-height: 100svh;
-    min-height: 100dvh;
-    height: 100svh;
-    height: 100dvh;
-  }
-
-  .hero-slide {
-    transform: scale(1.03);
-    background-position: center 32%;
-  }
-
-  .hero-slide--family-makkah {
-    background-position: center 28%;
-  }
-
-  .hero-slide--umrah {
-    background-position: center 35%;
-  }
-
-  .hero-slide--madinah {
-    background-position: center 38%;
-    filter: brightness(1.08) saturate(1.05);
-  }
-
-  .hero-slide--pilgrims {
-    background-position: center 30%;
-  }
-
-  .hero-single.is-ready .hero-slide.is-active {
-    transform: scale(1);
-  }
-
-  .hero-single-content {
-    padding:
-      calc(4.75rem + env(safe-area-inset-top, 0px))
-      1rem
-      calc(4.25rem + env(safe-area-inset-bottom, 0px));
-  }
-
-  .hero-kicker {
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    padding: 0.4rem 0.85rem;
-    margin-bottom: 0.95rem;
-  }
-
-  .hero-title-main {
-    font-size: clamp(1.65rem, 8.2vw, 2.35rem);
-    line-height: 1.15;
-  }
-
-  .hero-copy {
-    font-size: 0.94rem;
-    line-height: 1.65;
-    margin: 0.95rem auto 1.25rem;
-    max-width: 100%;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.6rem;
-    width: 100%;
-    max-width: 22rem;
-    margin-inline: auto;
-  }
-
-  .hero-actions .btn {
-    min-height: 48px;
-    width: 100%;
-    font-size: 0.95rem;
-  }
-
-  .hero-actions .btn-gold,
-  .hero-cta-pulse {
-    min-width: 0;
-  }
-
-  .hero-trust-bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.35rem;
-    margin-top: 1.1rem;
-    padding: 0.65rem 0.9rem;
-    max-width: 100%;
-  }
-
-  .hero-trust-bar span {
-    font-size: 0.7rem;
-    justify-content: center;
-  }
-
-  .hero-faith {
-    margin-top: 1.1rem;
-    font-size: 0.92rem;
-    line-height: 1.5;
-    padding-inline: 0.25rem;
-  }
-
-  .hero-passport {
-    font-size: 0.68rem;
-    padding: 0.4rem 0.75rem;
-    line-height: 1.35;
-    max-width: 100%;
-  }
-
-  .hero-dots {
-    bottom: calc(0.85rem + env(safe-area-inset-bottom, 0px));
-    gap: 0.2rem;
-    padding: 0.35rem 0.55rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .hero-title-main {
-    font-size: 1.55rem;
-  }
-
-  .hero-copy {
-    font-size: 0.88rem;
-  }
-
-  .hero-faith {
-    display: none;
+  .hero-split-tours-cta,
+  .hero-split-tours-row > a {
+    transition: none;
   }
 }

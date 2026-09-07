@@ -131,123 +131,108 @@
   background: #fff;
 }
 
-/* -- Home split: Hajj & Umrah / International Tours -- */
-.home-split {
+/* -- Stats strip directly below diagonal hero -- */
+.hero-stats-strip {
   position: relative;
   z-index: 2;
-  background: var(--home-navy);
-}
-
-.home-split-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 50vh;
-  min-height: 50dvh;
-}
-
-.home-split-panel {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  min-height: 50vh;
-  min-height: 50dvh;
-  padding: clamp(2rem, 5vw, 3.5rem);
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-}
-
-.home-split-veil {
-  position: absolute;
-  inset: 0;
+  padding: 2.25rem 0 2.75rem;
   background:
-    linear-gradient(
-      180deg,
-      rgba(15, 31, 61, 0.35) 0%,
-      rgba(15, 31, 61, 0.72) 55%,
-      rgba(10, 21, 40, 0.92) 100%
-    ),
-    linear-gradient(90deg, rgba(10, 21, 40, 0.25), transparent 40%);
-  pointer-events: none;
-}
-
-.home-split-content {
-  position: relative;
-  z-index: 1;
-  max-width: 26rem;
+    linear-gradient(180deg, #0f1f3d 0%, #142848 100%);
   color: #fff;
+  border-bottom: 1px solid rgba(224, 184, 74, 0.18);
 }
 
-.home-split-eyebrow {
-  margin: 0 0 0.65rem;
-  color: var(--home-gold-soft);
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.hero-stats-inner {
+  display: grid;
+  gap: 1.35rem;
+  justify-items: center;
+  text-align: center;
 }
 
-.home-split-content h2 {
-  margin: 0 0 0.85rem;
+.hero-stats-quote {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(255, 255, 255, 0.78);
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.45;
+}
+
+.hero-stats-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem 0.85rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(224, 184, 74, 0.28);
+}
+
+.hero-stats-badges span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.hero-stats-badges svg {
+  color: #e0b84a;
+  flex: 0 0 auto;
+}
+
+.hero-stats-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  max-width: 52rem;
+}
+
+.hero-stat-card {
+  display: grid;
+  gap: 0.35rem;
+  justify-items: center;
+  padding: 1.15rem 0.85rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(224, 184, 74, 0.18);
+}
+
+.hero-stat-icon {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: rgba(224, 184, 74, 0.16);
+  color: #e0b84a;
+}
+
+.hero-stat-card strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.15rem);
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.12;
+  line-height: 1;
   color: #fff;
 }
 
-.home-split-content h2::after {
-  content: '';
-  display: block;
-  width: 2.75rem;
-  height: 2px;
-  margin-top: 0.75rem;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--home-gold-soft), transparent);
+.hero-stat-card > span:last-child {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
-.home-split-content p {
-  margin: 0 0 1.35rem;
-  color: rgba(255, 255, 255, 0.86);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.home-split-content .btn-gold {
-  min-height: 48px;
-}
-
-@media (max-width: 768px) {
-  .home-split-grid {
+@media (max-width: 640px) {
+  .hero-stats-cards {
     grid-template-columns: 1fr;
   }
-
-  .home-split-panel {
-    min-height: 42vh;
-    min-height: 42dvh;
-    padding: 2rem 1.25rem;
-  }
-
-  .home-split-content {
-    max-width: 100%;
-  }
-
-  .home-split-content h2 {
-    font-size: clamp(1.65rem, 7vw, 2.1rem);
-  }
-
-  .home-split-content p {
-    font-size: 0.95rem;
-  }
-
-  .home-split-content .btn-gold {
-    width: 100%;
-    justify-content: center;
-  }
 }
+
+/* legacy home-split removed — diagonal hero owns that content */
 
 /* -- Trust data readout -- */
 .data-readout-section {

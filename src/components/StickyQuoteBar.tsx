@@ -9,7 +9,7 @@ export function StickyQuoteBar() {
 
   useEffect(() => {
     const onScroll = () => {
-      const hero = document.querySelector('.hero-single')
+      const hero = document.querySelector('.hero-split')
       const threshold = hero instanceof HTMLElement ? hero.offsetHeight * 0.7 : 420
       setVisible(window.scrollY > threshold)
     }

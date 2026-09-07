@@ -10,7 +10,6 @@ import {
 } from 'react'
 import {
   hasPackageMenuChildren,
-  PACKAGES_MENU_PLACEHOLDER_NOTE,
   packagesMenuCategories,
   type PackagesMenuItem,
 } from '../nav/packagesMenu'
@@ -253,9 +252,6 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
             </div>
           ))}
         </div>
-        <p className="pkg-mega-placeholder-note">
-          {PACKAGES_MENU_PLACEHOLDER_NOTE}
-        </p>
       </div>
     )
   }
@@ -322,9 +318,6 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
                       </ul>
                     </div>
                   ))}
-                  <p className="pkg-mega-placeholder-note">
-                    {PACKAGES_MENU_PLACEHOLDER_NOTE}
-                  </p>
                 </div>
               ) : null}
             </div>

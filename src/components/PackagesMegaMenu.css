@@ -92,9 +92,10 @@
   justify-content: space-between;
   gap: 0.65rem;
   width: 100%;
-  padding: 0.72rem 0.75rem;
+  padding: 0.65rem 0.55rem;
   border: 0;
-  border-radius: 10px;
+  border-radius: 0;
+  border-left: 2px solid transparent;
   background: transparent;
   color: #0f1f3d;
   font-family: var(--font-display);
@@ -104,8 +105,8 @@
   text-decoration: none;
   cursor: pointer;
   transition:
-    background 0.15s ease,
-    color 0.15s ease;
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .pkg-mega-category svg {
@@ -118,8 +119,9 @@
 .pkg-mega-category:hover,
 .pkg-mega-category:focus-visible,
 .pkg-mega-category.is-active {
-  background: rgba(201, 162, 39, 0.14);
+  background: transparent;
   color: var(--gold-deep);
+  border-left-color: var(--gold, #c9a227);
   outline: none;
 }
 
@@ -148,24 +150,56 @@
 }
 
 .pkg-mega-country li + li {
-  margin-top: 0.15rem;
+  margin-top: 0;
 }
 
 .pkg-mega-country a {
-  display: block;
-  padding: 0.45rem 0.55rem;
-  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.35rem 0.42rem 0.45rem;
+  border: 0;
+  border-radius: 0;
+  border-left: 2px solid transparent;
+  border-bottom: 1px solid rgba(15, 31, 61, 0.06);
+  background: transparent;
   color: var(--ink);
   font-size: 0.88rem;
   font-weight: 550;
   text-decoration: none;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.pkg-mega-country a::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-right: 1.5px solid currentColor;
+  border-top: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  opacity: 0.45;
+  transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.pkg-mega-country li:last-child a {
+  border-bottom: 0;
 }
 
 .pkg-mega-country a:hover,
 .pkg-mega-country a:focus-visible {
-  background: rgba(201, 162, 39, 0.1);
+  background: transparent;
   color: var(--gold-deep);
+  border-left-color: var(--gold, #c9a227);
   outline: none;
+}
+
+.pkg-mega-country a:hover::before,
+.pkg-mega-country a:focus-visible::before {
+  opacity: 1;
+  border-color: var(--gold-deep);
 }
 
 .pkg-mega-placeholder-note {
@@ -274,18 +308,46 @@
   }
 
   .pkg-mega-mobile-country a {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     min-height: 40px;
-    padding: 0.5rem 0.55rem;
-    border-radius: 8px;
+    padding: 0.45rem 0.4rem;
+    border-radius: 0;
+    border-left: 2px solid transparent;
+    border-bottom: 1px solid rgba(15, 31, 61, 0.06);
+    background: transparent;
     color: var(--muted);
     font-size: 0.9rem;
     text-decoration: none;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .pkg-mega-mobile-country a::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 0.35rem;
+    height: 0.35rem;
+    border-right: 1.5px solid currentColor;
+    border-top: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    opacity: 0.45;
+  }
+
+  .pkg-mega-mobile-country li:last-child a {
+    border-bottom: 0;
   }
 
   .pkg-mega-mobile-country a:hover {
-    background: rgba(201, 162, 39, 0.1);
+    background: transparent;
     color: var(--gold-deep);
+    border-left-color: var(--gold, #c9a227);
+  }
+
+  .pkg-mega-mobile-country a:hover::before {
+    opacity: 1;
   }
 }
 

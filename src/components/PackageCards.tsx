@@ -5,13 +5,11 @@ import {
   useMemo,
   useRef,
   useState,
-  type CSSProperties,
   type MouseEvent,
 } from 'react'
 import {
   packageTravelModes,
   type ItineraryRow,
-  type PackageAmenity,
   type PackageCategory,
   type TravelPackage,
 } from '../content/site'
@@ -29,6 +27,7 @@ import {
   travelSummaryChip,
   type TravelDetails,
 } from './TravelModeFields'
+import { PackageCard } from './PackageCard'
 import './PackageCards.css'
 
 type Filter = 'all' | PackageCategory
@@ -158,14 +157,19 @@ export function PackageCards({
 
       <div className="pkg-grid">
         {packages.map((pkg, index) => (
-          <PackageCard key={pkg.id} pkg={pkg} index={index} compact={compact} />
+          <TravelPackageCard
+            key={pkg.id}
+            pkg={pkg}
+            index={index}
+            compact={compact}
+          />
         ))}
       </div>
     </div>
   )
 }
 
-function PackageCard({
+function TravelPackageCard({
   pkg,
   index,
   compact = false,
@@ -176,8 +180,6 @@ function PackageCard({
 }) {
   const { company } = useCms()
   const { t } = useI18n()
-  const cardRef = useRef<HTMLElement>(null)
-  const [visible, setVisible] = useState(false)
   const [passengers, setPassengers] = useState<Passengers>({
     adults: 1,
     children: 0,
@@ -192,22 +194,6 @@ function PackageCard({
   const catalog = t.packageCatalog[pkg.id]
   const title = catalog?.title ?? pkg.title
   const summary = catalog?.summary ?? pkg.summary
-
-  useEffect(() => {
-    const node = cardRef.current
-    if (!node) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.12 },
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [])
 
   const totalLabel = useMemo(() => {
     const parts: string[] = []
@@ -224,7 +210,15 @@ function PackageCard({
         `${passengers.infants} ${passengers.infants === 1 ? t.packagesUi.infantLabel : t.common.infant}`,
       )
     return parts.join(' + ')
-  }, [passengers, t.common.adults, t.common.children, t.common.infant, t.packagesUi.adultLabel, t.packagesUi.childLabel, t.packagesUi.infantLabel])
+  }, [
+    passengers,
+    t.common.adults,
+    t.common.children,
+    t.common.infant,
+    t.packagesUi.adultLabel,
+    t.packagesUi.childLabel,
+    t.packagesUi.infantLabel,
+  ])
 
   const enquireTo = useMemo(() => {
     const params = new URLSearchParams({
@@ -247,7 +241,6 @@ function PackageCard({
 
   const travelOk = isTravelComplete(travel, modes)
   const chip = travelSummaryChip(travel)
-  const isFeatured = Boolean(pkg.featured)
   const hasDetailedItinerary = hasDetailedHajjItinerary(pkg.id)
   const itineraryDetail = getHajjItineraryDetail(pkg.id)
   const hasItinerary = Boolean(pkg.itinerary?.length) && !hasDetailedItinerary
@@ -268,202 +261,145 @@ function PackageCard({
     })
   }
 
+  const detailsContent = hasDetailedItinerary && itineraryDetail ? (
+    <div className="pkg-itinerary-teaser">
+      <p className="pkg-itinerary-season">{itineraryDetail.seasonHeading}</p>
+      <ul className="pkg-highlights">
+        {pkg.highlights.slice(0, 3).map((point) => (
+          <li key={point}>
+            <CheckIcon />
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+      <Link
+        className="pkg-itinerary-full-link"
+        to={`/packages/${pkg.id}/itinerary`}
+      >
+        View Full Itinerary <span aria-hidden="true">→</span>
+      </Link>
+    </div>
+  ) : hasItinerary ? (
+    <PackageItineraryTable rows={pkg.itinerary!} />
+  ) : undefined
+
   return (
-    <article
-      ref={cardRef}
-      className={`pkg-card pkg-card--${pkg.category}${isFeatured ? ' pkg-card--featured' : ''}${compact ? ' pkg-card--compact' : ''}${visible ? ' is-visible' : ''}`}
+    <PackageCard
       id={pkg.id}
-      style={{ '--pkg-delay': `${Math.min(index, 5) * 80}ms` } as CSSProperties}
+      index={index}
+      image={pkg.image}
+      imageAlt={`${title} — ${pkg.category} package`}
+      badgeLabel={pkg.tag}
+      featured={Boolean(pkg.featured)}
+      featuredRibbon={t.packagesUi.recommended}
+      featuredBadgeLabel={t.packagesUi.mostPopular}
+      category={pkg.category}
+      compact={compact}
+      season={pkg.season || null}
+      title={title}
+      passportNote={pkg.category === 'hajj' ? t.hero.passportNote : null}
+      rating={t.packagesUi.socialProof}
+      description={summary}
+      icons={pkg.amenities}
+      detailsTitle={
+        hasDetailedItinerary || hasItinerary
+          ? t.common.itineraryTitle
+          : t.common.packageDetails
+      }
+      detailsSubtitle={t.packagesUi.dubaiDepartures}
+      detailsContent={detailsContent}
+      bullets={detailsContent ? null : pkg.highlights}
+      placeholderNote={
+        pkg.placeholder ? t.common.placeholderPackageNote : null
+      }
+      itineraryHref={enquireTo}
+      itineraryLabel={enquireCtaLabel}
+      phone={primaryPhone}
+      phoneHref={telHref(primaryPhone)}
+      callPrefix={t.packagesUi.callPrefix}
+      hideBookCta={!compact}
     >
-      {isFeatured ? (
-        <span className="pkg-ribbon">{t.packagesUi.recommended}</span>
-      ) : null}
-
-      <div className="pkg-hero">
-        <img
-          src={pkg.image}
-          alt={`${title} — ${pkg.category} package`}
-          className="pkg-hero-img"
-          loading="lazy"
-          decoding="async"
-          width={640}
-          height={360}
-        />
-        <div className="pkg-hero-fade" aria-hidden="true" />
-        <PackageBadge tag={pkg.tag} featured={pkg.featured} mostPopularLabel={t.packagesUi.mostPopular} />
-      </div>
-
-      <div className="pkg-body">
-        <header className="pkg-intro">
-          {pkg.season ? <p className="pkg-season">{pkg.season}</p> : null}
-          <h3>{title}</h3>
-          {pkg.category === 'hajj' ? (
-            <p className="pkg-passport-badge">{t.hero.passportNote}</p>
-          ) : null}
-          <p className="pkg-social-proof">{t.packagesUi.socialProof}</p>
-          <span className="pkg-title-rule" aria-hidden="true" />
-          <p className="pkg-summary">{summary}</p>
-        </header>
-
-        <div className="pkg-amenities" aria-label="Package inclusions">
-          {pkg.amenities.map((item) => (
-            <div
-              className="pkg-amenity"
-              key={item.key}
-              title={`${item.title} - ${item.subtitle}`}
-            >
-              <span className="pkg-amenity-icon" aria-hidden="true">
-                <AmenityIcon type={item.key} />
-              </span>
-              <strong>{item.title}</strong>
+      {!compact ? (
+        <>
+          <div className="pkg-passengers">
+            <div className="pkg-passengers-head">
+              <strong>
+                <UserIcon /> {t.packagesUi.selectPassengers}
+              </strong>
+              <span>{t.packagesUi.travelingQuestion}</span>
             </div>
-          ))}
-        </div>
-
-        <div className="pkg-price-panel pkg-price-panel--cta">
-          <div className="pkg-price-start">
-            <span>
-              {hasDetailedItinerary
-                ? t.common.itineraryTitle
-                : hasItinerary
-                  ? t.common.itineraryTitle
-                  : t.common.packageDetails}
-            </span>
-            <em>{t.packagesUi.dubaiDepartures}</em>
-          </div>
-          {hasDetailedItinerary && itineraryDetail ? (
-            <div className="pkg-itinerary-teaser">
-              <p className="pkg-itinerary-season">{itineraryDetail.seasonHeading}</p>
-              <ul className="pkg-highlights">
-                {pkg.highlights.slice(0, 3).map((point) => (
-                  <li key={point}>
-                    <CheckIcon />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                className="pkg-itinerary-full-link"
-                to={`/packages/${pkg.id}/itinerary`}
-              >
-                View Full Itinerary <span aria-hidden="true">→</span>
-              </Link>
+            <div className="pkg-pax-grid">
+              <PassengerCounter
+                label={t.packagesUi.adultLabel}
+                hint={t.packagesUi.adultHint}
+                value={passengers.adults}
+                min={1}
+                onDec={() => update('adults', -1)}
+                onInc={() => update('adults', 1)}
+              />
+              <PassengerCounter
+                label={t.packagesUi.childLabel}
+                hint={t.packagesUi.childHint}
+                value={passengers.children}
+                min={0}
+                onDec={() => update('children', -1)}
+                onInc={() => update('children', 1)}
+              />
+              <PassengerCounter
+                label={t.packagesUi.infantLabel}
+                hint={t.packagesUi.infantHint}
+                value={passengers.infants}
+                min={0}
+                onDec={() => update('infants', -1)}
+                onInc={() => update('infants', 1)}
+              />
             </div>
-          ) : hasItinerary ? (
-            <PackageItineraryTable rows={pkg.itinerary!} />
-          ) : (
-            <ul className="pkg-highlights">
-              {pkg.highlights.map((point) => (
-                <li key={point}>
-                  <CheckIcon />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-          {pkg.placeholder ? (
-            <p className="pkg-placeholder-note">{t.common.placeholderPackageNote}</p>
-          ) : null}
-          <div className="pkg-pricing-cta">
-            <Link className="pkg-pricing-cta-btn" to={enquireTo}>
-              {enquireCtaLabel}
-            </Link>
-            <a className="pkg-pricing-cta-phone" href={telHref(primaryPhone)}>
-              {t.packagesUi.callPrefix} {primaryPhone}
-            </a>
           </div>
-        </div>
 
-        {!compact ? (
-          <>
-        <div className="pkg-passengers">
-          <div className="pkg-passengers-head">
-            <strong>
-              <UserIcon /> {t.packagesUi.selectPassengers}
-            </strong>
-            <span>{t.packagesUi.travelingQuestion}</span>
-          </div>
-          <div className="pkg-pax-grid">
-            <PassengerCounter
-              label={t.packagesUi.adultLabel}
-              hint={t.packagesUi.adultHint}
-              value={passengers.adults}
-              min={1}
-              onDec={() => update('adults', -1)}
-              onInc={() => update('adults', 1)}
-            />
-            <PassengerCounter
-              label={t.packagesUi.childLabel}
-              hint={t.packagesUi.childHint}
-              value={passengers.children}
-              min={0}
-              onDec={() => update('children', -1)}
-              onInc={() => update('children', 1)}
-            />
-            <PassengerCounter
-              label={t.packagesUi.infantLabel}
-              hint={t.packagesUi.infantHint}
-              value={passengers.infants}
-              min={0}
-              onDec={() => update('infants', -1)}
-              onInc={() => update('infants', 1)}
+          <div className="pkg-travel">
+            <TravelModeFields
+              modes={modes}
+              value={travel}
+              onChange={setTravel}
+              showError={travelTouched}
+              idPrefix={`${pkg.id}-travel`}
             />
           </div>
-        </div>
 
-        <div className="pkg-travel">
-          <TravelModeFields
-            modes={modes}
-            value={travel}
-            onChange={setTravel}
-            showError={travelTouched}
-            idPrefix={`${pkg.id}-travel`}
-          />
-        </div>
-
-        <div className="pkg-footer">
-          <div className="pkg-total-block pkg-total-block--enquiry">
-            <span>{t.packagesUi.travellerSummary}</span>
-            <strong className="pkg-total-amount">{totalLabel}</strong>
-            {chip ? (
-              <span className="travel-chip">
-                {travel.mode === 'road' ? '🚌' : '✈'} {chip}
-              </span>
-            ) : null}
-          </div>
-          <div className="pkg-trust">
-            <ShieldIcon />
-            <p>
-              {t.packagesUi.trustedPartner}
-              <span>{t.packagesUi.trustedPartnerSub}</span>
-            </p>
-          </div>
-          <div className="pkg-book-cta">
-            <Link
-              className={`pkg-book-btn${travelOk ? '' : ' is-blocked'}`}
-              to={enquireTo}
-              onClick={guardBook}
-              aria-disabled={!travelOk}
-            >
-              {enquireCtaLabel} <span aria-hidden="true">→</span>
-            </Link>
-            <span className="pkg-secure">
-              <LockIcon /> {t.packagesUi.secureEnquiry}
-            </span>
-          </div>
-        </div>
-          </>
-        ) : (
-          <div className="pkg-footer pkg-footer--compact">
+          <div className="pkg-footer">
+            <div className="pkg-total-block pkg-total-block--enquiry">
+              <span>{t.packagesUi.travellerSummary}</span>
+              <strong className="pkg-total-amount">{totalLabel}</strong>
+              {chip ? (
+                <span className="travel-chip">
+                  {travel.mode === 'road' ? '🚌' : '✈'} {chip}
+                </span>
+              ) : null}
+            </div>
+            <div className="pkg-trust">
+              <ShieldIcon />
+              <p>
+                {t.packagesUi.trustedPartner}
+                <span>{t.packagesUi.trustedPartnerSub}</span>
+              </p>
+            </div>
             <div className="pkg-book-cta">
-              <Link className="pkg-book-btn" to={enquireTo}>
+              <Link
+                className={`pkg-book-btn${travelOk ? '' : ' is-blocked'}`}
+                to={enquireTo}
+                onClick={guardBook}
+                aria-disabled={!travelOk}
+              >
                 {enquireCtaLabel} <span aria-hidden="true">→</span>
               </Link>
+              <span className="pkg-secure">
+                <LockIcon /> {t.packagesUi.secureEnquiry}
+              </span>
             </div>
           </div>
-        )}
-      </div>
-    </article>
+        </>
+      ) : null}
+    </PackageCard>
   )
 }
 
@@ -492,49 +428,6 @@ function PackageItineraryTable({ rows }: { rows: ItineraryRow[] }) {
         </tbody>
       </table>
     </div>
-  )
-}
-
-function PackageBadge({
-  tag,
-  featured,
-  mostPopularLabel,
-}: {
-  tag: string
-  featured?: boolean
-  mostPopularLabel: string
-}) {
-  if (featured) {
-    return (
-      <span className="pkg-badge pkg-badge--popular">
-        <PopularStar /> {mostPopularLabel}
-      </span>
-    )
-  }
-
-  const kind = tag.toLowerCase()
-  const icon =
-    kind.includes('platinum') || kind.includes('business') || kind.includes('premium') ? (
-      <CrownIcon />
-    ) : kind.includes('classic') ? (
-      <BadgeDot />
-    ) : kind.includes('custom') || kind.includes('customise') ? (
-      <BadgeSpark />
-    ) : kind.includes('group') ? (
-      <BadgeDot />
-    ) : kind.includes('economic') || kind.includes('economy') ? (
-      <BadgeDot />
-    ) : kind.includes('budget') ? (
-      <BadgeDot />
-    ) : (
-      <BadgeDot />
-    )
-
-  return (
-    <span className="pkg-badge pkg-badge--tier">
-      {icon}
-      {tag}
-    </span>
   )
 }
 
@@ -582,44 +475,6 @@ function PassengerCounter({
   )
 }
 
-function AmenityIcon({ type }: { type: PackageAmenity['key'] }) {
-  switch (type) {
-    case 'hotel':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-          <path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6" />
-        </svg>
-      )
-    case 'transport':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-          <rect x="3" y="5" width="18" height="12" rx="2" />
-          <path d="M3 11h18M7 21v-2M17 21v-2M7 5V3M17 5V3" />
-        </svg>
-      )
-    case 'meals':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-          <path d="M8 3v8M6 3v5a2 2 0 0 0 4 0V3M10 11v10M16 3v7a3 3 0 0 0 3 3h0V3M16 21V13" />
-        </svg>
-      )
-    case 'support':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-          <path d="M4 14v-2a8 8 0 0 1 16 0v2M4 14a2 2 0 0 0 2 2h1v-5H6a2 2 0 0 0-2 2Zm16 0a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 2Z" />
-          <path d="M18 18a4 4 0 0 1-4 3h-1" />
-        </svg>
-      )
-    case 'visa':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
-          <path d="M8 3h8l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />
-          <path d="M16 3v4h4M10 12h6M10 16h4" />
-        </svg>
-      )
-  }
-}
-
 function CheckIcon() {
   return (
     <span className="pkg-check" aria-hidden="true">
@@ -630,41 +485,15 @@ function CheckIcon() {
   )
 }
 
-function PopularStar() {
-  return (
-    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path d="m10 1.5 2.4 4.9 5.4.8-3.9 3.8.9 5.4L10 13.8 5.2 16.4l.9-5.4L2.2 7.2l5.4-.8L10 1.5z" />
-    </svg>
-  )
-}
-
-function CrownIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M3 17h18l-1.2-9.2a1 1 0 0 0-1.5-.7L14 10l-1.4-4.2a1 1 0 0 0-1.9 0L9.3 10 4.7 7.1a1 1 0 0 0-1.5.7L3 17Zm1.5 2h15v2h-15v-2Z" />
-    </svg>
-  )
-}
-
-function BadgeDot() {
-  return (
-    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <circle cx="10" cy="10" r="4" />
-    </svg>
-  )
-}
-
-function BadgeSpark() {
-  return (
-    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path d="M10 2l1.2 4.2L15.5 7.5 11.2 9.3 10 13.5 8.8 9.3 4.5 7.5l4.3-1.3L10 2Z" />
-    </svg>
-  )
-}
-
 function UserIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      aria-hidden="true"
+    >
       <circle cx="12" cy="8" r="3.5" />
       <path d="M5 19.5c1.8-3.2 4.2-4.8 7-4.8s5.2 1.6 7 4.8" />
     </svg>

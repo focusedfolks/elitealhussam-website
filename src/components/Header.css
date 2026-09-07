@@ -75,22 +75,26 @@
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
-  gap: 0;
+  gap: 0.15rem;
   min-width: 0;
+}
+
+.nav-menu-links {
+  display: contents;
 }
 
 .nav-link {
   display: inline-flex;
   align-items: center;
   gap: 0.15rem;
-  padding: 0.5rem 0.52rem;
+  padding: 0.55rem 0.85rem;
   border-radius: 999px;
   border: 0;
   background: transparent;
-  color: var(--muted);
+  color: var(--navy, #0f1f3d);
   font: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 650;
   white-space: nowrap;
   cursor: pointer;
   text-decoration: none;
@@ -98,13 +102,13 @@
 }
 
 .nav-link:hover {
-  color: var(--emerald);
-  background: rgba(15, 61, 46, 0.05);
+  color: var(--gold-deep, #8a6a3d);
+  background: rgba(201, 162, 39, 0.1);
 }
 
 .nav-link.is-active {
-  color: var(--emerald);
-  background: var(--emerald-mist);
+  color: var(--navy, #0f1f3d);
+  background: rgba(201, 162, 39, 0.18);
 }
 
 .nav-drop {
@@ -215,10 +219,6 @@
   display: none;
 }
 
-.nav-menu-links {
-  display: contents;
-}
-
 .lang-switch select {
   border: 1px solid var(--line);
   background: #fff;
@@ -276,7 +276,7 @@
   transform: translateY(-1px);
 }
 
-/* Desktop inline nav from 1280px up — hamburger below to avoid overflow */
+/* Desktop inline nav from 1280px up — hamburger below to match Packages mega-menu */
 @media (max-width: 1279px) {
   .header-bar {
     width: min(1280px, calc(100% - 1.25rem));

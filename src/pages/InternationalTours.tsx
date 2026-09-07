@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { Seo } from '../components/Seo'
+import { TourPackageCard } from '../components/TourPackageCard'
+import '../components/PackageCards.css'
+import '../components/TourPackageCards.css'
 import { pageMeta } from '../seo/pageMeta'
 import { images } from '../content/site'
-import { useI18n } from '../i18n'
+import { toursByCountry } from '../content/internationalTours'
 import './InnerPages.css'
 
 export function InternationalTours() {
-  const { t } = useI18n()
+  const groups = toursByCountry()
 
   return (
     <div>
@@ -19,7 +21,7 @@ export function InternationalTours() {
       />
       <PageHero
         title="International Tours"
-        subtitle="Curated global travel experiences from our Dubai, UAE office — full details coming soon."
+        subtitle="Curated holiday packages from our Dubai, UAE office — enquire for personalised pricing. Durations shown are confirmed; more destinations coming soon."
         image={images.touristHero}
         crumbs={[
           { label: 'Home', to: '/' },
@@ -28,22 +30,34 @@ export function InternationalTours() {
       />
 
       <section className="inner-section">
-        <div className="container" style={{ maxWidth: '42rem', textAlign: 'center' }}>
-          <p className="eyebrow">Coming soon</p>
-          <h2 className="section-title">International tour packages</h2>
-          <p style={{ color: 'var(--muted)', lineHeight: 1.75 }}>
-            We are preparing a dedicated range of international holiday and group
-            tour options. Speak with our Dubai team today and we will share
-            available destinations and itineraries.
+        <div className="container">
+          {groups.map((group) => (
+            <div
+              className="tour-country-block"
+              key={group.country}
+              id={group.country.toLowerCase()}
+            >
+              <h2 className="tour-country-title">{group.country}</h2>
+              <div className="pkg-grid">
+                {group.packages.map((pkg, index) => (
+                  <TourPackageCard key={pkg.slug} pkg={pkg} index={index} />
+                ))}
+              </div>
+            </div>
+          ))}
+          <p
+            style={{
+              marginTop: '1rem',
+              color: 'var(--muted)',
+              fontSize: '0.9rem',
+              lineHeight: 1.6,
+              maxWidth: '42rem',
+            }}
+          >
+            Additional destinations (including several India, Indonesia,
+            Malaysia, and Singapore options) will be published once durations
+            are confirmed with our operations team.
           </p>
-          <div className="cta-row" style={{ justifyContent: 'center', marginTop: '1.5rem' }}>
-            <Link className="btn btn-gold" to="/contact#lead-form">
-              {t.common.enquire}
-            </Link>
-            <Link className="btn btn-ghost" to="/packages">
-              {t.pages.packagesTitle}
-            </Link>
-          </div>
         </div>
       </section>
     </div>

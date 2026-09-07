@@ -1,8 +1,6 @@
 /**
  * Packages mega-menu navigation config.
- *
- * PLACEHOLDER: International Tours country/destination lists are TBD —
- * replace with the client's actual catalog when confirmed.
+ * International Tours lists only packages with confirmed durations.
  */
 
 export type PackagesDestinationLink = {
@@ -49,22 +47,69 @@ export const packagesMenuCategories: PackagesMenuItem[] = [
     label: 'International Tours',
     children: [
       {
-        country: 'TBD Country 1',
+        country: 'India',
         destinations: [
-          { label: 'TBD Destination', href: '/international-tours' },
-          { label: 'TBD Destination', href: '/international-tours' },
+          {
+            label: 'Delhi, Agra & Taj Mahal with Kashmir',
+            href: '/international-tours/delhi-agra-taj-mahal-kashmir',
+          },
+          {
+            label: 'Kashmir with Golden Triangle',
+            href: '/international-tours/kashmir-golden-triangle',
+          },
+          {
+            label: 'Haridwar & Rishikesh',
+            href: '/international-tours/haridwar-rishikesh',
+          },
         ],
       },
       {
-        country: 'TBD Country 2',
+        country: 'Indonesia',
         destinations: [
-          { label: 'TBD Destination', href: '/international-tours' },
-          { label: 'TBD Destination', href: '/international-tours' },
+          { label: 'Batam', href: '/international-tours/batam' },
+        ],
+      },
+      {
+        country: 'Thailand',
+        destinations: [
+          {
+            label: 'Bangkok – Pattaya',
+            href: '/international-tours/bangkok-pattaya',
+          },
+          {
+            label: 'Bangkok Free & Easy',
+            href: '/international-tours/bangkok-free-easy',
+          },
+          { label: 'Bangkok Tour', href: '/international-tours/bangkok-tour' },
+        ],
+      },
+      {
+        country: 'Malaysia',
+        destinations: [
+          { label: 'Langkawi', href: '/international-tours/langkawi' },
+        ],
+      },
+      {
+        country: 'Vietnam',
+        destinations: [
+          {
+            label: 'Hanoi – Sapa – Ha Long',
+            href: '/international-tours/hanoi-sapa-ha-long',
+          },
+          {
+            label: 'Hanoi – Sapa – Ha Long (Extended)',
+            href: '/international-tours/hanoi-sapa-ha-long-extended',
+          },
+          {
+            label: 'Hanoi – Ha Long – Ninh Binh',
+            href: '/international-tours/hanoi-ha-long-ninh-binh',
+          },
+          {
+            label: 'Hanoi – Sapa – Ninh Binh',
+            href: '/international-tours/hanoi-sapa-ninh-binh',
+          },
         ],
       },
     ],
   },
 ]
-
-export const PACKAGES_MENU_PLACEHOLDER_NOTE =
-  'International Tours destinations are placeholders pending client content.'

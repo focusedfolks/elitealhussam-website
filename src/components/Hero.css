@@ -57,9 +57,9 @@
   background:
     linear-gradient(
       115deg,
-      rgba(10, 21, 40, 0.82) 0%,
-      rgba(15, 31, 61, 0.55) 45%,
-      rgba(10, 21, 40, 0.35) 100%
+      rgba(10, 21, 40, 0.3) 0%,
+      rgba(15, 31, 61, 0.18) 45%,
+      rgba(10, 21, 40, 0.08) 100%
     );
   pointer-events: none;
 }
@@ -68,9 +68,9 @@
   background:
     linear-gradient(
       220deg,
-      rgba(10, 21, 40, 0.45) 0%,
-      rgba(15, 31, 61, 0.72) 55%,
-      rgba(10, 21, 40, 0.88) 100%
+      rgba(10, 21, 40, 0.32) 0%,
+      rgba(15, 31, 61, 0.52) 55%,
+      rgba(10, 21, 40, 0.7) 100%
     );
 }
 
@@ -92,9 +92,34 @@
 .hero-split-content {
   position: relative;
   z-index: 2;
+  isolation: isolate;
   color: #fff;
   max-width: 36rem;
   text-align: center;
+}
+
+.hero-split-content::before {
+  position: absolute;
+  z-index: -1;
+  inset: -3.5rem -4rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(8, 18, 28, 0.42) 0%,
+    rgba(8, 18, 28, 0.2) 50%,
+    rgba(8, 18, 28, 0) 76%
+  );
+  content: '';
+  pointer-events: none;
+}
+
+.hero-split-content--tours::before {
+  background: radial-gradient(
+    ellipse,
+    rgba(7, 18, 35, 0.28) 0%,
+    rgba(7, 18, 35, 0.12) 52%,
+    rgba(7, 18, 35, 0) 76%
+  );
 }
 
 .hero-split-content--hajj {

@@ -130,6 +130,16 @@ export function IconLandmark(props: IconProps) {
   )
 }
 
+export function IconMountain(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="m3 19 6.2-9 3.1 4.1 2.2-3 6.5 7.9H3Z" />
+      <path d="m9.2 10 1.7-2.5 1.4 2" />
+      <path d="m14.5 14.1 1.3-1.8 1.7 2.1" />
+    </Icon>
+  )
+}
+
 export function IconKaaba(props: IconProps) {
   return (
     <Icon {...props}>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { images } from '../content/site'
+import { IconKaaba, IconPlane } from './Icons'
 import './Hero.css'
 
 /** Swap / extend these paths — left panel (Hajj & Umrah) backgrounds */
@@ -80,16 +81,13 @@ export function Hero() {
           />
           <div className="hero-split-veil" aria-hidden />
           <div className="hero-split-content hero-split-content--hajj">
-            <p className="hero-split-eyebrow">Sacred Journeys</p>
-            <h1>Hajj &amp; Umrah</h1>
-            <p className="hero-split-copy">
-              Organised pilgrimage packages from Dubai, UAE — visas, hotels,
-              transport, and spiritual guidance for families and groups. Flexible
-              Umrah departures any time of year; Hajj in season.
-            </p>
+            <IconKaaba className="hero-split-icon" size={34} />
+            <h1>Umrah</h1>
+            <p className="hero-split-copy">A Journey of Faith, Peace &amp; Blessings</p>
+            <span className="hero-split-ornament" aria-hidden="true">◆</span>
             <div className="hero-split-actions">
-              <Link className="btn btn-gold" to="/packages/hajj-umrah">
-                View Hajj &amp; Umrah Packages
+              <Link className="hero-split-button hero-split-button--hajj" to="/packages/hajj-umrah">
+                Start Your Umrah Journey <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
@@ -99,13 +97,13 @@ export function Hero() {
           <BackgroundStack sources={TOURS_IMAGES} activeIndex={toursIndex} />
           <div className="hero-split-veil hero-split-veil--tours" aria-hidden />
           <div className="hero-split-content hero-split-content--tours">
-            <p className="hero-split-eyebrow">Global Travel</p>
+            <IconPlane className="hero-split-icon" size={34} />
             <h2>Tours</h2>
-            <div className="hero-split-tours-row">
-              <Link to="/international-tours">International</Link>
-              <Link to="/local-tours">Local</Link>
-              <Link className="hero-split-tours-cta" to="/international-tours">
-                Explore Tours
+            <p className="hero-split-copy">Explore the World, Create Memories</p>
+            <span className="hero-split-ornament" aria-hidden="true">◆</span>
+            <div className="hero-split-actions">
+              <Link className="hero-split-button hero-split-button--tours" to="/international-tours">
+                Explore More <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>

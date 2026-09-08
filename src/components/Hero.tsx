@@ -46,7 +46,7 @@ function BackgroundStack({ sources, fallback, activeIndex }: BgStackProps) {
         <div
           key={`${src}-${i}`}
           className={`hero-split-slide${i === activeIndex ? ' is-active' : ''}`}
-          style={{ backgroundImage: `url(${src}), url(${fallback})` }}
+          style={{ backgroundImage: `url("${src}"), url("${fallback}")` }}
         />
       ))}
     </div>

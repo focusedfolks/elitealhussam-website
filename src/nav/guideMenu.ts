@@ -37,9 +37,15 @@ export function hasGuideMenuChildren(
 
 /** History articles with confirmed scrape content only */
 const historyLinks: GuideDestinationLink[] = [
+  { label: 'History', href: '/history' },
   { label: "History Of Ka'bah", href: '/guide/history-of-kabah' },
   { label: 'Story of Zam Zam', href: '/guide/story-of-zamzam' },
   { label: 'Masjid-E-Nabawi', href: '/guide/masjid-e-nabawi' },
+]
+
+const galleryLinks: GuideDestinationLink[] = [
+  { label: 'Photo Gallery', href: '/gallery#photos' },
+  { label: 'Video Gallery', href: '/gallery#videos' },
 ]
 
 /** Top-level Guide categories — omit sections until content exists */
@@ -48,5 +54,10 @@ export const guideMenuCategories: GuideMenuItem[] = [
     id: 'history',
     label: 'History',
     children: [{ country: 'Sacred history', destinations: historyLinks }],
+  },
+  {
+    id: 'gallery',
+    label: 'Gallery',
+    children: [{ country: 'Gallery', destinations: galleryLinks }],
   },
 ]

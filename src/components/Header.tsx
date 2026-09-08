@@ -174,24 +174,6 @@ export function Header() {
                 </NavLink>
               ),
             )}
-            <NavLink
-              to="/history"
-              className={({ isActive }) =>
-                `nav-link${isActive ? ' is-active' : ''}`
-              }
-              onClick={closeNav}
-            >
-              History
-            </NavLink>
-            <NavLink
-              to="/gallery"
-              className={({ isActive }) =>
-                `nav-link${isActive ? ' is-active' : ''}`
-              }
-              onClick={closeNav}
-            >
-              Gallery
-            </NavLink>
           </div>
 
           <div className="nav-prefs">

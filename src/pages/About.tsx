@@ -63,7 +63,7 @@ const leaders = [
   },
   {
     initials: 'BA',
-    name: 'Mr. Basheer Ahmed',
+    name: 'B Sameer Ahmed Basheer Ahmed',
     title: 'Managing Director',
     quote:
       'Organised, experienced, and genuine tour operation for every pilgrim.',

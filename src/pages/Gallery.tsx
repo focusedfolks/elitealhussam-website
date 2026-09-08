@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PageHero } from '../components/PageHero'
 import { Seo } from '../components/Seo'
 import { images } from '../content/site'
@@ -9,7 +9,6 @@ type GalleryTab = 'photos' | 'videos'
 
 type GalleryImage = {
   src: string
-  caption: string
 }
 
 type GalleryVideo = {
@@ -19,34 +18,34 @@ type GalleryVideo = {
 }
 
 const photos: GalleryImage[] = [
-  { src: '/images/gallery/hajj 1436  image 16.jpg', caption: 'Hajj 1436 image 16' },
-  { src: '/images/gallery/Hajj 1436  image 22.jpg', caption: 'Hajj 1436 image 22' },
-  { src: '/images/gallery/Hajj 1436 image  21.jpg', caption: 'Hajj 1436 image 21' },
-  { src: '/images/gallery/Hajj 1436 image 1.jpg', caption: 'Hajj 1436 image 1' },
-  { src: '/images/gallery/Hajj 1436 image 10.jpg', caption: 'Hajj 1436 image 10' },
-  { src: '/images/gallery/Hajj 1436 image 12.jpg', caption: 'Hajj 1436 image 12' },
-  { src: '/images/gallery/Hajj 1436 image 13.jpg', caption: 'Hajj 1436 image 13' },
-  { src: '/images/gallery/Hajj 1436 image 14.jpg', caption: 'Hajj 1436 image 14' },
-  { src: '/images/gallery/Hajj 1436 image 15.jpg', caption: 'Hajj 1436 image 15' },
-  { src: '/images/gallery/Hajj 1436 image 17.jpg', caption: 'Hajj 1436 image 17' },
-  { src: '/images/gallery/Hajj 1436 image 18.jpg', caption: 'Hajj 1436 image 18' },
-  { src: '/images/gallery/Hajj 1436 image 19.jpg', caption: 'Hajj 1436 image 19' },
-  { src: '/images/gallery/Hajj 1436 image 2.jpg', caption: 'Hajj 1436 image 2' },
-  { src: '/images/gallery/Hajj 1436 image 20.jpg', caption: 'Hajj 1436 image 20' },
-  { src: '/images/gallery/Hajj 1436 image 21.jpg', caption: 'Hajj 1436 image 21' },
-  { src: '/images/gallery/Hajj 1436 image 23.jpg', caption: 'Hajj 1436 image 23' },
-  { src: '/images/gallery/Hajj 1436 image 24.jpg', caption: 'Hajj 1436 image 24' },
-  { src: '/images/gallery/Hajj 1436 image 25.jpg', caption: 'Hajj 1436 image 25' },
-  { src: '/images/gallery/Hajj 1436 image 26.jpg', caption: 'Hajj 1436 image 26' },
-  { src: '/images/gallery/Hajj 1436 image 27.jpg', caption: 'Hajj 1436 image 27' },
-  { src: '/images/gallery/hajj 1436 image 3.jpg', caption: 'Hajj 1436 image 3' },
-  { src: '/images/gallery/Hajj 1436 image 4.jpg', caption: 'Hajj 1436 image 4' },
-  { src: '/images/gallery/Hajj 1436 image 5.jpg', caption: 'Hajj 1436 image 5' },
-  { src: '/images/gallery/Hajj 1436 image 6.jpg', caption: 'Hajj 1436 image 6' },
-  { src: '/images/gallery/hajj 1436 image 7.jpg', caption: 'Hajj 1436 image 7' },
-  { src: '/images/gallery/Hajj 1436 image 8.jpg', caption: 'Hajj 1436 image 8' },
-  { src: '/images/gallery/Hajj 1436 image 9.jpg', caption: 'Hajj 1436 image 9' },
-  { src: '/images/gallery/Hajj image 1436 11.jpg', caption: 'Hajj 1436 image 11' },
+  { src: '/images/gallery/hajj 1436  image 16.jpg' },
+  { src: '/images/gallery/Hajj 1436  image 22.jpg' },
+  { src: '/images/gallery/Hajj 1436 image  21.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 1.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 10.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 12.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 13.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 14.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 15.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 17.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 18.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 19.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 2.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 20.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 21.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 23.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 24.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 25.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 26.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 27.jpg' },
+  { src: '/images/gallery/hajj 1436 image 3.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 4.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 5.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 6.jpg' },
+  { src: '/images/gallery/hajj 1436 image 7.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 8.jpg' },
+  { src: '/images/gallery/Hajj 1436 image 9.jpg' },
+  { src: '/images/gallery/Hajj image 1436 11.jpg' },
 ]
 
 const videos: GalleryVideo[] = [
@@ -82,6 +81,44 @@ function PlayIcon() {
 
 export function Gallery() {
   const [tab, setTab] = useState<GalleryTab>('photos')
+  const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (selectedPhoto === null) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedPhoto(null)
+      if (event.key === 'ArrowLeft') {
+        setSelectedPhoto((current) =>
+          current === null ? null : (current - 1 + photos.length) % photos.length,
+        )
+      }
+      if (event.key === 'ArrowRight') {
+        setSelectedPhoto((current) =>
+          current === null ? null : (current + 1) % photos.length,
+        )
+      }
+    }
+
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [selectedPhoto])
+
+  function showPreviousPhoto() {
+    setSelectedPhoto((current) =>
+      current === null ? null : (current - 1 + photos.length) % photos.length,
+    )
+  }
+
+  function showNextPhoto() {
+    setSelectedPhoto((current) =>
+      current === null ? null : (current + 1) % photos.length,
+    )
+  }
 
   return (
     <div className="gallery-page">
@@ -128,12 +165,20 @@ export function Gallery() {
           </div>
 
           {tab === 'photos' ? (
-            <div className="gallery-grid" role="tabpanel">
-              {photos.map((photo) => (
-                <figure className="gallery-card" key={photo.src}>
-                  <img src={photo.src} alt={photo.caption} loading="lazy" />
-                  <figcaption>{photo.caption}</figcaption>
-                </figure>
+            <div className="gallery-grid gallery-photo-grid" role="tabpanel">
+              {photos.map((photo, index) => (
+                <button
+                  className="gallery-card gallery-photo-card"
+                  type="button"
+                  key={photo.src}
+                  onClick={() => setSelectedPhoto(index)}
+                  aria-label={`View gallery photo ${index + 1}`}
+                >
+                  <img src={photo.src} alt="" loading="lazy" />
+                  <span className="gallery-photo-overlay" aria-hidden="true">
+                    <span className="gallery-view-icon" />
+                  </span>
+                </button>
               ))}
             </div>
           ) : (
@@ -159,6 +204,53 @@ export function Gallery() {
           )}
         </div>
       </section>
+
+      {selectedPhoto !== null ? (
+        <div
+          className="gallery-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Gallery photo viewer"
+          onClick={() => setSelectedPhoto(null)}
+        >
+          <button
+            className="gallery-lightbox-close"
+            type="button"
+            aria-label="Close photo viewer"
+            onClick={() => setSelectedPhoto(null)}
+          >
+            X
+          </button>
+          <button
+            className="gallery-lightbox-arrow gallery-lightbox-arrow--previous"
+            type="button"
+            aria-label="Previous photo"
+            onClick={(event) => {
+              event.stopPropagation()
+              showPreviousPhoto()
+            }}
+          >
+            &#8249;
+          </button>
+          <img
+            className="gallery-lightbox-image"
+            src={photos[selectedPhoto].src}
+            alt=""
+            onClick={(event) => event.stopPropagation()}
+          />
+          <button
+            className="gallery-lightbox-arrow gallery-lightbox-arrow--next"
+            type="button"
+            aria-label="Next photo"
+            onClick={(event) => {
+              event.stopPropagation()
+              showNextPhoto()
+            }}
+          >
+            &#8250;
+          </button>
+        </div>
+      ) : null}
     </div>
   )
 }

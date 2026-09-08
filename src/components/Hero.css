@@ -74,6 +74,15 @@
     );
 }
 
+.hero-split-panel--hajj > .hero-split-veil {
+  background: linear-gradient(
+    115deg,
+    rgba(10, 21, 40, 0.08) 0%,
+    rgba(15, 31, 61, 0.04) 45%,
+    rgba(10, 21, 40, 0) 100%
+  );
+}
+
 /* Corner-to-corner diagonal: bottom-left (0,100%) → top-right (100%,0%) */
 .hero-split-panel--hajj {
   z-index: 2;
@@ -144,12 +153,7 @@
 
 .hero-split-content--hajj::before {
   inset: -4.25rem -5rem;
-  background: radial-gradient(
-    ellipse,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.5) 48%,
-    rgba(0, 0, 0, 0) 78%
-  );
+  background: none;
 }
 
 .hero-split-content--hajj h1 {

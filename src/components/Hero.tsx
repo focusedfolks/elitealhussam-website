@@ -1,25 +1,16 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { images } from '../content/site'
 import { IconMountain, IconMosque } from './Icons'
 import './Hero.css'
 
-/** Swap / extend these paths — left panel (Hajj & Umrah) backgrounds */
+/** Left panel (Hajj & Umrah) background */
 const HAJJ_UMRAH_IMAGES = [
-  images.familyMakkah,
-  images.hero,
-  images.umrah,
-  images.heroMadinah,
-  images.pilgrims,
+  '/images/hero-umrah-golden.jpeg',
 ] as const
 
-/** Swap / extend these paths — right panel (Tours) backgrounds */
+/** Right panel (Tours) background */
 const TOURS_IMAGES = [
-  images.dubai,
-  images.touristHero,
-  '/images/tours/bangkok-pattaya.jpg',
-  '/images/tours/langkawi.jpg',
-  '/images/tours/hanoi-sapa-halong.jpg',
+  '/images/hero-tours-mountain.jpeg',
 ] as const
 
 const ROTATE_MS = 5000

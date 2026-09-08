@@ -398,7 +398,20 @@ function TravelPackageCard({
             </div>
           </div>
         </>
-      ) : null}
+      ) : (
+        <div className="pkg-passengers pkg-passengers--compact">
+          <div className="pkg-pax-grid">
+            <PassengerCounter
+              label={t.packagesUi.infantLabel}
+              hint={t.packagesUi.infantHint}
+              value={passengers.infants}
+              min={0}
+              onDec={() => update('infants', -1)}
+              onInc={() => update('infants', 1)}
+            />
+          </div>
+        </div>
+      )}
     </PackageCard>
   )
 }

@@ -657,6 +657,32 @@
   gap: 0.75rem;
 }
 
+.pkg-passengers--compact {
+  gap: 0;
+}
+
+.pkg-passengers--compact .pkg-pax-grid {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 8.5rem;
+}
+
+.pkg-passengers--compact .pkg-pax-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.45rem;
+  padding: 0.45rem 0.55rem;
+  text-align: left;
+}
+
+.pkg-passengers--compact .pkg-pax-card > span {
+  margin: 0;
+  align-self: center;
+}
+
+.pkg-passengers--compact .pkg-pax-ctrl {
+  align-self: center;
+}
+
 .pkg-passengers-head {
   display: flex;
   align-items: center;

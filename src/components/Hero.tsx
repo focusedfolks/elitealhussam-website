@@ -10,7 +10,7 @@ const HAJJ_UMRAH_IMAGES = [
 
 /** Right panel (Tours) background */
 const TOURS_IMAGES = [
-  '/images/hero-tours-mountain.jpeg?v=20260908',
+  '/images/hero section  tour.png?v=20260908',
 ] as const
 
 const ROTATE_MS = 5000

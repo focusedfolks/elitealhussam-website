@@ -662,25 +662,41 @@
 }
 
 .pkg-passengers--compact .pkg-pax-grid {
-  grid-template-columns: minmax(0, 1fr);
-  max-width: 8.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  max-width: none;
 }
 
 .pkg-passengers--compact .pkg-pax-card {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 0.45rem;
-  padding: 0.45rem 0.55rem;
-  text-align: left;
+  gap: 0.2rem;
+  padding: 0.45rem 0.2rem;
+  text-align: center;
 }
 
 .pkg-passengers--compact .pkg-pax-card > span {
   margin: 0;
   align-self: center;
+  font-size: 0.56rem;
+  text-align: center;
 }
 
 .pkg-passengers--compact .pkg-pax-ctrl {
   align-self: center;
+  gap: 0.1rem;
+  padding: 0.12rem;
+}
+
+.pkg-passengers--compact .pkg-pax-card strong {
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.pkg-passengers--compact .pkg-pax-ctrl button {
+  width: 1.55rem;
+  height: 1.55rem;
+  min-width: 1.55rem;
+  min-height: 1.55rem;
+  font-size: 0.88rem;
 }
 
 .pkg-passengers-head {

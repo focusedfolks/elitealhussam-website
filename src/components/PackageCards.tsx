@@ -402,6 +402,22 @@ function TravelPackageCard({
         <div className="pkg-passengers pkg-passengers--compact">
           <div className="pkg-pax-grid">
             <PassengerCounter
+              label={t.packagesUi.adultLabel}
+              hint={t.packagesUi.adultHint}
+              value={passengers.adults}
+              min={1}
+              onDec={() => update('adults', -1)}
+              onInc={() => update('adults', 1)}
+            />
+            <PassengerCounter
+              label={t.packagesUi.childLabel}
+              hint={t.packagesUi.childHint}
+              value={passengers.children}
+              min={0}
+              onDec={() => update('children', -1)}
+              onInc={() => update('children', 1)}
+            />
+            <PassengerCounter
               label={t.packagesUi.infantLabel}
               hint={t.packagesUi.infantHint}
               value={passengers.infants}

@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react'
 import { IconMountain, IconMosque } from './Icons'
 import './Hero.css'
 
-/** Left panel (Hajj & Umrah) background */
+/** Left panel (Umrah) background */
 const HAJJ_UMRAH_IMAGES = [
-  '/images/hero-umrah-golden.jpeg',
+  '/images/image_f29f63.jpg',
 ] as const
 
 /** Right panel (Tours) background */
 const TOURS_IMAGES = [
-  '/images/hero-tours-mountain.jpeg',
+  '/images/image_f29f46.jpg',
 ] as const
 
 const ROTATE_MS = 5000
@@ -35,17 +35,18 @@ function useIndependentSlideIndex(length: number, intervalMs: number) {
 
 type BgStackProps = {
   sources: readonly string[]
+  fallback: string
   activeIndex: number
 }
 
-function BackgroundStack({ sources, activeIndex }: BgStackProps) {
+function BackgroundStack({ sources, fallback, activeIndex }: BgStackProps) {
   return (
     <div className="hero-split-slides" aria-hidden>
       {sources.map((src, i) => (
         <div
           key={`${src}-${i}`}
           className={`hero-split-slide${i === activeIndex ? ' is-active' : ''}`}
-          style={{ backgroundImage: `url(${src})` }}
+          style={{ backgroundImage: `url(${src}), url(${fallback})` }}
         />
       ))}
     </div>
@@ -53,7 +54,7 @@ function BackgroundStack({ sources, activeIndex }: BgStackProps) {
 }
 
 /**
- * Contained 50/50 hero — background images auto-rotate with crossfade per side.
+ * Full-screen 50/50 hero with a diagonal split and responsive mobile stack.
  */
 export function Hero() {
   const hajjIndex = useIndependentSlideIndex(HAJJ_UMRAH_IMAGES.length, ROTATE_MS)
@@ -68,6 +69,7 @@ export function Hero() {
         <article className="hero-split-panel hero-split-panel--hajj">
           <BackgroundStack
             sources={HAJJ_UMRAH_IMAGES}
+            fallback="/images/hero-umrah-golden.jpeg"
             activeIndex={hajjIndex}
           />
           <div className="hero-split-veil" aria-hidden />
@@ -85,7 +87,11 @@ export function Hero() {
         </article>
 
         <article className="hero-split-panel hero-split-panel--tours">
-          <BackgroundStack sources={TOURS_IMAGES} activeIndex={toursIndex} />
+          <BackgroundStack
+            sources={TOURS_IMAGES}
+            fallback="/images/hero-tours-mountain.jpeg"
+            activeIndex={toursIndex}
+          />
           <div className="hero-split-veil hero-split-veil--tours" aria-hidden />
           <div className="hero-split-content hero-split-content--tours">
             <IconMountain className="hero-split-icon" size={34} />

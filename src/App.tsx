@@ -27,6 +27,8 @@ import { Packages } from './pages/PackagesPages'
 import { PackageItineraryPage } from './pages/PackageItineraryPage'
 import { Pricing } from './pages/Pricing'
 import { Analytics } from './components/Analytics'
+import { History } from './pages/History'
+import { Gallery } from './pages/Gallery'
 
 function PublicLayout() {
   return (
@@ -60,6 +62,8 @@ export default function App() {
             <Route element={<PublicLayout />}>
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
+              <Route path="history" element={<History />} />
+              <Route path="gallery" element={<Gallery />} />
               <Route path="packages/hajj-umrah" element={<Packages />} />
               <Route path="packages" element={<Packages />} />
               <Route path="packages/:packageId/itinerary" element={<PackageItineraryPage />} />

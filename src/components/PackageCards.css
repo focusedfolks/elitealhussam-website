@@ -1321,6 +1321,84 @@
   padding: 0.65rem 0.85rem;
 }
 
+@media (max-width: 767px) {
+  .pkg-wrap--compact {
+    width: calc(100vw - 1rem);
+  }
+
+  .pkg-wrap--compact .pkg-grid {
+    gap: 0.75rem;
+    padding-inline: 0.5rem;
+    margin-inline: -0.5rem;
+  }
+
+  .pkg-wrap--compact .pkg-card {
+    flex-basis: min(90vw, 360px);
+  }
+
+  .pkg-card--compact.pkg-card--umrah .pkg-hero,
+  .pkg-card--compact.pkg-card--hajj .pkg-hero {
+    height: 230px;
+  }
+
+  .pkg-card--compact .pkg-body {
+    padding: 0.9rem 0.8rem 1rem;
+    gap: 0.8rem;
+  }
+
+  .pkg-card--compact .pkg-intro h3 {
+    font-size: 1.18rem;
+  }
+
+  .pkg-card--compact .pkg-summary {
+    font-size: 0.8rem;
+  }
+
+  .pkg-passengers--compact .pkg-pax-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.3rem;
+  }
+
+  .pkg-passengers--compact .pkg-pax-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: initial;
+    padding: 0.4rem 0.15rem;
+    gap: 0.2rem;
+    text-align: center;
+  }
+
+  .pkg-passengers--compact .pkg-pax-card strong {
+    font-size: 0.7rem;
+  }
+
+  .pkg-passengers--compact .pkg-pax-card > span {
+    display: block;
+    font-size: 0.56rem;
+    text-align: center;
+  }
+
+  .pkg-passengers--compact .pkg-pax-ctrl {
+    gap: 0.1rem;
+    padding: 0.12rem;
+  }
+
+  .pkg-passengers--compact .pkg-pax-ctrl button {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1rem;
+  }
+
+  .pkg-card--compact .pkg-pricing-cta-btn,
+  .pkg-card--compact .pkg-pricing-cta-phone {
+    min-height: 46px;
+    width: 100%;
+  }
+}
+
 @media (max-width: 900px) {
   .pkg-wrap--compact .pkg-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

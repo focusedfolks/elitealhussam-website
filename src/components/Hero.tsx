@@ -5,12 +5,12 @@ import './Hero.css'
 
 /** Left panel (Umrah) background */
 const HAJJ_UMRAH_IMAGES = [
-  '/images/image_f29f63.jpg',
+  '/images/hero section umrah.png',
 ] as const
 
 /** Right panel (Tours) background */
 const TOURS_IMAGES = [
-  '/images/image_f29f46.jpg',
+  '/images/hero section  tour.png',
 ] as const
 
 const ROTATE_MS = 5000

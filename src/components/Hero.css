@@ -37,7 +37,6 @@
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transition: opacity 800ms ease;
   transform: scale(1.01);
   transition: opacity 800ms ease, transform 900ms ease;
   will-change: opacity;
@@ -91,14 +90,14 @@
   z-index: 2;
   clip-path: polygon(0 0, 100% 0, 0 100%);
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .hero-split-panel--tours {
   z-index: 1;
   clip-path: polygon(100% 0, 100% 100%, 0 100%);
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .hero-split-content {
@@ -137,12 +136,14 @@
 .hero-split-content--hajj {
   z-index: 3;
   padding: 2.5rem 2rem;
-  width: min(36rem, 44%);
+  width: min(36rem, 42%);
+  margin-left: 4%;
 }
 
 .hero-split-content--tours {
   padding: 2.5rem 2rem;
-  width: min(36rem, 44%);
+  width: min(36rem, 42%);
+  margin-right: 4%;
 }
 
 .hero-split-icon {
@@ -335,6 +336,7 @@
   .hero-split-content--tours {
     width: 100%;
     max-width: none;
+    margin-inline: 0;
     padding: 1.75rem 1.25rem 1.75rem;
   }
 

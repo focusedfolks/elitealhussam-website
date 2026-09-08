@@ -64,6 +64,7 @@ export function Packages() {
           <PackageCards
             filter={filter}
             showFilters
+            compact
             onFilterChange={setFilter}
           />
         </div>

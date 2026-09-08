@@ -229,7 +229,7 @@
 /* -- Hero -- */
 .pkg-hero {
   position: relative;
-  height: 178px;
+  height: 220px;
   flex: 0 0 auto;
   overflow: hidden;
   background: var(--pkg-navy);
@@ -1250,7 +1250,7 @@
 }
 
 .pkg-card--compact .pkg-hero {
-  height: 118px;
+  height: 170px;
 }
 
 .pkg-card--compact .pkg-body {

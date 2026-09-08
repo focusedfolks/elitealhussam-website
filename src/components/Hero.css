@@ -85,17 +85,17 @@
   transform: scale(1.05);
 }
 
-/* Corner-to-corner diagonal: bottom-left (0,100%) → top-right (100%,0%) */
+/* Reference seam: about 62% from the left at the top, 38% at the bottom. */
 .hero-split-panel--hajj {
   z-index: 2;
-  clip-path: polygon(0 0, 100% 0, 0 100%);
+  clip-path: polygon(0 0, 62% 0, 38% 100%, 0 100%);
   align-items: center;
   justify-content: flex-start;
 }
 
 .hero-split-panel--tours {
   z-index: 1;
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(62% 0, 100% 0, 100% 100%, 38% 100%);
   align-items: center;
   justify-content: flex-end;
 }
@@ -136,14 +136,14 @@
 .hero-split-content--hajj {
   z-index: 3;
   padding: 2.5rem 2rem;
-  width: min(36rem, 42%);
-  margin-left: 4%;
+  width: min(36rem, 38%);
+  margin-left: 13%;
 }
 
 .hero-split-content--tours {
   padding: 2.5rem 2rem;
-  width: min(36rem, 42%);
-  margin-right: 4%;
+  width: min(36rem, 38%);
+  margin-right: 13%;
 }
 
 .hero-split-icon {

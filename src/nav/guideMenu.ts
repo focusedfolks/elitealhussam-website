@@ -1,7 +1,4 @@
-/**
- * Pilgrim Guide mega-menu navigation config.
- * Only links with confirmed published content are listed.
- */
+/** Guide mega-menu navigation config. */
 
 export type GuideDestinationLink = {
   label: string
@@ -35,29 +32,63 @@ export function hasGuideMenuChildren(
   return Boolean(item.children?.length)
 }
 
-/** History articles with confirmed scrape content only */
 const historyLinks: GuideDestinationLink[] = [
-  { label: 'History', href: '/history' },
-  { label: "History Of Ka'bah", href: '/guide/history-of-kabah' },
-  { label: 'Story of Zam Zam', href: '/guide/story-of-zamzam' },
-  { label: 'Masjid-E-Nabawi', href: '/guide/masjid-e-nabawi' },
+  { label: "History Of Ka'bah", href: '/guide/history/history-of-kabah' },
+  {
+    label: 'Foundation & Development of Makkah',
+    href: '/guide/history/foundation-and-development-of-makkah',
+  },
+  { label: 'Location of Makkah', href: '/guide/history/location-of-makkah' },
+  {
+    label: 'Quraan Mentioned Names Of Makkah',
+    href: '/guide/history/quraan-mentioned-names-of-makkah',
+  },
+  { label: 'Story of Zam Zam', href: '/guide/history/story-of-zam-zam' },
+  { label: 'Masjid-E-Nabawi', href: '/guide/history/masjid-e-nabawi' },
+  {
+    label: 'Structure & Important Places Surrounding Holy Kabah',
+    href: '/guide/history/structure-and-important-places',
+  },
 ]
 
-const galleryLinks: GuideDestinationLink[] = [
-  { label: 'Photo Gallery', href: '/gallery#photos' },
-  { label: 'Video Gallery', href: '/gallery#videos' },
+const ziyaratLinks: GuideCountryGroup[] = [
+  {
+    country: 'Makkah',
+    destinations: [
+      { label: 'Jabal Al-Nour', href: '/guide/ziyarat/makkah/jabal-al-nour' },
+      { label: 'Jabal Thawr', href: '/guide/ziyarat/makkah/jabal-thawr' },
+      { label: 'Masjid Ayesha', href: '/guide/ziyarat/makkah/masjid-ayesha' },
+      { label: 'Masjid Jinn', href: '/guide/ziyarat/makkah/masjid-jinn' },
+      { label: 'Jannatul Maala', href: '/guide/ziyarat/makkah/jannatul-maala' },
+      { label: 'Masjid Nimrah', href: '/guide/ziyarat/makkah/masjid-nimrah' },
+      {
+        label: 'Arafath (Jabal Ur Rehman)',
+        href: '/guide/ziyarat/makkah/arafath-jabal-ur-rehman',
+      },
+    ],
+  },
+  {
+    country: 'Madinah',
+    destinations: [
+      { label: 'Roula Shareef', href: '/guide/ziyarat/madinah/roula-shareef' },
+      { label: 'Rauudathul Jannah', href: '/guide/ziyarat/madinah/rauudathul-jannah' },
+      { label: 'Masjid Qiblatain', href: '/guide/ziyarat/madinah/masjid-qiblatain' },
+      { label: 'Masjid Quba', href: '/guide/ziyarat/madinah/masjid-quba' },
+      { label: 'Jabal Al Uhad', href: '/guide/ziyarat/madinah/jabal-al-uhad' },
+      { label: 'Jannatul Baqi', href: '/guide/ziyarat/madinah/jannatul-baqi' },
+    ],
+  },
 ]
 
-/** Top-level Guide categories — omit sections until content exists */
 export const guideMenuCategories: GuideMenuItem[] = [
   {
     id: 'history',
-    label: 'History',
-    children: [{ country: 'Sacred history', destinations: historyLinks }],
+    label: 'HISTORY',
+    children: [{ country: 'History', destinations: historyLinks }],
   },
   {
-    id: 'gallery',
-    label: 'Gallery',
-    children: [{ country: 'Gallery', destinations: galleryLinks }],
+    id: 'ziyarat',
+    label: 'ZIYARAT',
+    children: ziyaratLinks,
   },
 ]

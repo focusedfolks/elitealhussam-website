@@ -137,7 +137,7 @@ export function Home() {
   ]
 
   const proof = [
-    { value: '45+', label: t.common.years, Icon: IconSparkle },
+    { value: '45+', label: '45+ Years — Now in Dubai', Icon: IconSparkle },
     { value: '1', label: 'Office · Dubai, UAE', Icon: IconBuilding },
     { value: '4', label: t.common.multilingual, Icon: IconGlobe },
     { value: '24/7', label: 'Pilgrim support on journey', Icon: IconKaaba },
@@ -175,10 +175,13 @@ export function Home() {
               <IconShieldCheck size={14} /> Licensed Operator
             </span>
             <span>
-              <IconSparkle size={14} /> 45+ Years
+              <IconSparkle size={14} /> 45+ Years — Now in Dubai
             </span>
             <span>
               <IconBuilding size={14} /> Dubai, UAE
+            </span>
+            <span>
+              <IconUsers size={14} /> 20,000+ Pilgrims Served
             </span>
           </div>
           <div className="hero-stats-cards">
@@ -193,7 +196,7 @@ export function Home() {
               <span className="hero-stat-icon" aria-hidden>
                 <IconUsers size={18} />
               </span>
-              <strong>500+</strong>
+              <strong>2,000+</strong>
               <span>Pilgrims Served</span>
             </article>
             <article className="hero-stat-card">
@@ -231,7 +234,7 @@ export function Home() {
             </div>
             <div className="trust-item">
               <IconSparkle size={16} />
-              <span>45+ Years Experience</span>
+              <span>45+ Years — Now in Dubai</span>
             </div>
             <div className="trust-item">
               <IconGlobe size={16} />
@@ -288,7 +291,7 @@ export function Home() {
             </div>
             <div className="data-readout-stat">
               <span className="data-readout-label">Pilgrims served</span>
-              <strong data-count="500" data-suffix="+">
+              <strong data-count="2000" data-suffix="+">
                 0
               </strong>
             </div>

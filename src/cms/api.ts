@@ -103,6 +103,7 @@ export async function fetchCmsPackages(): Promise<TravelPackage[]> {
     return {
       ...fallback,
       ...cms,
+      image: fallback.image,
       itinerary: fallback.itinerary ?? cms.itinerary,
       placeholder: fallback.placeholder ?? cms.placeholder,
     }

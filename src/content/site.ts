@@ -209,7 +209,7 @@ export const umrahPackages: TravelPackage[] = [
       'A comfortable & affordable Umrah from Dubai, UAE — quality hotels, transport, and visa support handled end-to-end.',
     locations: 'Makkah • Madinah',
     duration: '10–12 Days',
-    image: '/images/safa-marwa.webp',
+    image: '/images/hero-makkah.webp',
     popular: true,
     availableTravelModes: ['air', 'road'],
     pricing: {
@@ -243,7 +243,7 @@ export const umrahPackages: TravelPackage[] = [
       'Closer hotels, smoother transfers, and attentive care for a peaceful Umrah from Dubai, UAE.',
     locations: 'Makkah • Madinah',
     duration: '14–16 Days',
-    image: '/images/luxury-stay.webp',
+    image: '/images/madinah-nabawi.webp',
     availableTravelModes: ['air'],
     pricing: {
       adult: 185000,
@@ -272,7 +272,7 @@ export const umrahPackages: TravelPackage[] = [
       'Coordinated group Umrah departures from Dubai, UAE — shared hotels, transport, and dedicated group leader support.',
     locations: 'Makkah • Madinah',
     duration: 'TBC',
-    image: '/images/family-travel.webp',
+    image: '/images/kiswah-detail.webp',
     placeholder: true,
     availableTravelModes: ['air', 'road'],
     pricing: {
@@ -306,7 +306,7 @@ export const umrahPackages: TravelPackage[] = [
       'Tell us your preferred dates, group size, and hotel class — our Dubai team will tailor your Umrah itinerary.',
     locations: 'Makkah • Madinah',
     duration: 'Flexible',
-    image: '/images/theme-offer-1.webp',
+    image: '/images/hero-makkah.webp',
     placeholder: true,
     pricing: {
       adult: 145000,
@@ -336,7 +336,7 @@ export const hajjPackages: TravelPackage[] = [
       '20-day platinum-short Hajj from Dubai, UAE — Swissotel Al Maqam & Dallah Taiba stays, full Hajj days programme, and decades of trusted hospitality.',
     locations: 'Makkah • Madinah • Arafat',
     duration: '20 Days',
-    image: '/images/kiswah-detail.webp',
+    image: '/images/hero-makkah.webp',
     popular: true,
     featured: true,
     availableTravelModes: ['air', 'road'],
@@ -372,7 +372,7 @@ export const hajjPackages: TravelPackage[] = [
       'Business Class Hajj from Dubai, UAE — elevated stays, priority transfers, and dedicated support for Indian passport holders.',
     locations: 'Makkah • Madinah • Arafat',
     duration: '28–32 Days',
-    image: '/images/makkah-clock-tower.webp',
+    image: '/images/madinah-green-dome.webp',
     popular: true,
     placeholder: true,
     availableTravelModes: ['air', 'road'],
@@ -412,7 +412,7 @@ export const hajjPackages: TravelPackage[] = [
       '30-day value Hajj from Dubai, UAE for Indian passport holders — Makkah Tower / Pullman stays, organised rites, and group support.',
     locations: 'Makkah • Madinah • Arafat',
     duration: '30 Days',
-    image: '/images/hajj-arafat.webp',
+    image: '/images/hero-makkah.webp',
     availableTravelModes: ['air', 'road'],
     itinerary: budgetHajjItinerary,
     pricing: {

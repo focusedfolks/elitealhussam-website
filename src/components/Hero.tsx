@@ -77,6 +77,10 @@ export function Hero() {
             <IconMosque className="hero-split-icon" size={34} />
             <h1>Umrah</h1>
             <p className="hero-split-copy">A Journey of Faith, Peace &amp; Blessings</p>
+            <div className="hero-split-trust" aria-label="Trust highlights">
+              <span>20,000+ Pilgrims Served</span>
+              <span>45+ Years — Now in Dubai</span>
+            </div>
             <span className="hero-split-ornament" aria-hidden="true">◆</span>
             <div className="hero-split-actions">
               <Link className="hero-split-button hero-split-button--hajj" to="/packages/hajj-umrah">

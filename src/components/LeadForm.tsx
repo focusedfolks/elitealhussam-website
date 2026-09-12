@@ -52,12 +52,16 @@ function formatTravellersLabel(adults: number, children: number): string {
 }
 
 function formatTripPreferencesForMessage(opts: {
+  roomType: string
   makkahHotel: string
   madinaHotel: string
   makkahCheckIn: string
   madinaCheckIn: string
+  makkahCheckOut: string
+  madinaCheckOut: string
 }): string {
   const lines: string[] = []
+  if (opts.roomType) lines.push(`Room type: ${opts.roomType}`)
   if (opts.makkahHotel) lines.push(`Preferred Hotel — Makkah: ${opts.makkahHotel}`)
   if (opts.madinaHotel) lines.push(`Preferred Hotel — Madina: ${opts.madinaHotel}`)
   if (opts.makkahCheckIn) {
@@ -68,6 +72,16 @@ function formatTripPreferencesForMessage(opts: {
   if (opts.madinaCheckIn) {
     lines.push(
       `Madina check-in: ${formatDisplayDate(opts.madinaCheckIn)}`,
+    )
+  }
+  if (opts.makkahCheckOut) {
+    lines.push(
+      `Makkah check-out: ${formatDisplayDate(opts.makkahCheckOut)}`,
+    )
+  }
+  if (opts.madinaCheckOut) {
+    lines.push(
+      `Madina check-out: ${formatDisplayDate(opts.madinaCheckOut)}`,
     )
   }
   return lines.length ? lines.join('\n') : ''
@@ -99,10 +113,13 @@ export function LeadForm({
     parseDefaultAdults(defaultTravellers),
   )
   const [children, setChildren] = useState(0)
+  const [roomType, setRoomType] = useState('')
   const [makkahHotel, setMakkahHotel] = useState('')
   const [madinaHotel, setMadinaHotel] = useState('')
   const [makkahCheckIn, setMakkahCheckIn] = useState('')
   const [madinaCheckIn, setMadinaCheckIn] = useState('')
+  const [makkahCheckOut, setMakkahCheckOut] = useState('')
+  const [madinaCheckOut, setMadinaCheckOut] = useState('')
   const [travel, setTravel] = useState<TravelDetails>(() => ({
     ...emptyTravelDetails(),
     ...defaultTravel,
@@ -146,13 +163,17 @@ export function LeadForm({
     const email = String(data.get('email') || '')
     const packageInterest = String(data.get('interest') || '')
     const travellers = String(data.get('travellers') || travellersLabel)
+    const selectedRoomType = String(data.get('roomType') || '')
     const messageInput = String(data.get('message') || '')
     const travelBlock = formatTravelForMessage(travel)
     const tripBlock = formatTripPreferencesForMessage({
+      roomType: selectedRoomType,
       makkahHotel,
       madinaHotel,
       makkahCheckIn,
       madinaCheckIn,
+      makkahCheckOut,
+      madinaCheckOut,
     })
     const message = [messageInput, tripBlock].filter(Boolean).join('\n\n')
 
@@ -370,6 +391,23 @@ export function LeadForm({
                     </button>
                   </div>
                 </div>
+                <label>
+                  Room Type
+                  <select
+                    name="roomType"
+                    required
+                    value={roomType}
+                    onChange={(e) => setRoomType(e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Select room type
+                    </option>
+                    <option value="Double">Double</option>
+                    <option value="Triple">Triple</option>
+                    <option value="Quad">Quad</option>
+                    <option value="Quint">Quint</option>
+                  </select>
+                </label>
                 <input type="hidden" name="travellers" value={travellersLabel} />
               </div>
 
@@ -414,6 +452,16 @@ export function LeadForm({
                 />
               </label>
               <label>
+                Makkah Check-out Date
+                <input
+                  type="date"
+                  name="makkahCheckOut"
+                  min={minDate}
+                  value={makkahCheckOut}
+                  onChange={(e) => setMakkahCheckOut(e.target.value)}
+                />
+              </label>
+              <label>
                 Madina check-in date
                 <input
                   type="date"
@@ -421,6 +469,16 @@ export function LeadForm({
                   min={minDate}
                   value={madinaCheckIn}
                   onChange={(e) => setMadinaCheckIn(e.target.value)}
+                />
+              </label>
+              <label>
+                Madinah Check-out Date
+                <input
+                  type="date"
+                  name="madinaCheckOut"
+                  min={minDate}
+                  value={madinaCheckOut}
+                  onChange={(e) => setMadinaCheckOut(e.target.value)}
                 />
               </label>
             </div>

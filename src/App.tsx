@@ -18,6 +18,7 @@ import { BlogPost } from './pages/BlogPost'
 import { Contact } from './pages/Contact'
 import { GUIDE_DEFAULT_PATH } from './content/guide'
 import { GuidePage } from './pages/GuidePage'
+import { StructureAndImportantPlacesPage } from './pages/StructureAndImportantPlacesPage'
 import { Home } from './pages/Home'
 import { InternationalTours } from './pages/InternationalTours'
 import { LocalTours } from './pages/LocalTours'
@@ -81,6 +82,24 @@ export default function App() {
               <Route
                 path="guide"
                 element={<Navigate to={GUIDE_DEFAULT_PATH} replace />}
+              />
+              <Route
+                path="guide/history/structure-and-important-places"
+                element={
+                  <Navigate
+                    to="/guide/history/structure-and-important-places/black-stone"
+                    replace
+                  />
+                }
+              />
+              <Route
+                path="guide/history/structure-and-important-places/:placeSlug"
+                element={<StructureAndImportantPlacesPage />}
+              />
+              <Route path="guide/history/:slug" element={<GuidePage />} />
+              <Route
+                path="guide/ziyarat/:region/:ziyaratSlug"
+                element={<GuidePage />}
               />
               <Route path="guide/:slug" element={<GuidePage />} />
               <Route path="contact" element={<Contact />} />

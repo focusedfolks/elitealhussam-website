@@ -9,6 +9,7 @@ import './TravelModeFields.css'
 
 export type TravelDetails = {
   mode: TravelMode | ''
+  roadTransfer: string
   airport: string
   returnAirport: string
   airline: string
@@ -19,6 +20,7 @@ export type TravelDetails = {
 
 export const emptyTravelDetails = (): TravelDetails => ({
   mode: 'air',
+  roadTransfer: '',
   airport: '',
   returnAirport: '',
   airline: '',
@@ -56,7 +58,7 @@ export function isTravelComplete(
   if (!mode || !modes.includes(mode)) return false
   if (!details.departureDate) return false
   if (mode === 'air') return Boolean(details.airport && details.returnAirport)
-  return Boolean(details.departureCity)
+  return Boolean(details.departureCity && details.roadTransfer)
 }
 
 export function travelSummaryChip(details: TravelDetails): string | null {
@@ -93,6 +95,7 @@ export function formatTravelForMessage(details: TravelDetails): string {
   const pickup = details.pickupPoint || 'To be confirmed'
   return (
     `${dateLine}Travel Mode: By Road\nDeparture: ${details.departureCity || '-'}` +
+    `\nIntercity Transfer: ${details.roadTransfer || '-'}` +
     `\nPickup Point / Area: ${pickup}\n` +
     `Note: Exact pickup and schedule will be confirmed by ELITE ALHUSSAM.`
   )
@@ -124,6 +127,7 @@ export function TravelModeFields({
     onChange({
       ...value,
       mode: next,
+      roadTransfer: next === 'road' ? value.roadTransfer : '',
       airport: next === 'air' ? value.airport : '',
       returnAirport: next === 'air' ? value.returnAirport : '',
       airline: next === 'air' ? value.airline : '',
@@ -312,6 +316,32 @@ export function TravelModeFields({
               }
               placeholder="e.g. Al Nahda, Dubai"
             />
+          </label>
+          <label htmlFor={`${idPrefix}-road-transfer`}>
+            Intercity Transfer
+            <select
+              id={`${idPrefix}-road-transfer`}
+              name={asFormFields ? 'roadTransfer' : undefined}
+              required={asFormFields}
+              value={value.roadTransfer}
+              onChange={(e) =>
+                onChange({
+                  ...value,
+                  mode: 'road',
+                  roadTransfer: e.target.value,
+                })
+              }
+            >
+              <option value="" disabled>
+                Select transfer option
+              </option>
+              <option value="Makkah to Madinah by Car">
+                Makkah to Madinah by Car
+              </option>
+              <option value="Makkah to Madinah by Train">
+                Makkah to Madinah by Train
+              </option>
+            </select>
           </label>
           <p className="travel-note">
             Road travel to Makkah &amp; Madinah is organized via coordinated

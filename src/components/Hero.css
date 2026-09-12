@@ -187,6 +187,21 @@
   max-width: 18rem;
 }
 
+.hero-split-trust {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0 auto 1rem;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.hero-split-trust span {
+  display: inline-flex;
+  justify-content: center;
+}
+
 .hero-split-content--hajj .hero-split-copy {
   color: rgba(255, 255, 255, 0.9);
 }

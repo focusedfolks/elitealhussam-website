@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { Seo } from '../components/Seo'
 import {
@@ -55,14 +55,35 @@ function renderBlock(block: GuideBlock, index: number) {
 }
 
 export function GuidePage() {
-  const { slug } = useParams()
-  const page = slug ? getGuidePage(slug) : undefined
+  const { slug, region, ziyaratSlug } = useParams()
+  const location = useLocation()
+  const guideSlug = location.pathname.startsWith('/guide/history/')
+    ? `history/${slug ?? ''}`
+    : location.pathname.startsWith('/guide/ziyarat/')
+      ? `ziyarat/${region ?? ''}/${ziyaratSlug ?? ''}`
+      : slug
+  const page = guideSlug ? getGuidePage(guideSlug) : undefined
 
-  if (!slug) return <Navigate to={GUIDE_DEFAULT_PATH} replace />
+  if (!guideSlug) return <Navigate to={GUIDE_DEFAULT_PATH} replace />
   if (!page) return <Navigate to={GUIDE_DEFAULT_PATH} replace />
 
   const hero = page.heroImage ?? images.pilgrimsHero
-  const related = guidePages.filter((p) => p.slug !== page.slug)
+  const ziyaratRegion = page.slug.match(/^ziyarat\/([^/]+)\//)?.[1]
+  const related = Array.from(
+    new Map(
+      guidePages
+        .filter((item) =>
+          ziyaratRegion
+            ? item.slug.startsWith(`ziyarat/${ziyaratRegion}/`) &&
+              item.slug !== page.slug
+            : item.section === 'history' && item.slug !== page.slug,
+        )
+        .map((item) => [item.slug, item]),
+    ).values(),
+  )
+  const relatedLabel = ziyaratRegion
+    ? `More in ${ziyaratRegion[0].toUpperCase()}${ziyaratRegion.slice(1)} Ziyarat`
+    : 'More in History'
 
   return (
     <div className="guide-page">
@@ -81,7 +102,10 @@ export function GuidePage() {
         image={hero}
         crumbs={[
           { label: 'Home', to: '/' },
-          { label: 'Guide', to: GUIDE_DEFAULT_PATH },
+          { label: 'History', to: GUIDE_DEFAULT_PATH },
+          ...(ziyaratRegion
+            ? [{ label: `Ziyarat · ${ziyaratRegion[0].toUpperCase()}${ziyaratRegion.slice(1)}` }]
+            : []),
           { label: page.title },
         ]}
       />
@@ -94,7 +118,7 @@ export function GuidePage() {
 
           {related.length > 0 ? (
             <aside className="guide-aside" aria-label="More guide articles">
-              <p className="eyebrow">More in History</p>
+              <p className="eyebrow">{relatedLabel}</p>
               <ul className="guide-related">
                 {related.map((item) => (
                   <li key={item.slug}>

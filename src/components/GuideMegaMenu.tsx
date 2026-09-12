@@ -371,7 +371,7 @@ export function GuideMegaMenu({ label, onNavigate }: Props) {
           onMouseLeave={scheduleClose}
         >
           <div className="pkg-mega-panel pkg-mega-panel--categories">
-            <p className="pkg-mega-panel-title">Pilgrim guide</p>
+            <p className="pkg-mega-panel-title">History</p>
             {renderDesktopPanel1()}
           </div>
           {renderDesktopPanel2()}

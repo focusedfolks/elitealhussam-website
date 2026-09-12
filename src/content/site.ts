@@ -306,7 +306,7 @@ export const umrahPackages: TravelPackage[] = [
       'Tell us your preferred dates, group size, and hotel class — our Dubai team will tailor your Umrah itinerary.',
     locations: 'Makkah • Madinah',
     duration: 'Flexible',
-    image: '/images/hero-makkah.webp',
+    image: '/images/kiswah-detail.webp',
     placeholder: true,
     pricing: {
       adult: 145000,

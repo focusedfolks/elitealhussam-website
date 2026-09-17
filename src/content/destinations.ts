@@ -1,5 +1,6 @@
 export type Destination = {
   name: string
+  slug: string
   image: string
   imageAlt: string
   description: string
@@ -31,8 +32,14 @@ export type DestinationCountry =
 
 const comingSoon = 'Destination details coming soon.'
 
-const destination = (name: string, image: string, imageAlt: string): Destination => ({
+const destination = (
+  name: string,
+  image: string,
+  imageAlt: string,
+  slug = image,
+): Destination => ({
   name,
+  slug,
   image: `/images/tours/${image}.jpg`,
   imageAlt,
   description: comingSoon,
@@ -77,6 +84,7 @@ export const destinationCountries: DestinationCountry[] = [
                 'Periyar National Park, Thekkady',
                 'periyar-national-park-thekkady',
                 'Periyar National Park Thekkady wildlife',
+                'periyar-national-park',
               ),
               destination(
                 'Eravikulam National Park',

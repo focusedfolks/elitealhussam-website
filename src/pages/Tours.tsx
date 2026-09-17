@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { Seo } from '../components/Seo'
 import {
@@ -16,8 +17,13 @@ function categoriesFor(country: DestinationCountry, stateName: string | null) {
 }
 
 export function Tours() {
-  const [selectedCountryId, setSelectedCountryId] = useState<string | null>(null)
-  const [selectedStateName, setSelectedStateName] = useState<string | null>(null)
+  const location = useLocation()
+  const [selectedCountryId, setSelectedCountryId] = useState<string | null>(
+    () => new URLSearchParams(location.search).get('country'),
+  )
+  const [selectedStateName, setSelectedStateName] = useState<string | null>(
+    () => new URLSearchParams(location.search).get('state'),
+  )
   const selectedCountry = destinationCountries.find(
     (country) => country.id === selectedCountryId,
   )
@@ -28,6 +34,35 @@ export function Tours() {
     selectedCountry?.kind === 'states'
       ? selectedCountry.states.find((state) => state.name === selectedStateName)
       : undefined
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const countryParam = params.get('country')
+    const stateParam = params.get('state')
+    const country = destinationCountries.find((item) => {
+      if (countryParam === 'dubai') return item.id === 'dubai-uae'
+      return item.id === countryParam
+    })
+
+    setSelectedCountryId(country?.id ?? null)
+    setSelectedStateName(
+      country?.kind === 'states'
+        ? country.states.find(
+            (state) => state.name.toLowerCase().replaceAll(' ', '-') === stateParam,
+          )?.name ?? null
+        : null,
+    )
+  }, [location.search])
+
+  useEffect(() => {
+    if (!location.hash) return
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(location.hash.slice(1))?.scrollIntoView({
+        block: 'center',
+      })
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [location.hash, selectedCountryId, selectedStateName])
 
   function selectCountry(country: DestinationCountry) {
     setSelectedCountryId(country.id)
@@ -149,7 +184,7 @@ function DestinationGroups({
           <h3>{category.name}</h3>
           <div className="destination-grid">
             {category.destinations.map((item) => (
-              <article key={item.name} className="destination-card">
+              <article id={item.slug} key={item.name} className="destination-card">
                 <img src={item.image} alt={item.imageAlt} loading="lazy" />
                 <div className="destination-card-body">
                   <h4>{item.name}</h4>

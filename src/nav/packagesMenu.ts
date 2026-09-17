@@ -11,6 +11,12 @@ export type PackagesDestinationLink = {
 export type PackagesCountryGroup = {
   country: string
   destinations: PackagesDestinationLink[]
+  subgroups?: PackagesDestinationSubgroup[]
+}
+
+export type PackagesDestinationSubgroup = {
+  label: string
+  destinations: PackagesDestinationLink[]
 }
 
 export type PackagesMenuFlatItem = {
@@ -62,6 +68,46 @@ export const packagesMenuCategories: PackagesMenuItem[] = [
             href: '/international-tours/haridwar-rishikesh',
           },
         ],
+        subgroups: [
+          {
+            label: 'Kerala',
+            destinations: [
+              { label: 'Munnar', href: '/tours?country=india&state=kerala#munnar' },
+              { label: 'Wayanad', href: '/tours?country=india&state=kerala#wayanad' },
+              { label: 'Vagamon', href: '/tours?country=india&state=kerala#vagamon' },
+              { label: 'Alleppey', href: '/tours?country=india&state=kerala#alleppey' },
+              { label: 'Kumarakom', href: '/tours?country=india&state=kerala#kumarakom' },
+              { label: 'Varkala', href: '/tours?country=india&state=kerala#varkala' },
+              { label: 'Kovalam', href: '/tours?country=india&state=kerala#kovalam' },
+              { label: 'Fort Kochi', href: '/tours?country=india&state=kerala#fort-kochi' },
+              {
+                label: 'Periyar National Park, Thekkady',
+                href: '/tours?country=india&state=kerala#periyar-national-park',
+              },
+              {
+                label: 'Eravikulam National Park',
+                href: '/tours?country=india&state=kerala#eravikulam-national-park',
+              },
+              {
+                label: 'Athirappilly Waterfalls',
+                href: '/tours?country=india&state=kerala#athirappilly-waterfalls',
+              },
+            ],
+          },
+          {
+            label: 'Tamil Nadu',
+            destinations: [
+              { label: 'Ooty', href: '/tours?country=india&state=tamil-nadu#ooty' },
+              { label: 'Kodaikanal', href: '/tours?country=india&state=tamil-nadu#kodaikanal' },
+              { label: 'Yercaud', href: '/tours?country=india&state=tamil-nadu#yercaud' },
+              { label: 'Yelagiri', href: '/tours?country=india&state=tamil-nadu#yelagiri' },
+            ],
+          },
+        ],
+      },
+      {
+        country: 'Dubai, UAE',
+        destinations: [{ label: 'Dubai', href: '/tours?country=dubai' }],
       },
       {
         country: 'Indonesia',

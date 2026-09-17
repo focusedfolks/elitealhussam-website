@@ -12,6 +12,7 @@ export type PackagesCountryGroup = {
   country: string
   destinations: PackagesDestinationLink[]
   subgroups?: PackagesDestinationSubgroup[]
+  sections?: PackagesDestinationSubgroup[]
 }
 
 export type PackagesDestinationSubgroup = {
@@ -54,53 +55,30 @@ export const packagesMenuCategories: PackagesMenuItem[] = [
     children: [
       {
         country: 'India',
-        destinations: [
+        destinations: [],
+        sections: [
           {
-            label: 'Delhi, Agra & Taj Mahal with Kashmir',
-            href: '/international-tours/delhi-agra-taj-mahal-kashmir',
-          },
-          {
-            label: 'Kashmir with Golden Triangle',
-            href: '/international-tours/kashmir-golden-triangle',
-          },
-          {
-            label: 'Haridwar & Rishikesh',
-            href: '/international-tours/haridwar-rishikesh',
-          },
-        ],
-        subgroups: [
-          {
-            label: 'Kerala',
+            label: 'Packages',
             destinations: [
-              { label: 'Munnar', href: '/tours?country=india&state=kerala#munnar' },
-              { label: 'Wayanad', href: '/tours?country=india&state=kerala#wayanad' },
-              { label: 'Vagamon', href: '/tours?country=india&state=kerala#vagamon' },
-              { label: 'Alleppey', href: '/tours?country=india&state=kerala#alleppey' },
-              { label: 'Kumarakom', href: '/tours?country=india&state=kerala#kumarakom' },
-              { label: 'Varkala', href: '/tours?country=india&state=kerala#varkala' },
-              { label: 'Kovalam', href: '/tours?country=india&state=kerala#kovalam' },
-              { label: 'Fort Kochi', href: '/tours?country=india&state=kerala#fort-kochi' },
               {
-                label: 'Periyar National Park, Thekkady',
-                href: '/tours?country=india&state=kerala#periyar-national-park',
+                label: 'Delhi, Agra & Taj Mahal with Kashmir',
+                href: '/international-tours/delhi-agra-taj-mahal-kashmir',
               },
               {
-                label: 'Eravikulam National Park',
-                href: '/tours?country=india&state=kerala#eravikulam-national-park',
+                label: 'Kashmir with Golden Triangle',
+                href: '/international-tours/kashmir-golden-triangle',
               },
               {
-                label: 'Athirappilly Waterfalls',
-                href: '/tours?country=india&state=kerala#athirappilly-waterfalls',
+                label: 'Haridwar & Rishikesh',
+                href: '/international-tours/haridwar-rishikesh',
               },
             ],
           },
           {
-            label: 'Tamil Nadu',
+            label: 'Destinations',
             destinations: [
-              { label: 'Ooty', href: '/tours?country=india&state=tamil-nadu#ooty' },
-              { label: 'Kodaikanal', href: '/tours?country=india&state=tamil-nadu#kodaikanal' },
-              { label: 'Yercaud', href: '/tours?country=india&state=tamil-nadu#yercaud' },
-              { label: 'Yelagiri', href: '/tours?country=india&state=tamil-nadu#yelagiri' },
+              { label: 'Kerala', href: '/tours?country=india&state=kerala' },
+              { label: 'Tamil Nadu', href: '/tours?country=india&state=tamil-nadu' },
             ],
           },
         ],

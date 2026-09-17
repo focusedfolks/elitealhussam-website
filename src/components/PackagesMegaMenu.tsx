@@ -234,7 +234,17 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
           {activeCategory.children.map((group) => (
             <div className="pkg-mega-country" key={group.country}>
               <h4>{group.country}</h4>
-              {renderDestinationLinks(group.country, group.destinations)}
+              {group.sections
+                ? group.sections.map((section) => (
+                    <div className="pkg-mega-subgroup" key={section.label}>
+                      <h5>{section.label}</h5>
+                      {renderDestinationLinks(
+                        `${group.country}-${section.label}`,
+                        section.destinations,
+                      )}
+                    </div>
+                  ))
+                : renderDestinationLinks(group.country, group.destinations)}
               {group.subgroups?.map((subgroup) => (
                 <div className="pkg-mega-subgroup" key={subgroup.label}>
                   <h5>{subgroup.label}</h5>
@@ -318,7 +328,14 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
                   {item.children.map((group) => (
                     <div className="pkg-mega-mobile-country" key={group.country}>
                       <p>{group.country}</p>
-                      {renderMobileDestinationLinks(group.destinations)}
+                      {group.sections
+                        ? group.sections.map((section) => (
+                            <div className="pkg-mega-mobile-subgroup" key={section.label}>
+                              <p>{section.label}</p>
+                              {renderMobileDestinationLinks(section.destinations)}
+                            </div>
+                          ))
+                        : renderMobileDestinationLinks(group.destinations)}
                       {group.subgroups?.map((subgroup) => (
                         <div className="pkg-mega-mobile-subgroup" key={subgroup.label}>
                           <p>{subgroup.label}</p>

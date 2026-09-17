@@ -275,8 +275,8 @@ export const internationalTourPackages: TourPackage[] = [
     duration: '5 Days / 4 Nights',
     days: 5,
     nights: 4,
-    image: '/images/tours/bangkok-pattaya.jpg',
-    imageAlt: 'Bangkok city skyline at dusk',
+    image: '/images/hero%20section%20%20tour.png',
+    imageAlt: 'Thailand travel landscape',
     about:
       'Split your Thailand short break between Bangkok’s temples and markets and Pattaya’s coastline — a balanced city-and-beach itinerary over five days.',
     highlights: [

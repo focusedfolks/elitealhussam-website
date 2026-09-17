@@ -42,32 +42,32 @@ export const destinationCountries: DestinationCountry[] = [
           {
             name: 'Hill Station',
             destinations: [
-              destination('Munnar', '/images/hero section  tour.png', 'Munnar hill station Kerala tea plantations', 'munnar'),
-              destination('Wayanad', '/images/tours/hero-tours-mountain.jpeg', 'Wayanad hill station Kerala forest', 'wayanad'),
-              destination('Vagamon', '/images/theme-hero.webp', 'Vagamon hill station Kerala meadows', 'vagamon'),
+              destination('Munnar', '/images/tours/Munnar.jpg', 'Munnar hill station Kerala tea plantations', 'munnar'),
+              destination('Wayanad', '/images/tours/Wayanad.jpg', 'Wayanad hill station Kerala forest', 'wayanad'),
+              destination('Vagamon', '/images/tours/Vagamon.jpg', 'Vagamon hill station Kerala meadows', 'vagamon'),
             ],
           },
           {
             name: 'Backwaters and Lakes',
             destinations: [
-              destination('Alleppey', '/images/gallery-stays.webp', 'Alleppey backwaters Kerala houseboat', 'alleppey'),
-              destination('Kumarakom', '/images/gallery-family.webp', 'Kumarakom lake Kerala backwaters', 'kumarakom'),
+              destination('Alleppey', '/images/tours/Alleppey.jpg', 'Alleppey backwaters Kerala houseboat', 'alleppey'),
+              destination('Kumarakom', '/images/tours/Kumarakom.jpg', 'Kumarakom lake Kerala backwaters', 'kumarakom'),
             ],
           },
           {
             name: 'Beaches and Coastal Towns',
             destinations: [
-              destination('Varkala', '/images/theme-offer-1.webp', 'Varkala beach cliff Kerala', 'varkala'),
-              destination('Kovalam', '/images/theme-offer-2.webp', 'Kovalam beach Kerala lighthouse', 'kovalam'),
-              destination('Fort Kochi', '/images/theme-offer-3.webp', 'Fort Kochi Chinese fishing nets', 'fort-kochi'),
+              destination('Varkala', '/images/tours/Varkala.jpg', 'Varkala beach cliff Kerala', 'varkala'),
+              destination('Kovalam', '/images/tours/Kovalam.jpg', 'Kovalam beach Kerala lighthouse', 'kovalam'),
+              destination('Fort Kochi', '/images/tours/fort%20kochi.jpg', 'Fort Kochi Chinese fishing nets', 'fort-kochi'),
             ],
           },
           {
             name: 'Wildlife and Nature',
             destinations: [
-              destination('Periyar National Park, Thekkady', '/images/theme-offer-4.webp', 'Periyar National Park Thekkady wildlife', 'periyar-national-park'),
-              destination('Eravikulam National Park', '/images/mount-uhud.webp', 'Eravikulam National Park Nilgiri Tahr', 'eravikulam-national-park'),
-              destination('Athirappilly Waterfalls', '/images/hajj-arafat.webp', 'Athirappilly Waterfalls Kerala', 'athirappilly-waterfalls'),
+              destination('Periyar National Park, Thekkady', '/images/tours/Periyar%20National%20Park%2C%20Thekkady.jpg', 'Periyar National Park Thekkady wildlife', 'periyar-national-park'),
+              destination('Eravikulam National Park', '/images/tours/Eravikulam%20National%20Park.jpg', 'Eravikulam National Park Nilgiri Tahr', 'eravikulam-national-park'),
+              destination('Athirappilly Waterfalls', '/images/tours/Athirappilly%20Waterfalls.jpg', 'Athirappilly Waterfalls Kerala', 'athirappilly-waterfalls'),
             ],
           },
         ],

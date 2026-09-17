@@ -9,6 +9,7 @@ import {
 } from 'react'
 import {
   packageTravelModes,
+  PACKAGE_CONTENT_PENDING,
   type ItineraryRow,
   type PackageCategory,
   type TravelPackage,
@@ -193,7 +194,8 @@ function TravelPackageCard({
   const [travelTouched, setTravelTouched] = useState(false)
   const catalog = t.packageCatalog[pkg.id]
   const title = catalog?.title ?? pkg.title
-  const summary = catalog?.summary ?? pkg.summary
+  const pendingContent = Boolean(pkg.pendingContent)
+  const summary = pendingContent ? PACKAGE_CONTENT_PENDING : catalog?.summary ?? pkg.summary
 
   const totalLabel = useMemo(() => {
     const parts: string[] = []
@@ -244,7 +246,10 @@ function TravelPackageCard({
   const hasDetailedItinerary = hasDetailedHajjItinerary(pkg.id)
   const itineraryDetail = getHajjItineraryDetail(pkg.id)
   const hasItinerary = Boolean(pkg.itinerary?.length) && !hasDetailedItinerary
-  const enquireCtaLabel = t.common.viewItineraryEnquire
+  const isCustomize = pkg.tag.toLowerCase() === 'customize'
+  const enquireCtaLabel = isCustomize
+    ? 'Build Your Package'
+    : t.common.contactForPricing
   const primaryPhone = company.phones[0]
 
   function guardBook(e: MouseEvent) {
@@ -308,10 +313,14 @@ function TravelPackageCard({
       }
       detailsSubtitle={t.packagesUi.dubaiDepartures}
       detailsContent={detailsContent}
-      bullets={detailsContent ? null : pkg.highlights}
-      placeholderNote={
-        pkg.placeholder ? t.common.placeholderPackageNote : null
+      bullets={
+        detailsContent
+          ? null
+          : pendingContent
+            ? [PACKAGE_CONTENT_PENDING]
+            : pkg.highlights
       }
+      placeholderNote={pendingContent ? null : pkg.placeholder ? t.common.placeholderPackageNote : null}
       itineraryHref={enquireTo}
       itineraryLabel={enquireCtaLabel}
       phone={primaryPhone}

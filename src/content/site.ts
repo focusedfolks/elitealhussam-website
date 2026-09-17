@@ -96,11 +96,6 @@ export type PackageAmenity = {
 }
 
 export type { ItineraryRow } from './hajjItineraries'
-import {
-  budgetHajjItinerary,
-  businessHajjItineraryPlaceholder,
-  platinumHajjItinerary,
-} from './hajjItineraries'
 
 export type TravelMode = 'air' | 'road'
 
@@ -127,6 +122,7 @@ export type TravelPackage = {
   featured?: boolean
   /** Modes offered for this package; defaults to both air + road */
   availableTravelModes?: TravelMode[]
+  pendingContent?: boolean
 }
 
 export const AIRPORTS = [
@@ -198,6 +194,9 @@ const defaultAmenities: PackageAmenity[] = [
   { key: 'visa', title: 'Visa Help', subtitle: 'Documentation' },
 ]
 
+export const PACKAGE_CONTENT_PENDING =
+  '// TODO: Awaiting final Economic/Group package content from client — do not publish without replacing this placeholder\n[Package description and feature list pending]'
+
 export const umrahPackages: TravelPackage[] = [
   {
     id: 'umrah-economy',
@@ -205,8 +204,7 @@ export const umrahPackages: TravelPackage[] = [
     title: 'Economic Umrah Package',
     tag: 'Economic',
     season: '',
-    summary:
-      'A comfortable & affordable Umrah from Dubai, UAE — quality hotels, transport, and visa support handled end-to-end.',
+    summary: PACKAGE_CONTENT_PENDING,
     locations: 'Makkah • Madinah',
     duration: '10–12 Days',
     image: '/images/hero-makkah.webp',
@@ -219,48 +217,12 @@ export const umrahPackages: TravelPackage[] = [
       currency: 'INR',
       note: 'Details on enquiry',
     },
-    features: ['Group departure from Dubai', 'Shared transport', 'Visa help'],
-    highlights: [
-      'Best for budget-conscious travellers',
-      'Comfortable Dubai · UAE departure',
-      'Hassle-free Umrah journey',
-    ],
+    features: [PACKAGE_CONTENT_PENDING],
+    highlights: [PACKAGE_CONTENT_PENDING],
     amenities: [
-      { key: 'hotel', title: 'Hotel', subtitle: 'Economy stay' },
-      { key: 'transport', title: 'Transport', subtitle: 'All ground' },
-      { key: 'meals', title: 'Meals', subtitle: 'Daily included' },
-      { key: 'support', title: 'Support', subtitle: '24/7 care' },
-      { key: 'visa', title: 'Visa', subtitle: 'Docs help' },
+      ...defaultAmenities,
     ],
-  },
-  {
-    id: 'umrah-premium',
-    category: 'umrah',
-    title: 'Premium Umrah Package',
-    tag: 'Premium',
-    season: '',
-    summary:
-      'Closer hotels, smoother transfers, and attentive care for a peaceful Umrah from Dubai, UAE.',
-    locations: 'Makkah • Madinah',
-    duration: '14–16 Days',
-    image: '/images/madinah-nabawi.webp',
-    availableTravelModes: ['air'],
-    pricing: {
-      adult: 185000,
-      child: 145000,
-      infant: 42000,
-      currency: 'INR',
-      note: 'Details on enquiry',
-    },
-    features: ['Near Haram hotels', 'Private transfers option', 'Priority support'],
-    highlights: ['Near Haram hotels', 'Smoother transfers', 'Priority Dubai support'],
-    amenities: [
-      { key: 'hotel', title: 'Hotel', subtitle: 'Near Haram' },
-      { key: 'transport', title: 'Transport', subtitle: 'Private option' },
-      { key: 'meals', title: 'Meals', subtitle: 'Quality dining' },
-      { key: 'support', title: 'Support', subtitle: 'Priority care' },
-      { key: 'visa', title: 'Visa', subtitle: 'Docs help' },
-    ],
+    pendingContent: true,
   },
   {
     id: 'umrah-group',
@@ -268,8 +230,7 @@ export const umrahPackages: TravelPackage[] = [
     title: 'Group Umrah Package',
     tag: 'Group',
     season: '',
-    summary:
-      'Coordinated group Umrah departures from Dubai, UAE — shared hotels, transport, and dedicated group leader support.',
+    summary: PACKAGE_CONTENT_PENDING,
     locations: 'Makkah • Madinah',
     duration: 'TBC',
     image: '/images/kiswah-detail.webp',
@@ -282,28 +243,18 @@ export const umrahPackages: TravelPackage[] = [
       currency: 'INR',
       note: 'Details on enquiry',
     },
-    features: ['Group coordination', 'Shared transport', 'Dubai, UAE departures'],
-    highlights: [
-      'Ideal for families & friends travelling together',
-      'Group leader support throughout',
-      'Package details — coming soon',
-    ],
-    amenities: [
-      { key: 'hotel', title: 'Hotel', subtitle: 'Group allocation' },
-      { key: 'transport', title: 'Transport', subtitle: 'Shared coaches' },
-      { key: 'meals', title: 'Meals', subtitle: 'As per package' },
-      { key: 'support', title: 'Support', subtitle: 'Group leader' },
-      { key: 'visa', title: 'Visa', subtitle: 'Group processing' },
-    ],
+    features: [PACKAGE_CONTENT_PENDING],
+    highlights: [PACKAGE_CONTENT_PENDING],
+    amenities: defaultAmenities,
+    pendingContent: true,
   },
   {
     id: 'umrah-customise',
     category: 'umrah',
-    title: 'Customise Your Umrah',
-    tag: 'Customise',
+    title: 'Customize Your Umrah',
+    tag: 'Customize',
     season: '',
-    summary:
-      'Tell us your preferred dates, group size, and hotel class — our Dubai team will tailor your Umrah itinerary.',
+    summary: PACKAGE_CONTENT_PENDING,
     locations: 'Makkah • Madinah',
     duration: 'Flexible',
     image: '/images/kiswah-detail.webp',
@@ -315,32 +266,25 @@ export const umrahPackages: TravelPackage[] = [
       currency: 'INR',
       note: 'Details on enquiry',
     },
-    features: ['Choose your dates', 'Room preference', 'Family-friendly'],
-    highlights: [
-      'Flexible Dubai · UAE planning',
-      'Tailored hotel & transport options',
-      'Enquiry-based itinerary — contact our team',
-    ],
+    features: [PACKAGE_CONTENT_PENDING],
+    highlights: [PACKAGE_CONTENT_PENDING],
     amenities: defaultAmenities,
+    pendingContent: true,
   },
 ]
 
 export const hajjPackages: TravelPackage[] = [
   {
-    id: 'platinum-2025',
+    id: 'hajj-economic',
     category: 'hajj',
-    title: 'Platinum Short Package',
-    tag: 'Platinum Short',
+    title: 'Economic Hajj Package',
+    tag: 'Economic',
     season: 'Hajj 1448H / 2027',
-    summary:
-      '20-day platinum-short Hajj from Dubai, UAE — Swissotel Al Maqam & Dallah Taiba stays, full Hajj days programme, and decades of trusted hospitality.',
+    summary: PACKAGE_CONTENT_PENDING,
     locations: 'Makkah • Madinah • Arafat',
     duration: '20 Days',
     image: '/images/hero-makkah.webp',
-    popular: true,
-    featured: true,
     availableTravelModes: ['air', 'road'],
-    itinerary: platinumHajjItinerary,
     pricing: {
       adult: 545000,
       child: 415000,
@@ -348,35 +292,24 @@ export const hajjPackages: TravelPackage[] = [
       currency: 'INR',
       note: 'Details on enquiry',
     },
-    features: ['Premium hotels near Haram', 'Full Hajj guidance', 'Indian passport holders only'],
-    highlights: [
-      '20-day Platinum Short programme',
-      'Swissotel Al Maqam & Dallah Taiba',
-      'Indian passport holders only',
-    ],
-    amenities: [
-      { key: 'hotel', title: 'Hotel', subtitle: 'Luxury near Haram' },
-      { key: 'transport', title: 'Transport', subtitle: 'Comfort coaches' },
-      { key: 'meals', title: 'Meals', subtitle: 'Quality dining' },
-      { key: 'support', title: 'Support', subtitle: 'Dedicated team' },
-      { key: 'visa', title: 'Visa', subtitle: 'Full help' },
-    ],
+    features: [PACKAGE_CONTENT_PENDING],
+    highlights: [PACKAGE_CONTENT_PENDING],
+    amenities: defaultAmenities,
+    pendingContent: true,
   },
   {
-    id: 'classic-hajj-2025',
+    id: 'hajj-group',
     category: 'hajj',
-    title: 'Business Hajj Package',
-    tag: 'Business',
-    season: '',
-    summary:
-      'Business Class Hajj from Dubai, UAE — elevated stays, priority transfers, and dedicated support for Indian passport holders.',
+    title: 'Group Hajj Package',
+    tag: 'Group',
+    season: 'Hajj 1448H / 2027',
+    summary: PACKAGE_CONTENT_PENDING,
     locations: 'Makkah • Madinah • Arafat',
     duration: '28–32 Days',
     image: '/images/madinah-green-dome.webp',
     popular: true,
     placeholder: true,
     availableTravelModes: ['air', 'road'],
-    itinerary: businessHajjItineraryPlaceholder,
     pricing: {
       adult: 385000,
       child: 295000,
@@ -384,37 +317,22 @@ export const hajjPackages: TravelPackage[] = [
       currency: 'INR',
       note: 'Details on enquiry',
     },
-    features: [
-      'Business Class hotels',
-      'Priority Dubai, UAE support',
-      'Indian passport holders only',
-    ],
-    highlights: [
-      'Elevated Business Class comfort',
-      'Dubai, UAE departures',
-      'Indian passport holders only',
-    ],
-    amenities: [
-      { key: 'hotel', title: 'Business Hotels', subtitle: 'Premium near Haram' },
-      { key: 'transport', title: 'Priority Transport', subtitle: 'Comfort transfers' },
-      { key: 'meals', title: 'Quality Dining', subtitle: 'Curated meals' },
-      { key: 'support', title: 'Dedicated Support', subtitle: 'Dubai team 24/7' },
-      { key: 'visa', title: 'Visa Assistance', subtitle: 'Full documentation' },
-    ],
+    features: [PACKAGE_CONTENT_PENDING],
+    highlights: [PACKAGE_CONTENT_PENDING],
+    amenities: defaultAmenities,
+    pendingContent: true,
   },
   {
-    id: 'hajj-budget',
+    id: 'hajj-customise',
     category: 'hajj',
-    title: 'Budget Package',
-    tag: 'Budget',
+    title: 'Customize Your Hajj',
+    tag: 'Customize',
     season: 'Hajj 1448H / 2027',
-    summary:
-      '30-day value Hajj from Dubai, UAE for Indian passport holders — Makkah Tower / Pullman stays, organised rites, and group support.',
+    summary: PACKAGE_CONTENT_PENDING,
     locations: 'Makkah • Madinah • Arafat',
     duration: '30 Days',
     image: '/images/hero-makkah.webp',
     availableTravelModes: ['air', 'road'],
-    itinerary: budgetHajjItinerary,
     pricing: {
       adult: 385000,
       child: 295000,
@@ -422,13 +340,10 @@ export const hajjPackages: TravelPackage[] = [
       currency: 'INR',
       note: 'Details on enquiry',
     },
-    features: ['Organised Hajj rites', 'Shared transport', 'Indian passport holders only'],
-    highlights: [
-      '30-day Budget Hajj programme',
-      'Makkah Tower / Pullman stays',
-      'Indian passport holders only',
-    ],
+    features: [PACKAGE_CONTENT_PENDING],
+    highlights: [PACKAGE_CONTENT_PENDING],
     amenities: defaultAmenities,
+    pendingContent: true,
   },
 ]
 

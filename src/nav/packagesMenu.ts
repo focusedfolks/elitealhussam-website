@@ -88,12 +88,6 @@ export const packagesMenuCategories: PackagesMenuItem[] = [
         destinations: [{ label: 'Dubai', href: '/tours?country=dubai' }],
       },
       {
-        country: 'Indonesia',
-        destinations: [
-          { label: 'Batam', href: '/international-tours/batam' },
-        ],
-      },
-      {
         country: 'Thailand',
         destinations: [
           {
@@ -105,6 +99,12 @@ export const packagesMenuCategories: PackagesMenuItem[] = [
             href: '/international-tours/bangkok-free-easy',
           },
           { label: 'Bangkok Tour', href: '/international-tours/bangkok-tour' },
+        ],
+      },
+      {
+        country: 'Indonesia',
+        destinations: [
+          { label: 'Batam', href: '/international-tours/batam' },
         ],
       },
       {

@@ -11,6 +11,7 @@ import {
 import {
   hasPackageMenuChildren,
   packagesMenuCategories,
+  type PackagesCountryGroup,
   type PackagesMenuItem,
 } from '../nav/packagesMenu'
 import './PackagesMegaMenu.css'
@@ -53,10 +54,12 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
   )
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null)
+  const [activeCountryName, setActiveCountryName] = useState<string | null>(null)
   const [mobilePackagesOpen, setMobilePackagesOpen] = useState(false)
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState<string | null>(
     null,
   )
+  const [mobileCountryOpen, setMobileCountryOpen] = useState<string | null>(null)
   const openTimerRef = useRef<number | null>(null)
   const closeTimerRef = useRef<number | null>(null)
 
@@ -67,6 +70,13 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
   const activeCategory = packagesMenuCategories.find(
     (item) => item.id === activeCategoryId,
   )
+  const isInternationalTours = activeCategory?.id === 'international-tours'
+  const activeCountry =
+    isInternationalTours && activeCategory && hasPackageMenuChildren(activeCategory)
+      ? activeCategory.children.find(
+          (group) => group.country === activeCountryName,
+        )
+      : undefined
 
   const clearTimers = useCallback(() => {
     if (openTimerRef.current !== null) {
@@ -83,6 +93,7 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
     clearTimers()
     setMenuOpen(false)
     setActiveCategoryId(null)
+    setActiveCountryName(null)
   }, [clearTimers])
 
   useEffect(() => {
@@ -96,6 +107,7 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
     closeMenu()
     setMobilePackagesOpen(false)
     setMobileCategoryOpen(null)
+    setMobileCountryOpen(null)
   }, [location.pathname, closeMenu])
 
   useEffect(() => {
@@ -147,6 +159,7 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
     cancelClose()
     if (hasPackageMenuChildren(item)) {
       setActiveCategoryId(item.id)
+      setActiveCountryName(null)
       setMenuOpen(true)
     } else {
       setActiveCategoryId(null)
@@ -158,6 +171,7 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
       e.preventDefault()
       setMenuOpen(true)
       setActiveCategoryId(item.id)
+      setActiveCountryName(null)
     }
   }
 
@@ -227,6 +241,32 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
   function renderDesktopPanel2() {
     if (!activeCategory || !hasPackageMenuChildren(activeCategory)) return null
 
+    if (activeCategory.id === 'international-tours') {
+      return (
+        <div className="pkg-mega-panel pkg-mega-panel--country-list">
+          <p className="pkg-mega-panel-title">Countries</p>
+          <ul className="pkg-mega-list pkg-mega-list--categories" role="menu">
+            {activeCategory.children.map((group) => (
+              <li key={group.country} role="none">
+                <button
+                  type="button"
+                  role="menuitem"
+                  className={`pkg-mega-category${activeCountryName === group.country ? ' is-active' : ''}`}
+                  aria-expanded={activeCountryName === group.country}
+                  onMouseEnter={() => setActiveCountryName(group.country)}
+                  onFocus={() => setActiveCountryName(group.country)}
+                  onClick={() => setActiveCountryName(group.country)}
+                >
+                  <span>{group.country}</span>
+                  <ChevronRight />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
     return (
       <div className="pkg-mega-panel pkg-mega-panel--destinations">
         <p className="pkg-mega-panel-title">{activeCategory.label}</p>
@@ -254,6 +294,41 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
                   )}
                 </div>
               ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  function renderDesktopPanel3() {
+    if (!activeCountry) return null
+
+    return (
+      <div className="pkg-mega-panel pkg-mega-panel--destinations">
+        <p className="pkg-mega-panel-title">{activeCountry.country}</p>
+        <div className="pkg-mega-dest-grid">
+          {activeCountry.sections
+            ? activeCountry.sections.map((section) => (
+                <div className="pkg-mega-subgroup" key={section.label}>
+                  <h5>{section.label}</h5>
+                  {renderDestinationLinks(
+                    `${activeCountry.country}-${section.label}`,
+                    section.destinations,
+                  )}
+                </div>
+              ))
+            : renderDestinationLinks(
+                activeCountry.country,
+                activeCountry.destinations,
+              )}
+          {activeCountry.subgroups?.map((subgroup) => (
+            <div className="pkg-mega-subgroup" key={subgroup.label}>
+              <h5>{subgroup.label}</h5>
+              {renderDestinationLinks(
+                `${activeCountry.country}-${subgroup.label}`,
+                subgroup.destinations,
+              )}
             </div>
           ))}
         </div>
@@ -327,21 +402,31 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
                 <div className="pkg-mega-mobile-nested">
                   {item.children.map((group) => (
                     <div className="pkg-mega-mobile-country" key={group.country}>
-                      <p>{group.country}</p>
-                      {group.sections
-                        ? group.sections.map((section) => (
-                            <div className="pkg-mega-mobile-subgroup" key={section.label}>
-                              <p>{section.label}</p>
-                              {renderMobileDestinationLinks(section.destinations)}
-                            </div>
-                          ))
-                        : renderMobileDestinationLinks(group.destinations)}
-                      {group.subgroups?.map((subgroup) => (
-                        <div className="pkg-mega-mobile-subgroup" key={subgroup.label}>
-                          <p>{subgroup.label}</p>
-                          {renderMobileDestinationLinks(subgroup.destinations)}
-                        </div>
-                      ))}
+                      {item.id !== 'international-tours' ? (
+                        <p>{group.country}</p>
+                      ) : null}
+                      {item.id === 'international-tours' ? (
+                        <>
+                          <button
+                            type="button"
+                            className="pkg-mega-mobile-trigger pkg-mega-mobile-country-trigger"
+                            aria-expanded={mobileCountryOpen === group.country}
+                            onClick={() =>
+                              setMobileCountryOpen((cur) =>
+                                cur === group.country ? null : group.country,
+                              )
+                            }
+                          >
+                            <span>{group.country}</span>
+                            <ChevronDown open={mobileCountryOpen === group.country} />
+                          </button>
+                          {mobileCountryOpen === group.country
+                            ? renderMobileCountryItems(group)
+                            : null}
+                        </>
+                      ) : (
+                        renderMobileCountryItems(group)
+                      )}
                     </div>
                   ))}
                 </div>
@@ -373,6 +458,29 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
           </li>
         ))}
       </ul>
+    )
+  }
+
+  function renderMobileCountryItems(
+    group: PackagesCountryGroup,
+  ) {
+    return (
+      <div className="pkg-mega-mobile-country-items">
+        {group.sections
+          ? group.sections.map((section) => (
+              <div className="pkg-mega-mobile-subgroup" key={section.label}>
+                <p>{section.label}</p>
+                {renderMobileDestinationLinks(section.destinations)}
+              </div>
+            ))
+          : renderMobileDestinationLinks(group.destinations)}
+        {group.subgroups?.map((subgroup) => (
+          <div className="pkg-mega-mobile-subgroup" key={subgroup.label}>
+            <p>{subgroup.label}</p>
+            {renderMobileDestinationLinks(subgroup.destinations)}
+          </div>
+        ))}
+      </div>
     )
   }
 
@@ -416,6 +524,7 @@ export function PackagesMegaMenu({ label, onNavigate }: Props) {
             {renderDesktopPanel1()}
           </div>
           {renderDesktopPanel2()}
+          {renderDesktopPanel3()}
         </div>
       ) : (
         renderMobileAccordion()

@@ -69,6 +69,14 @@
   background: #fff;
 }
 
+.pkg-mega-panel--country-list {
+  min-width: 220px;
+  max-width: 260px;
+  padding: 0.85rem 0.65rem 0.75rem;
+  border-left: 0;
+  border-radius: 0;
+}
+
 .pkg-mega-panel-title {
   margin: 0 0 0.55rem;
   padding: 0 0.45rem;
@@ -371,6 +379,15 @@
 
 .pkg-mega-mobile-subgroup p {
   margin-bottom: 0.1rem;
+}
+
+.pkg-mega-mobile-country-trigger {
+  margin-top: 0.2rem;
+  padding-left: 0.4rem;
+}
+
+.pkg-mega-mobile-country-items {
+  padding-left: 0.7rem;
 }
 
 @media (min-width: 1280px) {

@@ -18,6 +18,7 @@ export const gu: Dictionary = {
     { to: '/', label: 'હોમ' },
     { to: '/about', label: 'અમારા વિશે' },
     { to: '/packages', label: 'પેકેજ' },
+    { to: '/tours', label: 'ટૂર્સ' },
     { to: '/guide', label: 'ઇતિહાસ' },
     { to: '/gallery', label: 'ગેલેરી' },
     { to: '/blog', label: 'બ્લોગ' },

@@ -22,6 +22,7 @@ import { StructureAndImportantPlacesPage } from './pages/StructureAndImportantPl
 import { Home } from './pages/Home'
 import { InternationalTours } from './pages/InternationalTours'
 import { LocalTours } from './pages/LocalTours'
+import { Tours } from './pages/Tours'
 import { TourPackagePage } from './pages/TourPackagePage'
 import { NotFound } from './pages/NotFound'
 import { Packages } from './pages/PackagesPages'
@@ -74,6 +75,7 @@ export default function App() {
                 element={<TourPackagePage />}
               />
               <Route path="local-tours" element={<LocalTours />} />
+              <Route path="tours" element={<Tours />} />
               <Route path="pricing" element={<Pricing />} />
               <Route path="hajj" element={<Navigate to="/packages" replace />} />
               <Route path="umrah" element={<Navigate to="/packages" replace />} />

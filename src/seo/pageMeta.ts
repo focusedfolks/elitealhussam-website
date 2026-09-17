@@ -66,6 +66,13 @@ export const pageMeta = {
     path: '/local-tours',
     image: images.dubai,
   },
+  tours: {
+    title: 'Destinations | ELITE ALHUSSAM Travel and Tourism',
+    description:
+      'Browse destinations across India and Dubai from ELITE ALHUSSAM. Destination details are being prepared and will be published soon.',
+    path: '/tours',
+    image: images.touristHero,
+  },
   notFound: {
     title: 'Page Not Found | ELITE ALHUSSAM',
     description:

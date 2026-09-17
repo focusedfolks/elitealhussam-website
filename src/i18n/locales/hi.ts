@@ -18,6 +18,7 @@ export const hi: Dictionary = {
     { to: '/', label: 'होम' },
     { to: '/about', label: 'हमारे बारे में' },
     { to: '/packages', label: 'पैकेज' },
+    { to: '/tours', label: 'टूर्स' },
     { to: '/guide', label: 'इतिहास' },
     { to: '/gallery', label: 'गैलरी' },
     { to: '/blog', label: 'ब्लॉग' },

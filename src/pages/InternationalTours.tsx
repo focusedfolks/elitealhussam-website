@@ -5,11 +5,13 @@ import '../components/PackageCards.css'
 import '../components/TourPackageCards.css'
 import { pageMeta } from '../seo/pageMeta'
 import { images } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
 import { toursByCountry } from '../content/internationalTours'
 import './InnerPages.css'
 
 export function InternationalTours() {
-  const groups = toursByCountry()
+  const { packages } = useCms()
+  const groups = toursByCountry(packages)
 
   return (
     <div>

@@ -69,7 +69,7 @@ export function AdminPackagesList() {
   return (
     <>
       <div className="admin-toolbar">
-        <p className="admin-muted">Manage Hajj & Umrah packages and pricing.</p>
+        <p className="admin-muted">Manage Hajj, Umrah, and International Tour packages.</p>
         <Link className="admin-btn admin-btn-primary" to="/admin/packages/new">
           Add package
         </Link>
@@ -230,6 +230,7 @@ export function AdminPackageEdit() {
           >
             <option value="hajj">Hajj</option>
             <option value="umrah">Umrah</option>
+            <option value="tour">International Tour</option>
           </select>
         </div>
         <div className="admin-field">

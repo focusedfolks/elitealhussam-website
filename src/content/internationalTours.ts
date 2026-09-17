@@ -1,3 +1,5 @@
+import type { TravelPackage } from './site'
+
 /**
  * International tour packages with confirmed durations only.
  * Packages marked Duration: TBD in the source brief are omitted until client confirms.
@@ -28,6 +30,37 @@ export type TourPackage = {
   itinerary: { day: string; title: string; text: string }[]
   inclusions: string[]
   exclusions: string[]
+}
+
+export function tourPackageToTravelPackage(pkg: TourPackage): TravelPackage {
+  return {
+    id: pkg.slug,
+    category: 'tour' as const,
+    title: pkg.title,
+    tag: pkg.country,
+    season: '',
+    summary: pkg.description,
+    locations: pkg.country,
+    duration: pkg.duration,
+    image: pkg.image,
+    pricing: {
+      adult: 0,
+      child: 0,
+      infant: 0,
+      currency: 'INR' as const,
+      note: 'Enquire for a personalised quote',
+    },
+    features: pkg.inclusions.slice(0, 5),
+    highlights: pkg.highlights,
+    amenities: [
+      { key: 'hotel' as const, title: 'Hotels', subtitle: 'As quoted' },
+      { key: 'transport' as const, title: 'Transfers', subtitle: 'As quoted' },
+      { key: 'meals' as const, title: 'Meals', subtitle: 'As quoted' },
+      { key: 'support' as const, title: 'Support', subtitle: 'Dubai team' },
+      { key: 'visa' as const, title: 'Guidance', subtitle: 'Trip planning' },
+    ],
+    availableTravelModes: ['air', 'road'],
+  }
 }
 
 export const internationalTourPackages: TourPackage[] = [
@@ -725,11 +758,38 @@ export const internationalTourPackages: TourPackage[] = [
   },
 ]
 
-export function getTourBySlug(slug: string): TourPackage | undefined {
-  return internationalTourPackages.find((pkg) => pkg.slug === slug)
+export function editableInternationalTourPackages(
+  cmsPackages: TravelPackage[] = [],
+): TourPackage[] {
+  return internationalTourPackages.map((pkg) => {
+    const edited = cmsPackages.find(
+      (candidate) => candidate.category === 'tour' && candidate.id === pkg.slug,
+    )
+    if (!edited) return pkg
+    return {
+      ...pkg,
+      title: edited.title,
+      description: edited.summary,
+      duration: edited.duration,
+      image: edited.image,
+      highlights: edited.highlights.length ? edited.highlights : pkg.highlights,
+    }
+  })
 }
 
-export function toursByCountry(): { country: TourCountry; packages: TourPackage[] }[] {
+export function getTourBySlug(
+  slug: string,
+  cmsPackages: TravelPackage[] = [],
+): TourPackage | undefined {
+  return editableInternationalTourPackages(cmsPackages).find(
+    (pkg) => pkg.slug === slug,
+  )
+}
+
+export function toursByCountry(
+  cmsPackages: TravelPackage[] = [],
+): { country: TourCountry; packages: TourPackage[] }[] {
+  const packages = editableInternationalTourPackages(cmsPackages)
   const order: TourCountry[] = [
     'India',
     'Indonesia',
@@ -741,7 +801,7 @@ export function toursByCountry(): { country: TourCountry; packages: TourPackage[
   return order
     .map((country) => ({
       country,
-      packages: internationalTourPackages.filter((p) => p.country === country),
+        packages: packages.filter((p) => p.country === country),
     }))
     .filter((group) => group.packages.length > 0)
 }

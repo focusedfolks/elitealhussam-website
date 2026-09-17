@@ -31,7 +31,7 @@ export function Packages() {
     const hash = location.hash.replace('#', '')
     if (!hash) return
     const match = allPackages.find((pkg) => pkg.id === hash)
-    if (match) {
+    if (match && (match.category === 'hajj' || match.category === 'umrah')) {
       setFilter(match.category)
       requestAnimationFrame(() => {
         document

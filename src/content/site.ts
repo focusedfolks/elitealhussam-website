@@ -79,7 +79,7 @@ export const features = [
   },
 ]
 
-export type PackageCategory = 'hajj' | 'umrah'
+export type PackageCategory = 'hajj' | 'umrah' | 'tour'
 
 export type PackagePricing = {
   adult: number

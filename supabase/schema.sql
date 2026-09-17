@@ -4,7 +4,7 @@
 -- Packages
 create table if not exists public.packages (
   id text primary key,
-  category text not null check (category in ('hajj', 'umrah')),
+  category text not null check (category in ('hajj', 'umrah', 'tour')),
   title text not null,
   tag text not null default '',
   season text not null default '',

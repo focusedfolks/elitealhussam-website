@@ -33,7 +33,7 @@ import {
 import { PackageCard } from './PackageCard'
 import './PackageCards.css'
 
-type Filter = 'all' | PackageCategory
+type Filter = 'all' | Exclude<PackageCategory, 'tour'>
 
 type Passengers = {
   adults: number

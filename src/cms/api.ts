@@ -6,6 +6,10 @@ import {
   testimonials as staticSiteTestimonials,
   type TravelPackage,
 } from '../content/site'
+import {
+  internationalTourPackages,
+  tourPackageToTravelPackage,
+} from '../content/internationalTours'
 import { isSupabaseConfigured, supabase } from '../lib/supabase'
 import type {
   CmsAbout,
@@ -16,6 +20,11 @@ import type {
 } from './types'
 
 marked.setOptions({ gfm: true })
+
+export const staticPackages: TravelPackage[] = [
+  ...allPackages,
+  ...internationalTourPackages.map(tourPackageToTravelPackage),
+]
 
 const fallbackTestimonials: CmsTestimonial[] = [
   {
@@ -64,8 +73,8 @@ function mapPackage(row: Record<string, unknown>): TravelPackage {
       : undefined,
     popular: Boolean(row.popular),
     featured: Boolean(row.featured),
-    itinerary: allPackages.find((p) => p.id === String(row.id))?.itinerary,
-    placeholder: allPackages.find((p) => p.id === String(row.id))?.placeholder,
+    itinerary: staticPackages.find((p) => p.id === String(row.id))?.itinerary,
+    placeholder: staticPackages.find((p) => p.id === String(row.id))?.placeholder,
   }
 }
 
@@ -88,16 +97,16 @@ function mapBlog(row: Record<string, unknown>): CmsBlogPost {
 }
 
 export async function fetchCmsPackages(): Promise<TravelPackage[]> {
-  if (!supabase) return allPackages
+  if (!supabase) return staticPackages
   const { data, error } = await supabase
     .from('packages')
     .select('*')
     .eq('published', true)
     .order('sort_order', { ascending: true })
-  if (error || !data?.length) return allPackages
+  if (error || !data?.length) return staticPackages
   const mapped = data.map((row) => mapPackage(row as Record<string, unknown>))
   const cmsById = new Map(mapped.map((pkg) => [pkg.id, pkg]))
-  return allPackages.map((fallback) => {
+  const merged = staticPackages.map((fallback) => {
     const cms = cmsById.get(fallback.id)
     if (!cms) return fallback
     return {
@@ -108,6 +117,8 @@ export async function fetchCmsPackages(): Promise<TravelPackage[]> {
       placeholder: fallback.placeholder ?? cms.placeholder,
     }
   })
+  const knownIds = new Set(staticPackages.map((pkg) => pkg.id))
+  return [...merged, ...mapped.filter((pkg) => !knownIds.has(pkg.id))]
 }
 
 export async function fetchCmsBlogPosts(): Promise<CmsBlogPost[]> {
@@ -196,11 +207,18 @@ export async function adminListPackages() {
     .select('*')
     .order('sort_order', { ascending: true })
   if (error) throw error
-  return (data || []).map((row) => ({
+  const rows = (data || []).map((row) => ({
     ...mapPackage(row as Record<string, unknown>),
     published: Boolean(row.published),
     sortOrder: Number(row.sort_order || 0),
   }))
+  const knownIds = new Set(rows.map((pkg) => pkg.id))
+  return [
+    ...staticPackages
+      .filter((pkg) => !knownIds.has(pkg.id))
+      .map((pkg) => ({ ...pkg, published: true, sortOrder: 0 })),
+    ...rows,
+  ]
 }
 
 export async function adminUpsertPackage(

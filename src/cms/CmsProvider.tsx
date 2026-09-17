@@ -10,7 +10,6 @@ import {
 import { posts as staticPosts } from 'virtual:blog-posts'
 import {
   aboutCopy,
-  allPackages,
   company as staticCompany,
   type TravelPackage,
 } from '../content/site'
@@ -21,6 +20,7 @@ import {
   fetchCmsPackages,
   fetchCmsTestimonials,
   isSupabaseConfigured,
+  staticPackages,
 } from './api'
 import type { CmsAbout, CmsBlogPost, CmsCompany, CmsTestimonial } from './types'
 
@@ -54,7 +54,7 @@ function staticBlogAsCms(): CmsBlogPost[] {
 
 export function CmsProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(isSupabaseConfigured)
-  const [packages, setPackages] = useState<TravelPackage[]>(allPackages)
+  const [packages, setPackages] = useState<TravelPackage[]>(staticPackages)
   const [posts, setPosts] = useState<CmsBlogPost[]>(staticBlogAsCms())
   const [testimonials, setTestimonials] = useState<CmsTestimonial[]>([
     {
@@ -83,7 +83,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
 
   const refresh = useCallback(async () => {
     if (!isSupabaseConfigured) {
-      setPackages(allPackages)
+      setPackages(staticPackages)
       setPosts(staticBlogAsCms())
       setTestimonials([
         {
@@ -120,7 +120,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         fetchCmsCompany(),
         fetchCmsAbout(),
       ])
-      setPackages(pkgs.length ? pkgs : allPackages)
+      setPackages(pkgs.length ? pkgs : staticPackages)
       setPosts(blog.length ? blog : staticBlogAsCms())
       setTestimonials(testi)
       // Keep Dubai contact details authoritative even if CMS seed is stale

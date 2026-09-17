@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Seo } from '../components/Seo'
 import { TourEnquiryForm } from '../components/TourEnquiryForm'
 import { getTourBySlug } from '../content/internationalTours'
+import { useCms } from '../cms/CmsProvider'
 import './TourPackagePage.css'
 
 type TabId = 'info' | 'itinerary' | 'inclusions' | 'exclusions'
@@ -24,7 +25,8 @@ function ClockIcon() {
 
 export function TourPackagePage() {
   const { slug } = useParams()
-  const pkg = slug ? getTourBySlug(slug) : undefined
+  const { packages } = useCms()
+  const pkg = slug ? getTourBySlug(slug, packages) : undefined
   const [tab, setTab] = useState<TabId>('info')
 
   if (!pkg) return <Navigate to="/international-tours" replace />

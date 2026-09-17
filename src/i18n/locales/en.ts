@@ -18,7 +18,6 @@ export const en: Dictionary = {
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About Us' },
     { to: '/packages', label: 'Packages' },
-    { to: '/tours', label: 'Tours' },
     { to: '/guide', label: 'History' },
     { to: '/gallery', label: 'Gallery' },
     { to: '/blog', label: 'Blog' },

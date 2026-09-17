@@ -187,11 +187,11 @@ export function packageTravelModes(pkg: TravelPackage): TravelMode[] {
 }
 
 const defaultAmenities: PackageAmenity[] = [
-  { key: 'hotel', title: 'Hotel Stay', subtitle: 'Quality lodging' },
+  { key: 'hotel', title: 'Hotel', subtitle: 'Quality lodging' },
   { key: 'transport', title: 'Transport', subtitle: 'All transfers' },
-  { key: 'meals', title: 'Daily Meals', subtitle: 'As per package' },
-  { key: 'support', title: '24/7 Support', subtitle: 'Always available' },
-  { key: 'visa', title: 'Visa Help', subtitle: 'Documentation' },
+  { key: 'meals', title: 'Meals', subtitle: 'As per package' },
+  { key: 'support', title: 'Support', subtitle: 'Always available' },
+  { key: 'visa', title: 'Visa', subtitle: 'Documentation' },
 ]
 
 export const PACKAGE_CONTENT_PENDING =

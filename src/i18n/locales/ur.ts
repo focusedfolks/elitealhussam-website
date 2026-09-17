@@ -18,7 +18,6 @@ export const ur: Dictionary = {
     { to: '/', label: 'ہوم' },
     { to: '/about', label: 'ہمارے بارے میں' },
     { to: '/packages', label: 'پیکجز' },
-    { to: '/tours', label: 'ٹورز' },
     { to: '/guide', label: 'تاریخ' },
     { to: '/gallery', label: 'گیلری' },
     { to: '/blog', label: 'بلاگ' },

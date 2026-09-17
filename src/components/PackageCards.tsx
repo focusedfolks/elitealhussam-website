@@ -10,9 +10,11 @@ import {
 import {
   packageTravelModes,
   PACKAGE_CONTENT_PENDING,
+  hajjPackages,
   type ItineraryRow,
   type PackageCategory,
   type TravelPackage,
+  umrahPackages,
 } from '../content/site'
 import {
   getHajjItineraryDetail,
@@ -75,11 +77,15 @@ export function PackageCards({
     else setInternalFilter(next)
   }
 
-  const totalCount = allPackages.filter((pkg) =>
+  const packageSource = showFilters
+    ? [...umrahPackages, ...hajjPackages]
+    : allPackages
+
+  const totalCount = packageSource.filter((pkg) =>
     popularOnly ? Boolean(pkg.popular) : true,
   ).length
 
-  const packages = allPackages
+  const packages = packageSource
     .filter((pkg) => (popularOnly ? Boolean(pkg.popular) : true))
     .filter((pkg) => (active === 'all' ? true : pkg.category === active))
     .filter((pkg) => !excludeIds.includes(pkg.id))
@@ -142,7 +148,6 @@ export function PackageCards({
             ).map(([key, label]) => (
               <button
                 key={key}
-                type="button"
                 role="tab"
                 data-filter={key}
                 aria-selected={active === key}
@@ -193,9 +198,11 @@ function TravelPackageCard({
   }))
   const [travelTouched, setTravelTouched] = useState(false)
   const catalog = t.packageCatalog[pkg.id]
-  const title = catalog?.title ?? pkg.title
   const pendingContent = Boolean(pkg.pendingContent)
-  const summary = pendingContent ? PACKAGE_CONTENT_PENDING : catalog?.summary ?? pkg.summary
+  const title = pendingContent ? pkg.title : catalog?.title ?? pkg.title
+  const summary = pendingContent
+    ? PACKAGE_CONTENT_PENDING
+    : catalog?.summary ?? pkg.summary
 
   const totalLabel = useMemo(() => {
     const parts: string[] = []

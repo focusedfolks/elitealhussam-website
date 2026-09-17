@@ -78,10 +78,10 @@ export const destinationCountries: DestinationCountry[] = [
           {
             name: 'Hill Station',
             destinations: [
-              destination('Ooty', '/images/hero-madinah.webp', 'Ooty hill station Tamil Nadu', 'ooty'),
-              destination('Kodaikanal', '/images/gallery-packages.webp', 'Kodaikanal hill station lake Tamil Nadu', 'kodaikanal'),
-              destination('Yercaud', '/images/family-travel.webp', 'Yercaud hill station Tamil Nadu', 'yercaud'),
-              destination('Yelagiri', '/images/airport-travel.webp', 'Yelagiri hill station Tamil Nadu', 'yelagiri'),
+              destination('Ooty', '/images/tours/Ooty%20tamil%20nadu.jpg', 'Ooty hill station Tamil Nadu', 'ooty'),
+              destination('Kodaikanal', '/images/tours/Kodaikanal%20tamil%20nadu.jpg', 'Kodaikanal hill station lake Tamil Nadu', 'kodaikanal'),
+              destination('Yercaud', '/images/tours/Yercaud%20tamil%20nadu.jpg', 'Yercaud hill station Tamil Nadu', 'yercaud'),
+              destination('Yelagiri', '/images/tours/Yelagiri%20tamil%20nadu.jpg', 'Yelagiri hill station Tamil Nadu', 'yelagiri'),
             ],
           },
         ],

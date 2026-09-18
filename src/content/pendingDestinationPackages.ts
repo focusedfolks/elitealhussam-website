@@ -2,6 +2,7 @@ import {
   destinationCountries,
   type Destination,
 } from './destinations'
+import type { TourDetailContent, TravelPackage } from './site'
 
 export type PendingDestinationPackage = Destination & {
   stateName: string
@@ -9,9 +10,10 @@ export type PendingDestinationPackage = Destination & {
   tagline: string
   about: string
   highlights: string[]
-  itinerary: { day: string; title: string; text: string }[]
+  itinerary: TourDetailContent['itinerary']
   inclusions: string[]
   exclusions: string[]
+  tourDetails?: TourDetailContent
 }
 
 const sharedInclusions = [
@@ -34,15 +36,14 @@ const sharedExclusions = [
 
 type PendingPackageDetails = Omit<
   PendingDestinationPackage,
-  keyof Destination | 'stateName'
+  keyof Destination | 'stateName' | 'tourDetails'
 >
 
 const pendingPackageDetails: Record<string, PendingPackageDetails> = {
   munnar: {
     duration: '2 Days / 1 Night',
     tagline: 'Tea Plantations and Cool Hill Air',
-    about:
-      'A classic Munnar getaway through rolling tea plantations and cool hill air in the Western Ghats.',
+    about: 'A classic Munnar getaway through rolling tea plantations and cool hill air in the Western Ghats.',
     highlights: ['Tea Museum & plantation walk', 'Echo Point', 'Mattupetty Dam', 'Top Station viewpoint'],
     itinerary: [
       { day: 'Day 1', title: 'Arrival in Munnar', text: 'Visit the Tea Museum and a working tea plantation; Echo Point and Mattupetty Dam in the afternoon.' },
@@ -273,7 +274,56 @@ export function getPendingDestinationBySlug(
   if (!pendingDestinationSlugs.has(slug)) return undefined
   const destination = destinationsWithStates().find((item) => item.slug === slug)
   const details = pendingPackageDetails[slug]
-  return destination && details ? { ...destination, ...details } : undefined
+  return destination && details
+    ? {
+        ...destination,
+        ...details,
+        tourDetails: {
+          tagline: details.tagline,
+          about: details.about,
+          highlights: details.highlights,
+          itinerary: details.itinerary,
+          inclusions: details.inclusions,
+          exclusions: details.exclusions,
+        },
+      }
+    : undefined
+}
+
+export function pendingDestinationToTravelPackage(
+  destination: PendingDestinationPackage,
+): TravelPackage {
+  return {
+    id: destination.slug,
+    category: 'tour',
+    title: destination.name,
+    tag: destination.stateName,
+    season: destination.duration,
+    summary: destination.description,
+    locations: destination.stateName,
+    duration: destination.duration,
+    image: destination.image,
+    pricing: {
+      adult: 0,
+      child: 0,
+      infant: 0,
+      currency: 'INR',
+      note: 'Enquire for a personalised quote',
+    },
+    features: destination.inclusions.slice(0, 5),
+    highlights: destination.highlights,
+    amenities: [],
+    availableTravelModes: ['air', 'road'],
+    tourDetails: destination.tourDetails,
+    pendingContent: true,
+  }
+}
+
+export function pendingDestinationPackages(): TravelPackage[] {
+  return destinationsWithStates()
+    .map((destination) => getPendingDestinationBySlug(destination.slug))
+    .filter((destination): destination is PendingDestinationPackage => Boolean(destination))
+    .map(pendingDestinationToTravelPackage)
 }
 
 export function isPendingDestinationSlug(slug: string): boolean {

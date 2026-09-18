@@ -146,6 +146,11 @@ export function AdminPackageEdit() {
   const [form, setForm] = useState(emptyPackage())
   const [featuresText, setFeaturesText] = useState('')
   const [highlightsText, setHighlightsText] = useState('')
+  const [tourTagline, setTourTagline] = useState('')
+  const [tourAbout, setTourAbout] = useState('')
+  const [tourItineraryText, setTourItineraryText] = useState('')
+  const [tourInclusionsText, setTourInclusionsText] = useState('')
+  const [tourExclusionsText, setTourExclusionsText] = useState('')
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -167,6 +172,15 @@ export function AdminPackageEdit() {
         })
         setFeaturesText(found.features.join('\n'))
         setHighlightsText(found.highlights.join('\n'))
+        setTourTagline(found.tourDetails?.tagline ?? '')
+        setTourAbout(found.tourDetails?.about ?? '')
+        setTourItineraryText(
+          found.tourDetails?.itinerary
+            .map((day) => `${day.day} | ${day.title} | ${day.text}`)
+            .join('\n') ?? '',
+        )
+        setTourInclusionsText(found.tourDetails?.inclusions.join('\n') ?? '')
+        setTourExclusionsText(found.tourDetails?.exclusions.join('\n') ?? '')
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load')
       }
@@ -188,6 +202,27 @@ export function AdminPackageEdit() {
           .split('\n')
           .map((s) => s.trim())
           .filter(Boolean),
+        tourDetails: {
+          tagline: tourTagline.trim(),
+          about: tourAbout.trim(),
+          highlights: highlightsText
+            .split('\n')
+            .map((s) => s.trim())
+            .filter(Boolean),
+          itinerary: tourItineraryText
+            .split('\n')
+            .map((line) => line.split('|').map((part) => part.trim()))
+            .filter((parts) => parts.length >= 3 && parts.every(Boolean))
+            .map(([day, title, text]) => ({ day, title, text })),
+          inclusions: tourInclusionsText
+            .split('\n')
+            .map((s) => s.trim())
+            .filter(Boolean),
+          exclusions: tourExclusionsText
+            .split('\n')
+            .map((s) => s.trim())
+            .filter(Boolean),
+        },
       })
       setMessage('Package saved')
       if (isNew) navigate(`/admin/packages/${form.id}`)
@@ -346,6 +381,41 @@ export function AdminPackageEdit() {
           <textarea
             value={highlightsText}
             onChange={(e) => setHighlightsText(e.target.value)}
+          />
+        </div>
+        <div className="admin-field full">
+          <label>Package detail tagline</label>
+          <input
+            value={tourTagline}
+            onChange={(e) => setTourTagline(e.target.value)}
+          />
+        </div>
+        <div className="admin-field full">
+          <label>About This Package</label>
+          <textarea
+            value={tourAbout}
+            onChange={(e) => setTourAbout(e.target.value)}
+          />
+        </div>
+        <div className="admin-field full">
+          <label>Itinerary (one per line: Day 1 | Title | Description)</label>
+          <textarea
+            value={tourItineraryText}
+            onChange={(e) => setTourItineraryText(e.target.value)}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Inclusions (one per line)</label>
+          <textarea
+            value={tourInclusionsText}
+            onChange={(e) => setTourInclusionsText(e.target.value)}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Exclusions (one per line)</label>
+          <textarea
+            value={tourExclusionsText}
+            onChange={(e) => setTourExclusionsText(e.target.value)}
           />
         </div>
         <div className="admin-field">

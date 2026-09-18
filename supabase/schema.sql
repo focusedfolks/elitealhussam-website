@@ -19,6 +19,7 @@ create table if not exists public.packages (
   available_travel_modes jsonb default null,
   popular boolean not null default false,
   featured boolean not null default false,
+  tour_details jsonb default null,
   published boolean not null default true,
   sort_order int not null default 0,
   updated_at timestamptz not null default now()

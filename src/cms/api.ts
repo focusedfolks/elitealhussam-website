@@ -10,6 +10,7 @@ import {
   internationalTourPackages,
   tourPackageToTravelPackage,
 } from '../content/internationalTours'
+import { pendingDestinationPackages } from '../content/pendingDestinationPackages'
 import { isSupabaseConfigured, supabase } from '../lib/supabase'
 import type {
   CmsAbout,
@@ -75,6 +76,7 @@ function mapPackage(row: Record<string, unknown>): TravelPackage {
     featured: Boolean(row.featured),
     itinerary: staticPackages.find((p) => p.id === String(row.id))?.itinerary,
     placeholder: staticPackages.find((p) => p.id === String(row.id))?.placeholder,
+    tourDetails: row.tour_details as TravelPackage['tourDetails'],
   }
 }
 
@@ -217,6 +219,9 @@ export async function adminListPackages() {
     ...staticPackages
       .filter((pkg) => !knownIds.has(pkg.id))
       .map((pkg) => ({ ...pkg, published: true, sortOrder: 0 })),
+    ...pendingDestinationPackages()
+      .filter((pkg) => !knownIds.has(pkg.id))
+      .map((pkg) => ({ ...pkg, published: true, sortOrder: 0 })),
     ...rows,
   ]
 }
@@ -242,6 +247,7 @@ export async function adminUpsertPackage(
     available_travel_modes: pkg.availableTravelModes ?? null,
     popular: Boolean(pkg.popular),
     featured: Boolean(pkg.featured),
+    tour_details: pkg.tourDetails ?? null,
     published: pkg.published !== false,
     sort_order: pkg.sortOrder ?? 0,
   })

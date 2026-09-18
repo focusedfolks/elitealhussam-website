@@ -20,14 +20,14 @@ export type DestinationCountry =
   | { id: string; name: string; kind: 'states'; states: DestinationState[] }
   | { id: string; name: string; kind: 'destinations'; categories: DestinationCategory[] }
 
-const comingSoon = 'Destination details coming soon.'
+const destinationCardDescription = 'View destination package details and enquire.'
 
 const destination = (name: string, image: string, imageAlt: string, slug: string): Destination => ({
   name,
   slug,
   image,
   imageAlt,
-  description: comingSoon,
+  description: destinationCardDescription,
 })
 
 export const destinationCountries: DestinationCountry[] = [

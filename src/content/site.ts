@@ -99,6 +99,15 @@ export type { ItineraryRow } from './hajjItineraries'
 
 export type TravelMode = 'air' | 'road'
 
+export type TourDetailContent = {
+  tagline: string
+  about: string
+  highlights: string[]
+  itinerary: { day: string; title: string; text: string }[]
+  inclusions: string[]
+  exclusions: string[]
+}
+
 export type TravelPackage = {
   id: string
   category: PackageCategory
@@ -123,6 +132,7 @@ export type TravelPackage = {
   /** Modes offered for this package; defaults to both air + road */
   availableTravelModes?: TravelMode[]
   pendingContent?: boolean
+  tourDetails?: TourDetailContent
 }
 
 export const AIRPORTS = [

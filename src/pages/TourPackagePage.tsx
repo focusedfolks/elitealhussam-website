@@ -29,19 +29,22 @@ export function TourPackagePage() {
   const { packages } = useCms()
   const internationalPackage = slug ? getTourBySlug(slug, packages) : undefined
   const pendingDestination = slug ? getPendingDestinationBySlug(slug) : undefined
+  const cmsDestination = pendingDestination
+    ? packages.find((item) => item.id === pendingDestination.slug)
+    : undefined
   const pkg = internationalPackage ?? (pendingDestination ? {
     slug: pendingDestination.slug,
-    title: pendingDestination.name,
-    tagline: pendingDestination.tagline,
-    description: pendingDestination.description,
-    duration: pendingDestination.duration,
-    image: pendingDestination.image,
+    title: cmsDestination?.title ?? pendingDestination.name,
+    tagline: cmsDestination?.tourDetails?.tagline ?? pendingDestination.tagline,
+    description: cmsDestination?.summary ?? pendingDestination.description,
+    duration: cmsDestination?.duration ?? pendingDestination.duration,
+    image: cmsDestination?.image ?? pendingDestination.image,
     imageAlt: pendingDestination.imageAlt,
-    about: pendingDestination.about,
-    highlights: pendingDestination.highlights,
-    itinerary: pendingDestination.itinerary,
-    inclusions: pendingDestination.inclusions,
-    exclusions: pendingDestination.exclusions,
+    about: cmsDestination?.tourDetails?.about ?? pendingDestination.about,
+    highlights: cmsDestination?.tourDetails?.highlights ?? pendingDestination.highlights,
+    itinerary: cmsDestination?.tourDetails?.itinerary ?? pendingDestination.itinerary,
+    inclusions: cmsDestination?.tourDetails?.inclusions ?? pendingDestination.inclusions,
+    exclusions: cmsDestination?.tourDetails?.exclusions ?? pendingDestination.exclusions,
     isPending: true,
   } : undefined)
   const [tab, setTab] = useState<TabId>('info')

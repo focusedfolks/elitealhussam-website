@@ -27,7 +27,8 @@ For Vercel: add the same two variables in **Project Settings → Environment Var
 
 1. In Supabase, open **SQL Editor**.
 2. Paste and run the full contents of `supabase/schema.sql`.
-3. This creates tables, RLS policies, and seed data (packages, company, about, testimonials).
+3. If the project already had the original schema, also run `supabase/add-tour-details.sql` once.
+4. This creates tables, RLS policies, and seed data (packages, company, about, testimonials).
 
 ## 4. Create an admin user
 
@@ -41,7 +42,7 @@ Anyone who can authenticate is treated as an admin (RLS allows authenticated ful
 
 Open `/admin` for:
 
-- **Packages** — prices, images, features, publish/draft
+- **Packages** — prices, images, features, publish/draft, and editable Package Info, itinerary, inclusions, and exclusions. The Kerala and Tamil Nadu destination packages appear in this list with their built-in content ready to save as CMS rows.
 - **Blog** — Markdown posts
 - **Leads** — form enquiries (also still opens WhatsApp/email)
 - **Testimonials** — homepage quotes

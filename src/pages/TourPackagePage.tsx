@@ -32,16 +32,16 @@ export function TourPackagePage() {
   const pkg = internationalPackage ?? (pendingDestination ? {
     slug: pendingDestination.slug,
     title: pendingDestination.name,
-    tagline: 'Package details pending',
+    tagline: pendingDestination.tagline,
     description: pendingDestination.description,
-    duration: '// TODO: duration pending',
+    duration: pendingDestination.duration,
     image: pendingDestination.image,
     imageAlt: pendingDestination.imageAlt,
-    about: `Full itinerary and package details for ${pendingDestination.name} are being finalized. Contact our Dubai team for current availability and pricing.`,
-    highlights: [],
-    itinerary: [],
-    inclusions: [],
-    exclusions: [],
+    about: pendingDestination.about,
+    highlights: pendingDestination.highlights,
+    itinerary: pendingDestination.itinerary,
+    inclusions: pendingDestination.inclusions,
+    exclusions: pendingDestination.exclusions,
     isPending: true,
   } : undefined)
   const [tab, setTab] = useState<TabId>('info')

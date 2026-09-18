@@ -376,7 +376,11 @@ export function Home() {
             </p>
           </GsapReveal>
           <div className="packages-category-block">
-            <PackageCards filter="all" popularOnly compact />
+            <PackageCards
+              filter="umrah"
+              excludeIds={['hajj-economic', 'hajj-group', 'hajj-customise']}
+              compact
+            />
           </div>
           <div className="packages-more">
             <Link className="btn btn-ghost" to="/packages">

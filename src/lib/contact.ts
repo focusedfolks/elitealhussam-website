@@ -6,7 +6,7 @@ export const CONTACT_WHATSAPP_E164 = '971565746678'
 export const CONTACT_EMAIL = 'alhussamuae@gmail.com'
 
 export const ITINERARY_ENQUIRE_CTA_LABEL = 'View Itinerary & Enquire'
-export const HAJJ_PASSPORT_NOTE = 'Haj Services – Indian Passport Holders Only'
+export const HAJJ_PASSPORT_NOTE = 'Hajj Services – Indian Passport Holders Only'
 
 export function telHref(phone: string = CONTACT_PHONE_DISPLAY) {
   const cleaned = phone.replace(/[^\d+]/g, '')

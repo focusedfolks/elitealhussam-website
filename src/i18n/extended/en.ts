@@ -27,7 +27,7 @@ export const hero: Dictionary['hero'] = {
   yearsExperience: '45+ Years',
   dubaiUae: 'Dubai, UAE',
   faithQuote: '"Labbaik Allahumma Labbaik" - we walk with you in faith.',
-  passportNote: 'Haj Services – Indian Passport Holders Only',
+  passportNote: 'Hajj Services – Indian Passport Holders Only',
   slides: [
     {
       headline: 'Umrah, Made Simple — Any Time of Year',
@@ -43,7 +43,7 @@ export const hero: Dictionary['hero'] = {
         'ELITE ALHUSSAM delivers organised pilgrimage packages from Dubai, UAE - trusted for 45+ years, built for families and group bookings. Haj services for Indian passport holders only.',
       primaryCta: 'Start Your Hajj Journey',
       secondaryCta: 'View Hajj Packages',
-      complianceTag: 'Haj Services – Indian Passport Holders Only',
+      complianceTag: 'Hajj Services – Indian Passport Holders Only',
     },
     {
       headline: 'Family & Group Bookings, Handled With Care',

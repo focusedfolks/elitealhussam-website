@@ -138,7 +138,6 @@ export function Home() {
 
   const proof = [
     { value: '45+', label: '45+ Years — Now in Dubai', Icon: IconSparkle },
-    { value: '1', label: 'Office · Dubai, UAE', Icon: IconBuilding },
     { value: '4', label: t.common.multilingual, Icon: IconGlobe },
     { value: '24/7', label: 'Pilgrim support on journey', Icon: IconKaaba },
   ]
@@ -176,9 +175,6 @@ export function Home() {
             </span>
             <span>
               <IconSparkle size={14} /> 45+ Years — Now in Dubai
-            </span>
-            <span>
-              <IconBuilding size={14} /> Dubai, UAE
             </span>
             <span>
               <IconUsers size={14} /> 20,000+ Pilgrims Served
@@ -235,10 +231,6 @@ export function Home() {
             <div className="trust-item">
               <IconSparkle size={16} />
               <span>45+ Years — Now in Dubai</span>
-            </div>
-            <div className="trust-item">
-              <IconGlobe size={16} />
-              <span>Dubai, UAE presence</span>
             </div>
             <div className="trust-item">
               <IconKaaba size={16} />

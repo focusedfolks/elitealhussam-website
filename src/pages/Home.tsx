@@ -370,7 +370,12 @@ export function Home() {
           <div className="packages-category-block">
             <PackageCards
               filter="umrah"
-              excludeIds={['hajj-economic', 'hajj-group', 'hajj-customise']}
+              excludeIds={[
+                'umrah-premium',
+                'hajj-economic',
+                'hajj-group',
+                'hajj-customise',
+              ]}
               compact
             />
           </div>

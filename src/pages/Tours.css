@@ -117,11 +117,18 @@
 }
 
 .destination-card {
+  display: block;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: #fff;
+  color: inherit;
+  text-decoration: none;
   box-shadow: var(--shadow-soft);
+}
+
+.destination-card:hover {
+  border-color: var(--gold);
 }
 
 .destination-card img {

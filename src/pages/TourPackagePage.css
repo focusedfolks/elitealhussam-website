@@ -134,6 +134,15 @@
   line-height: 1.7;
 }
 
+.tour-detail-empty-state {
+  padding: 1.2rem 1rem;
+  border: 1px solid rgba(15, 31, 61, 0.06);
+  border-radius: 14px;
+  background: #f8f6f1;
+  color: var(--muted, #6b7280);
+  text-align: center;
+}
+
 .tour-detail-panel ul {
   margin: 0;
   padding-left: 1.15rem;

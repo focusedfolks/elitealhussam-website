@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
 import { Seo } from '../components/Seo'
 import {
@@ -8,6 +8,7 @@ import {
   type DestinationCountry,
 } from '../content/destinations'
 import { images } from '../content/site'
+import { isPendingDestinationSlug } from '../content/pendingDestinationPackages'
 import { pageMeta } from '../seo/pageMeta'
 import './Tours.css'
 
@@ -184,13 +185,28 @@ function DestinationGroups({
           <h3>{category.name}</h3>
           <div className="destination-grid">
             {category.destinations.map((item) => (
-              <article id={item.slug} key={item.name} className="destination-card">
-                <img src={item.image} alt={item.imageAlt} loading="lazy" />
-                <div className="destination-card-body">
-                  <h4>{item.name}</h4>
-                  <p>{item.description}</p>
-                </div>
-              </article>
+              isPendingDestinationSlug(item.slug) ? (
+                <Link
+                  id={item.slug}
+                  key={item.name}
+                  className="destination-card"
+                  to={`/international-tours/${item.slug}`}
+                >
+                  <img src={item.image} alt={item.imageAlt} loading="lazy" />
+                  <div className="destination-card-body">
+                    <h4>{item.name}</h4>
+                    <p>{item.description}</p>
+                  </div>
+                </Link>
+              ) : (
+                <article id={item.slug} key={item.name} className="destination-card">
+                  <img src={item.image} alt={item.imageAlt} loading="lazy" />
+                  <div className="destination-card-body">
+                    <h4>{item.name}</h4>
+                    <p>{item.description}</p>
+                  </div>
+                </article>
+              )
             ))}
           </div>
         </section>

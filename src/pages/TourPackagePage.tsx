@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Seo } from '../components/Seo'
 import { TourEnquiryForm } from '../components/TourEnquiryForm'
 import { getTourBySlug } from '../content/internationalTours'
+import { getPendingDestinationBySlug } from '../content/pendingDestinationPackages'
 import { useCms } from '../cms/CmsProvider'
 import './TourPackagePage.css'
 
@@ -26,7 +27,23 @@ function ClockIcon() {
 export function TourPackagePage() {
   const { slug } = useParams()
   const { packages } = useCms()
-  const pkg = slug ? getTourBySlug(slug, packages) : undefined
+  const internationalPackage = slug ? getTourBySlug(slug, packages) : undefined
+  const pendingDestination = slug ? getPendingDestinationBySlug(slug) : undefined
+  const pkg = internationalPackage ?? (pendingDestination ? {
+    slug: pendingDestination.slug,
+    title: pendingDestination.name,
+    tagline: 'Package details pending',
+    description: pendingDestination.description,
+    duration: '// TODO: duration pending',
+    image: pendingDestination.image,
+    imageAlt: pendingDestination.imageAlt,
+    about: `Full itinerary and package details for ${pendingDestination.name} are being finalized. Contact our Dubai team for current availability and pricing.`,
+    highlights: [],
+    itinerary: [],
+    inclusions: [],
+    exclusions: [],
+    isPending: true,
+  } : undefined)
   const [tab, setTab] = useState<TabId>('info')
 
   if (!pkg) return <Navigate to="/international-tours" replace />
@@ -41,8 +58,16 @@ export function TourPackagePage() {
   return (
     <div className="tour-detail">
       <Seo
-        title={`${pkg.title} | International Tours · ELITE ALHUSSAM`}
-        description={`${pkg.tagline}. ${pkg.description} ${pkg.duration}.`}
+        title={
+          internationalPackage
+            ? `${pkg.title} | International Tours · ELITE ALHUSSAM`
+            : `${pkg.title} | Tours · ELITE ALHUSSAM`
+        }
+        description={
+          internationalPackage
+            ? `${pkg.tagline}. ${pkg.description} ${pkg.duration}.`
+            : pkg.about
+        }
         url={`/international-tours/${pkg.slug}`}
         image={pkg.image}
       />
@@ -52,7 +77,14 @@ export function TourPackagePage() {
         style={{ ['--tour-hero-image' as string]: `url(${pkg.image})` }}
       >
         <div className="container tour-detail-hero-inner">
-          <Link className="tour-detail-back" to="/international-tours">
+          <Link
+            className="tour-detail-back"
+            to={
+              pendingDestination
+                ? `/tours?country=india&state=${pendingDestination.stateName.toLowerCase().replaceAll(' ', '-')}`
+                : '/international-tours'
+            }
+          >
             ← Back to Packages
           </Link>
           <span className="tour-detail-badge">Package</span>
@@ -88,49 +120,65 @@ export function TourPackagePage() {
                 <>
                   <h2>About This Package</h2>
                   <p>{pkg.about}</p>
-                  <h3>Highlights</h3>
-                  <ul>
-                    {pkg.highlights.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+                  {pkg.highlights.length > 0 ? (
+                    <>
+                      <h3>Highlights</h3>
+                      <ul>
+                        {pkg.highlights.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : null}
                 </>
               ) : null}
 
               {tab === 'itinerary' ? (
                 <>
                   <h2>Itinerary</h2>
-                  <ol className="tour-itin-list">
-                    {pkg.itinerary.map((day) => (
-                      <li key={day.day}>
-                        <p className="tour-itin-day">{day.day}</p>
-                        <h3>{day.title}</h3>
-                        <p>{day.text}</p>
-                      </li>
-                    ))}
-                  </ol>
+                  {pkg.itinerary.length > 0 ? (
+                    <ol className="tour-itin-list">
+                      {pkg.itinerary.map((day) => (
+                        <li key={day.day}>
+                          <p className="tour-itin-day">{day.day}</p>
+                          <h3>{day.title}</h3>
+                          <p>{day.text}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <p className="tour-detail-empty-state">Itinerary coming soon</p>
+                  )}
                 </>
               ) : null}
 
               {tab === 'inclusions' ? (
                 <>
                   <h2>Inclusions</h2>
-                  <ul>
-                    {pkg.inclusions.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+                  {pkg.inclusions.length > 0 ? (
+                    <ul>
+                      {pkg.inclusions.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="tour-detail-empty-state">Inclusions coming soon</p>
+                  )}
                 </>
               ) : null}
 
               {tab === 'exclusions' ? (
                 <>
                   <h2>Exclusions</h2>
-                  <ul>
-                    {pkg.exclusions.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+                  {pkg.exclusions.length > 0 ? (
+                    <ul>
+                      {pkg.exclusions.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="tour-detail-empty-state">Exclusions coming soon</p>
+                  )}
                 </>
               ) : null}
             </div>

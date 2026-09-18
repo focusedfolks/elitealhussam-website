@@ -88,15 +88,4 @@ export const destinationCountries: DestinationCountry[] = [
       },
     ],
   },
-  {
-    id: 'dubai-uae',
-    name: 'Dubai, UAE',
-    kind: 'destinations',
-    categories: [
-      {
-        name: 'Destinations',
-        destinations: [destination('Dubai', '/images/dubai-skyline.webp', 'Dubai skyline UAE', 'dubai')],
-      },
-    ],
-  },
 ]

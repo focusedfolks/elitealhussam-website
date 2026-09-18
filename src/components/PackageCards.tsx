@@ -9,7 +9,7 @@ import {
 } from 'react'
 import {
   packageTravelModes,
-  PACKAGE_CONTENT_PENDING,
+  PACKAGE_CONTENT_FALLBACK,
   hajjPackages,
   type ItineraryRow,
   type PackageCategory,
@@ -201,7 +201,7 @@ function TravelPackageCard({
   const pendingContent = Boolean(pkg.pendingContent)
   const title = pendingContent ? pkg.title : catalog?.title ?? pkg.title
   const summary = pendingContent
-    ? PACKAGE_CONTENT_PENDING
+    ? PACKAGE_CONTENT_FALLBACK
     : catalog?.summary ?? pkg.summary
 
   const totalLabel = useMemo(() => {
@@ -324,7 +324,7 @@ function TravelPackageCard({
         detailsContent
           ? null
           : pendingContent
-            ? [PACKAGE_CONTENT_PENDING]
+            ? [PACKAGE_CONTENT_FALLBACK]
             : pkg.highlights
       }
       placeholderNote={pendingContent ? null : pkg.placeholder ? t.common.placeholderPackageNote : null}

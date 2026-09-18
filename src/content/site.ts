@@ -243,7 +243,7 @@ export const umrahPackages: TravelPackage[] = [
     summary: PACKAGE_CONTENT_PENDING,
     locations: 'Makkah • Madinah',
     duration: 'TBC',
-    image: '/images/kiswah-detail.webp',
+    image: '/images/theme/Group Umrah Package.jpg',
     placeholder: true,
     availableTravelModes: ['air', 'road'],
     pricing: {
@@ -267,7 +267,7 @@ export const umrahPackages: TravelPackage[] = [
     summary: PACKAGE_CONTENT_PENDING,
     locations: 'Makkah • Madinah',
     duration: 'Flexible',
-    image: '/images/kiswah-detail.webp',
+    image: '/images/theme/Customise Your Umrah.jpg',
     placeholder: true,
     pricing: {
       adult: 145000,

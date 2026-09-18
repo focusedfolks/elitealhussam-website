@@ -49,14 +49,14 @@ export const platinumShortItineraryDetail: HajjPackageItineraryDetail = {
   packageId: 'platinum-2025',
   packageName: 'Platinum Short Package',
   durationBadge: '20 DAYS',
-  seasonHeading: `HAJJ ${HAJJ_ITINERARY_SEASON} PACKAGE ITINERARY`,
+  seasonHeading: 'HAJJ 1448/ 2027 PACKAGE ITINERARY',
   makkahHotel: {
-    name: 'Swissotel Al Maqam / Similar',
-    distance: '0–100 Mtrs from Haram',
+    name: 'SWISSOTEL AL MAQAM / SIMILAR',
+    distance: '0 - 100 Mtrs from Haram',
   },
   medinahHotel: {
-    name: 'Dallah Taiba / Dar Al Iman / Similar',
-    distance: '0–200 Mtrs from Haram',
+    name: 'DALLAH TAIBA / DAR AL IMAN / SIMILAR',
+    distance: '0 - 200 Mtrs from Haram',
   },
   amenitiesColumnA: [
     {
@@ -65,11 +65,11 @@ export const platinumShortItineraryDetail: HajjPackageItineraryDetail = {
     },
     {
       icon: 'stay',
-      text: 'Stay in Makkah for 6 nights at Four Star Hotel (Swissotel Al Maqam / Similar) — Distance 0–100 Mtrs',
+      text: 'Stay in Makkah for 6 nights at Four Star Hotel (Swissotel Al Maqam / Similar) - Distance 0 - 100 Mtrs',
     },
     {
       icon: 'stay',
-      text: 'Stay in Medinah for 3 nights at Four Star Hotel (Dallah Taiba / Similar) — Distance 0–200 Mtrs from Haram',
+      text: 'Stay in Medinah for 3 nights at Four Star Hotel (Dallah Taiba / Similar) - Distance 0 - 200 Mtrs from Haram',
     },
     {
       icon: 'default',
@@ -88,11 +88,7 @@ export const platinumShortItineraryDetail: HajjPackageItineraryDetail = {
   amenitiesColumnB: [
     {
       icon: 'gift',
-      text: 'Complements: Travelling trolley 20" & 24" inch, Sling bag, Slipper bag, Medical Pouch, Hip Pouch (Gents), Makana (Ladies), Cap',
-    },
-    {
-      icon: 'ihram',
-      text: 'Ihram, Umbrella, Mina back bag, Hajj guide book, Tawaf mani and Prayer mat.',
+      text: 'Complements: Travelling trolley 20" & 24\' inch, Sling bag, Slipper bag, Medical Pouch, Hip Pouch (Gents), Makana (Ladies), Cap, Ihram, Umbrella, Mina back bag, Hajj guide book, Tawaf mani and Prayer mat.',
     },
     {
       icon: 'default',
@@ -108,7 +104,7 @@ export const platinumShortItineraryDetail: HajjPackageItineraryDetail = {
     },
     {
       icon: 'bed',
-      text: 'Stay in 4–5 sharing bed room at Makkah outer building (Azizia / Similar). Note: Separate room for Gents & Ladies.',
+      text: 'Stay in 4 - 5 sharing bed room at Makkah outer building (Azizia / Similar). Note: Separate room for Gents & Ladies.',
     },
     {
       icon: 'warning',
@@ -118,79 +114,211 @@ export const platinumShortItineraryDetail: HajjPackageItineraryDetail = {
   ],
   itinerary: [
     {
-      place: 'Makkah Outer',
-      date: '10-05-27 (Mon) to 13-05-27 (Thu)',
-      hijriDate: '04 to 07 Dhul-Hijjah',
+      place: 'MAKKAH OUTER',
+      date: '10-05-27, Mon TO 13-05-27, Thu',
+      hijriDate: '04-ذو الحجة-48 TO 07-ذو الحجة-48',
       description:
-        'Stay in Makkah (Azizia / Haiyal Hijra / Shoukia) building and proceed to Mina Moallim Camp after Isha prayer.',
+        'STAY IN MAKKAH ( AZIZIA / HAIYAL HIJRA / SHOUKIA ) BUILDING AND PROCEED TO MINA MOALLIM CAMP AFTER ISHA PRAYER.',
     },
     {
-      place: 'Hajj Days',
-      date: '14-05-27 (Fri)',
-      hijriDate: '08 Dhul-Hijjah',
-      description: 'Stay in Mina Moallim Camp, after 9 PM proceed to Arafat',
+      place: 'HAJJ DAYS',
+      date: '14-05-27, Fri',
+      hijriDate: '08-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP, AFTER 9 PM PROCEED TO ARAFAT',
     },
     {
-      place: 'Hajj Days',
-      date: '15-05-27 (Sat)',
-      hijriDate: '09 Dhul-Hijjah',
-      description: 'Stay in Arafat Moallim Camp, after 6 PM proceed to Mustalifa',
+      place: 'HAJJ DAYS',
+      date: '15-05-27, Sat',
+      hijriDate: '09-ذو الحجة-48',
+      description: 'STAY IN ARAFAT MOALLIM CAMP, AFTER 6 PM PROCEED TO MUSTALIFA',
     },
     {
-      place: 'Hajj Days',
-      date: '16-05-27 (Sun)',
-      hijriDate: '10 Dhul-Hijjah',
-      description: 'Stay in Mina Moallim Camp',
+      place: 'HAJJ DAYS',
+      date: '16-05-27, Sun',
+      hijriDate: '10-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP',
     },
     {
-      place: 'Hajj Days',
-      date: '17-05-27 (Mon)',
-      hijriDate: '11 Dhul-Hijjah',
-      description: 'Stay in Mina Moallim Camp',
+      place: 'HAJJ DAYS',
+      date: '17-05-27, Mon',
+      hijriDate: '11-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP',
     },
     {
-      place: 'Hajj Days',
-      date: '18-05-27 (Tue)',
-      hijriDate: '12 Dhul-Hijjah',
-      description: 'Stay in Mina Moallim Camp',
+      place: 'HAJJ DAYS',
+      date: '18-05-27, Tue',
+      hijriDate: '12-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP',
     },
     {
-      place: 'Hajj Days',
-      date: '19-05-27 (Wed)',
-      hijriDate: '13 Dhul-Hijjah',
+      place: 'HAJJ DAYS',
+      date: '19-05-27, Wed',
+      hijriDate: '13-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP, AFTER 4 PM PROCEED TO MAKKAH OUTER',
+    },
+    {
+      place: 'MAKKAH OUTER',
+      date: '20-05-27, Thu TO 21-05-27, Fri',
+      hijriDate: '14-ذو الحجة-48 TO 15-ذو الحجة-48',
       description:
-        'Stay in Mina Moallim Camp, after 4 PM proceed to Makkah Outer',
+        'STAY IN MAKKAH ( AZIZIA / HAIYAL HIJRA / SHOUKIA ) BUILDING AND PROCEED TO HARAM NEAREST HOTEL ON 15th DHUL-HAJJAH AFTER ISHA PRAYER.',
     },
     {
-      place: 'Makkah Outer',
-      date: '20-05-27 (Thu) to 21-05-27 (Fri)',
-      hijriDate: '14 to 15 Dhul-Hijjah',
+      place: 'MAKKAH',
+      date: '21-05-27, Fri TO 27-05-27, Thu',
+      hijriDate: '15-ذو الحجة-48 TO 21-ذو الحجة-48',
       description:
-        'Stay in Makkah (Azizia / Haiyal Hijra / Shoukia) building and proceed to Haram nearest hotel on 15th Dhul-Hajjah after Isha prayer.',
+        'IN SHAA ALLAH STAY IN MAKKAH HARAM NEAREST STAR HOTEL (SWISSOTEL AL MAQAM / SIMILAR) FOR 06 NIGHTS, ON 21st DHUL-HAJJAH AFTER 10AM PROCEED TO MEDINAH HOTEL',
     },
     {
-      place: 'Makkah',
-      date: '21-05-27 (Fri) to 27-05-27 (Thu)',
-      hijriDate: '15 to 21 Dhul-Hijjah',
+      place: 'MEDINAH',
+      date: '27-05-27, Thu TO 30-05-27, Sun',
+      hijriDate: '21-ذو الحجة-48 TO 24-ذو الحجة-48',
       description:
-        'InshaAllah stay in Makkah Haram nearest star hotel (Swissotel Al Maqam / Similar) for 06 nights, on 21st Dhul-Hajjah after 10 AM proceed to Medinah hotel',
+        'IN SHAA ALLAH STAY IN MEDINAH STAR HOTEL (DALLAH TAIBA/ DAR AL EMAN INTERCONTINENTAL/ SIMILAR) 3 NIGHTS AND PROCEED TO MADINAH/JEDDAH AIRPORT AS PER FLIGHT AND RULES & REGULATION OF KSA',
     },
     {
-      place: 'Medinah',
-      date: '27-05-27 (Thu) to 30-05-27 (Sun)',
-      hijriDate: '21 to 24 Dhul-Hijjah',
-      description:
-        'InshaAllah stay in Medinah star hotel (Dallah Taiba / Dar Al Eman Intercontinental / Similar) 3 nights and proceed to Madinah/Jeddah airport as per flight and rules & regulation of KSA',
-    },
-    {
-      place: 'Departure',
-      date: '31-05-27 (Mon)',
-      hijriDate: '25 Dhul-Hijjah',
-      description: 'InshaAllah Chennai arrival on 31 May 2027',
+      place: 'DEP',
+      date: '31-05-27, Mon',
+      hijriDate: '25-ذو الحجة-48',
+      description: 'IN SHAA ALLAH CHENNAI ARRIVAL ON 31 MAY 2027',
     },
   ],
   notes: [
-    'Based on whatever the quotation we have given that Saudi is not yet confirmed once they will confirm, we will update the Mina tower and tent details Insha Allah.',
+    'Note: As per the flight schedule, itinerary may change one or two days (before or after) without any prior notice.',
+  ],
+}
+
+export const businessShortItineraryDetail: HajjPackageItineraryDetail = {
+  packageId: 'classic-hajj-2025',
+  packageName: 'Business Short Package',
+  durationBadge: '20 DAYS',
+  seasonHeading: 'HAJJ 1448/ 2027 PACKAGE ITINERARY',
+  makkahHotel: {
+    name: 'AZIZIA/ SIMILAR',
+    distance: '0 - 100 Mtrs from Haram',
+  },
+  medinahHotel: {
+    name: 'PROVINCE SHAM/ SANABEL / SIMILAR',
+    distance: '200 - 300 Mtrs from Haram',
+  },
+  amenitiesColumnA: [
+    {
+      icon: 'stay',
+      text: 'Stay in Makkah outer building (Azizia / Showkia / Haiyal Hizra /Similar)',
+    },
+    {
+      icon: 'stay',
+      text: 'Stay in Medinah for 3 nights at Two Star Hotel ( Province Sham/ Sanabel/ Similar ) - Distance 200 - 300 Mtrs from Haram',
+    },
+    {
+      icon: 'default',
+      text: 'Hajj Arkan days (Additional COST as per availability and preferred)',
+    },
+    {
+      icon: 'default',
+      text: 'Special A/C Bus arrangement for local transport (Moulim provided buses at Hajj Days).',
+    },
+    {
+      icon: 'default',
+      text: 'Travel with experienced Guide & bayaan ( discourse ).',
+    },
+    { icon: 'default', text: 'Tea / Coffee / Fruit' },
+  ],
+  amenitiesColumnB: [
+    {
+      icon: 'gift',
+      text: 'Complements: Travelling trolley 20" & 24\' inch, Sling bag, Slipper bag, Medical Pouch, Hip Pouch (Gents), Makana (Ladies), Cap, Ihram, Umbrella, Mina back bag, Hajj guide book, Tawaf mani and Prayer mat.',
+    },
+    {
+      icon: 'default',
+      text: 'Virtual Session on Haj / Umrah Procedure at Chennai.',
+    },
+    {
+      icon: 'ihram',
+      text: '5 Liters of Zam Zam water at return departure (Subject to KSA government rules and regulations).',
+    },
+    {
+      icon: 'bed',
+      text: 'Room Type: Double / Triple / Quad as per guest booked.',
+    },
+    {
+      icon: 'bed',
+      text: 'Stay in 4 - 5 sharing bed room at Makkah outer building (Azizia / Similar). Note: Separate room for Gents & Ladies.',
+    },
+    {
+      icon: 'warning',
+      text: 'There is no transport arrangements to haram while staying in Makkah Outer (Azizia/Similar)',
+    },
+    { icon: 'excluded', text: 'Qurbani not included in package cost' },
+  ],
+  itinerary: [
+    {
+      place: 'MAKKAH OUTER',
+      date: '10-05-27, Mon TO 13-05-27, Thu',
+      hijriDate: '04-ذو الحجة-48 TO 07-ذو الحجة-48',
+      description:
+        'STAY IN MAKKAH ( AZIZIA / HAIYAL HIJRA / SHOUKIA ) BUILDING AND PROCEED TO MINA MOALLIM CAMP AFTER ISHA PRAYER.',
+    },
+    {
+      place: 'HAJJ DAYS',
+      date: '14-05-27, Fri',
+      hijriDate: '08-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP, AFTER 9 PM PROCEED TO ARAFAT',
+    },
+    {
+      place: 'HAJJ DAYS',
+      date: '15-05-27, Sat',
+      hijriDate: '09-ذو الحجة-48',
+      description: 'STAY IN ARAFAT MOALLIM CAMP, AFTER 6 PM PROCEED TO MUSTALIFA',
+    },
+    {
+      place: 'HAJJ DAYS',
+      date: '16-05-27, Sun',
+      hijriDate: '10-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP',
+    },
+    {
+      place: 'HAJJ DAYS',
+      date: '17-05-27, Mon',
+      hijriDate: '11-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP',
+    },
+    {
+      place: 'HAJJ DAYS',
+      date: '18-05-27, Tue',
+      hijriDate: '12-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP',
+    },
+    {
+      place: 'HAJJ DAYS',
+      date: '19-05-27, Wed',
+      hijriDate: '13-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP, AFTER 4 PM PROCEED TO MAKKAH OUTER',
+    },
+    {
+      place: 'MAKKAH OUTER',
+      date: '21-05-27, Fri TO 27-05-27, Thu',
+      hijriDate: '15-ذو الحجة-48 TO 21-ذو الحجة-48',
+      description:
+        'STAY IN MAKKAH ( AZIZIA / HAIYAL HIJRA / SHOUKIA ) BUILDING ON 21st DHUL-HAJJAH AFTER 10AM PROCEED TO MEDINAH HOTEL',
+    },
+    {
+      place: 'MEDINAH',
+      date: '27-05-27, Thu TO 30-05-27, Sun',
+      hijriDate: '21-ذو الحجة-48 TO 24-ذو الحجة-48',
+      description:
+        'IN SHAA ALLAH STAY IN MEDINAH TWO STAR HOTEL (PROVINCE SHAM/ SANABEL/ SIMILAR) 3 NIGHTS AND PROCEED TO MADINAH/JEDDAH AIRPORT AS PER FLIGHT AND RULES & REGULATION OF KSA',
+    },
+    {
+      place: 'DEP',
+      date: '31-05-27, Mon',
+      hijriDate: '25-ذو الحجة-48',
+      description: 'IN SHAA ALLAH CHENNAI ARRIVAL ON 31 MAY 2027',
+    },
+  ],
+  notes: [
+    'Note: As per the flight schedule, itinerary may change one or two days (before or after) without any prior notice.',
   ],
 }
 
@@ -198,28 +326,27 @@ export const budgetHajjItineraryDetail: HajjPackageItineraryDetail = {
   packageId: 'hajj-budget',
   packageName: 'Budget Package',
   durationBadge: '30 DAYS',
-  seasonHeading: `HAJJ ${HAJJ_ITINERARY_SEASON} PACKAGE ITINERARY`,
-  itineraryTableTitle: 'Itinerary — InshaAllah by the Grace of Almighty',
+  seasonHeading: 'HAJJ 1448/ 2027 PACKAGE ITINERARY',
   makkahHotel: {
-    name: 'Makkah Tower / Pullman / Similar',
-    distance: '0–100 Mtrs from Haram',
+    name: 'MAKKAH TOWER/ PULLMAN/ SIMILAR',
+    distance: '0 - 100 Mtrs from Haram',
   },
   medinahHotel: {
-    name: 'Province Sham / Sanabel / Similar',
-    distance: '200–300 Mtrs from Haram',
+    name: 'PROVINCE SHAM/ SANABEL / SIMILAR',
+    distance: '200 - 300 Mtrs from Haram',
   },
   amenitiesColumnA: [
     {
       icon: 'stay',
-      text: 'Stay in Makkah outer building (Azizia / Showkia / Haiyal Hizra / Similar) before and after Hajj Arkans.',
+      text: 'Stay in Makkah outer building (Azizia / Showkia / Haiyal Hizra /Similar) before and after Hajj Arkans.',
     },
     {
       icon: 'stay',
-      text: 'Stay in Makkah for 6 nights at Four Star Hotel (Swissotel / Similar) — Distance 0–100 Mtrs',
+      text: 'Stay in Makkah for 6 nights at Four Star Hotel (Swissotel / Similar ) - Distance 0 - 100 Mtrs',
     },
     {
       icon: 'stay',
-      text: 'Stay in Medinah for 3 nights at Four Star Hotel (Dallah Taiba / Similar) — Distance 0–200 Mtrs from Haram',
+      text: 'Stay in Medinah for 3 nights at Four Star Hotel (Dallah Taiba / Similar ) - Distance 0 - 200 Mtrs from Haram',
     },
     {
       icon: 'default',
@@ -231,18 +358,14 @@ export const budgetHajjItineraryDetail: HajjPackageItineraryDetail = {
     },
     {
       icon: 'default',
-      text: 'Travel with experienced Guide & bayaan (discourse).',
+      text: 'Travel with experienced Guide & bayaan ( discourse ).',
     },
     { icon: 'default', text: 'Tea / Coffee / Fruit' },
   ],
   amenitiesColumnB: [
     {
       icon: 'gift',
-      text: 'Complements: Travelling trolley 20" & 24" inch, Sling bag, Slipper bag, Medical Pouch, Hip Pouch (Gents), Makana (Ladies), Cap',
-    },
-    {
-      icon: 'ihram',
-      text: 'Ihram, Umbrella, Mina back bag, Hajj guide book, Tawaf mani and Prayer mat.',
+      text: 'Complements: Travelling trolley 20" & 24\' inch, Sling bag, Slipper bag, Medical Pouch, Hip Pouch (Gents), Makana (Ladies), Cap, Ihram, Umbrella, Mina back bag, Hajj guide book, Tawaf mani and Prayer mat.',
     },
     {
       icon: 'default',
@@ -258,11 +381,7 @@ export const budgetHajjItineraryDetail: HajjPackageItineraryDetail = {
     },
     {
       icon: 'bed',
-      text: 'Stay in 4–5 sharing bed room at Makkah outer building (Azizia / Similar). Note: Separate room for Gents & Ladies.',
-    },
-    {
-      icon: 'default',
-      text: 'Food amount has calculated SR.100/per day for full board limited menu at Hotel and SR.70/per day South Indian limited menu at Azizia building only. As per food contract, Saudi service provider will provide food in Haj Arkan days.',
+      text: 'Stay in 4 - 5 sharing bed room at Makkah outer building (Azizia / Similar). Note: Separate room for Gents & Ladies.',
     },
     {
       icon: 'warning',
@@ -272,80 +391,78 @@ export const budgetHajjItineraryDetail: HajjPackageItineraryDetail = {
   ],
   itinerary: [
     {
-      place: 'Makkah Outer',
-      date: '10-05-27 (Mon) to 13-05-27 (Thu)',
-      hijriDate: '04 to 07 Dhul-Hijjah 1448',
+      place: 'MAKKAH OUTER',
+      date: '10-05-27, Mon TO 13-05-27, Thu',
+      hijriDate: '04-ذو الحجة-48 TO 07-ذو الحجة-48',
       description:
-        'Stay in Makkah (Azizia / Haiyal Hijra / Shoukia) building and proceed to Mina Moallim Camp after Isha prayer.',
+        'STAY IN MAKKAH ( AZIZIA / HAIYAL HIJRA / SHOUKIA ) BUILDING AND PROCEED TO MINA MOALLIM CAMP AFTER ISHA PRAYER.',
     },
     {
-      place: 'Hajj Days',
-      date: '14-05-27 (Fri)',
-      hijriDate: '08 Dhul-Hijjah 1448',
-      description: 'Stay in Mina Moallim Camp, after 9 PM proceed to Arafat',
+      place: 'HAJJ DAYS',
+      date: '14-05-27, Fri',
+      hijriDate: '08-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP, AFTER 9 PM PROCEED TO ARAFAT',
     },
     {
-      place: 'Hajj Days',
-      date: '15-05-27 (Sat)',
-      hijriDate: '09 Dhul-Hijjah 1448',
-      description: 'Stay in Arafat Moallim Camp, after 6 PM proceed to Mustalifa',
+      place: 'HAJJ DAYS',
+      date: '15-05-27, Sat',
+      hijriDate: '09-ذو الحجة-48',
+      description: 'STAY IN ARAFAT MOALLIM CAMP, AFTER 6 PM PROCEED TO MUSTALIFA',
     },
     {
-      place: 'Hajj Days',
-      date: '16-05-27 (Sun)',
-      hijriDate: '10 Dhul-Hijjah 1448',
-      description: 'Stay in Mina Moallim Camp',
+      place: 'HAJJ DAYS',
+      date: '16-05-27, Sun',
+      hijriDate: '10-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP',
     },
     {
-      place: 'Hajj Days',
-      date: '17-05-27 (Mon)',
-      hijriDate: '11 Dhul-Hijjah 1448',
-      description: 'Stay in Mina Moallim Camp',
+      place: 'HAJJ DAYS',
+      date: '17-05-27, Mon',
+      hijriDate: '11-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP',
     },
     {
-      place: 'Hajj Days',
-      date: '18-05-27 (Tue)',
-      hijriDate: '12 Dhul-Hijjah 1448',
-      description: 'Stay in Mina Moallim Camp',
+      place: 'HAJJ DAYS',
+      date: '18-05-27, Tue',
+      hijriDate: '12-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP',
     },
     {
-      place: 'Hajj Days',
-      date: '19-05-27 (Wed)',
-      hijriDate: '13 Dhul-Hijjah 1448',
+      place: 'HAJJ DAYS',
+      date: '19-05-27, Wed',
+      hijriDate: '13-ذو الحجة-48',
+      description: 'STAY IN MINA MOALLIM CAMP, AFTER 4 PM PROCEED TO MAKKAH OUTER',
+    },
+    {
+      place: 'MAKKAH OUTER',
+      date: '20-05-27, Thu TO 27-05-27, Thu',
+      hijriDate: '14-ذو الحجة-48 TO 21-ذو الحجة-48',
       description:
-        'Stay in Mina Moallim Camp, after 4 PM proceed to Makkah Outer',
+        'STAY IN MAKKAH ( AZIZIA / HAIYAL HIJRA / SHOUKIA ) BUILDING ON 21st DHUL-HAJJAH AFTER ISHA PRAYER PROCEED TO MAKKAH NEAREST HOTEL',
     },
     {
-      place: 'Makkah Outer',
-      date: '20-05-27 (Thu) to 27-05-27 (Thu)',
-      hijriDate: '14 to 21 Dhul-Hijjah 1448',
+      place: 'MAKKAH',
+      date: '27-05-27, Thu TO 05-06-27, Sat',
+      hijriDate: '21-ذو الحجة-48 TO 49-محرم-01',
       description:
-        'Stay in Makkah (Azizia / Haiyal Hijra / Shoukia) building on 21st Dhul-Hajjah after Isha prayer, proceed to Makkah nearest hotel',
+        'IN SHAA ALLAH STAY IN MAKKAH HARAM NEAREST STAR HOTEL (MAKKAH TOWER/ PULLMAN/ ROTONA / SIMILAR) FOR 09 NIGHTS, ON 1st MUHARRAM AFTER 10AM PROCEED TO MEDINAH HOTEL',
     },
     {
-      place: 'Makkah',
-      date: '27-05-27 (Thu) to 05-06-27 (Sat)',
-      hijriDate: '21 Dhul-Hijjah 1448 to 01 Muharram 1449',
+      place: 'MEDINAH',
+      date: '05-06-27, Sat TO 09-06-27, Wed',
+      hijriDate: '49-محرم-01 TO 49-محرم-05',
       description:
-        'InshaAllah stay in Makkah Haram nearest star hotel (Makkah Tower / Pullman / Rotana / Similar) for 09 nights, on 1st Muharram after 10 AM proceed to Medinah hotel',
+        'IN SHAA ALLAH STAY IN MEDINAH TWO STAR HOTEL (PROVINCE SHAM/ SANABEL/ SIMILAR) 4 NIGHTS AND PROCEED TO MADINAH/JEDDAH AIRPORT AS PER FLIGHT AND RULES & REGULATION OF KSA',
     },
     {
-      place: 'Medinah',
-      date: '05-06-27 (Sat) to 09-06-27 (Wed)',
-      hijriDate: '01 to 05 Muharram 1449',
-      description:
-        'InshaAllah stay in Medinah two star hotel (Province Sham / Sanabel / Similar) 4 nights and proceed to Madinah/Jeddah airport as per flight and rules & regulation of KSA',
-    },
-    {
-      place: 'Departure',
-      date: '10-06-27 (Thu)',
-      hijriDate: '06 Muharram 1449',
-      description: 'InshaAllah Chennai arrival on 10 June 2027',
+      place: 'DEP',
+      date: '10-06-27, Thu',
+      hijriDate: '49-محرم-06',
+      description: 'IN SHAA ALLAH CHENNAI ARRIVAL ON 10 JUNE 2027',
     },
   ],
   notes: [
-    'As per the flight schedule, itinerary may change one or two days (before or after) without any prior notice.',
-    'Based on whatever the quotation we have given that Saudi is not yet confirmed once they will confirm, we will update the Mina tower and tent details Insha Allah.',
+    'Note: As per the flight schedule, itinerary may change one or two days (before or after) without any prior notice.',
   ],
 }
 
@@ -354,6 +471,7 @@ export const hajjPackageItineraryDetails: Record<
   HajjPackageItineraryDetail
 > = {
   'platinum-2025': platinumShortItineraryDetail,
+  'classic-hajj-2025': businessShortItineraryDetail,
   'hajj-budget': budgetHajjItineraryDetail,
 }
 

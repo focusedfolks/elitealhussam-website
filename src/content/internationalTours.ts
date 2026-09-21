@@ -11,6 +11,7 @@ export type TourCountry =
   | 'Thailand'
   | 'Malaysia'
   | 'Vietnam'
+  | 'Dubai, UAE'
   | 'Singapore'
 
 export type TourPackage = {
@@ -756,6 +757,341 @@ export const internationalTourPackages: TourPackage[] = [
       'Travel insurance',
     ],
   },
+  {
+    slug: 'dubai-new-glimpses',
+    country: 'Dubai, UAE',
+    title: 'Dubai New Glimpses',
+    tagline: 'Dubai\'s Newest Attractions',
+    description:
+      "A five-day Dubai itinerary covering the city's newest attractions.",
+    duration: '4 Nights / 5 Days',
+    days: 5,
+    nights: 4,
+    image: '/images/dubai-skyline.webp',
+    imageAlt: 'Dubai skyline at sunset',
+    about:
+      "A five-day Dubai itinerary covering the city's newest attractions — from the Museum of the Future to the Dubai Safari Park and a ride over Palm Jumeirah.",
+    highlights: [
+      'Dubai Crocodile Park',
+      'Museum of the Future',
+      'Skyviews Observatory',
+      'Dubai Safari Park',
+      'Palm Jumeirah Monorail & View at the Palm',
+      'Aya Universe',
+    ],
+    itinerary: [
+      {
+        day: 'Day 1',
+        title: 'Arrive Dubai International Airport',
+        text: 'Meet and transfer to hotel. Evening visit to Dubai Crocodile Park. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 2',
+        title: 'Museum of the Future and Skyviews Observatory',
+        text: 'Morning visit to the Museum of the Future. Evening visit to Skyviews Observatory at Downtown Dubai. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 3',
+        title: 'Dubai Safari Park',
+        text: 'Morning and afternoon visit to Dubai Safari Park. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 4',
+        title: 'Palm Jumeirah and Aya Universe',
+        text: 'Morning one-way monorail ride over Palm Jumeirah, followed by a visit to View at the Palm Observatory. Evening visit to Aya Universe at Wafi City. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 5',
+        title: 'Departure',
+        text: 'Check out and transfer back to Dubai International Airport for departure.',
+      },
+    ],
+    inclusions: [
+      '4 nights accommodation on twin-sharing basis, inclusive of breakfast and all taxes',
+      'Private arrival transfer from Dubai International Airport to hotel',
+      'Dubai Crocodile Park visit with entry ticket and private transfers',
+      'Museum of the Future visit with entry ticket and private transfers',
+      'Skyviews Observatory visit with entry ticket and private transfers',
+      'Dubai Safari Park visit with entry ticket and private transfers',
+      'One-way monorail ride over Palm Jumeirah',
+      'View at the Palm visit with entry ticket and private transfers',
+      'Aya Universe visit with entry ticket and private transfers',
+      'Private departure transfer from hotel to Dubai International Airport',
+      'All applicable taxes, including 5% VAT',
+      'Complimentary: 2 x 500ml bottles of mineral water per person per day; facial wipes on arrival day',
+    ],
+    exclusions: [
+      'Air tickets to/from or within the United Arab Emirates',
+      'Any meals not mentioned in the itinerary',
+      'Any tours, transfers, or services not mentioned in the itinerary',
+      'Personal expenses (tips, porterage, room service, laundry, calls, etc.)',
+      'Increases in entrance fees, taxes, insurance, or other incidental charges',
+      'Meet & greet assistance inside the airport',
+      'Visa and OK-to-board charges',
+      'Tourism Dirham Fee applied by hotels',
+      'Anything not mentioned under Package Inclusions',
+    ],
+  },
+  {
+    slug: 'dubai-stop-over',
+    country: 'Dubai, UAE',
+    title: 'Dubai Stop-Over',
+    tagline: 'A Short Dubai Stopover',
+    description:
+      "A short Dubai stopover covering the city's highlights and a desert safari.",
+    duration: '2 Nights / 3 Days',
+    days: 3,
+    nights: 2,
+    image: '/images/dubai-skyline.webp',
+    imageAlt: 'Dubai skyline at sunset',
+    about:
+      "A short Dubai stopover covering the city's highlights and a desert safari — ideal for travelers with limited time between connections.",
+    highlights: ['Half-day Dubai city tour', 'Desert Safari with BBQ dinner'],
+    itinerary: [
+      {
+        day: 'Day 1',
+        title: 'Arrive Dubai International Airport',
+        text: 'Meet and transfer to hotel. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 2',
+        title: 'Dubai city tour and Desert Safari',
+        text: 'Morning half-day city tour of Dubai. Afternoon to evening Desert Safari with camp activities and BBQ dinner. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 3',
+        title: 'Departure',
+        text: 'Check out and transfer back to Dubai International Airport for departure.',
+      },
+    ],
+    inclusions: [
+      '2 nights accommodation on twin-sharing basis, inclusive of breakfast and all taxes',
+      'Private arrival transfer from Dubai International Airport to hotel',
+      'Half-day city tour of Dubai on a shared (Seat-in-Coach) basis',
+      'Desert Safari with camp activities and BBQ dinner on a shared basis',
+      'Private departure transfer from hotel to Dubai International Airport',
+      'All applicable taxes, including 5% VAT',
+      'Complimentary: 2 x 500ml bottles of mineral water per person per day; facial wipes on arrival day',
+    ],
+    exclusions: [
+      'Air tickets to/from or within the United Arab Emirates',
+      'Any meals not mentioned in the itinerary',
+      'Any tours, transfers, or services not mentioned in the itinerary',
+      'Personal expenses (tips, porterage, room service, laundry, calls, etc.)',
+      'Increases in entrance fees, taxes, insurance, or other incidental charges',
+      'Meet & greet assistance inside the airport',
+      'Visa and OK-to-board charges',
+      'Tourism Dirham Fee applied by hotels',
+      'Anything not mentioned under Package Inclusions',
+    ],
+  },
+  {
+    slug: 'emirates-heritage',
+    country: 'Dubai, UAE',
+    title: 'Emirates Heritage',
+    tagline: 'Across the Emirates to Musandam',
+    description:
+      "A six-day tour across the UAE's seven emirates, ending with a dhow cruise into Musandam's Omani fjords.",
+    duration: '5 Nights / 6 Days',
+    days: 6,
+    nights: 5,
+    image: '/images/dubai-skyline.webp',
+    imageAlt: 'Dubai skyline at sunset',
+    about:
+      "A six-day tour across the UAE's seven emirates — Dubai, Sharjah, Abu Dhabi, Fujairah, and Khorfakkan — ending with a dhow cruise into Musandam's Omani fjords.",
+    highlights: [
+      'Dubai & Sharjah city tours',
+      'Full-day Abu Dhabi',
+      'Northern Emirates (Fujairah & Khorfakkan)',
+      'Musandam Dibba Dhow Cruise',
+    ],
+    itinerary: [
+      {
+        day: 'Day 1',
+        title: 'Arrive Dubai International Airport',
+        text: 'Meet and transfer to hotel. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 2',
+        title: 'Dubai and Sharjah city tours',
+        text: 'Morning half-day city tour of Dubai. Afternoon to evening half-day city tour of Sharjah. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 3',
+        title: 'Abu Dhabi',
+        text: "Full-day Abu Dhabi city tour covering the city's important landmarks. Overnight in Dubai.",
+      },
+      {
+        day: 'Day 4',
+        title: 'Northern Emirates',
+        text: 'Full-day city tour of the Northern Emirates — Fujairah and Khorfakkan. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 5',
+        title: 'Musandam Dibba',
+        text: 'Full-day trip to Musandam Dibba: Dhow cruise with lunch and activities. Note: this excursion crosses into Omani territory — guests must carry their original passport (valid at least 6 months); a day-pass/border formality is arranged by the operator, and a small border fee is typically payable separately on-site. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 6',
+        title: 'Departure',
+        text: 'Check out and transfer back to Dubai International Airport for departure.',
+      },
+    ],
+    // TODO: Inclusions not yet received from client for this package — do not publish until confirmed. Do not copy another package's inclusions list as a placeholder.
+    inclusions: [],
+    exclusions: [
+      'Air tickets to/from or within the United Arab Emirates',
+      'Any meals not mentioned in the itinerary',
+      'Any tours, transfers, or services not mentioned in the itinerary',
+      'Personal expenses (tips, porterage, room service, laundry, calls, etc.)',
+      'Increases in entrance fees, taxes, insurance, or other incidental charges',
+      'Meet & greet assistance inside the airport',
+      'Visa and OK-to-board charges',
+      'Tourism Dirham Fee applied by hotels',
+      'Anything not mentioned under Package Inclusions',
+    ],
+  },
+  {
+    slug: 'dubai-luxury-travel',
+    country: 'Dubai, UAE',
+    title: 'Dubai Luxury Travel',
+    tagline: 'Dubai and Abu Dhabi in Luxury',
+    description:
+      'A five-day premium Dubai experience with private touring, a Marina yacht cruise, and a VIP desert camp.',
+    duration: '4 Nights / 5 Days',
+    days: 5,
+    nights: 4,
+    image: '/images/dubai-skyline.webp',
+    imageAlt: 'Dubai skyline at sunset',
+    about:
+      "A five-day premium Dubai experience — private touring by luxury SUV, a Marina yacht cruise, the Burj Khalifa's highest lounge, Ferrari World, and a VIP desert camp.",
+    highlights: [
+      'Private Yacht Cruise at the Marina',
+      'Burj Khalifa Lounge (152nd–154th floor)',
+      'Ferrari World (Fast Track)',
+      'Inside Burj Al Arab Tour',
+      'Luxury Desert Safari with VIP camp',
+    ],
+    itinerary: [
+      {
+        day: 'Day 1',
+        title: 'Arrive Dubai International Airport',
+        text: 'With meet & greet assistance, transfer to hotel. Evening 2-hour private yacht cruise at Dubai Marina. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 2',
+        title: 'Dubai city tour and Burj Khalifa',
+        text: 'Morning half-day private city tour of Dubai covering important landmarks in a luxury vehicle. Evening Dubai Mall visit and Burj Khalifa Highest Floor Lounge (152nd/153rd/154th floor). Overnight in Dubai.',
+      },
+      {
+        day: 'Day 3',
+        title: 'Abu Dhabi and Ferrari World',
+        text: 'Full-day Abu Dhabi excursion: morning city tour covering important landmarks, afternoon to evening Ferrari World visit with fast-track entry. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 4',
+        title: 'Burj Al Arab and luxury Desert Safari',
+        text: 'Morning Inside Burj Al Arab Tour. Afternoon to evening Desert Safari with camp activities and BBQ dinner at a luxury camp with VIP table service. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 5',
+        title: 'Departure',
+        text: 'Check out and transfer back to Dubai International Airport for departure.',
+      },
+    ],
+    inclusions: [
+      '4 nights accommodation on twin-sharing basis, inclusive of breakfast and all taxes',
+      'Private arrival transfer from Dubai International Airport to hotel',
+      '2-hour exclusive yacht cruise at the Marina with private transfers',
+      'Half-day private city tour of Dubai',
+      'Burj Khalifa Lounge visit (152nd/153rd/154th floor) with entry ticket and private transfers',
+      'Full-day private city tour of Abu Dhabi',
+      'Ferrari World visit with fast-track entry ticket',
+      'Inside Burj Al Arab Tour with entry ticket and private transfers',
+      'Desert Safari with camp activities and BBQ dinner in a private vehicle, luxury camp with VIP table service',
+      'Private departure transfer from hotel to Dubai International Airport',
+      'All tours and transfers by GMC Yukon or similar category vehicle; Desert Safari by Land Cruiser or similar category vehicle',
+      'Meet & greet assistance inside the airport for arrival and departure',
+      'All applicable taxes, including 5% VAT',
+      'Tourism Dirham Fee applied by hotels',
+      'Complimentary: 2 x 500ml bottles of mineral water per person per day; facial wipes on arrival day',
+    ],
+    exclusions: [
+      'Air tickets to/from or within the United Arab Emirates',
+      'Any meals not mentioned in the itinerary',
+      'Any tours, transfers, or services not mentioned in the itinerary',
+      'Personal expenses (tips, porterage, room service, laundry, calls, etc.)',
+      'Increases in entrance fees, taxes, insurance, or other incidental charges',
+      'Meet & greet assistance inside the airport',
+      'Visa and OK-to-board charges',
+      'Anything not mentioned under Package Inclusions',
+    ],
+  },
+  {
+    slug: 'dubai-at-a-glance',
+    country: 'Dubai, UAE',
+    title: 'Dubai At A Glance',
+    tagline: 'Dubai Highlights in Four Days',
+    description:
+      "A compact four-day Dubai introduction covering the city's signature experiences.",
+    duration: '3 Nights / 4 Days',
+    days: 4,
+    nights: 3,
+    image: '/images/dubai-skyline.webp',
+    imageAlt: 'Dubai skyline at sunset',
+    about:
+      "A compact four-day Dubai introduction covering the city's signature experiences — a Marina dhow dinner cruise, the Burj Khalifa, and a desert safari.",
+    highlights: [
+      'Dhow Cruise with Dinner (Dubai Marina)',
+      'Burj Khalifa (124th/125th floor)',
+      'Dubai Mall Fountain Show',
+      'Desert Safari with BBQ dinner',
+    ],
+    itinerary: [
+      {
+        day: 'Day 1',
+        title: 'Arrive Dubai International Airport',
+        text: 'Meet and transfer to hotel. Evening 2-hour Dhow Cruise with dinner at Dubai Marina. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 2',
+        title: 'Dubai city tour and Burj Khalifa',
+        text: 'Morning half-day city tour of Dubai covering important landmarks. Evening Dubai Mall visit, Burj Khalifa 124th/125th Floor Observatory, and the Fountain Show at Dubai Mall. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 3',
+        title: 'Desert Safari',
+        text: 'Afternoon to evening Desert Safari with camp activities and BBQ dinner on a shared basis. Overnight in Dubai.',
+      },
+      {
+        day: 'Day 4',
+        title: 'Departure',
+        text: 'Check out and transfer back to Dubai International Airport for departure.',
+      },
+    ],
+    inclusions: [
+      '3 nights accommodation on twin-sharing basis, inclusive of breakfast and all taxes',
+      'Private arrival transfer from Dubai International Airport to hotel',
+      'Dhow Cruise with dinner and shared transfers, Dubai Marina side',
+      'Half-day city tour of Dubai on a shared (Seat-in-Coach) basis',
+      'Burj Khalifa visit with entry ticket (124th/125th Floor Observatory, non-prime time) and private transfers',
+      'Desert Safari with camp activities and BBQ dinner on a shared basis',
+      'Private departure transfer from hotel to Dubai International Airport',
+      'All applicable taxes, including 5% VAT',
+      'Complimentary: 2 x 500ml bottles of mineral water per person per day; facial wipes on arrival day',
+    ],
+    exclusions: [
+      'Air tickets to/from or within the United Arab Emirates',
+      'Any meals not mentioned in the itinerary',
+      'Any tours, transfers, or services not mentioned in the itinerary',
+      'Personal expenses (tips, porterage, room service, laundry, calls, etc.)',
+      'Increases in entrance fees, taxes, insurance, or other incidental charges',
+      'Meet & greet assistance inside the airport',
+      'Visa and OK-to-board charges',
+      'Tourism Dirham Fee applied by hotels',
+      'Anything not mentioned under Package Inclusions',
+    ],
+  },
 ]
 
 export function editableInternationalTourPackages(
@@ -796,6 +1132,7 @@ export function toursByCountry(
     'Thailand',
     'Malaysia',
     'Vietnam',
+    'Dubai, UAE',
     'Singapore',
   ]
   return order

@@ -85,7 +85,28 @@ export const packagesMenuCategories: PackagesMenuItem[] = [
       },
       {
         country: 'Dubai, UAE',
-        destinations: [{ label: 'Dubai', href: '/tours?country=dubai' }],
+        destinations: [
+          {
+            label: 'Dubai New Glimpses',
+            href: '/packages/dubai/dubai-new-glimpses',
+          },
+          {
+            label: 'Dubai Stop-Over',
+            href: '/packages/dubai/dubai-stop-over',
+          },
+          {
+            label: 'Emirates Heritage',
+            href: '/packages/dubai/emirates-heritage',
+          },
+          {
+            label: 'Dubai Luxury Travel',
+            href: '/packages/dubai/dubai-luxury-travel',
+          },
+          {
+            label: 'Dubai At A Glance',
+            href: '/packages/dubai/dubai-at-a-glance',
+          },
+        ],
       },
       {
         country: 'Thailand',

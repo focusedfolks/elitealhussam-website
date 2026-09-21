@@ -40,10 +40,7 @@ export function Tours() {
     const params = new URLSearchParams(location.search)
     const countryParam = params.get('country')
     const stateParam = params.get('state')
-    const country = destinationCountries.find((item) => {
-      if (countryParam === 'dubai') return item.id === 'dubai-uae'
-      return item.id === countryParam
-    })
+    const country = destinationCountries.find((item) => item.id === countryParam)
 
     setSelectedCountryId(country?.id ?? null)
     setSelectedStateName(

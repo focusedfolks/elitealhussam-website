@@ -17,7 +17,10 @@ type Props = {
  */
 export function TourPackageCard({ pkg, index = 0 }: Props) {
   const { company } = useCms()
-  const href = `/international-tours/${pkg.slug}`
+  const href =
+    pkg.country === 'Dubai, UAE'
+      ? `/packages/dubai/${pkg.slug}`
+      : `/international-tours/${pkg.slug}`
   const phone = company.phones[0]
   const bullets =
     pkg.highlights.length > 0

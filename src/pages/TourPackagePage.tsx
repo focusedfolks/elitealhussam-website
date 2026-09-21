@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { Seo } from '../components/Seo'
 import { TourEnquiryForm } from '../components/TourEnquiryForm'
@@ -26,6 +26,7 @@ function ClockIcon() {
 
 export function TourPackagePage() {
   const { slug } = useParams()
+  const location = useLocation()
   const { packages } = useCms()
   const internationalPackage = slug ? getTourBySlug(slug, packages) : undefined
   const pendingDestination = slug ? getPendingDestinationBySlug(slug) : undefined
@@ -48,6 +49,9 @@ export function TourPackagePage() {
     isPending: true,
   } : undefined)
   const [tab, setTab] = useState<TabId>('info')
+  const packagePath = location.pathname.startsWith('/packages/dubai/')
+    ? `/packages/dubai/${pkg?.slug ?? ''}`
+    : `/international-tours/${pkg?.slug ?? ''}`
 
   if (!pkg) return <Navigate to="/international-tours" replace />
 
@@ -71,7 +75,7 @@ export function TourPackagePage() {
             ? `${pkg.tagline}. ${pkg.description} ${pkg.duration}.`
             : pkg.about
         }
-        url={`/international-tours/${pkg.slug}`}
+        url={packagePath}
         image={pkg.image}
       />
 

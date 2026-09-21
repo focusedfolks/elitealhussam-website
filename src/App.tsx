@@ -68,6 +68,7 @@ export default function App() {
               <Route path="gallery" element={<Gallery />} />
               <Route path="packages/hajj-umrah" element={<Packages />} />
               <Route path="packages" element={<Packages />} />
+              <Route path="packages/dubai/:slug" element={<TourPackagePage />} />
               <Route path="packages/:packageId/itinerary" element={<PackageItineraryPage />} />
               <Route path="international-tours" element={<InternationalTours />} />
               <Route

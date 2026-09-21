@@ -368,6 +368,16 @@
   font-size: 0.86rem;
 }
 
+.admin-package-image-preview {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--navy-mist);
+}
+
 .admin-check {
   display: flex;
   align-items: center;

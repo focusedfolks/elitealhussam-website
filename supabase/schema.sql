@@ -112,6 +112,34 @@ create trigger site_settings_updated_at
   for each row execute function public.set_updated_at();
 
 -- Row Level Security
+insert into storage.buckets (id, name, public)
+values ('package-images', 'package-images', true)
+on conflict (id) do update set public = true;
+
+drop policy if exists "Public read package images" on storage.objects;
+create policy "Public read package images"
+  on storage.objects for select
+  using (bucket_id = 'package-images');
+
+drop policy if exists "Admin upload package images" on storage.objects;
+create policy "Admin upload package images"
+  on storage.objects for insert
+  to authenticated
+  with check (bucket_id = 'package-images');
+
+drop policy if exists "Admin update package images" on storage.objects;
+create policy "Admin update package images"
+  on storage.objects for update
+  to authenticated
+  using (bucket_id = 'package-images')
+  with check (bucket_id = 'package-images');
+
+drop policy if exists "Admin delete package images" on storage.objects;
+create policy "Admin delete package images"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'package-images');
+
 alter table public.packages enable row level security;
 alter table public.blog_posts enable row level security;
 alter table public.testimonials enable row level security;

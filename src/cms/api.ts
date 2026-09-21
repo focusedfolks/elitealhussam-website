@@ -114,7 +114,6 @@ export async function fetchCmsPackages(): Promise<TravelPackage[]> {
     return {
       ...fallback,
       ...cms,
-      image: fallback.image,
       itinerary: fallback.itinerary ?? cms.itinerary,
       placeholder: fallback.placeholder ?? cms.placeholder,
     }
@@ -252,6 +251,26 @@ export async function adminUpsertPackage(
     sort_order: pkg.sortOrder ?? 0,
   })
   if (error) throw error
+}
+
+export async function adminUploadPackageImage(
+  packageId: string,
+  file: File,
+): Promise<string> {
+  if (!supabase) throw new Error('Supabase not configured')
+  if (!file.type.startsWith('image/')) {
+    throw new Error('Please choose an image file')
+  }
+
+  const extension = file.name.split('.').pop()?.toLowerCase() || 'jpg'
+  const safePackageId = packageId.trim().toLowerCase().replace(/[^a-z0-9-]+/g, '-')
+  const path = `packages/${safePackageId || 'package'}-${Date.now()}.${extension}`
+  const { error } = await supabase.storage
+    .from('package-images')
+    .upload(path, file, { cacheControl: '3600', contentType: file.type })
+  if (error) throw error
+
+  return supabase.storage.from('package-images').getPublicUrl(path).data.publicUrl
 }
 
 export async function adminDeletePackage(id: string) {

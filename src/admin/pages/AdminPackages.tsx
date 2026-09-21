@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   adminDeletePackage,
   adminListPackages,
+  adminUploadPackageImage,
   adminUpsertPackage,
 } from '../../cms/api'
 import type { TravelPackage } from '../../content/site'
@@ -151,6 +152,7 @@ export function AdminPackageEdit() {
   const [tourItineraryText, setTourItineraryText] = useState('')
   const [tourInclusionsText, setTourInclusionsText] = useState('')
   const [tourExclusionsText, setTourExclusionsText] = useState('')
+  const [imageUploading, setImageUploading] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -228,6 +230,22 @@ export function AdminPackageEdit() {
       if (isNew) navigate(`/admin/packages/${form.id}`)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Save failed')
+    }
+  }
+
+  async function onImageSelected(file: File | undefined) {
+    if (!file) return
+    setError(null)
+    setMessage(null)
+    try {
+      setImageUploading(true)
+      const image = await adminUploadPackageImage(form.id || form.title, file)
+      setForm((current) => ({ ...current, image }))
+      setMessage('Image uploaded. Save the package to publish it.')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Image upload failed')
+    } finally {
+      setImageUploading(false)
     }
   }
 
@@ -312,8 +330,25 @@ export function AdminPackageEdit() {
           />
         </div>
         <div className="admin-field">
-          <label>Image path</label>
+          <label>Package image</label>
           <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/avif"
+            disabled={imageUploading}
+            onChange={(e) => {
+              void onImageSelected(e.target.files?.[0])
+              e.currentTarget.value = ''
+            }}
+          />
+          <span className="admin-muted">
+            {imageUploading ? 'Uploading image…' : 'Upload JPG, PNG, WebP, or AVIF'}
+          </span>
+          {form.image ? (
+            <img className="admin-package-image-preview" src={form.image} alt="Package preview" />
+          ) : null}
+          <label htmlFor="package-image-path">Image URL or path</label>
+          <input
+            id="package-image-path"
             value={form.image}
             onChange={(e) => setForm({ ...form, image: e.target.value })}
           />

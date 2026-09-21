@@ -287,8 +287,10 @@
 
 .proof-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.1rem;
+  width: min(100%, 52rem);
+  margin-inline: auto;
 }
 
 .proof-card {

@@ -767,8 +767,8 @@ export const internationalTourPackages: TourPackage[] = [
     duration: '4 Nights / 5 Days',
     days: 5,
     nights: 4,
-    image: '/images/dubai-skyline.webp',
-    imageAlt: 'Dubai skyline at sunset',
+    image: '/images/tours/Dubai New Glimpses.jpg',
+    imageAlt: 'Dubai New Glimpses travel package',
     about:
       "A five-day Dubai itinerary covering the city's newest attractions — from the Museum of the Future to the Dubai Safari Park and a ride over Palm Jumeirah.",
     highlights: [
@@ -842,8 +842,8 @@ export const internationalTourPackages: TourPackage[] = [
     duration: '2 Nights / 3 Days',
     days: 3,
     nights: 2,
-    image: '/images/dubai-skyline.webp',
-    imageAlt: 'Dubai skyline at sunset',
+    image: '/images/tours/Dubai Stop-Over.jpg',
+    imageAlt: 'Dubai Stop-Over travel package',
     about:
       "A short Dubai stopover covering the city's highlights and a desert safari — ideal for travelers with limited time between connections.",
     highlights: ['Half-day Dubai city tour', 'Desert Safari with BBQ dinner'],
@@ -895,8 +895,8 @@ export const internationalTourPackages: TourPackage[] = [
     duration: '5 Nights / 6 Days',
     days: 6,
     nights: 5,
-    image: '/images/dubai-skyline.webp',
-    imageAlt: 'Dubai skyline at sunset',
+    image: '/images/tours/Emirates Heritage.jpg',
+    imageAlt: 'Emirates Heritage travel package',
     about:
       "A six-day tour across the UAE's seven emirates — Dubai, Sharjah, Abu Dhabi, Fujairah, and Khorfakkan — ending with a dhow cruise into Musandam's Omani fjords.",
     highlights: [
@@ -961,8 +961,8 @@ export const internationalTourPackages: TourPackage[] = [
     duration: '4 Nights / 5 Days',
     days: 5,
     nights: 4,
-    image: '/images/dubai-skyline.webp',
-    imageAlt: 'Dubai skyline at sunset',
+    image: '/images/tours/Dubai Luxury Travel.jpg',
+    imageAlt: 'Dubai Luxury Travel package',
     about:
       "A five-day premium Dubai experience — private touring by luxury SUV, a Marina yacht cruise, the Burj Khalifa's highest lounge, Ferrari World, and a VIP desert camp.",
     highlights: [
@@ -1037,8 +1037,8 @@ export const internationalTourPackages: TourPackage[] = [
     duration: '3 Nights / 4 Days',
     days: 4,
     nights: 3,
-    image: '/images/dubai-skyline.webp',
-    imageAlt: 'Dubai skyline at sunset',
+    image: '/images/tours/Dubai At A Glance.jpg',
+    imageAlt: 'Dubai At A Glance travel package',
     about:
       "A compact four-day Dubai introduction covering the city's signature experiences — a Marina dhow dinner cruise, the Burj Khalifa, and a desert safari.",
     highlights: [

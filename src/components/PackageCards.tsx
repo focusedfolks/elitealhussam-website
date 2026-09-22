@@ -77,9 +77,15 @@ export function PackageCards({
     else setInternalFilter(next)
   }
 
+  const staticPackageImages = new Map(
+    [...umrahPackages, ...hajjPackages].map((pkg) => [pkg.id, pkg.image]),
+  )
   const packageSource = showFilters
     ? [...umrahPackages, ...hajjPackages]
-    : allPackages
+    : allPackages.map((pkg) => ({
+        ...pkg,
+        image: staticPackageImages.get(pkg.id) ?? pkg.image,
+      }))
 
   const totalCount = packageSource.filter((pkg) =>
     popularOnly ? Boolean(pkg.popular) : true,

@@ -1,0 +1,503 @@
+import { useEffect, useState, type FormEvent } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import {
+  adminDeletePackage,
+  adminListPackages,
+  adminUploadPackageImage,
+  adminUpsertPackage,
+} from '../../cms/api'
+import type { TravelPackage } from '../../content/site'
+
+const emptyPackage = (): TravelPackage & {
+  published: boolean
+  sortOrder: number
+} => ({
+  id: '',
+  category: 'umrah',
+  title: '',
+  tag: '',
+  season: '',
+  summary: '',
+  locations: 'Makkah • Madinah',
+  duration: '',
+  image: '/images/theme-hero.webp',
+  pricing: {
+    adult: 0,
+    child: 0,
+    infant: 0,
+    currency: 'INR',
+    note: 'Starting from · per person',
+  },
+  features: [],
+  highlights: [],
+  amenities: [
+    { key: 'hotel', title: 'Hotel', subtitle: 'Stay' },
+    { key: 'transport', title: 'Transport', subtitle: 'Transfers' },
+    { key: 'meals', title: 'Meals', subtitle: 'Included' },
+    { key: 'support', title: 'Support', subtitle: '24/7' },
+    { key: 'visa', title: 'Visa', subtitle: 'Help' },
+  ],
+  availableTravelModes: ['air', 'road'],
+  popular: false,
+  featured: false,
+  published: true,
+  sortOrder: 0,
+})
+
+export function AdminPackagesList() {
+  const [rows, setRows] = useState<
+    (TravelPackage & { published?: boolean; sortOrder?: number })[]
+  >([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  async function load() {
+    try {
+      setLoading(true)
+      setRows(await adminListPackages())
+      setError(null)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load packages')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    void load()
+  }, [])
+
+  return (
+    <>
+      <div className="admin-toolbar">
+        <p className="admin-muted">Manage Hajj, Umrah, and International Tour packages.</p>
+        <Link className="admin-btn admin-btn-primary" to="/admin/packages/new">
+          Add package
+        </Link>
+      </div>
+      {error ? <div className="admin-alert admin-alert-error">{error}</div> : null}
+      {loading ? (
+        <div className="admin-card">
+          <p className="admin-muted">Loading packages…</p>
+        </div>
+      ) : null}
+      {!loading ? (
+      <div className="admin-card admin-table-wrap">
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Adult (INR)</th>
+              <th>Status</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((pkg) => (
+              <tr key={pkg.id}>
+                <td>
+                  <strong>{pkg.title}</strong>
+                  <div className="admin-muted">{pkg.id}</div>
+                </td>
+                <td>{pkg.category}</td>
+                <td>{pkg.pricing.adult.toLocaleString('en-IN')}</td>
+                <td>
+                  <span
+                    className={`admin-badge ${pkg.published === false ? 'admin-badge-muted' : 'admin-badge-ok'}`}
+                  >
+                    {pkg.published === false ? 'Draft' : 'Live'}
+                  </span>
+                </td>
+                <td>
+                  <div className="admin-actions">
+                    <Link
+                      className="admin-btn admin-btn-ghost"
+                      to={`/admin/packages/${pkg.id}`}
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      type="button"
+                      className="admin-btn admin-btn-danger"
+                      onClick={async () => {
+                        if (!confirm(`Delete ${pkg.title}?`)) return
+                        await adminDeletePackage(pkg.id)
+                        await load()
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      ) : null}
+    </>
+  )
+}
+
+export function AdminPackageEdit() {
+  const { id } = useParams()
+  const isNew = id === 'new'
+  const navigate = useNavigate()
+  const [form, setForm] = useState(emptyPackage())
+  const [featuresText, setFeaturesText] = useState('')
+  const [highlightsText, setHighlightsText] = useState('')
+  const [tourTagline, setTourTagline] = useState('')
+  const [tourAbout, setTourAbout] = useState('')
+  const [tourItineraryText, setTourItineraryText] = useState('')
+  const [tourInclusionsText, setTourInclusionsText] = useState('')
+  const [tourExclusionsText, setTourExclusionsText] = useState('')
+  const [imageUploading, setImageUploading] = useState(false)
+  const [message, setMessage] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (isNew) return
+    ;(async () => {
+      try {
+        const rows = await adminListPackages()
+        const found = rows.find((p) => p.id === id)
+        if (!found) {
+          setError('Package not found')
+          return
+        }
+        setForm({
+          ...emptyPackage(),
+          ...found,
+          published: found.published !== false,
+          sortOrder: found.sortOrder ?? 0,
+        })
+        setFeaturesText(found.features.join('\n'))
+        setHighlightsText(found.highlights.join('\n'))
+        setTourTagline(found.tourDetails?.tagline ?? '')
+        setTourAbout(found.tourDetails?.about ?? '')
+        setTourItineraryText(
+          found.tourDetails?.itinerary
+            .map((day) => `${day.day} | ${day.title} | ${day.text}`)
+            .join('\n') ?? '',
+        )
+        setTourInclusionsText(found.tourDetails?.inclusions.join('\n') ?? '')
+        setTourExclusionsText(found.tourDetails?.exclusions.join('\n') ?? '')
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load')
+      }
+    })()
+  }, [id, isNew])
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault()
+    setError(null)
+    setMessage(null)
+    try {
+      await adminUpsertPackage({
+        ...form,
+        features: featuresText
+          .split('\n')
+          .map((s) => s.trim())
+          .filter(Boolean),
+        highlights: highlightsText
+          .split('\n')
+          .map((s) => s.trim())
+          .filter(Boolean),
+        tourDetails: {
+          tagline: tourTagline.trim(),
+          about: tourAbout.trim(),
+          highlights: highlightsText
+            .split('\n')
+            .map((s) => s.trim())
+            .filter(Boolean),
+          itinerary: tourItineraryText
+            .split('\n')
+            .map((line) => line.split('|').map((part) => part.trim()))
+            .filter((parts) => parts.length >= 3 && parts.every(Boolean))
+            .map(([day, title, text]) => ({ day, title, text })),
+          inclusions: tourInclusionsText
+            .split('\n')
+            .map((s) => s.trim())
+            .filter(Boolean),
+          exclusions: tourExclusionsText
+            .split('\n')
+            .map((s) => s.trim())
+            .filter(Boolean),
+        },
+      })
+      setMessage('Package saved')
+      if (isNew) navigate(`/admin/packages/${form.id}`)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Save failed')
+    }
+  }
+
+  async function onImageSelected(file: File | undefined) {
+    if (!file) return
+    setError(null)
+    setMessage(null)
+    try {
+      setImageUploading(true)
+      const image = await adminUploadPackageImage(form.id || form.title, file)
+      setForm((current) => ({ ...current, image }))
+      setMessage('Image uploaded. Save the package to publish it.')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Image upload failed')
+    } finally {
+      setImageUploading(false)
+    }
+  }
+
+  return (
+    <form className="admin-card admin-form" onSubmit={onSubmit}>
+      <div className="admin-toolbar">
+        <h2>{isNew ? 'New package' : 'Edit package'}</h2>
+        <Link className="admin-btn admin-btn-ghost" to="/admin/packages">
+          Back
+        </Link>
+      </div>
+      {error ? <div className="admin-alert admin-alert-error">{error}</div> : null}
+      {message ? <div className="admin-alert admin-alert-ok">{message}</div> : null}
+
+      <div className="admin-form-grid">
+        <div className="admin-field">
+          <label>ID (slug)</label>
+          <input
+            required
+            disabled={!isNew}
+            value={form.id}
+            onChange={(e) => setForm({ ...form, id: e.target.value.trim() })}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Category</label>
+          <select
+            value={form.category}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                category: e.target.value as TravelPackage['category'],
+              })
+            }
+          >
+            <option value="hajj">Hajj</option>
+            <option value="umrah">Umrah</option>
+            <option value="tour">International Tour</option>
+          </select>
+        </div>
+        <div className="admin-field">
+          <label>Title</label>
+          <input
+            required
+            value={form.title}
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Tag</label>
+          <input
+            value={form.tag}
+            onChange={(e) => setForm({ ...form, tag: e.target.value })}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Season</label>
+          <input
+            value={form.season}
+            onChange={(e) => setForm({ ...form, season: e.target.value })}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Duration</label>
+          <input
+            value={form.duration}
+            onChange={(e) => setForm({ ...form, duration: e.target.value })}
+          />
+        </div>
+        <div className="admin-field full">
+          <label>Summary</label>
+          <textarea
+            value={form.summary}
+            onChange={(e) => setForm({ ...form, summary: e.target.value })}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Locations</label>
+          <input
+            value={form.locations}
+            onChange={(e) => setForm({ ...form, locations: e.target.value })}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Package image</label>
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/avif"
+            disabled={imageUploading}
+            onChange={(e) => {
+              void onImageSelected(e.target.files?.[0])
+              e.currentTarget.value = ''
+            }}
+          />
+          <span className="admin-muted">
+            {imageUploading ? 'Uploading image…' : 'Upload JPG, PNG, WebP, or AVIF'}
+          </span>
+          {form.image ? (
+            <img className="admin-package-image-preview" src={form.image} alt="Package preview" />
+          ) : null}
+          <label htmlFor="package-image-path">Image URL or path</label>
+          <input
+            id="package-image-path"
+            value={form.image}
+            onChange={(e) => setForm({ ...form, image: e.target.value })}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Adult price (INR)</label>
+          <input
+            type="number"
+            value={form.pricing.adult}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                pricing: { ...form.pricing, adult: Number(e.target.value) },
+              })
+            }
+          />
+        </div>
+        <div className="admin-field">
+          <label>Child price (INR)</label>
+          <input
+            type="number"
+            value={form.pricing.child}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                pricing: { ...form.pricing, child: Number(e.target.value) },
+              })
+            }
+          />
+        </div>
+        <div className="admin-field">
+          <label>Infant price (INR)</label>
+          <input
+            type="number"
+            value={form.pricing.infant}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                pricing: { ...form.pricing, infant: Number(e.target.value) },
+              })
+            }
+          />
+        </div>
+        <div className="admin-field">
+          <label>Price note</label>
+          <input
+            value={form.pricing.note || ''}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                pricing: { ...form.pricing, note: e.target.value },
+              })
+            }
+          />
+        </div>
+        <div className="admin-field">
+          <label>Features (one per line)</label>
+          <textarea
+            value={featuresText}
+            onChange={(e) => setFeaturesText(e.target.value)}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Highlights (one per line)</label>
+          <textarea
+            value={highlightsText}
+            onChange={(e) => setHighlightsText(e.target.value)}
+          />
+        </div>
+        <div className="admin-field full">
+          <label>Package detail tagline</label>
+          <input
+            value={tourTagline}
+            onChange={(e) => setTourTagline(e.target.value)}
+          />
+        </div>
+        <div className="admin-field full">
+          <label>About This Package</label>
+          <textarea
+            value={tourAbout}
+            onChange={(e) => setTourAbout(e.target.value)}
+          />
+        </div>
+        <div className="admin-field full">
+          <label>Itinerary (one per line: Day 1 | Title | Description)</label>
+          <textarea
+            value={tourItineraryText}
+            onChange={(e) => setTourItineraryText(e.target.value)}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Inclusions (one per line)</label>
+          <textarea
+            value={tourInclusionsText}
+            onChange={(e) => setTourInclusionsText(e.target.value)}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Exclusions (one per line)</label>
+          <textarea
+            value={tourExclusionsText}
+            onChange={(e) => setTourExclusionsText(e.target.value)}
+          />
+        </div>
+        <div className="admin-field">
+          <label>Sort order</label>
+          <input
+            type="number"
+            value={form.sortOrder}
+            onChange={(e) =>
+              setForm({ ...form, sortOrder: Number(e.target.value) })
+            }
+          />
+        </div>
+        <div className="admin-field">
+          <label className="admin-check">
+            <input
+              type="checkbox"
+              checked={form.popular}
+              onChange={(e) => setForm({ ...form, popular: e.target.checked })}
+            />
+            Popular
+          </label>
+          <label className="admin-check">
+            <input
+              type="checkbox"
+              checked={form.featured}
+              onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+            />
+            Featured
+          </label>
+          <label className="admin-check">
+            <input
+              type="checkbox"
+              checked={form.published}
+              onChange={(e) =>
+                setForm({ ...form, published: e.target.checked })
+              }
+            />
+            Published
+          </label>
+        </div>
+      </div>
+
+      <div className="admin-actions">
+        <button className="admin-btn admin-btn-primary" type="submit">
+          Save package
+        </button>
+      </div>
+    </form>
+  )
+}

@@ -1,0 +1,151 @@
+.cq-section {
+  padding-top: 4.5rem;
+  padding-bottom: 5rem;
+}
+
+.cq-panel {
+  align-items: start;
+}
+
+.cq-form {
+  gap: 1rem;
+}
+
+.cq-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.cq-nights {
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  background: rgba(15, 61, 46, 0.06);
+  border: 1px solid rgba(15, 61, 46, 0.1);
+  color: var(--navy);
+  font-size: 0.9rem;
+}
+
+.cq-nights strong {
+  font-weight: 800;
+}
+
+.cq-nights-hint {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.82rem;
+}
+
+.cq-room-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.cq-services-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.cq-services {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.cq-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(15, 31, 61, 0.1);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+}
+
+.cq-check input[type='checkbox'] {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.15rem;
+  flex: 0 0 auto;
+  accent-color: var(--emerald, #0f3d2e);
+}
+
+.cq-check span {
+  line-height: 1.4;
+}
+
+.cq-check--food {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.cq-food-times {
+  width: 4.25rem !important;
+  min-height: 2.25rem !important;
+  margin-inline-start: auto;
+  padding: 0.35rem 0.5rem !important;
+  text-align: center;
+}
+
+.cq-food-times:disabled {
+  opacity: 0.45;
+}
+
+.cq-food-unit {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .cq-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .cq-room-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .cq-row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .cq-room-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cq-check--food {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 0.55rem;
+    row-gap: 0.45rem;
+  }
+
+  .cq-check--food > span:first-of-type {
+    grid-column: 2;
+  }
+
+  .cq-food-times {
+    grid-column: 2;
+    margin-inline-start: 0;
+    width: 5rem !important;
+  }
+
+  .cq-food-unit {
+    grid-column: 2;
+  }
+}

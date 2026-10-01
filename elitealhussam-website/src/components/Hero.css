@@ -1,0 +1,407 @@
+/* Full-screen diagonal split hero */
+
+.hero-shell {
+  position: relative;
+  min-height: 100svh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.hero-split {
+  position: relative;
+  display: grid;
+  direction: ltr;
+  min-height: 100svh;
+  min-height: 100dvh;
+  height: 100svh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #0a1528;
+}
+
+.hero-split-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+}
+
+.hero-split-slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-split-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.01);
+  transition: opacity 800ms ease, transform 900ms ease;
+  will-change: opacity;
+}
+
+.hero-split-slide.is-active {
+  opacity: 1;
+  z-index: 1;
+  transform: scale(1);
+}
+
+.hero-split-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      115deg,
+      rgba(10, 21, 40, 0.3) 0%,
+      rgba(15, 31, 61, 0.18) 45%,
+      rgba(10, 21, 40, 0.08) 100%
+    );
+  pointer-events: none;
+}
+
+.hero-split-veil--tours {
+  background:
+    linear-gradient(
+      220deg,
+      rgba(10, 21, 40, 0.32) 0%,
+      rgba(15, 31, 61, 0.52) 55%,
+      rgba(10, 21, 40, 0.7) 100%
+    );
+}
+
+.hero-split-panel--hajj > .hero-split-veil {
+  background: linear-gradient(
+    115deg,
+    rgba(4, 20, 17, 0.62) 0%,
+    rgba(0, 68, 56, 0.38) 52%,
+    rgba(4, 20, 17, 0.18) 100%
+  );
+}
+
+.hero-split-panel:hover .hero-split-slide.is-active {
+  transform: scale(1.05);
+}
+
+/* Reference seam: about 62% from the left at the top, 38% at the bottom. */
+.hero-split-panel--hajj {
+  z-index: 2;
+  clip-path: polygon(0 0, 62% 0, 38% 100%, 0 100%);
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.hero-split-panel--tours {
+  z-index: 1;
+  clip-path: polygon(62% 0, 100% 0, 100% 100%, 38% 100%);
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.hero-split-content {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  color: #fff;
+  max-width: 36rem;
+  text-align: center;
+  direction: ltr;
+}
+
+html[dir='rtl'] .hero-split-content {
+  direction: rtl;
+}
+
+.hero-split-content::before {
+  position: absolute;
+  z-index: -1;
+  inset: -3.5rem -4rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(8, 18, 28, 0.42) 0%,
+    rgba(8, 18, 28, 0.2) 50%,
+    rgba(8, 18, 28, 0) 76%
+  );
+  content: '';
+  pointer-events: none;
+}
+
+.hero-split-content--tours::before {
+  background: radial-gradient(
+    ellipse,
+    rgba(7, 18, 35, 0.28) 0%,
+    rgba(7, 18, 35, 0.12) 52%,
+    rgba(7, 18, 35, 0) 76%
+  );
+}
+
+.hero-split-content--hajj {
+  z-index: 3;
+  padding: 2.5rem 2rem;
+  width: min(36rem, 38%);
+  margin-left: 13%;
+}
+
+.hero-split-content--tours {
+  padding: 2.5rem 2rem;
+  width: min(36rem, 38%);
+  margin-right: 13%;
+}
+
+.hero-split-icon {
+  display: block;
+  margin: 0 auto 0.8rem;
+}
+
+.hero-split-content--hajj .hero-split-icon {
+  color: #fff;
+}
+
+.hero-split-content--hajj::before {
+  inset: -4.25rem -5rem;
+  background: none;
+}
+
+.hero-split-content--hajj h1 {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: #fff;
+}
+
+.hero-split-content--tours h2 {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.hero-split-copy {
+  margin: 0 auto 0.8rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.95rem, 1.3vw, 1.08rem);
+  line-height: 1.45;
+  max-width: 18rem;
+}
+
+.hero-split-trust {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0 auto 1rem;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.hero-split-trust span {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.hero-split-content--hajj .hero-split-copy {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-split-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  color: #e0b84a;
+  font-size: 0.65rem;
+  line-height: 1;
+  margin-bottom: 1.35rem;
+}
+
+.hero-split-ornament::before,
+.hero-split-ornament::after {
+  width: 2.5rem;
+  height: 1px;
+  background: currentColor;
+  content: '';
+}
+
+.hero-split-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.hero-split-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 44px;
+  padding: 0.7rem 1.25rem;
+  border: 0;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-split-button:hover {
+  transform: translateY(-2px);
+}
+
+.hero-split-button--hajj {
+  background: #0b4f3f;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(11, 79, 63, 0.24);
+}
+
+.hero-split-button--tours {
+  background: #e0b84a;
+  color: #16253a;
+  box-shadow: 0 10px 24px rgba(224, 184, 74, 0.22);
+}
+
+.hero-split-tours-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 0.85rem;
+}
+
+.hero-split-tours-row > a:not(.hero-split-tours-cta) {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+  font-weight: 650;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.hero-split-tours-row > a:not(.hero-split-tours-cta):hover {
+  color: #e0b84a;
+  border-bottom-color: rgba(224, 184, 74, 0.65);
+}
+
+/* Keep Explore Tours on the same row as Local */
+.hero-split-tours-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin-inline-start: 0.15rem;
+  padding: 0.5rem 1.05rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(224, 184, 74, 0.65);
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.hero-split-tours-cta:hover {
+  background: rgba(224, 184, 74, 0.22);
+  border-color: #e0b84a;
+}
+
+/* —— Mobile: stack full-width rectangles, no clip-path —— */
+@media (max-width: 900px) {
+  .hero-shell {
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
+  .hero-split {
+    height: 100svh;
+    height: 100dvh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-split-panel {
+    position: relative;
+    inset: auto;
+    clip-path: none !important;
+    min-height: 50%;
+    flex: 1 1 50%;
+    width: 100%;
+  }
+
+  .hero-split-panel--hajj {
+    min-height: 50%;
+    align-items: center;
+  }
+
+  .hero-split-panel--tours {
+    min-height: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-split-content--hajj,
+  .hero-split-content--tours {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding: 1.75rem 1.25rem 1.75rem;
+  }
+
+  .hero-split-content--hajj h1 {
+    font-size: clamp(2.15rem, 9vw, 3rem);
+  }
+
+  .hero-split-content--tours h2 {
+    font-size: clamp(2.15rem, 9vw, 3rem);
+  }
+
+  .hero-split-veil {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(10, 21, 40, 0.35) 0%,
+        rgba(10, 21, 40, 0.55) 40%,
+        rgba(10, 21, 40, 0.88) 100%
+      );
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-split-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-split-tours-row {
+    gap: 0.55rem 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-split-slide {
+    transition: none;
+  }
+
+  .hero-split-tours-cta,
+  .hero-split-tours-row > a {
+    transition: none;
+  }
+
+  .hero-split-button {
+    transition: none;
+  }
+}

@@ -1,0 +1,138 @@
+.guide-page .guide-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.guide-prose {
+  max-width: 72ch;
+}
+
+.guide-prose p {
+  color: var(--muted);
+  line-height: 1.8;
+  margin: 0 0 1.15rem;
+}
+
+.guide-heading {
+  margin: 2rem 0 0.85rem;
+  color: var(--ink);
+  font-family: var(--font-display, Georgia, serif);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.guide-heading:first-child {
+  margin-top: 0;
+}
+
+.guide-prose h2.guide-heading {
+  font-size: 1.45rem;
+}
+
+.guide-prose h3.guide-heading {
+  font-size: 1.25rem;
+}
+
+.guide-prose h4.guide-heading {
+  font-size: 1.1rem;
+}
+
+.guide-list {
+  margin: 0 0 1.15rem;
+  padding-left: 1.25rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.guide-list li + li {
+  margin-top: 0.45rem;
+}
+
+.guide-quote {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.15rem;
+  border-left: 3px solid var(--gold, #b8956c);
+  background: var(--surface-soft);
+  color: var(--ink);
+}
+
+.guide-quote p {
+  margin: 0;
+  color: inherit;
+  font-style: italic;
+}
+
+.guide-quote cite {
+  display: block;
+  margin-top: 0.65rem;
+  font-size: 0.9rem;
+  font-style: normal;
+  color: var(--muted);
+}
+
+.guide-notice {
+  margin: 0 0 1.15rem;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  line-height: 1.6;
+}
+
+.guide-notice--info {
+  background: rgba(184, 149, 108, 0.12);
+  color: var(--ink);
+}
+
+.guide-notice--warning {
+  background: rgba(160, 80, 40, 0.1);
+  color: var(--ink);
+}
+
+.guide-aside {
+  position: sticky;
+  top: 6.5rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface-soft);
+}
+
+.guide-aside .eyebrow {
+  margin: 0 0 0.65rem;
+}
+
+.guide-related {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.guide-related li + li {
+  margin-top: 0.55rem;
+}
+
+.guide-related a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.guide-related a:hover {
+  color: var(--gold-deep, #8a6a3d);
+}
+
+.guide-aside .cta-row {
+  margin-top: 1.35rem;
+}
+
+@media (max-width: 900px) {
+  .guide-page .guide-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-aside {
+    position: static;
+  }
+}

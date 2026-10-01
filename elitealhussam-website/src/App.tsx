@@ -1,0 +1,116 @@
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { AdminAuthProvider } from './admin/AdminAuth'
+import { ProtectedAdmin } from './admin/ProtectedAdmin'
+import { AdminBlogEdit, AdminBlogList } from './admin/pages/AdminBlog'
+import { AdminDashboard } from './admin/pages/AdminDashboard'
+import { AdminLeads } from './admin/pages/AdminLeads'
+import { AdminLogin } from './admin/pages/AdminLogin'
+import { AdminPackageEdit, AdminPackagesList } from './admin/pages/AdminPackages'
+import { AdminAbout, AdminCompany } from './admin/pages/AdminSettings'
+import { AdminTestimonials } from './admin/pages/AdminTestimonials'
+import { CmsProvider } from './cms/CmsProvider'
+import { Layout } from './components/Layout'
+import { RouteReset } from './components/RouteReset'
+import { CurrencyProvider } from './currency'
+import { About } from './pages/About'
+import { Blog } from './pages/Blog'
+import { BlogPost } from './pages/BlogPost'
+import { Contact } from './pages/Contact'
+import { GUIDE_DEFAULT_PATH } from './content/guide'
+import { GuidePage } from './pages/GuidePage'
+import { StructureAndImportantPlacesPage } from './pages/StructureAndImportantPlacesPage'
+import { Home } from './pages/Home'
+import { InternationalTours } from './pages/InternationalTours'
+import { LocalTours } from './pages/LocalTours'
+import { Tours } from './pages/Tours'
+import { TourPackagePage } from './pages/TourPackagePage'
+import { NotFound } from './pages/NotFound'
+import { Packages } from './pages/PackagesPages'
+import { PackageItineraryPage } from './pages/PackageItineraryPage'
+import { Pricing } from './pages/Pricing'
+import { Analytics } from './components/Analytics'
+import { History } from './pages/History'
+import { Gallery } from './pages/Gallery'
+
+function PublicLayout() {
+  return (
+    <CmsProvider>
+      <Layout />
+    </CmsProvider>
+  )
+}
+
+export default function App() {
+  return (
+    <CurrencyProvider>
+      <BrowserRouter>
+        <RouteReset />
+        <Analytics />
+        <AdminAuthProvider>
+          <Routes>
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<ProtectedAdmin />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="packages" element={<AdminPackagesList />} />
+              <Route path="packages/:id" element={<AdminPackageEdit />} />
+              <Route path="blog" element={<AdminBlogList />} />
+              <Route path="blog/:id" element={<AdminBlogEdit />} />
+              <Route path="leads" element={<AdminLeads />} />
+              <Route path="testimonials" element={<AdminTestimonials />} />
+              <Route path="company" element={<AdminCompany />} />
+              <Route path="about" element={<AdminAbout />} />
+            </Route>
+
+            <Route element={<PublicLayout />}>
+              <Route index element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="history" element={<History />} />
+              <Route path="gallery" element={<Gallery />} />
+              <Route path="packages/hajj-umrah" element={<Packages />} />
+              <Route path="packages" element={<Packages />} />
+              <Route path="packages/dubai/:slug" element={<TourPackagePage />} />
+              <Route path="packages/:packageId/itinerary" element={<PackageItineraryPage />} />
+              <Route path="international-tours" element={<InternationalTours />} />
+              <Route
+                path="international-tours/:slug"
+                element={<TourPackagePage />}
+              />
+              <Route path="local-tours" element={<LocalTours />} />
+              <Route path="tours" element={<Tours />} />
+              <Route path="pricing" element={<Pricing />} />
+              <Route path="hajj" element={<Navigate to="/packages" replace />} />
+              <Route path="umrah" element={<Navigate to="/packages" replace />} />
+              <Route path="blog" element={<Blog />} />
+              <Route path="blog/:slug" element={<BlogPost />} />
+              <Route
+                path="guide"
+                element={<Navigate to={GUIDE_DEFAULT_PATH} replace />}
+              />
+              <Route
+                path="guide/history/structure-and-important-places"
+                element={
+                  <Navigate
+                    to="/guide/history/structure-and-important-places/black-stone"
+                    replace
+                  />
+                }
+              />
+              <Route
+                path="guide/history/structure-and-important-places/:placeSlug"
+                element={<StructureAndImportantPlacesPage />}
+              />
+              <Route path="guide/history/:slug" element={<GuidePage />} />
+              <Route
+                path="guide/ziyarat/:region/:ziyaratSlug"
+                element={<GuidePage />}
+              />
+              <Route path="guide/:slug" element={<GuidePage />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </AdminAuthProvider>
+      </BrowserRouter>
+    </CurrencyProvider>
+  )
+}

@@ -1,0 +1,43 @@
+.history-content {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  gap: 4rem;
+  align-items: start;
+}
+
+.history-intro {
+  position: sticky;
+  top: 7rem;
+}
+
+.history-intro > p:last-child {
+  margin: 1.2rem 0 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.history-prose {
+  max-width: 720px;
+}
+
+.history-prose p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.history-prose p + p {
+  margin-top: 1.35rem;
+}
+
+@media (max-width: 760px) {
+  .history-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .history-intro {
+    position: static;
+  }
+}

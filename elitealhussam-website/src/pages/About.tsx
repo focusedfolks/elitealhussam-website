@@ -1,0 +1,257 @@
+import { Link } from 'react-router-dom'
+import { useEffect, useRef, type ReactNode } from 'react'
+import { emphasizeIndianPassport } from '../lib/copy'
+import { PageHero } from '../components/PageHero'
+import { Seo } from '../components/Seo'
+import { pageMeta } from '../seo/pageMeta'
+import { BrandMark } from '../components/BrandMark'
+import { highlightIcons } from '../components/Icons'
+import { highlights, images } from '../content/site'
+import { useCms } from '../cms/CmsProvider'
+import { useI18n } from '../i18n'
+import './InnerPages.css'
+import './About.css'
+
+function Reveal({
+  children,
+  className = '',
+}: {
+  children: ReactNode
+  className?: string
+}) {
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const node = ref.current
+    if (!node) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          node.classList.add('is-in')
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref} className={`about-reveal${className ? ` ${className}` : ''}`}>
+      {children}
+    </div>
+  )
+}
+
+const highlightCopy: Record<string, string> = {
+  weekly: 'Regular scheduled trips throughout the season.',
+  bestPrice: 'Clear package guidance with honest inclusions for every traveller.',
+  guidance: 'Experienced spiritual support from briefing to return.',
+  luxury: 'Comfortable hotels close to the Haramain experience.',
+  chennaiSupport: 'Dedicated assistance from our Dubai, UAE office team.',
+  multilingual: 'Guidance in languages your family understands.',
+}
+
+const leaders = [
+  {
+    initials: 'KB',
+    name: 'Mr. K.A. Basheer Ahmed',
+    title: 'Chairman',
+    quote:
+      'Four decades of hospitality for pilgrims - service rooted in sincerity.',
+  },
+  {
+    initials: 'BA',
+    name: 'B Sameer Ahmed Basheer Ahmed',
+    title: 'Managing Director',
+    quote:
+      'Organised, experienced, and genuine tour operation for every pilgrim.',
+  },
+]
+
+const milestones = [
+  {
+    year: '45+',
+    label: 'Years of hospitality lineage',
+    detail: 'Aziz Khogeer Group Hotels roots in the Holy Land',
+  },
+  {
+    year: '1998',
+    label: 'Pilgrimage operations formalised',
+    detail: 'Organised Hajj & Umrah service tradition carried forward',
+  },
+  {
+    year: 'Today',
+    label: 'Dubai, UAE office',
+    detail: 'ELITE ALHUSSAM serving pilgrims with dedicated local support',
+  },
+]
+
+export function About() {
+  const { t } = useI18n()
+  const { about: aboutCopy } = useCms()
+  const labels: Record<string, string> = {
+    weekly: t.common.weekly,
+    bestPrice: t.common.bestPrice,
+    guidance: t.common.guidance,
+    luxury: t.common.luxury,
+    chennaiSupport: t.common.chennaiSupport,
+    multilingual: t.common.multilingual,
+  }
+
+  return (
+    <div className="about-page">
+      <Seo
+        title={pageMeta.about.title}
+        description={pageMeta.about.description}
+        url={pageMeta.about.path}
+        image={pageMeta.about.image}
+      />
+      <PageHero
+        title={t.pages.aboutTitle}
+        subtitle={t.pages.aboutSub}
+        image={images.hotel}
+        crumbs={[
+          { label: 'Home', to: '/' },
+          { label: t.pages.aboutTitle },
+        ]}
+      />
+
+      <section className="inner-section about-intro">
+        <div className="container about-intro-grid">
+          <Reveal className="about-intro-copy">
+            <div className="contact-brand-block">
+              <BrandMark size="lg" showTagline showRule />
+            </div>
+            <p className="eyebrow">Our story</p>
+            <h2 className="section-title">{t.home.whoTitle}</h2>
+            <div className="about-prose">
+              <p>{aboutCopy.intro}</p>
+              <p>{aboutCopy.legacy}</p>
+              <p>{aboutCopy.profile}</p>
+              <p>{emphasizeIndianPassport(aboutCopy.india)}</p>
+              <p>{aboutCopy.leadership}</p>
+            </div>
+            <div className="cta-row">
+              <Link className="btn btn-gold" to="/packages">
+                {t.pages.packagesTitle}
+              </Link>
+              <Link className="btn btn-ghost" to="/contact">
+                {t.talkToUs}
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal className="about-intro-aside">
+            <div
+              className="prose-media about-media"
+              style={{ backgroundImage: `url(${images.madinahDome})` }}
+              role="img"
+              aria-label="Masjid an-Nabawi in Madinah"
+            />
+            <aside className="about-stat-card">
+              <strong>45+</strong>
+              <span>Years of trusted service</span>
+              <em>Now Serving from Dubai, UAE</em>
+            </aside>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="inner-section alt about-why">
+        <div className="container">
+          <Reveal className="section-head about-section-head">
+            <p className="eyebrow">Why choose us</p>
+            <h2>What sets ELITE ALHUSSAM apart</h2>
+            <p>
+              Practical strengths families look for when choosing a pilgrimage
+              partner - from departures to guidance and local support.
+            </p>
+          </Reveal>
+          <Reveal className="highlight-grid about-stagger">
+            {highlights.map((item) => {
+              const Icon = highlightIcons[item.key]
+              return (
+                <article key={item.key} className="highlight-card">
+                  <span className="highlight-icon" aria-hidden>
+                    <Icon size={20} />
+                  </span>
+                  <h3>{labels[item.key]}</h3>
+                  <p>{highlightCopy[item.key]}</p>
+                </article>
+              )
+            })}
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="inner-section about-timeline-section">
+        <div className="container">
+          <Reveal className="section-head about-section-head">
+            <p className="eyebrow">Our journey</p>
+            <h2>Decades of trust, carried forward</h2>
+            <p>
+              From Holy Land hospitality roots to organised pilgrimage support
+              from Dubai, UAE.
+            </p>
+          </Reveal>
+          <Reveal className="about-timeline">
+            {milestones.map((item, i) => (
+              <div className="about-milestone" key={item.year}>
+                <span className="about-milestone-dot" aria-hidden="true" />
+                {i < milestones.length - 1 ? (
+                  <span className="about-milestone-line" aria-hidden="true" />
+                ) : null}
+                <strong>{item.year}</strong>
+                <h3>{item.label}</h3>
+                <p>{item.detail}</p>
+              </div>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="inner-section alt about-leadership">
+        <div className="container">
+          <Reveal className="section-head about-section-head">
+            <p className="eyebrow">Leadership</p>
+            <h2>People behind the pilgrimage care</h2>
+            <p>
+              A family tradition of organised, experienced, and sincere service
+              for elite and regular guests alike.
+            </p>
+          </Reveal>
+          <Reveal className="about-leaders about-stagger">
+            {leaders.map((person) => (
+              <article className="about-leader-card" key={person.name}>
+                <span className="about-leader-avatar" aria-hidden="true">
+                  {person.initials}
+                </span>
+                <div>
+                  <h3>{person.name}</h3>
+                  <p className="about-leader-title">{person.title}</p>
+                  <blockquote>“{person.quote}”</blockquote>
+                </div>
+              </article>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="about-cta-band">
+        <div className="container about-cta-inner">
+          <div>
+            <p className="eyebrow">Start your journey</p>
+            <h2>Ready for package details?</h2>
+            <p>
+              Talk to our Dubai team for Hajj and Umrah options. Haj services
+              are for <strong>Indian passport holders</strong> only — contact
+              us for pricing and package details.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}

@@ -1,0 +1,23 @@
+{
+  "name": "ELITE ALHUSSAM Travel and Tourism",
+  "short_name": "ELITE ALHUSSAM",
+  "description": "Hajj & Umrah packages from Dubai, UAE",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f3ec",
+  "theme_color": "#0f1f3d",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/alhussam-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,328 @@
+/* Detailed Hajj package itinerary — black / gold / cream */
+
+.pkg-itin {
+  --itin-navy: #0f1f3d;
+  --itin-gold: #c9a227;
+  --itin-gold-soft: #e0b84a;
+  --itin-cream: #f7f3ec;
+  --itin-cream-deep: #efe8dc;
+  background: var(--itin-cream);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 18px 48px rgba(15, 31, 61, 0.08);
+}
+
+.pkg-itin-header {
+  padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem) 1.5rem;
+  background: linear-gradient(135deg, var(--itin-navy) 0%, #162a52 100%);
+  color: #fff;
+  text-align: center;
+  border-bottom: 3px solid var(--itin-gold-soft);
+}
+
+.pkg-itin-season {
+  margin: 0 0 0.85rem;
+  color: var(--itin-gold-soft);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pkg-itin-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem 1.25rem;
+}
+
+.pkg-itin-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.pkg-itin-duration {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: rgba(224, 184, 74, 0.18);
+  border: 1px solid rgba(224, 184, 74, 0.55);
+  color: var(--itin-gold-soft);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.pkg-itin-hotels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: #fff;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+}
+
+.pkg-itin-hotel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1.35rem clamp(1rem, 3vw, 1.75rem);
+}
+
+.pkg-itin-hotel + .pkg-itin-hotel {
+  border-left: 1px solid rgba(201, 162, 39, 0.25);
+}
+
+.pkg-itin-hotel-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 12px;
+  background: rgba(201, 162, 39, 0.14);
+  color: var(--itin-gold);
+}
+
+.pkg-itin-hotel-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.pkg-itin-hotel strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--itin-navy);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.pkg-itin-hotel p {
+  margin: 0 0 0.25rem;
+  color: var(--ink);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.pkg-itin-hotel em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 0.82rem;
+}
+
+.pkg-itin-amenities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 1.5rem clamp(1rem, 3vw, 2rem);
+  background: var(--itin-cream-deep);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+}
+
+.pkg-itin-amenity-col {
+  margin: 0;
+  padding: 0 0.75rem;
+  list-style: none;
+}
+
+.pkg-itin-amenity-col:first-child {
+  border-right: 1px solid rgba(201, 162, 39, 0.2);
+}
+
+.pkg-itin-amenity {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-bottom: 0.75rem;
+  color: var(--ink);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.pkg-itin-amenity:last-child {
+  margin-bottom: 0;
+}
+
+.pkg-itin-amenity.is-warning span {
+  color: #9a5b00;
+  font-weight: 600;
+}
+
+.pkg-itin-amenity.is-excluded span {
+  color: #9b2335;
+  font-weight: 600;
+}
+
+.pkg-itin-bullet {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+  color: var(--itin-gold);
+}
+
+.pkg-itin-bullet svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.pkg-itin-bullet.is-warning {
+  color: #c77700;
+}
+
+.pkg-itin-bullet.is-excluded {
+  color: #c0392b;
+}
+
+.pkg-itin-table-section {
+  padding: 1.75rem clamp(1rem, 3vw, 2rem) 1.5rem;
+  background: #fff;
+}
+
+.pkg-itin-table-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+  font-weight: 600;
+  color: var(--itin-navy);
+  text-align: center;
+}
+
+.pkg-itin-table-title::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin: 0.65rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--itin-gold-soft), transparent);
+}
+
+.pkg-itin-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 31, 61, 0.12);
+}
+
+.pkg-itin-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.pkg-itin-table thead th {
+  padding: 0.85rem 1rem;
+  background: var(--itin-navy);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.pkg-itin-table tbody th,
+.pkg-itin-table tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(15, 31, 61, 0.08);
+  vertical-align: top;
+  text-align: left;
+}
+
+.pkg-itin-table tbody tr:nth-child(even) {
+  background: rgba(247, 243, 236, 0.65);
+}
+
+.pkg-itin-table tbody th[scope='row'] {
+  color: var(--itin-navy);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pkg-itin-table tbody th[scope='rowgroup'] {
+  background: rgba(201, 162, 39, 0.12);
+  color: var(--itin-navy);
+  font-weight: 800;
+  vertical-align: middle;
+  border-right: 1px solid rgba(201, 162, 39, 0.25);
+}
+
+.pkg-itin-hajj-label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 4.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pkg-itin-hajj-label svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  color: var(--itin-gold);
+}
+
+.pkg-itin-hajj-cont td:first-child {
+  /* continuation rows after rowspan */
+}
+
+.pkg-itin-notes {
+  margin: 0;
+  padding: 1.25rem clamp(1rem, 3vw, 2rem) 1.75rem;
+  background: rgba(201, 162, 39, 0.1);
+  border-top: 2px solid rgba(201, 162, 39, 0.35);
+}
+
+.pkg-itin-notes p {
+  margin: 0 0 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  background: #fff;
+  border-left: 4px solid var(--itin-gold);
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.pkg-itin-notes p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .pkg-itin-hotels,
+  .pkg-itin-amenities {
+    grid-template-columns: 1fr;
+  }
+
+  .pkg-itin-hotel + .pkg-itin-hotel {
+    border-left: 0;
+    border-top: 1px solid rgba(201, 162, 39, 0.25);
+  }
+
+  .pkg-itin-amenity-col:first-child {
+    border-right: 0;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+    padding-bottom: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .pkg-itin-amenity-col {
+    padding: 0;
+  }
+}

@@ -3,6 +3,7 @@ import { AdminAuthProvider } from './admin/AdminAuth'
 import { ProtectedAdmin } from './admin/ProtectedAdmin'
 import { AdminBlogEdit, AdminBlogList } from './admin/pages/AdminBlog'
 import { AdminDashboard } from './admin/pages/AdminDashboard'
+import { AdminGallery } from './admin/pages/AdminGallery'
 import { AdminLeads } from './admin/pages/AdminLeads'
 import { AdminLogin } from './admin/pages/AdminLogin'
 import { AdminPackageEdit, AdminPackagesList } from './admin/pages/AdminPackages'
@@ -53,6 +54,7 @@ export default function App() {
               <Route index element={<AdminDashboard />} />
               <Route path="packages" element={<AdminPackagesList />} />
               <Route path="packages/:id" element={<AdminPackageEdit />} />
+              <Route path="gallery" element={<AdminGallery />} />
               <Route path="blog" element={<AdminBlogList />} />
               <Route path="blog/:id" element={<AdminBlogEdit />} />
               <Route path="leads" element={<AdminLeads />} />

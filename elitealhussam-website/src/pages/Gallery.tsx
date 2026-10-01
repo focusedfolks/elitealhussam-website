@@ -1,52 +1,19 @@
 import { useEffect, useState } from 'react'
 import { PageHero } from '../components/PageHero'
 import { Seo } from '../components/Seo'
+import { fetchCmsGalleryPhotos } from '../cms/api'
+import { defaultGalleryPhotos, type GalleryCategory, type GalleryPhoto } from '../content/gallery'
 import { images } from '../content/site'
 import './InnerPages.css'
 import './Gallery.css'
 
 type GalleryTab = 'photos' | 'videos'
 
-type GalleryImage = {
-  src: string
-}
-
 type GalleryVideo = {
   url: string
   thumbnail: string
   caption: string
 }
-
-const photos: GalleryImage[] = [
-  { src: '/images/gallery/hajj 1436  image 16.jpg' },
-  { src: '/images/gallery/Hajj 1436  image 22.jpg' },
-  { src: '/images/gallery/Hajj 1436 image  21.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 1.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 10.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 12.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 13.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 14.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 15.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 17.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 18.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 19.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 2.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 20.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 21.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 23.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 24.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 25.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 26.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 27.jpg' },
-  { src: '/images/gallery/hajj 1436 image 3.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 4.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 5.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 6.jpg' },
-  { src: '/images/gallery/hajj 1436 image 7.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 8.jpg' },
-  { src: '/images/gallery/Hajj 1436 image 9.jpg' },
-  { src: '/images/gallery/Hajj image 1436 11.jpg' },
-]
 
 const videos: GalleryVideo[] = [
   {
@@ -81,21 +48,40 @@ function PlayIcon() {
 
 export function Gallery() {
   const [tab, setTab] = useState<GalleryTab>('photos')
+  const [category, setCategory] = useState<'all' | GalleryCategory>('all')
+  const [photos, setPhotos] = useState<GalleryPhoto[]>(defaultGalleryPhotos)
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null)
+  const visiblePhotos = photos.filter(
+    (photo) => category === 'all' || photo.category === category,
+  )
 
   useEffect(() => {
-    if (selectedPhoto === null) return
+    let active = true
+    void fetchCmsGalleryPhotos()
+      .then((items) => {
+        if (active) setPhotos(items)
+      })
+      .catch(() => {
+        if (active) setPhotos(defaultGalleryPhotos)
+      })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  useEffect(() => {
+    if (selectedPhoto === null || visiblePhotos.length === 0) return
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setSelectedPhoto(null)
       if (event.key === 'ArrowLeft') {
         setSelectedPhoto((current) =>
-          current === null ? null : (current - 1 + photos.length) % photos.length,
+          current === null ? null : (current - 1 + visiblePhotos.length) % visiblePhotos.length,
         )
       }
       if (event.key === 'ArrowRight') {
         setSelectedPhoto((current) =>
-          current === null ? null : (current + 1) % photos.length,
+          current === null ? null : (current + 1) % visiblePhotos.length,
         )
       }
     }
@@ -106,17 +92,17 @@ export function Gallery() {
       document.body.style.overflow = ''
       document.removeEventListener('keydown', onKeyDown)
     }
-  }, [selectedPhoto])
+  }, [selectedPhoto, visiblePhotos.length])
 
   function showPreviousPhoto() {
     setSelectedPhoto((current) =>
-      current === null ? null : (current - 1 + photos.length) % photos.length,
+      current === null ? null : (current - 1 + visiblePhotos.length) % visiblePhotos.length,
     )
   }
 
   function showNextPhoto() {
     setSelectedPhoto((current) =>
-      current === null ? null : (current + 1) % photos.length,
+      current === null ? null : (current + 1) % visiblePhotos.length,
     )
   }
 
@@ -165,22 +151,45 @@ export function Gallery() {
           </div>
 
           {tab === 'photos' ? (
-            <div className="gallery-grid gallery-photo-grid" role="tabpanel">
-              {photos.map((photo, index) => (
-                <button
-                  className="gallery-card gallery-photo-card"
-                  type="button"
-                  key={photo.src}
-                  onClick={() => setSelectedPhoto(index)}
-                  aria-label={`View gallery photo ${index + 1}`}
-                >
-                  <img src={photo.src} alt="" loading="lazy" />
-                  <span className="gallery-photo-overlay" aria-hidden="true">
-                    <span className="gallery-view-icon" />
-                  </span>
-                </button>
-              ))}
-            </div>
+            <>
+              <div className="gallery-category-tabs" role="tablist" aria-label="Filter photos">
+                {(['all', 'hajj', 'umrah'] as const).map((value) => (
+                  <button
+                    key={value}
+                    type="button"
+                    role="tab"
+                    aria-selected={category === value}
+                    className={category === value ? 'is-active' : ''}
+                    onClick={() => {
+                      setCategory(value)
+                      setSelectedPhoto(null)
+                    }}
+                  >
+                    {value === 'all' ? 'All photos' : value === 'hajj' ? 'Hajj' : 'Umrah'}
+                  </button>
+                ))}
+              </div>
+              {visiblePhotos.length ? (
+                <div className="gallery-grid gallery-photo-grid" role="tabpanel">
+                  {visiblePhotos.map((photo, index) => (
+                    <button
+                      className="gallery-card gallery-photo-card"
+                      type="button"
+                      key={photo.id}
+                      onClick={() => setSelectedPhoto(index)}
+                      aria-label={`View ${photo.category} gallery photo ${index + 1}`}
+                    >
+                      <img src={photo.src} alt={photo.alt} loading="lazy" />
+                      <span className="gallery-photo-overlay" aria-hidden="true">
+                        <span className="gallery-view-icon" />
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <p className="gallery-empty">No {category} photos have been added yet.</p>
+              )}
+            </>
           ) : (
             <div className="gallery-grid" role="tabpanel">
               {videos.map((video) => (
@@ -234,8 +243,8 @@ export function Gallery() {
           </button>
           <img
             className="gallery-lightbox-image"
-            src={photos[selectedPhoto].src}
-            alt=""
+            src={visiblePhotos[selectedPhoto].src}
+            alt={visiblePhotos[selectedPhoto].alt}
             onClick={(event) => event.stopPropagation()}
           />
           <button

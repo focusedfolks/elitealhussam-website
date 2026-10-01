@@ -11,6 +11,7 @@ import {
   tourPackageToTravelPackage,
 } from '../content/internationalTours'
 import { pendingDestinationPackages } from '../content/pendingDestinationPackages'
+import { defaultGalleryPhotos, type GalleryCategory, type GalleryPhoto } from '../content/gallery'
 import { isSupabaseConfigured, supabase } from '../lib/supabase'
 import type {
   CmsAbout,
@@ -271,6 +272,74 @@ export async function adminUploadPackageImage(
   if (error) throw error
 
   return supabase.storage.from('package-images').getPublicUrl(path).data.publicUrl
+}
+
+export async function fetchCmsGalleryPhotos(): Promise<GalleryPhoto[]> {
+  if (!supabase) return defaultGalleryPhotos
+  const { data, error } = await supabase
+    .from('site_settings')
+    .select('value')
+    .eq('key', 'gallery')
+    .maybeSingle()
+  if (error || !data || !Array.isArray(data.value)) return defaultGalleryPhotos
+  return data.value as GalleryPhoto[]
+}
+
+export async function adminListGalleryPhotos(): Promise<GalleryPhoto[]> {
+  if (!supabase) throw new Error('Supabase not configured')
+  const { data, error } = await supabase
+    .from('site_settings')
+    .select('value')
+    .eq('key', 'gallery')
+    .maybeSingle()
+  if (error) throw error
+  if (!data) return defaultGalleryPhotos
+  if (!Array.isArray(data.value)) throw new Error('Gallery settings are invalid')
+  return data.value as GalleryPhoto[]
+}
+
+export async function adminSaveGalleryPhotos(photos: GalleryPhoto[]) {
+  await adminSaveSetting('gallery', photos)
+}
+
+export async function adminUploadGalleryImage(
+  category: GalleryCategory,
+  file: File,
+): Promise<GalleryPhoto> {
+  if (!supabase) throw new Error('Supabase not configured')
+  const extensions: Record<string, string> = {
+    'image/jpeg': 'jpg',
+    'image/png': 'png',
+    'image/webp': 'webp',
+    'image/avif': 'avif',
+  }
+  const extension = extensions[file.type]
+  if (!extension) throw new Error('Choose a JPG, PNG, WebP, or AVIF image')
+  if (file.size > 10 * 1024 * 1024) throw new Error('Images must be 10 MB or smaller')
+
+  const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+  const storagePath = `gallery/${category}/${id}.${extension}`
+  const { error } = await supabase.storage
+    .from('package-images')
+    .upload(storagePath, file, {
+      cacheControl: '3600',
+      contentType: file.type,
+    })
+  if (error) throw error
+
+  return {
+    id,
+    category,
+    src: supabase.storage.from('package-images').getPublicUrl(storagePath).data.publicUrl,
+    alt: file.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim(),
+    storagePath,
+  }
+}
+
+export async function adminDeleteGalleryImage(storagePath: string) {
+  if (!supabase) throw new Error('Supabase not configured')
+  const { error } = await supabase.storage.from('package-images').remove([storagePath])
+  if (error) throw error
 }
 
 export async function adminDeletePackage(id: string) {

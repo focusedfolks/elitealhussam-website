@@ -7,6 +7,7 @@ import './Admin.css'
 const links = [
   { to: '/admin', end: true, label: 'Dashboard' },
   { to: '/admin/packages', label: 'Packages' },
+  { to: '/admin/gallery', label: 'Gallery' },
   { to: '/admin/blog', label: 'Blog' },
   { to: '/admin/leads', label: 'Leads' },
   { to: '/admin/testimonials', label: 'Testimonials' },
@@ -32,6 +33,8 @@ export function AdminLayout() {
 
   const title = location.pathname.startsWith('/admin/packages')
     ? 'Packages'
+    : location.pathname.startsWith('/admin/gallery')
+      ? 'Gallery'
     : location.pathname.startsWith('/admin/blog')
       ? 'Blog'
       : location.pathname.startsWith('/admin/leads')

@@ -153,7 +153,7 @@ export function Home() {
       label: `${home.years} Years — Now in Dubai`,
       Icon: IconSparkle,
     },
-    { value: '4', label: t.common.multilingual, Icon: IconGlobe },
+    { value: '4', label: 'Languages of pilgrim guidance', Icon: IconGlobe },
     { value: '24/7', label: home.supportLabel, Icon: IconKaaba },
   ]
 

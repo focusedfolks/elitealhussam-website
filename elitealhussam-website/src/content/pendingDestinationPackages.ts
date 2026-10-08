@@ -329,3 +329,19 @@ export function pendingDestinationPackages(): TravelPackage[] {
 export function isPendingDestinationSlug(slug: string): boolean {
   return pendingDestinationSlugs.has(slug)
 }
+
+/** Published India destination packages grouped by state (Kerala, Tamil Nadu…) */
+export function pendingDestinationsByState(): {
+  state: string
+  packages: PendingDestinationPackage[]
+}[] {
+  const groups = new Map<string, PendingDestinationPackage[]>()
+  for (const destination of destinationsWithStates()) {
+    const pkg = getPendingDestinationBySlug(destination.slug)
+    if (!pkg) continue
+    const list = groups.get(pkg.stateName) ?? []
+    list.push(pkg)
+    groups.set(pkg.stateName, list)
+  }
+  return [...groups].map(([state, packages]) => ({ state, packages }))
+}

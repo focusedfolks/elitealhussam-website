@@ -6,12 +6,17 @@ import '../components/TourPackageCards.css'
 import { pageMeta } from '../seo/pageMeta'
 import { images } from '../content/site'
 import { useCms } from '../cms/CmsProvider'
-import { toursByCountry } from '../content/internationalTours'
+import {
+  pendingDestinationToTourPackage,
+  toursByCountry,
+} from '../content/internationalTours'
+import { pendingDestinationsByState } from '../content/pendingDestinationPackages'
 import './InnerPages.css'
 
 export function InternationalTours() {
   const { packages } = useCms()
   const groups = toursByCountry(packages)
+  const indiaStates = pendingDestinationsByState()
 
   return (
     <div>
@@ -45,6 +50,28 @@ export function InternationalTours() {
                   <TourPackageCard key={pkg.slug} pkg={pkg} index={index} />
                 ))}
               </div>
+              {group.country === 'India'
+                ? indiaStates.map((stateGroup) => (
+                    <div
+                      className="tour-state-block"
+                      key={stateGroup.state}
+                      id={stateGroup.state.toLowerCase().replaceAll(' ', '-')}
+                    >
+                      <h3 className="tour-state-title">
+                        {stateGroup.state}
+                      </h3>
+                      <div className="pkg-grid">
+                        {stateGroup.packages.map((destination, index) => (
+                          <TourPackageCard
+                            key={destination.slug}
+                            pkg={pendingDestinationToTourPackage(destination)}
+                            index={index}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))
+                : null}
             </div>
           ))}
           <p
@@ -56,9 +83,9 @@ export function InternationalTours() {
               maxWidth: '42rem',
             }}
           >
-            Additional destinations (including several India, Indonesia,
-            Malaysia, and Singapore options) will be published once durations
-            are confirmed with our operations team.
+            Additional destinations (including Indonesia, Malaysia, and
+            Singapore options) will be published once durations are confirmed
+            with our operations team.
           </p>
         </div>
       </section>

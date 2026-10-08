@@ -1,4 +1,5 @@
 import type { TravelPackage } from './site'
+import type { PendingDestinationPackage } from './pendingDestinationPackages'
 
 /**
  * International tour packages with confirmed durations only.
@@ -1158,3 +1159,26 @@ export const PREFERRED_MONTHS = [
   'December',
   'Flexible / Not sure',
 ] as const
+
+/** Lets India state destinations (Kerala, Tamil Nadu) reuse the tour card */
+export function pendingDestinationToTourPackage(
+  destination: PendingDestinationPackage,
+): TourPackage {
+  return {
+    slug: destination.slug,
+    country: 'India',
+    title: destination.name,
+    tagline: destination.tagline,
+    description: destination.description,
+    duration: destination.duration,
+    days: 0,
+    nights: 0,
+    image: destination.image,
+    imageAlt: destination.imageAlt,
+    about: destination.about,
+    highlights: destination.highlights,
+    itinerary: destination.itinerary,
+    inclusions: destination.inclusions,
+    exclusions: destination.exclusions,
+  }
+}

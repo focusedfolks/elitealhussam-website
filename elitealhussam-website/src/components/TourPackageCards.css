@@ -148,6 +148,20 @@
   margin-bottom: 0;
 }
 
+.tour-state-block {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.tour-state-title {
+  margin: 0;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 600;
+  color: var(--ink, #0f1f3d);
+}
+
 .tour-country-title {
   margin: 0;
   font-family: var(--font-display, Georgia, serif);

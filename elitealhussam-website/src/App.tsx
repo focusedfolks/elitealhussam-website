@@ -7,7 +7,7 @@ import { AdminGallery } from './admin/pages/AdminGallery'
 import { AdminLeads } from './admin/pages/AdminLeads'
 import { AdminLogin } from './admin/pages/AdminLogin'
 import { AdminPackageEdit, AdminPackagesList } from './admin/pages/AdminPackages'
-import { AdminAbout, AdminCompany } from './admin/pages/AdminSettings'
+import { AdminAbout, AdminCompany, AdminHome } from './admin/pages/AdminSettings'
 import { AdminTestimonials } from './admin/pages/AdminTestimonials'
 import { CmsProvider } from './cms/CmsProvider'
 import { Layout } from './components/Layout'
@@ -60,6 +60,7 @@ export default function App() {
               <Route path="leads" element={<AdminLeads />} />
               <Route path="testimonials" element={<AdminTestimonials />} />
               <Route path="company" element={<AdminCompany />} />
+              <Route path="home" element={<AdminHome />} />
               <Route path="about" element={<AdminAbout />} />
             </Route>
 

@@ -11,18 +11,26 @@ import { posts as staticPosts } from 'virtual:blog-posts'
 import {
   aboutCopy,
   company as staticCompany,
+  homeCopy,
   type TravelPackage,
 } from '../content/site'
 import {
   fetchCmsAbout,
   fetchCmsBlogPosts,
   fetchCmsCompany,
+  fetchCmsHome,
   fetchCmsPackages,
   fetchCmsTestimonials,
   isSupabaseConfigured,
   staticPackages,
 } from './api'
-import type { CmsAbout, CmsBlogPost, CmsCompany, CmsTestimonial } from './types'
+import type {
+  CmsAbout,
+  CmsBlogPost,
+  CmsCompany,
+  CmsHome,
+  CmsTestimonial,
+} from './types'
 
 type CmsContextValue = {
   configured: boolean
@@ -32,6 +40,7 @@ type CmsContextValue = {
   testimonials: CmsTestimonial[]
   company: CmsCompany
   about: CmsAbout
+  home: CmsHome
   refresh: () => Promise<void>
 }
 
@@ -80,6 +89,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
     staticCompany as unknown as CmsCompany,
   )
   const [about, setAbout] = useState<CmsAbout>(aboutCopy)
+  const [home, setHome] = useState<CmsHome>(homeCopy)
 
   const refresh = useCallback(async () => {
     if (!isSupabaseConfigured) {
@@ -107,18 +117,20 @@ export function CmsProvider({ children }: { children: ReactNode }) {
       ])
       setCompany(staticCompany as unknown as CmsCompany)
       setAbout(aboutCopy)
+      setHome(homeCopy)
       setLoading(false)
       return
     }
 
     setLoading(true)
     try {
-      const [pkgs, blog, testi, comp, ab] = await Promise.all([
+      const [pkgs, blog, testi, comp, ab, hm] = await Promise.all([
         fetchCmsPackages(),
         fetchCmsBlogPosts(),
         fetchCmsTestimonials(),
         fetchCmsCompany(),
         fetchCmsAbout(),
+        fetchCmsHome(),
       ])
       setPackages(pkgs.length ? pkgs : staticPackages)
       setPosts(blog.length ? blog : staticBlogAsCms())
@@ -134,6 +146,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         positioning: staticCompany.positioning,
         background: staticCompany.background,
       } as CmsCompany)
+      setHome(hm)
       setAbout({
         ...ab,
         india: aboutCopy.india,
@@ -157,9 +170,10 @@ export function CmsProvider({ children }: { children: ReactNode }) {
       testimonials,
       company,
       about,
+      home,
       refresh,
     }),
-    [loading, packages, posts, testimonials, company, about, refresh],
+    [loading, packages, posts, testimonials, company, about, home, refresh],
   )
 
   return <CmsContext.Provider value={value}>{children}</CmsContext.Provider>

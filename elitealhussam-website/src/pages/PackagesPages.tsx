@@ -71,8 +71,10 @@ export function Packages() {
       </section>
 
       <LeadForm
-        title="Request a package quotation"
-        subtitle="Select your travellers and preferred package - our sales team will respond with a clear quote."
+        id="package-enquiry"
+        variant="short"
+        title="Quick package enquiry"
+        subtitle="Pick a package and your travellers - our sales team will reply with a clear quote. Want a fully tailored trip? Choose “Build Your Package” on Customize Your Umrah."
       />
     </div>
   )

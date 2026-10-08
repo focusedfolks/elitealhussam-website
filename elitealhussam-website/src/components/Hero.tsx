@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { IconMountain, IconMosque } from './Icons'
+import { useCms } from '../cms/CmsProvider'
 import { useI18n } from '../i18n'
 import './Hero.css'
 
@@ -59,6 +60,7 @@ function BackgroundStack({ sources, fallback, activeIndex }: BgStackProps) {
  */
 export function Hero() {
   const { t } = useI18n()
+  const { home } = useCms()
   const hajjIndex = useIndependentSlideIndex(HAJJ_UMRAH_IMAGES.length, ROTATE_MS)
   const toursIndex = useIndependentSlideIndex(
     TOURS_IMAGES.length,
@@ -81,8 +83,11 @@ export function Hero() {
             <h1>{t.pages.umrahTitle}</h1>
             <p className="hero-split-copy">{umrahSlide.subtext}</p>
             <div className="hero-split-trust" aria-label="Trust highlights">
-              <span>20,000+ Pilgrims Served</span>
-              <span>45+ Years — Now in Dubai</span>
+              <span>{home.totalPilgrims} Pilgrims Served</span>
+              <span>
+                {home.hajjPilgrims} Hajj · {home.umrahPilgrims} Umrah
+              </span>
+              <span>{home.years} Years — Now in Dubai</span>
             </div>
             <span className="hero-split-ornament" aria-hidden="true">◆</span>
             <div className="hero-split-actions">

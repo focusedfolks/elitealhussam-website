@@ -54,9 +54,20 @@ function initials(name: string) {
     .join('')
 }
 
+/** "20,000+" -> 20000 for the count-up animation */
+function countValue(display: string): string {
+  const digits = display.replace(/[^\d]/g, '')
+  return digits || '0'
+}
+
+/** "20,000+" -> "+" (any trailing non-digit text) */
+function countSuffix(display: string): string {
+  return display.replace(/^[\d,.\s]+/, '')
+}
+
 export function Home() {
   const { t } = useI18n()
-  const { testimonials, about } = useCms()
+  const { testimonials, about, home } = useCms()
   const homeRef = useRef<HTMLDivElement>(null)
   useHomeScrollEffects(homeRef)
 
@@ -137,9 +148,13 @@ export function Home() {
   ]
 
   const proof = [
-    { value: '45+', label: '45+ Years — Now in Dubai', Icon: IconSparkle },
+    {
+      value: home.years,
+      label: `${home.years} Years — Now in Dubai`,
+      Icon: IconSparkle,
+    },
     { value: '4', label: t.common.multilingual, Icon: IconGlobe },
-    { value: '24/7', label: 'Pilgrim support on journey', Icon: IconKaaba },
+    { value: '24/7', label: home.supportLabel, Icon: IconKaaba },
   ]
 
   const familyTrust = ['Family-friendly stays', 'Elderly care']
@@ -167,17 +182,21 @@ export function Home() {
       <section className="hero-stats-strip" aria-label="Trust and credentials">
         <div className="container hero-stats-inner">
           <p className="hero-stats-quote">
-            Labbaik Allahumma Labbaik — we walk with you in faith.
+            {home.quote}
           </p>
           <div className="hero-stats-badges">
             <span>
               <IconShieldCheck size={14} /> Licensed Operator
             </span>
             <span>
-              <IconSparkle size={14} /> 45+ Years — Now in Dubai
+              <IconSparkle size={14} /> {home.years} Years — Now in Dubai
             </span>
             <span>
-              <IconUsers size={14} /> 20,000+ Pilgrims Served
+              <IconUsers size={14} /> {home.totalPilgrims} Pilgrims Served
+            </span>
+            <span>
+              <IconKaaba size={14} /> {home.hajjPilgrims} Hajj ·{' '}
+              {home.umrahPilgrims} Umrah
             </span>
           </div>
           <div className="hero-stats-cards">
@@ -185,22 +204,36 @@ export function Home() {
               <span className="hero-stat-icon" aria-hidden>
                 <IconSparkle size={18} />
               </span>
-              <strong>45+</strong>
+              <strong>{home.years}</strong>
               <span>Years</span>
             </article>
             <article className="hero-stat-card">
               <span className="hero-stat-icon" aria-hidden>
                 <IconUsers size={18} />
               </span>
-              <strong>2,000+</strong>
+              <strong>{home.totalPilgrims}</strong>
               <span>Pilgrims Served</span>
             </article>
             <article className="hero-stat-card">
               <span className="hero-stat-icon" aria-hidden>
                 <IconKaaba size={18} />
               </span>
+              <strong>{home.hajjPilgrims}</strong>
+              <span>Hajj Pilgrims</span>
+            </article>
+            <article className="hero-stat-card">
+              <span className="hero-stat-icon" aria-hidden>
+                <IconUsers size={18} />
+              </span>
+              <strong>{home.umrahPilgrims}</strong>
+              <span>Umrah Pilgrims</span>
+            </article>
+            <article className="hero-stat-card">
+              <span className="hero-stat-icon" aria-hidden>
+                <IconKaaba size={18} />
+              </span>
               <strong>24/7</strong>
-              <span>Pilgrim Support on Journey</span>
+              <span>{home.supportLabel}</span>
             </article>
           </div>
         </div>
@@ -273,7 +306,10 @@ export function Home() {
           <div className="data-readout-stats">
             <div className="data-readout-stat">
               <span className="data-readout-label">Years active</span>
-              <strong data-count="45" data-suffix="+">
+              <strong
+                data-count={countValue(home.years)}
+                data-suffix={countSuffix(home.years)}
+              >
                 0
               </strong>
             </div>
@@ -283,7 +319,10 @@ export function Home() {
             </div>
             <div className="data-readout-stat">
               <span className="data-readout-label">Pilgrims served</span>
-              <strong data-count="2000" data-suffix="+">
+              <strong
+                data-count={countValue(home.totalPilgrims)}
+                data-suffix={countSuffix(home.totalPilgrims)}
+              >
                 0
               </strong>
             </div>
@@ -302,7 +341,7 @@ export function Home() {
               aria-label="Family walking together at Masjid an-Nabawi in Madinah"
             />
             <aside className="family-float-stat">
-              <strong>500+</strong>
+              <strong>{home.familiesServed}</strong>
               <span>Families Served</span>
             </aside>
           </GsapReveal>
@@ -435,7 +474,8 @@ export function Home() {
               trustworthy pilgrimage service.
             </p>
             <p className="rating-metric">
-              <span>4.9/5</span> average rating from 200+ reviews
+              <span>{home.ratingScore}/5</span> average rating from{' '}
+              {home.reviewCount} reviews
             </p>
           </GsapReveal>
           <GsapReveal className="testimonial-grid" stagger>

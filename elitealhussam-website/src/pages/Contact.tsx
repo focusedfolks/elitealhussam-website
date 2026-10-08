@@ -170,6 +170,7 @@ export function Contact() {
             <LeadForm
               key={`${packageId}-${travelMode}-${airport}-${departureCity}-${departureDate}`}
               compact
+              variant={packageId === 'umrah-customise' ? 'full' : 'short'}
               defaultPackage={defaultPackage}
               defaultTravellers={defaultTravellers}
               defaultTravel={defaultTravel}

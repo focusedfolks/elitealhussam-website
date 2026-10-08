@@ -511,3 +511,16 @@ export const heroSlides: HeroSlide[] = [
     },
   },
 ]
+
+/** Default copy for the Home page trust strip - editable from Admin > Home */
+export const homeCopy = {
+  quote: 'Labbaik Allahumma Labbaik — we walk with you in faith.',
+  years: '45+',
+  totalPilgrims: '20,000+',
+  hajjPilgrims: '5,000+',
+  umrahPilgrims: '15,000+',
+  familiesServed: '500+',
+  ratingScore: '4.9',
+  reviewCount: '200+',
+  supportLabel: 'Pilgrim Support on Journey',
+}

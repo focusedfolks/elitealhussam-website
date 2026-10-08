@@ -59,6 +59,26 @@ export type CmsAbout = {
   leadership: string
 }
 
+export type CmsHome = {
+  /** Quote line shown above the trust badges */
+  quote: string
+  /** e.g. "45+" */
+  years: string
+  /** e.g. "20,000+" */
+  totalPilgrims: string
+  /** e.g. "5,000+" */
+  hajjPilgrims: string
+  /** e.g. "15,000+" */
+  umrahPilgrims: string
+  /** e.g. "500+" */
+  familiesServed: string
+  /** e.g. "4.9" */
+  ratingScore: string
+  /** e.g. "200+" */
+  reviewCount: string
+  supportLabel: string
+}
+
 export type CmsLead = {
   id: string
   name: string

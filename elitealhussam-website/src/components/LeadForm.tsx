@@ -31,6 +31,11 @@ type Props = {
   title?: string
   subtitle?: string
   compact?: boolean
+  /**
+   * 'full' = detailed trip planner (hotels, dates, room type, travel mode) -
+   * used for the Customize package. 'short' = quick enquiry (default).
+   */
+  variant?: 'full' | 'short'
   defaultPackage?: string
   defaultTravellers?: string
   defaultTravel?: Partial<TravelDetails>
@@ -99,6 +104,7 @@ export function LeadForm({
   title,
   subtitle,
   compact = false,
+  variant = 'short',
   defaultPackage = '',
   defaultTravellers = '',
   defaultTravel,
@@ -127,6 +133,11 @@ export function LeadForm({
   }))
   const [travelTouched, setTravelTouched] = useState(false)
   const minDate = todayISO()
+  const isShort = variant === 'short'
+  const hasTravelPrefill = Boolean(
+    travel.airport || travel.departureCity || travel.departureDate,
+  )
+  const includeTravel = !isShort || hasTravelPrefill
 
   const travellersLabel = formatTravellersLabel(adults, children)
 
@@ -143,7 +154,7 @@ export function LeadForm({
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
-    const travelOk = isTravelComplete(travel, [...modes])
+    const travelOk = isShort || isTravelComplete(travel, [...modes])
     if (!form.checkValidity() || !travelOk) {
       setTouched({
         name: true,
@@ -165,7 +176,7 @@ export function LeadForm({
     const travellers = String(data.get('travellers') || travellersLabel)
     const selectedRoomType = String(data.get('roomType') || '')
     const messageInput = String(data.get('message') || '')
-    const travelBlock = formatTravelForMessage(travel)
+    const travelBlock = includeTravel ? formatTravelForMessage(travel) : ''
     const tripBlock = formatTripPreferencesForMessage({
       roomType: selectedRoomType,
       makkahHotel,
@@ -184,7 +195,7 @@ export function LeadForm({
       interest: packageInterest,
       travellers,
       message,
-      travel_mode: travel.mode || '',
+      travel_mode: includeTravel ? travel.mode || '' : '',
       departure_date: travel.departureDate || '',
       departure_airport: travel.airport || '',
       preferred_airline: travel.airline || '',
@@ -231,7 +242,10 @@ export function LeadForm({
   }
 
   return (
-    <section className={`lead-section${compact ? ' is-compact' : ''}`} id={id}>
+    <section
+      className={`lead-section${compact ? ' is-compact' : ''}${isShort ? ' is-short' : ''}`}
+      id={id}
+    >
       <div className={compact ? undefined : 'container'}>
         <div className="lead-panel">
           <div className="lead-copy">
@@ -391,6 +405,7 @@ export function LeadForm({
                     </button>
                   </div>
                 </div>
+                {!isShort ? (
                 <label>
                   Room Type
                   <select
@@ -408,9 +423,12 @@ export function LeadForm({
                     <option value="Quint">Quint</option>
                   </select>
                 </label>
+                ) : null}
                 <input type="hidden" name="travellers" value={travellersLabel} />
               </div>
 
+              {!isShort ? (
+                <>
               <label>
                 Preferred Hotel — Makkah
                 <select
@@ -481,8 +499,11 @@ export function LeadForm({
                   onChange={(e) => setMadinaCheckOut(e.target.value)}
                 />
               </label>
+                </>
+              ) : null}
             </div>
 
+            {!isShort ? (
             <div className="lead-step" data-step="3">
               <p className="lead-step-label">
                 <span>3</span> Travel mode & departure
@@ -496,17 +517,18 @@ export function LeadForm({
                 idPrefix={`${id}-travel`}
               />
             </div>
+            ) : null}
 
-            {!compact ? (
-              <div className="lead-step" data-step="4">
+            {!compact || isShort ? (
+              <div className="lead-step" data-step={isShort ? '3' : '4'}>
                 <p className="lead-step-label">
-                  <span>4</span> Message
+                  <span>{isShort ? 3 : 4}</span> Message
                 </p>
                 <label>
                   {t.common.message}
                   <textarea
                     name="message"
-                    rows={3}
+                    rows={isShort ? 2 : 3}
                     placeholder="Preferred dates or notes (optional)"
                   />
                 </label>

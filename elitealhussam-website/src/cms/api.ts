@@ -3,6 +3,7 @@ import {
   aboutCopy,
   allPackages,
   company as staticCompany,
+  homeCopy,
   testimonials as staticSiteTestimonials,
   type TravelPackage,
 } from '../content/site'
@@ -17,6 +18,7 @@ import type {
   CmsAbout,
   CmsBlogPost,
   CmsCompany,
+  CmsHome,
   CmsLead,
   CmsTestimonial,
 } from './types'
@@ -178,6 +180,17 @@ export async function fetchCmsAbout(): Promise<CmsAbout> {
     .maybeSingle()
   if (error || !data?.value) return aboutCopy
   return data.value as CmsAbout
+}
+
+export async function fetchCmsHome(): Promise<CmsHome> {
+  if (!supabase) return homeCopy
+  const { data, error } = await supabase
+    .from('site_settings')
+    .select('value')
+    .eq('key', 'home')
+    .maybeSingle()
+  if (error || !data?.value) return homeCopy
+  return { ...homeCopy, ...(data.value as Partial<CmsHome>) }
 }
 
 export async function submitLead(payload: {

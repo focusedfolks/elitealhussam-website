@@ -15,7 +15,7 @@ type StructurePlace = {
 const places: StructurePlace[] = [
   {
     slug: 'black-stone',
-    title: 'Black Stone (Al-Hajar Al-Aswad)',
+    title: 'Al-Hajar Al-Aswad (Black Stone)',
     subtitle: 'The sacred stone at the eastern corner of the Ka\'bah.',
     paragraphs: [
       'It is a stone from Al-Jannah (Paradise). It was brought by Angel Jibreel (peace be upon him), the Trusted One, to Ibraaheem (peace be upon him), who placed it on the eastern corner of the Sacred House. It stands 1.10 m above the ground where circumambulation is done and has been surrounded with a pure silver frame to protect it. This stone was originally a single piece, but through various events it broke, and only eight pieces of different sizes now remain.',

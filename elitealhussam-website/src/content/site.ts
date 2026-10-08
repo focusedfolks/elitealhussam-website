@@ -524,3 +524,16 @@ export const homeCopy = {
   reviewCount: '200+',
   supportLabel: 'Pilgrim Support on Journey',
 }
+
+/**
+ * Hajj and Group Umrah run on fixed group dates and hotels, so enquiry forms
+ * hide the hotel, check-in/out and departure date fields for them.
+ * Pass a package (id + category) and/or the form's "Package interest" value.
+ */
+export function hidesStayDateFields(
+  pkg?: { id: string; category: string } | null,
+  interest = '',
+): boolean {
+  if (pkg) return pkg.category === 'hajj' || pkg.id === 'umrah-group'
+  return interest === 'Hajj - General' || interest === 'Umrah Group Package'
+}

@@ -5,6 +5,7 @@ import {
   FORM_UMRAH_PACKAGE_OPTIONS,
   MADINA_HOTEL_OPTIONS,
   MAKKAH_HOTEL_OPTIONS,
+  hidesStayDateFields,
   packageTravelModes,
 } from '../content/site'
 import {
@@ -31,11 +32,6 @@ type Props = {
   title?: string
   subtitle?: string
   compact?: boolean
-  /**
-   * 'full' = detailed trip planner (hotels, dates, room type, travel mode) -
-   * used for the Customize package. 'short' = quick enquiry (default).
-   */
-  variant?: 'full' | 'short'
   defaultPackage?: string
   defaultTravellers?: string
   defaultTravel?: Partial<TravelDetails>
@@ -104,7 +100,6 @@ export function LeadForm({
   title,
   subtitle,
   compact = false,
-  variant = 'short',
   defaultPackage = '',
   defaultTravellers = '',
   defaultTravel,
@@ -133,11 +128,6 @@ export function LeadForm({
   }))
   const [travelTouched, setTravelTouched] = useState(false)
   const minDate = todayISO()
-  const isShort = variant === 'short'
-  const hasTravelPrefill = Boolean(
-    travel.airport || travel.departureCity || travel.departureDate,
-  )
-  const includeTravel = !isShort || hasTravelPrefill
 
   const travellersLabel = formatTravellersLabel(adults, children)
 
@@ -146,6 +136,7 @@ export function LeadForm({
     [interest, allPackages],
   )
   const modes = selectedPkg ? packageTravelModes(selectedPkg) : (['air', 'road'] as const)
+  const hideStayDates = hidesStayDateFields(selectedPkg, interest)
 
   function mark(name: string) {
     setTouched((prev) => ({ ...prev, [name]: true }))
@@ -154,7 +145,7 @@ export function LeadForm({
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
-    const travelOk = isShort || isTravelComplete(travel, [...modes])
+    const travelOk = isTravelComplete(travel, [...modes], !hideStayDates)
     if (!form.checkValidity() || !travelOk) {
       setTouched({
         name: true,
@@ -176,16 +167,31 @@ export function LeadForm({
     const travellers = String(data.get('travellers') || travellersLabel)
     const selectedRoomType = String(data.get('roomType') || '')
     const messageInput = String(data.get('message') || '')
-    const travelBlock = includeTravel ? formatTravelForMessage(travel) : ''
-    const tripBlock = formatTripPreferencesForMessage({
-      roomType: selectedRoomType,
-      makkahHotel,
-      madinaHotel,
-      makkahCheckIn,
-      madinaCheckIn,
-      makkahCheckOut,
-      madinaCheckOut,
-    })
+    const travelForMessage = hideStayDates
+      ? { ...travel, departureDate: '' }
+      : travel
+    const travelBlock = formatTravelForMessage(travelForMessage)
+    const tripBlock = formatTripPreferencesForMessage(
+      hideStayDates
+        ? {
+            roomType: selectedRoomType,
+            makkahHotel: '',
+            madinaHotel: '',
+            makkahCheckIn: '',
+            madinaCheckIn: '',
+            makkahCheckOut: '',
+            madinaCheckOut: '',
+          }
+        : {
+            roomType: selectedRoomType,
+            makkahHotel,
+            madinaHotel,
+            makkahCheckIn,
+            madinaCheckIn,
+            makkahCheckOut,
+            madinaCheckOut,
+          },
+    )
     const message = [messageInput, tripBlock].filter(Boolean).join('\n\n')
 
     void submitLead({
@@ -195,8 +201,8 @@ export function LeadForm({
       interest: packageInterest,
       travellers,
       message,
-      travel_mode: includeTravel ? travel.mode || '' : '',
-      departure_date: travel.departureDate || '',
+      travel_mode: travel.mode || '',
+      departure_date: travelForMessage.departureDate || '',
       departure_airport: travel.airport || '',
       preferred_airline: travel.airline || '',
       departure_city: travel.departureCity || '',
@@ -242,10 +248,7 @@ export function LeadForm({
   }
 
   return (
-    <section
-      className={`lead-section${compact ? ' is-compact' : ''}${isShort ? ' is-short' : ''}`}
-      id={id}
-    >
+    <section className={`lead-section${compact ? ' is-compact' : ''}`} id={id}>
       <div className={compact ? undefined : 'container'}>
         <div className="lead-panel">
           <div className="lead-copy">
@@ -405,7 +408,6 @@ export function LeadForm({
                     </button>
                   </div>
                 </div>
-                {!isShort ? (
                 <label>
                   Room Type
                   <select
@@ -423,87 +425,85 @@ export function LeadForm({
                     <option value="Quint">Quint</option>
                   </select>
                 </label>
-                ) : null}
                 <input type="hidden" name="travellers" value={travellersLabel} />
               </div>
 
-              {!isShort ? (
+              {!hideStayDates ? (
                 <>
-              <label>
-                Preferred Hotel — Makkah
-                <select
-                  name="makkahHotel"
-                  value={makkahHotel}
-                  onChange={(e) => setMakkahHotel(e.target.value)}
-                >
-                  <option value="">Select hotel (optional)</option>
-                  {MAKKAH_HOTEL_OPTIONS.map((hotel) => (
-                    <option key={hotel} value={hotel}>
-                      {hotel}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                Preferred Hotel — Madina
-                <select
-                  name="madinaHotel"
-                  value={madinaHotel}
-                  onChange={(e) => setMadinaHotel(e.target.value)}
-                >
-                  <option value="">Select hotel (optional)</option>
-                  {MADINA_HOTEL_OPTIONS.map((hotel) => (
-                    <option key={hotel} value={hotel}>
-                      {hotel}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                Makkah check-in date
-                <input
-                  type="date"
-                  name="makkahCheckIn"
-                  min={minDate}
-                  value={makkahCheckIn}
-                  onChange={(e) => setMakkahCheckIn(e.target.value)}
-                />
-              </label>
-              <label>
-                Makkah Check-out Date
-                <input
-                  type="date"
-                  name="makkahCheckOut"
-                  min={minDate}
-                  value={makkahCheckOut}
-                  onChange={(e) => setMakkahCheckOut(e.target.value)}
-                />
-              </label>
-              <label>
-                Madina check-in date
-                <input
-                  type="date"
-                  name="madinaCheckIn"
-                  min={minDate}
-                  value={madinaCheckIn}
-                  onChange={(e) => setMadinaCheckIn(e.target.value)}
-                />
-              </label>
-              <label>
-                Madinah Check-out Date
-                <input
-                  type="date"
-                  name="madinaCheckOut"
-                  min={minDate}
-                  value={madinaCheckOut}
-                  onChange={(e) => setMadinaCheckOut(e.target.value)}
-                />
-              </label>
+                  <label>
+                    Preferred Hotel — Makkah
+                    <select
+                      name="makkahHotel"
+                      value={makkahHotel}
+                      onChange={(e) => setMakkahHotel(e.target.value)}
+                    >
+                      <option value="">Select hotel (optional)</option>
+                      {MAKKAH_HOTEL_OPTIONS.map((hotel) => (
+                        <option key={hotel} value={hotel}>
+                          {hotel}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    Preferred Hotel — Madina
+                    <select
+                      name="madinaHotel"
+                      value={madinaHotel}
+                      onChange={(e) => setMadinaHotel(e.target.value)}
+                    >
+                      <option value="">Select hotel (optional)</option>
+                      {MADINA_HOTEL_OPTIONS.map((hotel) => (
+                        <option key={hotel} value={hotel}>
+                          {hotel}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    Makkah check-in date
+                    <input
+                      type="date"
+                      name="makkahCheckIn"
+                      min={minDate}
+                      value={makkahCheckIn}
+                      onChange={(e) => setMakkahCheckIn(e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Makkah Check-out Date
+                    <input
+                      type="date"
+                      name="makkahCheckOut"
+                      min={minDate}
+                      value={makkahCheckOut}
+                      onChange={(e) => setMakkahCheckOut(e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Madina check-in date
+                    <input
+                      type="date"
+                      name="madinaCheckIn"
+                      min={minDate}
+                      value={madinaCheckIn}
+                      onChange={(e) => setMadinaCheckIn(e.target.value)}
+                    />
+                  </label>
+                  <label>
+                    Madinah Check-out Date
+                    <input
+                      type="date"
+                      name="madinaCheckOut"
+                      min={minDate}
+                      value={madinaCheckOut}
+                      onChange={(e) => setMadinaCheckOut(e.target.value)}
+                    />
+                  </label>
                 </>
               ) : null}
             </div>
 
-            {!isShort ? (
             <div className="lead-step" data-step="3">
               <p className="lead-step-label">
                 <span>3</span> Travel mode & departure
@@ -514,21 +514,21 @@ export function LeadForm({
                 onChange={setTravel}
                 showError={travelTouched}
                 asFormFields
+                hideDate={hideStayDates}
                 idPrefix={`${id}-travel`}
               />
             </div>
-            ) : null}
 
-            {!compact || isShort ? (
-              <div className="lead-step" data-step={isShort ? '3' : '4'}>
+            {!compact ? (
+              <div className="lead-step" data-step="4">
                 <p className="lead-step-label">
-                  <span>{isShort ? 3 : 4}</span> Message
+                  <span>4</span> Message
                 </p>
                 <label>
                   {t.common.message}
                   <textarea
                     name="message"
-                    rows={isShort ? 2 : 3}
+                    rows={3}
                     placeholder="Preferred dates or notes (optional)"
                   />
                 </label>

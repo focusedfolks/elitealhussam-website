@@ -53,10 +53,11 @@ export function formatDisplayDate(iso: string): string {
 export function isTravelComplete(
   details: TravelDetails,
   modes: TravelMode[],
+  requireDate = true,
 ): boolean {
   const mode = details.mode || (modes.length === 1 ? modes[0] : '')
   if (!mode || !modes.includes(mode)) return false
-  if (!details.departureDate) return false
+  if (requireDate && !details.departureDate) return false
   if (mode === 'air') return Boolean(details.airport && details.returnAirport)
   return Boolean(details.departureCity && details.roadTransfer)
 }
@@ -108,6 +109,8 @@ type Props = {
   showError?: boolean
   asFormFields?: boolean
   idPrefix?: string
+  /** Hide "Preferred Departure Date" (Hajj / Group Umrah fixed dates) */
+  hideDate?: boolean
 }
 
 export function TravelModeFields({
@@ -117,10 +120,11 @@ export function TravelModeFields({
   showError = false,
   asFormFields = false,
   idPrefix = 'travel',
+  hideDate = false,
 }: Props) {
   const mode = value.mode || (modes.length === 1 ? modes[0] : '')
   const incomplete =
-    showError && !isTravelComplete({ ...value, mode }, modes)
+    showError && !isTravelComplete({ ...value, mode }, modes, !hideDate)
   const minDate = todayISO()
 
   function setMode(next: TravelMode) {
@@ -182,25 +186,27 @@ export function TravelModeFields({
         ) : null}
       </div>
 
-      <label className="travel-date-field" htmlFor={`${idPrefix}-date`}>
-        Preferred Departure Date
-        <span className="travel-date-wrap">
-          <span className="travel-date-icon" aria-hidden="true">
-            📅
+      {!hideDate ? (
+        <label className="travel-date-field" htmlFor={`${idPrefix}-date`}>
+          Preferred Departure Date
+          <span className="travel-date-wrap">
+            <span className="travel-date-icon" aria-hidden="true">
+              📅
+            </span>
+            <input
+              id={`${idPrefix}-date`}
+              type="date"
+              name={asFormFields ? 'departureDate' : undefined}
+              required={asFormFields}
+              min={minDate}
+              value={value.departureDate}
+              onChange={(e) =>
+                onChange({ ...value, departureDate: e.target.value })
+              }
+            />
           </span>
-          <input
-            id={`${idPrefix}-date`}
-            type="date"
-            name={asFormFields ? 'departureDate' : undefined}
-            required={asFormFields}
-            min={minDate}
-            value={value.departureDate}
-            onChange={(e) =>
-              onChange({ ...value, departureDate: e.target.value })
-            }
-          />
-        </span>
-      </label>
+        </label>
+      ) : null}
 
       {mode === 'air' ? (
         <div className="travel-conditional">

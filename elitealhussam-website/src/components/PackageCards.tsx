@@ -8,6 +8,7 @@ import {
   type MouseEvent,
 } from 'react'
 import {
+  hidesStayDateFields,
   packageTravelModes,
   PACKAGE_CONTENT_FALLBACK,
   hajjPackages,
@@ -254,7 +255,8 @@ function TravelPackageCard({
     return `/contact?${params.toString()}#lead-form`
   }, [pkg.id, passengers, travel])
 
-  const travelOk = isTravelComplete(travel, modes)
+  const hideDate = hidesStayDateFields(pkg)
+  const travelOk = isTravelComplete(travel, modes, !hideDate)
   const chip = travelSummaryChip(travel)
   const hasDetailedItinerary = hasDetailedHajjItinerary(pkg.id)
   const itineraryDetail = getHajjItineraryDetail(pkg.id)
@@ -384,6 +386,7 @@ function TravelPackageCard({
               value={travel}
               onChange={setTravel}
               showError={travelTouched}
+              hideDate={hideDate}
               idPrefix={`${pkg.id}-travel`}
             />
           </div>
